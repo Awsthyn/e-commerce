@@ -1,6 +1,6 @@
-Link al diagrama. Lo pueden editar.
+﻿Link al diagrama. Lo pueden editar.
 
-https://app.lucidchart.com/invitations/accept/d94ab9e9-c58f-4c5c-8fa2-3a248b420d9c
+https://app.lucidchart.com/documents/view/26861220-6206-430a-86d7-01caa24f479b
 
 S4: Producto:
 Debe tener por lo menos estos atributos:
