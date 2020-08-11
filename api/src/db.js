@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-// const Category = require('./models/Category');
+// const Category = require('./models/Category'); // <--Angelo Modifico
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
@@ -36,6 +36,11 @@ const { Product, Category } = sequelize.models; // <--Angelo Modifico
 // Aca vendrian las relaciones
  Product.hasMany(Category);// <--Angelo Modifico
  Category.hasMany(Product);// <--Angelo Modifico
+
+ //Nota de Angelo: me tira un warning de que tenemos una promesa sin error handler: 
+ // UnhandledPromiseRejectionWarning: Error: Cyclic dependency found. categories is dependent of itself.
+ //   Dependency chain: categories -> products => categories
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
