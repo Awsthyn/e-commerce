@@ -19,9 +19,6 @@ module.exports = (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    image: {
-      type: DataTypes.STRING
     } 
   });
 };
