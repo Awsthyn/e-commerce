@@ -1,23 +1,26 @@
 import React from 'react';
-
+//import Category from './';
 export default class NewProduct extends React.Component {
 
   constructor(props) {
       super(props);
       this.state = {
-                name: "",
-                description: "",
-                price: "",
-                stock: "",
-                image: ""
+            name: "",
+            description: "",
+            price: "",
+            stock: "",
+            image: "",
+            category: ""
+        }
+        this.categories = props.categories
 
-            }
-             this.handleChange = this.handleChange.bind(this);
-             this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(e) {
+
+    handleChange(e) {
        this.setState({[e.target.name]: e.target.value})
-   }
+    }
 
    handleSubmit(e){
        e.prevent.default();
@@ -26,7 +29,8 @@ export default class NewProduct extends React.Component {
            description: e.value.description,
            price: e.value.price,
            stock: e.value.stock,
-           image: e.value.image
+           image: e.value.image,
+           category: e.value.category
        })
    }
 
@@ -54,6 +58,17 @@ export default class NewProduct extends React.Component {
                   <label>Imagen:</label>
                 <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
               </div>
+              <label>Categoria:</label>
+               <select onChange={ (e)=> {
+
+                   this.setState({
+                   categoryId: e.value
+               })}} >
+                    {this.categories.map(category =>(
+                        <option key={category.id} value={category.name}>{category.name}</option>
+                    ))
+                }
+                </select>
               <button type="submit" className="btn btn-dark">Enviar</button>
           </form>
           </div>

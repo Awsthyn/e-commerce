@@ -5,11 +5,12 @@ export default class EditProduct extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-                name: this.props.name,
-                description: this.props.description,
-                price: this.props.price,
-                stock: this.props.stock,
-                image:this.props.image
+                name: props.product.name,
+                description: props.product.description,
+                price: props.product.price,
+                stock: props.product.stock,
+                image:props.product.image,
+                category: props.product.category
                 }
 
              this.handleChange = this.handleChange.bind(this);
@@ -26,8 +27,8 @@ export default class EditProduct extends React.Component {
            description: e.value.description,
            price: e.value.price,
            stock: e.value.stock,
-           image: e.value.image
-
+           image: e.value.image,
+           category: e.value.category
        })
    }
 //imagenes con map?
@@ -37,24 +38,34 @@ export default class EditProduct extends React.Component {
           <form onSubmit={this.handleSubmit} >
               <div className="form-group">
                   <label>Nombre:</label>
-                  <input type="text" id="name" name="name" value={this.props.price} onChange={this.handleChange} className="form-control"/>
+                  <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} className="form-control"/>
               </div>
               <div className="form-group">
                   <label>Descripcion:</label>
-                  <input type="text" id="description" name="description" value={this.props.description} onChange={this.handleChange} className="form-control"/>
+                  <input type="text" id="description" name="description" value={this.state.description} onChange={this.handleChange} className="form-control"/>
               </div>
               <div className="form-group">
                   <label>Precio:</label>
-                  <input id="price" name="price" onChange={this.handleChange} value={this.props.price} className="form-control"/>
+                  <input id="price" name="price" onChange={this.handleChange} value={this.state.price} className="form-control"/>
               </div>
               <div className="form-group">
                   <label>Stock:</label>
-                  <input id="stock" name="stock" onChange={this.handleChange} value={this.props.stock} className="form-control" />
+                  <input id="stock" name="stock" onChange={this.handleChange} value={this.state.stock} className="form-control" />
               </div>
               <div className="form-group">
                   <label>Imagen:</label>
-                  <img src={this.props.images} name="image" class="img-fluid" />
+                <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
               </div>
+              <label>Categoria:</label>
+               <select defaultValue={this.state.category} onChange={ (e)=> {
+                   this.setState({
+                   category: e.value
+               })}}>
+                    {this.props.categories.map(category =>(
+                        <option key={category.id} value={category.id} >{category.name}</option>
+                    ))
+                }
+                </select>
               <button type="submit" className="btn btn-dark">Enviar</button>
           </form>
           </div>
