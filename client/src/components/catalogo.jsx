@@ -6,26 +6,28 @@ const array = [
     name: "La mano de Dios",
     price: 100000,
     image:
-      "https://images.mediotiempo.com/PmwyUX2dhdem0VmpU09tAI4F62k=/958x596/uploads/media/2019/06/22/mano-dios-gol-maradona-inglaterra.jpg",
+      "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg",
   },
   {
       name: "Croma en oferta. Ver descripción.",
       price: 500,
-      image: "https://pbs.twimg.com/profile_images/1263596368641224705/iAWtOr6g.jpg"
+      image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
   },
   {
       name: "Poema de Lorem Ipsum",
       price: 1000,
-      image: "https://ihdemu.com/images/blog/que-es-lorem-ipsum.jpg"
+      image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
   }
 ];
 
 const catalogo = () => {
   return (
     <div className="container">
+      <div className="row">
       {array.map((e) => (
         <ProductCard key={e} name= {e.name} price={e.price} image= {e.image} />
       ))}
+      </div>
     </div>
   );
 };

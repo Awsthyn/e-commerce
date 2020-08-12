@@ -6,7 +6,7 @@ const productCard = ({ name, price, image }) => {
       <img src={image} class="card-img-top" alt={name} />
       <div className="card-body d-flex flex-column justify-content-center">
         <h5 className="card-title text-center">{name}</h5>
-        <p className="card-text text-center">{price}</p>
+        <p className="card-text text-center">$ {price}</p>
         <a href="#" className="btn btn-primary ml-auto mr-auto">
           See more details...
         </a>
