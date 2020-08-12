@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import ProductCard from './components/productCard';
+import Catalogo from "./components/catalogo";
 
 function App() {
   return (
     <>
-      <ProductCard />
+      <Catalogo />
     </>
   );
 }
