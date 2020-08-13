@@ -25,6 +25,7 @@ export default class NewProduct extends React.Component {
 
    handleSubmit(e){
        e.preventDefault();
+       console.log(this.state)
        const product = this.state;
        const url = 'http://localhost:3001/products/';
 
@@ -65,7 +66,7 @@ export default class NewProduct extends React.Component {
                 <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
               </div>
               <label>Categoria:</label>
-               <select onChange={ (e)=> {
+               {/*<select onChange={ (e)=> {
                    this.setState({
                    category: e.target.value
                })}} >
@@ -73,7 +74,7 @@ export default class NewProduct extends React.Component {
                         <option key={category.id} value={category.id}>{category.name}</option>
                     ))
                 }
-                </select>
+                </select>*/}
               <button type="submit" className="btn btn-dark">Enviar</button>
           </form>
           </div>

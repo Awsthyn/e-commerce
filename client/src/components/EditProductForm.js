@@ -5,7 +5,7 @@ export default class EditProduct extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-                id: props.product.id,
+                id: props.id,
                 name: props.product.name,
                 description: props.product.description,
                 price: props.product.price,
@@ -42,7 +42,7 @@ export default class EditProduct extends React.Component {
 //imagenes con map?
   render() {
       return (
-          <div className="conteiner-fluid abs-center">
+          <div className="container-fluid abs-center">
           <form onSubmit={this.handleSubmit} >
               <div className="form-group">
                   <label>Nombre:</label>
@@ -65,7 +65,7 @@ export default class EditProduct extends React.Component {
                 <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
               </div>
               <label>Categoria:</label>
-               <select defaultValue={this.state.category} onChange={ (e)=> {
+              {/* <select defaultValue={this.state.category} onChange={ (e)=> {
                    this.setState({
                    category: e.target.value
                })}}>
@@ -73,7 +73,7 @@ export default class EditProduct extends React.Component {
                         <option key={category.id} value={category.id} >{category.name}</option>
                     ))
                 }
-                </select>
+            </select> */}
               <button type="submit" className="btn btn-dark">Enviar</button>
           </form>
           </div>
