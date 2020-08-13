@@ -1,7 +1,7 @@
 import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-// import Product from "./components/product";
+import Product from "./components/product";
 import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import productComponent from "./components/product";
@@ -18,6 +18,7 @@ function App() {
         <Link to="/products/:id">
           <button>Detalle Producto</button>
         </Link>
+      <Product name={"Ariel"} description={"Tiene 4 hijos"} price={50000} stock={1} image={'sin imagen todavia'}/>
       </div>
       <Route path="/catalog" component={Catalog} />
       <Route path="/products/:id" component={productComponent} />
