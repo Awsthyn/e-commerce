@@ -8,7 +8,6 @@ import productComponent from "./components/product";
 import NewProductForm from "./components/NewProductForm"
 import EditProductForm from "./components/EditProductForm"
 
-
 function App() {
   let ejemplo = {
     id: 1,
@@ -20,8 +19,8 @@ function App() {
     category: [1, 2]
   }
   return (
+
     <Router>
-    
       <div> // --> desde aca navBar
         <Link to="/catalog">
           <button>Catalogo</button>
@@ -38,6 +37,7 @@ function App() {
       <Route path="/catalog" component={Catalog} />
       <Route path="/products/:id" component={productComponent} />
     </Router>
+
   );
 }
 
