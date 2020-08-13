@@ -1,0 +1,16 @@
+.product_container{
+  display: flex;
+  width: 1000px;
+  margin:0 auto;  
+  border:1px solid black;  
+}
+.product_img{
+  width: 450px;
+  
+}
+.product_smallImgs{
+  display: flex;
+}
+.product_data{
+  width: 450px;
+}
