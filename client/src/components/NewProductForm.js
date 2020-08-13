@@ -1,5 +1,6 @@
 import React from 'react';
 //import Category from './';
+
 export default class NewProduct extends React.Component {
 
   constructor(props) {
@@ -10,7 +11,7 @@ export default class NewProduct extends React.Component {
             price: "",
             stock: "",
             image: "",
-            category: ""
+            category: 1
         }
         this.categories = props.categories
 
@@ -23,15 +24,20 @@ export default class NewProduct extends React.Component {
     }
 
    handleSubmit(e){
-       e.prevent.default();
-       this.setState({
-           name: e.value.name,
-           description: e.value.description,
-           price: e.value.price,
-           stock: e.value.stock,
-           image: e.value.image,
-           category: e.value.category
-       })
+       e.preventDefault();
+       const product = this.state;
+       const url = 'http://localhost:3001/products/';
+
+       fetch(url, {
+           method: 'POST',
+           body: JSON.stringify({ product }),
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       }).then(res => {
+           console.info(res)
+       }).catch(err => console.error(err))
+
    }
 
   render() {
@@ -60,12 +66,11 @@ export default class NewProduct extends React.Component {
               </div>
               <label>Categoria:</label>
                <select onChange={ (e)=> {
-
                    this.setState({
-                   categoryId: e.value
+                   category: e.target.value
                })}} >
                     {this.categories.map(category =>(
-                        <option key={category.id} value={category.name}>{category.name}</option>
+                        <option key={category.id} value={category.id}>{category.name}</option>
                     ))
                 }
                 </select>

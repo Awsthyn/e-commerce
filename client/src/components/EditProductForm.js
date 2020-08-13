@@ -5,6 +5,7 @@ export default class EditProduct extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
+                id: props.product.id,
                 name: props.product.name,
                 description: props.product.description,
                 price: props.product.price,
@@ -21,15 +22,22 @@ export default class EditProduct extends React.Component {
    }
 
    handleSubmit(e){
-       e.prevent.default();
-       this.setState({
-           name: e.value.name,
-           description: e.value.description,
-           price: e.value.price,
-           stock: e.value.stock,
-           image: e.value.image,
-           category: e.value.category
-       })
+       e.preventDefault();
+       console.info('putting')
+       const product = this.state;
+       const url = 'http://localhost:3001/products/' + this.state.id;
+
+       fetch(url, {
+           method: 'POST',
+           body: JSON.stringify({ product }),
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       }).then(res => {
+           console.info(res)
+       }).catch(err => console.error(err))
+
+
    }
 //imagenes con map?
   render() {
@@ -59,7 +67,7 @@ export default class EditProduct extends React.Component {
               <label>Categoria:</label>
                <select defaultValue={this.state.category} onChange={ (e)=> {
                    this.setState({
-                   category: e.value
+                   category: e.target.value
                })}}>
                     {this.props.categories.map(category =>(
                         <option key={category.id} value={category.id} >{category.name}</option>
