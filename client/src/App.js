@@ -30,7 +30,7 @@ function App() {
         <Link to="/products/:id">
           <button>Detalle Producto</button>
         </Link>
-      <NewProductForm />   
+      <NewProductForm />    
       </div>
     
     

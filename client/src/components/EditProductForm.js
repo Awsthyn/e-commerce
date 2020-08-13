@@ -29,7 +29,7 @@ export default class EditProduct extends React.Component {
 
        fetch(url, {
            method: 'POST',
-           body: JSON.stringify({ product }),
+           body: JSON.stringify(product),
            headers: {
                'Content-Type': 'application/json'
            }
