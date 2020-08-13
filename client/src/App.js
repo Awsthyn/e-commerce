@@ -5,11 +5,24 @@ import Product from "./components/product";
 import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import productComponent from "./components/product";
+import NewProductForm from "./components/NewProductForm"
+import EditProductForm from "./components/EditProductForm"
+
 
 function App() {
+  let ejemplo = {
+    id: 1,
+    name: 'agus',
+    description: '26 años',
+    price: 50,
+    stock: 50,
+    image: 'lorem',
+    category: [1, 2]
+  }
   return (
     <Router>
-      <div>
+    
+      <div> // --> desde aca navBar
         <Link to="/catalog">
           <button>Catalogo</button>
         </Link>
@@ -17,9 +30,11 @@ function App() {
       <div>
         <Link to="/products/:id">
           <button>Detalle Producto</button>
-        </Link>
-      <Product name={"Ariel"} description={"Tiene 4 hijos"} price={50000} stock={1} image={'sin imagen todavia'}/>
+        </Link> 
       </div>
+    // --> hasta aca navBar
+    
+    
       <Route path="/catalog" component={Catalog} />
       <Route path="/products/:id" component={productComponent} />
     </Router>
