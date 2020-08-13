@@ -1,30 +1,46 @@
 import React from "react";
-import Product from "../../../api/src/models/Product.js";
+import s from "../css/product.module.css";
+// import Product from "../../../api/src/models/Product";
 
-export default function Product ({ name, description, price, stock, image }) {
+
+export default function productComponent ({ name, description, price, stock, image }) {
   return(
-    <div className="product_container">
-    <div className="product_images">
-      <img>{image}</img>
-      <div>
-        <img>{image}</img>
-        <img>{image}</img>
-        <img>{image}</img>
-      </div>
+    
+      <div className={s.product_container}>
+        <div className={s.product_img}>
+          <img alt= "Imagen no encontrada">{image}</img>
+          <div className={s.product_smallImgs}>
+            <img alt= "Imagen no encontrada">{image}</img>
+            <img alt= "Imagen no encontrada">{image}</img>
+            <img alt= "Imagen no encontrada">{image}</img>
+          </div>
+        </div>
+        <div className={s.product_data}>
+          <button onClick = {()=>window.history.back()}>X</button>
+          <h3>{name}NOMBRE</h3>
+          <h5>{price}$1324</h5>
+          <hr></hr>
+          <h6>{stock}STOCK=5</h6>
+          <hr></hr>
+          <p>{description}DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, consectetur.</p>
+          <hr></hr>
+          <div>
+            <div class="container">
+              <span id="rateMe3" class="rating-faces">
+                {
+                  "Estrellas*****"
+                }
+
+              </span>
+            </div>
+          </div>
+          <hr></hr>
+          <buton>COMPRAR</buton>
+        </div>
+        {/* <rating.js file */}
+          <script src="js/addons/rating.js"></script>
     </div>
-    <div className="product_data">
-      <h3>{name}</h3>
-      <h5>{price}</h5>
-      <hr></hr>
-      <h6>{stock}</h6>
-      <hr></hr>
-      <p>{description}</p>
-      <hr></hr>
-      <div><span>ESTRELLAS</span></div>
-      <hr></hr>
-      <buton></buton>
-    </div>
-  </div>
+  
   )
  
 
