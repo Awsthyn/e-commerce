@@ -11,7 +11,7 @@ const Checkbox = ({ initialState, category, onChange }) => {
     }
 
     return (
-        <div>
+        <div className="form-group">
             <input
                 type="checkbox"
                 className="form-check-input"
