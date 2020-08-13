@@ -46,7 +46,9 @@ Product.update({
 	stock
 
 }, {where: {id}})
-res.sendStatus(200);
+.then(() => {
+	res.sendStatus(200);
+})
 } catch (error) {
 	console.error(error.message)
 }	
@@ -54,9 +56,12 @@ res.sendStatus(200);
 
 server.delete('/:id', (req,res, next) =>{
 try {
-Product.destroy({where:{id}})	
+Product.destroy({where:{id}})
+.then(() => {
+	res.sendStatus(200);
+})	
 } catch (error) {
-	
+	console.error(error.message)
 }	
 })
 
