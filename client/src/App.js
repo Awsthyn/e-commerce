@@ -21,7 +21,7 @@ function App() {
   return (
 
     <Router>
-      <div> // --> desde aca navBar
+      <div>
         <Link to="/catalog">
           <button>Catalogo</button>
         </Link>
@@ -29,9 +29,10 @@ function App() {
       <div>
         <Link to="/products/:id">
           <button>Detalle Producto</button>
-        </Link> 
+        </Link>
+      <NewProductForm />   
       </div>
-    // --> hasta aca navBar
+    
     
     
       <Route path="/catalog" component={Catalog} />

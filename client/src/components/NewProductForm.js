@@ -31,7 +31,7 @@ export default class NewProduct extends React.Component {
 
        fetch(url, {
            method: 'POST',
-           body: JSON.stringify({ product }),
+           body: JSON.stringify(product),
            headers: {
                'Content-Type': 'application/json'
            }
@@ -43,7 +43,7 @@ export default class NewProduct extends React.Component {
 
   render() {
       return (
-           <div className="conteiner-fluid abs-center">
+           <div className="container-fluid abs-center">
           <form onSubmit={this.handleSubmit} className="form-group">
               <div className="form-group">
                   <label>Nombre:</label>
