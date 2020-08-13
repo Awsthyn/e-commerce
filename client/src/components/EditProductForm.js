@@ -54,7 +54,7 @@ export default class EditProduct extends React.Component {
        }).catch(err => console.error(err))
 
    }
-//imagenes con map?
+
   render() {
       return (
           <div className="conteiner-fluid abs-center">
@@ -89,7 +89,7 @@ export default class EditProduct extends React.Component {
                     )}
                 )}
             </div>
-            
+
               <button type="submit" className="btn btn-dark">Enviar</button>
           </form>
           </div>
