@@ -21,7 +21,7 @@ function App() {
   return (
 
     <Router>
-      <div> // --> desde aca navBar
+      <div>
         <Link to="/catalog">
           <button>Catalogo</button>
         </Link>
@@ -31,8 +31,6 @@ function App() {
           <button>Detalle Producto</button>
         </Link> 
       </div>
-    // --> hasta aca navBar
-    
     
       <Route path="/catalog" component={Catalog} />
       <Route path="/products/:id" component={productComponent} />
