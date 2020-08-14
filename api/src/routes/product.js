@@ -1,8 +1,8 @@
 const server = require('express').Router();
-const { Product } = require('../db.js');
+const { Product, Category } = require('../db.js');
 
 server.get('/', (req, res, next) => {
-	Product.findAll()
+	Product.findAll({include: Category})
 		.then(products => {
 			console.log(products)
 			res.json(products);
@@ -12,7 +12,7 @@ server.get('/', (req, res, next) => {
 
 server.get('/:id', (req, res, next) => {
 	
-	Product.findByPk(req.params.id)
+	Product.findByPk(req.params.id, {include: Category})
 		.then(product => {
 			res.json(product);
 		})
