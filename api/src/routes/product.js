@@ -55,6 +55,7 @@ Product.update({
 
 server.delete('/:id', (req,res, next) =>{
 try {
+const { id } = req.params;
 Product.destroy({where:{id}})
 .then(() => {
 	res.sendStatus(200);
