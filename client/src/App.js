@@ -2,16 +2,17 @@ import React, {useState, useEffect} from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import Product from "./components/product";
-import SearchBar from "./components/SearchBar";
 //import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido---> (TRAE PRODUCTO)
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 //import productComponent from "./components/product";
 import Catalog from "./components/catalogo"; //cambiar ruta a catalog cuando este subido
 import Nav from "./components/Nav";
 import NewProductForm from "./components/NewProductForm"
 import EditProductForm from "./components/EditProductForm"
 
+
 function App() {
+  const [prodsCatalog, setProdsCatalog] = useState([])
 
   const array = [
     {
@@ -58,44 +59,44 @@ function App() {
     category: [1, 2]
   };
   
-  // function onSearch(valor) {
-  //   //Llamado a la API del clima
-  //   fetch(`http://localhost:3001/search?palabra=${valor}`)
-  //     .then(r => r.json())
-  //     .then((recurso) => { state.pr = recurso
-  //     };
+
+  function onSearch(valor) {
+    fetch(`http://localhost:3001/search?query=${valor}`)
+      .then(r => r.json())
+      .then((data) => { 
+        console.log(data)
+        setProdsCatalog(data) })
+      .catch(error => {console.error(error)})
+  }
             
-  {/* <Route
+            
+  return (
+    <Router>
+      <Route
+        path = "/"
+        render={() => <Nav onSearch = {onSearch}/>} //aca le paso prop del fetch que hace searchbar 
+      />
+      <Route
         path = "/catalog"
         render={() => <Catalog array = {array}/>} //aca le pasamos lista de todos los products
       />
       <Route
-        path = "/products/:id"
-        render={() => <Product />} //aca le paso prop del fetch que hace searchbar 
+        path = "/search"
+        render={() => <Catalog array = {prodsCatalog}/>} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
-        path = "/search/:keyword"
-        render={() => <Catalog array = {array}/>} //aca le paso prop del fetch que hace searchbar 
-      /> */}          
-            
-            
-            
-  return (
-
-    <Router>
-        <Route path='/' render={Nav} />
-        <Route path="/catalog" render={()=> <Catalog array = {array}/>} />
-        <Route exact path="/products/:id" component={Product} />
-
-        <Route path="/products/form/new" 
-            render={()=> <NewProductForm categories={categories} />}
-         />   
-        
-        <Route path="/products/:id/edit" >
-            <EditProductForm categories={categories} product={ejemplo} />
-        </Route>
+        exact path = "/products/:id"
+        render={() => <Product />} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
+      />
+      <Route
+        path = "/products/form/new"
+        render={() => <NewProductForm categories={categories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+      />
+      <Route
+        path = "/products/:id/edit"
+        render={() => <EditProductForm categories={categories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+      />
     </Router>
-
   );
 }
 

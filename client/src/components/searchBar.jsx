@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 // import styles from "./SearchBar.module.css";
 
 export default function SearchBar({onSearch}) {
   const [prod, setProd] = useState("");//setea el estado que todavia no definimos
+  let history = useHistory()
   return (
     <form className="navbar navbar--dark bg-dark" onSubmit={(e) => {
+      history.push('/search')
       e.preventDefault();
       onSearch(prod);
       setProd("");//vacia el placeholder
