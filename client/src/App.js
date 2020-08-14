@@ -9,6 +9,20 @@ import NewProductForm from "./components/NewProductForm"
 import EditProductForm from "./components/EditProductForm"
 
 function App() {
+    const categories = [
+        {
+            id: 1,
+            name: 'category 1'
+        },
+        {
+            id: 2,
+            name: 'category 2'
+        },
+        {
+            id: 3,
+            name: 'category 3'
+        }
+    ];
   let ejemplo = {
     id: 1,
     name: 'agus',
@@ -21,22 +35,26 @@ function App() {
   return (
 
     <Router>
-      <div>
-        <Link to="/catalog">
-          <button>Catalogo</button>
-        </Link>
-      </div>
-      <div>
-        <Link to="/products/:id">
-          <button>Detalle Producto</button>
-        </Link>
-      <NewProductForm />    
-      </div>
-    
-    
-    
-      <Route path="/catalog" component={Catalog} />
-      <Route path="/products/:id" component={productComponent} />
+        <div>
+            <Link to="/catalog">
+                <button>Catalogo</button>
+            </Link>
+        </div>
+        <div>
+            <Link to="/products/:id">
+                <button>Detalle Producto</button>
+            </Link>
+        </div>
+
+        <Route path="/catalog" component={Catalog} />
+        <Route exact path="/products/:id" component={productComponent} />
+
+        <Route path="/products/form/new" >
+            <NewProductForm categories={categories} />
+        </Route>
+        <Route path="/products/:id/edit" >
+            <EditProductForm categories={categories} product={ejemplo} />
+        </Route>
     </Router>
 
   );
