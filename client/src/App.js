@@ -13,6 +13,25 @@ import EditProductForm from "./components/EditProductForm"
 
 function App() {
 
+  const array = [
+    {
+      name: "La mano de Dios",
+      price: 100000,
+      image:
+        "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg",
+    },
+    {
+        name: "Croma en oferta. Ver descripción.",
+        price: 500,
+        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
+    },
+    {
+        name: "Poema de Lorem Ipsum",
+        price: 1000,
+        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
+    }
+  ];
+
     const categories = [
         {
             id: 1,
@@ -39,12 +58,12 @@ function App() {
     category: [1, 2]
   };
   
-  function onSearch(valor) {
-    //Llamado a la API del clima
-    fetch(`http://localhost:3001/search?palabra=${valor}`)
-      .then(r => r.json())
-      .then((recurso) => { state.pr = recurso
-      };
+  // function onSearch(valor) {
+  //   //Llamado a la API del clima
+  //   fetch(`http://localhost:3001/search?palabra=${valor}`)
+  //     .then(r => r.json())
+  //     .then((recurso) => { state.pr = recurso
+  //     };
             
   {/* <Route
         path = "/catalog"
@@ -65,7 +84,7 @@ function App() {
 
     <Router>
         <Route path='/' render={Nav} />
-        <Route path="/catalog" render={()=> <Catalog />} />
+        <Route path="/catalog" render={()=> <Catalog array = {array}/>} />
         <Route exact path="/products/:id" component={Product} />
 
         <Route path="/products/form/new" 
