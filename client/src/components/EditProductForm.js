@@ -1,25 +1,41 @@
 import React from 'react';
+import Checkbox from './Checkbox';
 
 export default class EditProduct extends React.Component {
 
   constructor(props) {
       super(props);
       this.state = {
-                id: props.id,
-                name: props.product.name,
-                description: props.product.description,
-                price: props.product.price,
-                stock: props.product.stock,
-                image:props.product.image,
-                category: props.product.category
-                }
+            id: props.product.id,
+            name: props.product.name,
+            description: props.product.description,
+            price: props.product.price,
+            stock: props.product.stock,
+            image:props.product.image,
+            category: props.product.category
+        }
 
-             this.handleChange = this.handleChange.bind(this);
-             this.handleSubmit = this.handleSubmit.bind(this);
+        this.categories = props.categories
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onCheckboxClicked= this.onCheckboxClicked.bind(this);
     }
-  handleChange(e) {
+
+    handleChange(e) {
        this.setState({[e.target.name]: e.target.value})
-   }
+    }
+
+    onCheckboxClicked(category, isChecked) {
+        if(isChecked){
+            this.setState({
+                category: [...this.state.category, category.id]
+            })
+        } else {
+            this.setState({
+                category: this.state.category.filter(c => c !== category.id)
+            })
+        }
+    }
 
    handleSubmit(e){
        e.preventDefault();
@@ -37,9 +53,8 @@ export default class EditProduct extends React.Component {
            console.info(res)
        }).catch(err => console.error(err))
 
-
    }
-//imagenes con map?
+
   render() {
       return (
           <div className="container-fluid abs-center">
@@ -64,16 +79,17 @@ export default class EditProduct extends React.Component {
                   <label>Imagen:</label>
                 <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
               </div>
+
               <label>Categoria:</label>
-              {/* <select defaultValue={this.state.category} onChange={ (e)=> {
-                   this.setState({
-                   category: e.target.value
-               })}}>
-                    {this.props.categories.map(category =>(
-                        <option key={category.id} value={category.id} >{category.name}</option>
-                    ))
-                }
-            </select> */}
+            <div className="form-check form-check-inline">
+                {this.categories.map( category => {
+                    const marcado = this.state.category.filter(id => id === category.id).length > 0
+                    return (
+                        <Checkbox key = {category.id} initialState={marcado} category={category} onChange={this.onCheckboxClicked} />
+                    )}
+                )}
+            </div>
+
               <button type="submit" className="btn btn-dark">Enviar</button>
           </form>
           </div>
