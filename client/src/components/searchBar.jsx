@@ -9,13 +9,13 @@ export default function SearchBar({onSearch}) {
       onSearch(prod);
       setProd("");//vacia el placeholder
     }}>
-    <input className={styles.input}
+    <input //className={styles.input}
       type="text"
       placeholder="Buscar..."
       value={prod}
       onChange={e=>setProd(e.target.value)}
       />
-    <input className={styles.boton}
+    <input //className={styles.boton}
       type="submit"
       value= "Mostrar"
     />
