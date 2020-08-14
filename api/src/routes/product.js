@@ -1,7 +1,6 @@
 const server = require('express').Router();
 const { Product } = require('../db.js');
 
-
 server.get('/', (req, res, next) => {
 	Product.findAll()
 		.then(products => {
@@ -14,8 +13,8 @@ server.get('/', (req, res, next) => {
 server.get('/:id', (req, res, next) => {
 	
 	Product.findByPk(req.params.id)
-		.then(products => {
-			res.json(products);
+		.then(product => {
+			res.json(product);
 		})
 		.catch(next);
 });
@@ -66,3 +65,5 @@ Product.destroy({where:{id}})
 })
 
 module.exports = server;
+
+

@@ -36,7 +36,7 @@ export default function productComponent({
           </div>
         </div>
         <hr></hr>
-        <buton>COMPRAR</buton>
+        <button>COMPRAR</button>
       </div>
       {/* <rating.js file */}
       <script src="js/addons/rating.js"></script>

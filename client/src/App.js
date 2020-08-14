@@ -1,15 +1,18 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import Product from "./components/product";
-import Catalog from "./components/catalogo"; //cambiar ruta a catalog cuando este subido
+import SearchBar from "./components/SearchBar";
+//import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido---> (TRAE PRODUCTO)
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+//import productComponent from "./components/product";
+import Catalog from "./components/catalogo"; //cambiar ruta a catalog cuando este subido
 import Nav from "./components/Nav";
-import productComponent from "./components/product";
 import NewProductForm from "./components/NewProductForm"
 import EditProductForm from "./components/EditProductForm"
 
 function App() {
+
     const categories = [
         {
             id: 1,
@@ -24,6 +27,8 @@ function App() {
             name: 'category 3'
         }
     ];
+    
+    
   let ejemplo = {
     id: 1,
     name: 'agus',
@@ -32,13 +37,36 @@ function App() {
     stock: 50,
     image: 'lorem',
     category: [1, 2]
-  }
+  };
+  
+  function onSearch(valor) {
+    //Llamado a la API del clima
+    fetch(`http://localhost:3001/search?palabra=${valor}`)
+      .then(r => r.json())
+      .then((recurso) => { state.pr = recurso
+      };
+            
+  {/* <Route
+        path = "/catalog"
+        render={() => <Catalog array = {array}/>} //aca le pasamos lista de todos los products
+      />
+      <Route
+        path = "/products/:id"
+        render={() => <Product />} //aca le paso prop del fetch que hace searchbar 
+      />
+      <Route
+        path = "/search/:keyword"
+        render={() => <Catalog array = {array}/>} //aca le paso prop del fetch que hace searchbar 
+      /> */}          
+            
+            
+            
   return (
 
     <Router>
         <Route path='/' render={Nav} />
         <Route path="/catalog" render={()=> <Catalog />} />
-        <Route exact path="/products/:id" component={productComponent} />
+        <Route exact path="/products/:id" component={Product} />
 
         <Route path="/products/form/new" 
             render={()=> <NewProductForm categories={categories} />}
@@ -52,4 +80,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
