@@ -43,7 +43,7 @@ const { Product, Category } = sequelize.models; // <--Angelo Modifico
 
 // Aca vendrian las relaciones
  Product.belongsToMany(Category, {through: 'productsInCategory'});// <--Angelo Modifico
- Category.belongsToMany(Product, {through: 'categoriesOfProduct'});// <--Angelo Modifico
+ Category.belongsToMany(Product, {through: 'productsInCategory'});// <--Angelo Modifico
 
  //Nota de Angelo: me tira un warning de que tenemos una promesa sin error handler: 
  // UnhandledPromiseRejectionWarning: Error: Cyclic dependency found. categories is dependent of itself.
