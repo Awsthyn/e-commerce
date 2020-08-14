@@ -26,6 +26,7 @@ export default class NewProduct extends React.Component {
 
    handleSubmit(e){
        e.preventDefault();
+       console.log(this.state)
        const product = this.state;
        const url = 'http://localhost:3001/products/';
 

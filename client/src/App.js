@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// import logo from "./logo.svg";
+import "./App.css";
+import Product from "./components/product";
+import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import productComponent from "./components/product";
+import NewProductForm from "./components/NewProductForm"
+import EditProductForm from "./components/EditProductForm"
 
 function App() {
+  let ejemplo = {
+    id: 1,
+    name: 'agus',
+    description: '26 años',
+    price: 50,
+    stock: 50,
+    image: 'lorem',
+    category: [1, 2]
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router>
+      <div>
+        <Link to="/catalog">
+          <button>Catalogo</button>
+        </Link>
+      </div>
+      <div>
+        <Link to="/products/:id">
+          <button>Detalle Producto</button>
+        </Link> 
+      </div>
+    
+      <Route path="/catalog" component={Catalog} />
+      <Route path="/products/:id" component={productComponent} />
+    </Router>
+
   );
 }
 

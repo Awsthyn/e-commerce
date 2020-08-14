@@ -57,7 +57,7 @@ export default class EditProduct extends React.Component {
 
   render() {
       return (
-          <div className="conteiner-fluid abs-center">
+          <div className="container-fluid abs-center">
           <form onSubmit={this.handleSubmit} >
               <div className="form-group">
                   <label>Nombre:</label>
