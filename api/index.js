@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category } = require("./src/db.js");
+const { conn, Product, Category, productsInCategory } = require("./src/db.js");
 //const Category = require("./src/models/Category.js");
 // Syncing all the models at once.
 conn
@@ -27,6 +27,30 @@ conn
     server.listen(3001, () => {
       console.log("%s listening at 3001"); // eslint-disable-line no-console
     });
+  })
+  .then(() => {
+    Category.bulkCreate([
+      { name: "Vestimenta", description: "Pilchas para vestirse" },
+      {
+        name: "Herramientas",
+        description: "Artefactos que nos faciliten algún tipo de trabajo",
+      },
+      {
+        name: "Armas",
+        description:
+          "Artefactos que nos faciliten algunos tipos de trabajo (no muy legales)",
+      },
+      {
+        name: "Maquinarias",
+        description: "Como una herramienta, pero más complejo, grande y caro",
+      },
+      { name: "Ornamental", description: "Elementos para la decoración" },
+      {
+        name: "Libros",
+        description: "Para matar el tiempo de una forma casi productiva",
+      },
+      { name: "Comestibles", description: "Alimentos, ingredientes, especias" },
+    ]);
   })
   .then(() => {
     Product.bulkCreate([
@@ -52,8 +76,11 @@ conn
     ]);
   })
   .then(() => {
-    Category.bulkCreate([
-      { name: "Vestimenta", description: "lorem" },
-      { name: "Herramientas", description: "lorem" },
+    productsInCategory.bulkCreate([
+      { productId: 1, categoryId: 1 },
+      { productId: 1, categoryId: 2 },
+      { productId: 2, categoryId: 1 },
+      { productId: 3, categoryId: 2 },
+      { productId: 3, categoryId: 1 },
     ]);
   });
