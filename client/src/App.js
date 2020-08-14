@@ -2,8 +2,9 @@ import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import Product from "./components/product";
-import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido
+import Catalog from "./components/catalogo"; //cambiar ruta a catalog cuando este subido
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Nav from "./components/Nav";
 import productComponent from "./components/product";
 import NewProductForm from "./components/NewProductForm"
 import EditProductForm from "./components/EditProductForm"
@@ -35,23 +36,14 @@ function App() {
   return (
 
     <Router>
-        <div>
-            <Link to="/catalog">
-                <button>Catalogo</button>
-            </Link>
-        </div>
-        <div>
-            <Link to="/products/:id">
-                <button>Detalle Producto</button>
-            </Link>
-        </div>
-
-        <Route path="/catalog" component={Catalog} />
+        <Route path='/' render={Nav} />
+        <Route path="/catalog" render={()=> <Catalog />} />
         <Route exact path="/products/:id" component={productComponent} />
 
-        <Route path="/products/form/new" >
-            <NewProductForm categories={categories} />
-        </Route>
+        <Route path="/products/form/new" 
+            render={()=> <NewProductForm categories={categories} />}
+         />   
+        
         <Route path="/products/:id/edit" >
             <EditProductForm categories={categories} product={ejemplo} />
         </Route>
