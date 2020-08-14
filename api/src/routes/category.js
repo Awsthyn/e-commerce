@@ -27,4 +27,22 @@ server.delete('/:id', (req,res, next) =>{
     }	
     })
 
+
+    server.put("/:id", (req, res, next)=>{
+        try {
+        const { id } = req.params;
+        const {name, description} = req.body;	
+        Category.update({
+            name,
+            description
+        
+        }, {where: {id}})
+        .then(() => {
+            res.sendStatus(200);
+        })
+        } catch (error) {
+            console.error(error.message)
+        }	
+        })
+
 module.exports = server;
