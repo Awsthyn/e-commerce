@@ -1,14 +1,16 @@
 const server = require('express').Router();
 const { Product } = require('../db.js');
+var Sequelize = require("sequelize");
 
-server.get(`/?palabra=${valor}`, (req, res, next) => {     // --> en airTable dice que pasemos por query, como?
+
+server.get(`/`, (req, res, next) => {  
+  let { query } = req.query;
+  query = '%' + query + '%'
+    // --> en airTable dice que pasemos por query, como?
 	Product.findAll({
         where: {
           name: {
-            [Sequelize.Op.iLike]: req.query.palabra
-          },
-          description: {
-            
+            [Sequelize.Op.iLike]: query
           }
         }
       })
@@ -16,5 +18,8 @@ server.get(`/?palabra=${valor}`, (req, res, next) => {     // --> en airTable di
           res.json(products);
         })
 
-        .catch(next); '/:asd' 
+        .catch(next);
+        //res.json(query)      
 });
+
+module.exports = server;
