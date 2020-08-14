@@ -7,8 +7,9 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 //import productComponent from "./components/product";
 import Catalog from "./components/catalogo"; //cambiar ruta a catalog cuando este subido
 import Nav from "./components/Nav";
-import NewProductForm from "./components/NewProductForm"
-import EditProductForm from "./components/EditProductForm"
+import NewProductForm from "./components/NewProductForm";
+import EditProductForm from "./components/EditProductForm";
+import NewCategoryForm from "./components/NewCategoryForm";
 
 
 function App() {
@@ -47,8 +48,8 @@ function App() {
             name: 'category 3'
         }
     ];
-    
-    
+
+
   let ejemplo = {
     id: 1,
     name: 'agus',
@@ -58,23 +59,23 @@ function App() {
     image: 'lorem',
     category: [1, 2]
   };
-  
+
 
   function onSearch(valor) {
     fetch(`http://localhost:3001/search?query=${valor}`)
       .then(r => r.json())
-      .then((data) => { 
+      .then((data) => {
         console.log(data)
         setProdsCatalog(data) })
       .catch(error => {console.error(error)})
   }
-            
-            
+
+
   return (
     <Router>
       <Route
         path = "/"
-        render={() => <Nav onSearch = {onSearch}/>} //aca le paso prop del fetch que hace searchbar 
+        render={() => <Nav onSearch = {onSearch}/>} //aca le paso prop del fetch que hace searchbar
       />
       <Route
         path = "/catalog"
@@ -96,8 +97,12 @@ function App() {
         path = "/products/:id/edit"
         render={() => <EditProductForm categories={categories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
+      <Route
+        path = "/categories/form/new"
+        render={() => <NewCategoryForm />}
+      />
     </Router>
   );
 }
 
-export default App; 
+export default App;
