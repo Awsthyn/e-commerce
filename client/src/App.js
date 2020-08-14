@@ -55,7 +55,6 @@ function App() {
         <Route path="/products/:id/edit" >
             <EditProductForm categories={categories} product={ejemplo} />
         </Route>
-
     </Router>
 
   );
