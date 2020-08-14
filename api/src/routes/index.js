@@ -3,6 +3,7 @@ const { Router } = require('express');
 const productRouter = require('./product.js');
 const searchRouter = require('./search.js');
 const bodyParser = require('body-parser');
+const categoryRouter = require('./category.js')
 
 
 const router = Router();
@@ -12,6 +13,7 @@ const router = Router();
 // router.use('/auth', authRouter);
 router.use(bodyParser.json());
 router.use('/products', productRouter);
+router.use('/categories', categoryRouter);
 router.use('/search', searchRouter);
 
 module.exports = router;
