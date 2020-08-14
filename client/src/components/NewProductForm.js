@@ -1,5 +1,5 @@
 import React from 'react';
-//import Category from './';
+import Checkbox from './Checkbox';
 
 export default class NewProduct extends React.Component {
 
@@ -11,12 +11,13 @@ export default class NewProduct extends React.Component {
             price: "",
             stock: "",
             image: "",
-            category: 1
+            category: []
         }
         this.categories = props.categories
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
   }
 
     handleChange(e) {
@@ -31,7 +32,7 @@ export default class NewProduct extends React.Component {
 
        fetch(url, {
            method: 'POST',
-           body: JSON.stringify({ product }),
+           body: JSON.stringify(product),
            headers: {
                'Content-Type': 'application/json'
            }
@@ -41,9 +42,21 @@ export default class NewProduct extends React.Component {
 
    }
 
+   onCheckboxClicked(category, isChecked) {
+       if(isChecked){
+           this.setState({
+               category: [...this.state.category, category.id]
+           })
+       } else {
+           this.setState({
+               category: this.state.category.filter(c => c !== category.id)
+           })
+       }
+   }
+
   render() {
       return (
-           <div className="conteiner-fluid abs-center">
+           <div className="container-fluid abs-center">
           <form onSubmit={this.handleSubmit} className="form-group">
               <div className="form-group">
                   <label>Nombre:</label>
@@ -66,15 +79,13 @@ export default class NewProduct extends React.Component {
                 <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
               </div>
               <label>Categoria:</label>
-               {/*<select onChange={ (e)=> {
-                   this.setState({
-                   category: e.target.value
-               })}} >
-                    {this.categories.map(category =>(
-                        <option key={category.id} value={category.id}>{category.name}</option>
-                    ))
-                }
-                </select>*/}
+                <div className="form-check form-check-inline">
+                    {this.categories.map( category => {
+                        return (
+                            <Checkbox key = {category.id} initialState={false} category={category} onChange={this.onCheckboxClicked} />
+                        )}
+                    )}
+                </div>
               <button type="submit" className="btn btn-dark">Enviar</button>
           </form>
           </div>
