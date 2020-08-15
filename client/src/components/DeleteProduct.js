@@ -13,13 +13,16 @@ function DeleteProduct({ id }){
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => console.info(res))
+        }).then(res => {
+            console.info(res)
+            alert("El Producto se ha Eliminado correctamente")
+        })
         .catch(err => console.error(err))
     }
 
     return (
-        <div>
-            <button className="btn btn-warning" onClick={handleClick}>Delete</button>
+        <div className="mx-auto">
+            <button className="btn btn-danger" onClick={handleClick}>Delete</button>
         </div>
     )
 }

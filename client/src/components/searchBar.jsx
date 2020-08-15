@@ -6,7 +6,7 @@ export default function SearchBar({onSearch}) {
   const [prod, setProd] = useState("");//setea el estado que todavia no definimos
   let history = useHistory()
   return (
-    <form className="navbar navbar--dark bg-dark" onSubmit={(e) => {
+    <form className="form-inline ml-auto" onSubmit={(e) => {
       history.push('/search')
       e.preventDefault();
       onSearch(prod);
@@ -18,7 +18,7 @@ export default function SearchBar({onSearch}) {
       value={prod}
       onChange={e=>setProd(e.target.value)}
       />
-    <input className="btn btn-sm btn-outline-success" type="submit" value= "Mostrar"/>
+    <input className="btn btn-sm btn-outline-light" type="submit" value= "Mostrar"/>
     </form>
   );
 }
@@ -27,7 +27,6 @@ export default function SearchBar({onSearch}) {
 
 /*import React, {useState} from 'react';
 // import styles from "./SearchBar.module.css";
-
 export default function SearchBar({onSearch}) {
   const [prod, setProd] = useState("");//setea el estado que todavia no definimos
   return (

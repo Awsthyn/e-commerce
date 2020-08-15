@@ -3,16 +3,17 @@ import Checkbox from "./Checkbox";
 
 export default class NewProduct extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      description: "",
-      price: "",
-      stock: "",
-      image: "",
-      category: [],
-    };
-    this.categories = props.categories;
+      super(props);
+
+      this.state = {
+            name: "",
+            description: "",
+            price: "",
+            stock: "",
+            image: "",
+            category: []
+        }
+        this.categories = props.categories
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +39,15 @@ export default class NewProduct extends React.Component {
     })
       .then((res) => {
         console.info(res);
+        this.setState({
+            name: "",
+            description: "",
+            price: "",
+            stock: "",
+            image: "",
+            category: []
+        })
+        alert("El producto se creó correctamente")
       })
       .catch((err) => console.error(err));
   }
@@ -56,7 +66,7 @@ export default class NewProduct extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid abs-center">
+      <div className="abs-center">
         <form onSubmit={this.handleSubmit} className="form-group">
           <div className="form-group">
             <label>Nombre:</label>
@@ -65,6 +75,7 @@ export default class NewProduct extends React.Component {
               id="name"
               name="name"
               onChange={this.handleChange}
+              value={this.state.name}
               className="form-control"
             />
           </div>
@@ -75,6 +86,7 @@ export default class NewProduct extends React.Component {
               id="description"
               name="description"
               onChange={this.handleChange}
+              value={this.state.description}
               className="form-control"
             />
           </div>
@@ -84,6 +96,7 @@ export default class NewProduct extends React.Component {
               id="price"
               name="price"
               onChange={this.handleChange}
+              value={this.state.price}
               className="form-control"
             />
           </div>
@@ -93,6 +106,7 @@ export default class NewProduct extends React.Component {
               id="stock"
               name="stock"
               onChange={this.handleChange}
+              value={this.state.stock}
               className="form-control"
             />
           </div>
@@ -102,6 +116,7 @@ export default class NewProduct extends React.Component {
               type="text"
               name="image"
               onChange={this.handleChange}
+              value={this.state.image}
               className="form-control"
             />
           </div>
@@ -118,8 +133,8 @@ export default class NewProduct extends React.Component {
               );
             })}
           </div>
-          <button type="submit" className="btn btn-dark">
-            Enviar
+          <button type="submit" className="btn btn-primary">
+            Crear
           </button>
         </form>
       </div>
