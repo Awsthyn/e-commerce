@@ -17,10 +17,13 @@ function Nav({onSearch}) {
           onSearch={onSearch}
         />
         <Link to="/products/form/new">
-          <button className="btn btn-sm btn-success">New Form</button>
+          <button className="btn btn-sm btn-success">New Product</button>
         </Link>
         <Link to="/products/1/edit">
           <button className="btn btn-sm btn-primary">Edit Form---link hardcodeado</button>
+        </Link>
+        <Link to="/categories/form/new">
+          <button className="btn btn-sm btn-success">New Category </button>
         </Link>
       </div>
     </nav>
