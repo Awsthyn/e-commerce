@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Category } = require("../db.js");
+const { Category, Product } = require("../db.js");
 
 server.get("/", (req, res, next) => {
   Category.findAll()
@@ -9,6 +9,15 @@ server.get("/", (req, res, next) => {
     })
     .catch(next);
 });
+
+server.get("/:nombreCat", (req, res, next) => {
+  Category.findOne({where:{
+    name: req.params.nombreCat
+  }, include: Product})
+  .then((cat)=>{
+    res.json(cat)
+  })
+})
 
 server.post("/", (req, res, next) => {
   const { name, description } = req.body;
