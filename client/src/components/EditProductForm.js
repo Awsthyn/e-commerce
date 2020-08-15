@@ -1,5 +1,6 @@
 import React from 'react';
 import Checkbox from './Checkbox';
+import DeleteProduct from './DeleteProduct';
 
 export default class EditProduct extends React.Component {
 
@@ -51,13 +52,15 @@ export default class EditProduct extends React.Component {
            }
        }).then(res => {
            console.info(res)
+           alert("El Producto se editó correctamente")
        }).catch(err => console.error(err))
 
    }
 
   render() {
       return (
-          <div className="container-fluid abs-center">
+    <div>
+        <div className="container-fluid abs-center">
           <form onSubmit={this.handleSubmit} >
               <div className="form-group">
                   <label>Nombre:</label>
@@ -89,10 +92,13 @@ export default class EditProduct extends React.Component {
                     )}
                 )}
             </div>
-
-              <button type="submit" className="btn btn-dark">Enviar</button>
+            <div>
+            <button type="submit" className="btn btn-warning">Editar</button>
+            </div>
           </form>
           </div>
+             <DeleteProduct />
+    </div>
       );
   }
 
