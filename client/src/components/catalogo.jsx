@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "./productCard";
 import S from"../css/catalogo.module.css";
 
 
@@ -7,7 +7,8 @@ import S from"../css/catalogo.module.css";
 const catalogo = ({array, categories}) => {
   console.log(categories);
   return (
-    <div className="container row" >
+    <div class="container-fluid abs-center">
+    <div className="container row " >
       <div>
         <h1 className= {S.title}>Categorias</h1>
         <ul>{categories.map((e) => (
@@ -20,6 +21,7 @@ const catalogo = ({array, categories}) => {
         <ProductCard key={e} name= {e.name} price={e.price} image= {e.image} />
       ))}
       </div>
+    </div>
     </div>
   );
 };
