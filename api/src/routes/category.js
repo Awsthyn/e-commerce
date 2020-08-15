@@ -13,7 +13,7 @@ server.get("/", (req, res, next) => {
 server.get("/:nombreCat", (req, res, next) => {
   Category.findOne({where:{
     name: req.params.nombreCat
-  }, include: Product})
+  }, include: { all: true, nested: true }})
   .then((cat)=>{
     res.json(cat)
   })
