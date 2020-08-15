@@ -9,6 +9,8 @@ import Catalog from "./components/catalogo"; //cambiar ruta a catalog cuando est
 import Nav from "./components/Nav";
 import NewProductForm from "./components/NewProductForm";
 import EditProductForm from "./components/EditProductForm";
+import NewCategoryForm from "./components/NewCategoryForm";
+
 
 //desde aca agrego Ariel
 
@@ -52,6 +54,8 @@ function App() {
   //   },
   // ];
 
+
+
   let ejemplo = {
     id: 1,
     name: "agus",
@@ -61,6 +65,7 @@ function App() {
     image: "lorem",
     category: [1, 2],
   };
+
 
   function onSearch(valor) {
     fetch(`http://localhost:3001/search?query=${valor}`)
@@ -97,11 +102,14 @@ function App() {
     getProduct(); // Your code here
   }, []);
 
+
   return (
     <Router>
       <Route
+
         path="/"
         render={() => <Nav onSearch={onSearch} />} //aca le paso prop del fetch que hace searchbar
+
       />
       <Route
         path="/catalog"
@@ -131,6 +139,10 @@ function App() {
         render={() => (
           <EditProductForm categories={listCategories} product={ejemplo} />
         )} //aca le pasamos lista de todos los products que coinciden (onSearch)
+      />
+      <Route
+        path = "/categories/form/new"
+        render={() => <NewCategoryForm />}
       />
     </Router>
   );
