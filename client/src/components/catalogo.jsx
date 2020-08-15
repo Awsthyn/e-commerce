@@ -32,7 +32,7 @@ const catalogo = ({ array, categories, filter }) => {
                         key={e}
                         name={e.name}
                         price={e.price}
-                        image={e.image}
+                        image={`http://ecommerce-g5.tk/server-fotos/${e.images[1].url}.jpg`}
                     />
                 ))}
             </div>
