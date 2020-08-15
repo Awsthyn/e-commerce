@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import Product from "./components/product";
@@ -12,90 +12,133 @@ import EditProductForm from "./components/EditProductForm";
 import NewCategoryForm from "./components/NewCategoryForm";
 
 
+//desde aca agrego Ariel
+
 function App() {
-  const [prodsCatalog, setProdsCatalog] = useState([])
+  const [prodsCatalog, setProdsCatalog] = useState([]);
+  const [listCategories, setListCategories] = useState([]);
+  const [listProducts, setListProducts] = useState([]);
 
-  const array = [
-    {
-      name: "La mano de Dios",
-      price: 100000,
-      image:
-        "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg",
-    },
-    {
-        name: "Croma en oferta. Ver descripción.",
-        price: 500,
-        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
-    },
-    {
-        name: "Poema de Lorem Ipsum",
-        price: 1000,
-        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
-    }
-  ];
+  //Comentamos para conectar las categorias desde el back
 
-    const categories = [
-        {
-            id: 1,
-            name: 'category 1'
-        },
-        {
-            id: 2,
-            name: 'category 2'
-        },
-        {
-            id: 3,
-            name: 'category 3'
-        }
-    ];
+  // const array = [
+  //   {
+  //     name: "La mano de Dios",
+  //     price: 100000,
+  //     image: "http://ecommerce-g5.tk/server-fotos/manodedios.jpg",
+  //   },
+  //   {
+  //     name: "Croma en oferta. Ver descripción.",
+  //     price: 500,
+  //     image: "http://ecommerce-g5.tk/server-fotos/croma.jpeg",
+  //   },
+  //   {
+  //     name: "Poema de Lorem Ipsum",
+  //     price: 1000,
+  //     image: "http://ecommerce-g5.tk/server-fotos/lorem.jpg",
+  //   },
+  // ];
+
+  // const categories = [
+  //   {
+  //     id: 1,
+  //     name: "category 1",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "category 2",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "category 3",
+  //   },
+  // ];
+
 
 
   let ejemplo = {
     id: 1,
-    name: 'agus',
-    description: '26 años',
+    name: "agus",
+    description: "26 años",
     price: 50,
     stock: 50,
-    image: 'lorem',
-    category: [1, 2]
+    image: "lorem",
+    category: [1, 2],
   };
 
 
   function onSearch(valor) {
     fetch(`http://localhost:3001/search?query=${valor}`)
-      .then(r => r.json())
+      .then((r) => r.json())
       .then((data) => {
-        console.log(data)
-        setProdsCatalog(data) })
-      .catch(error => {console.error(error)})
+        console.log(data);
+        setProdsCatalog(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
+
+  function getCategories() {
+    fetch(`http://localhost:3001/categories`)
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+        setListCategories(data);
+      });
+  }
+
+  function getProduct() {
+    fetch(`http://localhost:3001/products`)
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+        setListProducts(data);
+      });
+  }
+
+  useEffect(() => {
+    getCategories(); // Your code here
+    getProduct(); // Your code here
+  }, []);
 
 
   return (
     <Router>
       <Route
-        path = "/"
-        render={() => <Nav onSearch = {onSearch}/>} //aca le paso prop del fetch que hace searchbar
+
+        path="/"
+        render={() => <Nav onSearch={onSearch} />} //aca le paso prop del fetch que hace searchbar
+
       />
       <Route
-        path = "/catalog"
-        render={() => <Catalog array = {array}/>} //aca le pasamos lista de todos los products
+        path="/catalog"
+        render={() => (
+          <Catalog array={listProducts} categories={listCategories} />
+        )} //aca le pasamos lista de todos los products
       />
       <Route
-        path = "/search"
-        render={() => <Catalog array = {prodsCatalog}/>} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        path="/search"
+        render={() => (
+          <Catalog array={prodsCatalog} categories={listCategories} />
+        )} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
-        exact path = "/products/:id"
-        render={() => <Product />} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
+        exact
+        path="/products/:id"
+        render={() => (
+          <Product />
+        )} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
       />
       <Route
-        path = "/products/form/new"
-        render={() => <NewProductForm categories={categories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        path="/products/form/new"
+        render={() => <NewProductForm categories={listCategories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
-        path = "/products/:id/edit"
-        render={() => <EditProductForm categories={categories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        path="/products/:id/edit"
+        render={() => (
+          <EditProductForm categories={listCategories} product={ejemplo} />
+        )} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         path = "/categories/form/new"
