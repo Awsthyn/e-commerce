@@ -52,17 +52,18 @@ const initialCategories = [
       stock: 2000,
     },
     {
+      name: "Pata de conejo",
+      description: "20 + de suerte en la quiniela para tu abuela.",
+      price: 500,
+      stock: 150,
+    },
+    {
         name: "Croma en oferta. Ver descripción.",
         description: "Renderiza solamente en color amarillo.",
         price: 500,
         stock: 2000,
       },
-      {
-        name: "Pata de conejo",
-        description: "20 + de suerte en la quiniela para tu abuela.",
-        price: 500,
-        stock: 150,
-      },
+
       {
         name: "Escalera al cielo",
         description: "Uno de los pocos senderos que te lleva al paraíso (musical).",
@@ -121,11 +122,25 @@ const initialCategories = [
   ]
 
 const prodXCat = [
-    { productId: 1, categoryId: 1 },
     { productId: 1, categoryId: 2 },
-    { productId: 2, categoryId: 1 },
-    { productId: 3, categoryId: 2 },
+    { productId: 2, categoryId: 3 },
     { productId: 3, categoryId: 1 },
+    { productId: 4, categoryId: 5 },
+    { productId: 5, categoryId: 4 },
+    { productId: 6, categoryId: 5 },
+    { productId: 7, categoryId: 5 },
+    { productId: 8, categoryId: 5 },
+    { productId: 9, categoryId: 3 },
+    { productId: 9, categoryId: 5 },
+    { productId: 10, categoryId: 2 },
+    { productId: 11, categoryId: 6 },
+    { productId: 12, categoryId: 3 },
+    { productId: 13, categoryId: 5 },
+    { productId: 14, categoryId: 7 },
+    { productId: 15, categoryId: 6 },
+    { productId: 16, categoryId: 5 },
+    { productId: 16, categoryId: 2 }
+
   ]  
 
 const bruteDataImages = ["billetera", "boom", "botas", "buda", "cohetemenem",

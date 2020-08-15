@@ -11,7 +11,7 @@ export default function productComponent({
     image,
 }) {
     return (
-    <div className="container-fluid abs-center">
+    <div className="container-fluid  abs-center">
         <div className={s.product_container}>
             <div className={s.product_img}>
                 <img src={image} alt={name} />
