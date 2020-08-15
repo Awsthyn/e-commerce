@@ -96,7 +96,7 @@ const initialCategories = [
         stock: 1,
       },
       {
-        name: "Mesa redonde",
+        name: "Mesa redonda estilo medieval",
         description: "Es como una mesa… pero redonda. Ideal para regalarle a un caballero de Bretaña.",
         price: 500,
         stock: 2000,
