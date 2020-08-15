@@ -79,7 +79,7 @@ function App() {
         fetch(`http://localhost:3001/categories`)
             .then((r) => r.json())
             .then((data) => {
-                console.log(data);
+                
                 setListCategories(data);
             });
     }
@@ -88,7 +88,7 @@ function App() {
         fetch(`http://localhost:3001/products`)
             .then((r) => r.json())
             .then((data) => {
-                console.log(data);
+                
                 setListProducts(data);
             });
     }
@@ -96,7 +96,7 @@ function App() {
         fetch(`http://localhost:3001/categories/${value}`)
             .then((r) => r.json())
             .then((data) => {
-                console.log(data.products);
+                
                 setListProducts(data.products);
             });
     }

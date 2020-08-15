@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product } = require("../db.js");
+const { Product, Category, Image } = require("../db.js");
 var Sequelize = require("sequelize");
 
 server.get(`/`, (req, res, next) => {
@@ -21,6 +21,7 @@ server.get(`/`, (req, res, next) => {
         },
       ],
     },
+    include: [Category, Image]
   })
     .then((products) => {
       res.json(products);

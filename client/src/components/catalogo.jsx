@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 import S from "../css/catalogo.module.css";
 
 const catalogo = ({ array, categories, filter }) => {
-    console.log(categories);
+    
     return (
         <div className="container row">
             <div>
