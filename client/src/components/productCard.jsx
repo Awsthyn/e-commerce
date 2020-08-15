@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, NavLink} from 'react-router-dom';
 
 const productCard = ({ name, price, image }) => {
   return (
@@ -7,9 +8,10 @@ const productCard = ({ name, price, image }) => {
       <div className="card-body d-flex flex-column justify-content-center">
         <h5 className="card-title text-center">{name}</h5>
         <p className="card-text text-center">$ {price}</p>
-        <a href="#" className="btn btn-primary ml-auto mr-auto">
-          See more details...
-        </a>
+        <NavLink to="/products/:id" className="btn btn-primary ml-auto mr-auto">VER MAS</NavLink>
+        {/* <a href="#/products/:id" className="btn btn-primary ml-auto mr-auto">
+          See more details... </a>*/}
+        
       </div>
     </div>
   );
