@@ -16,6 +16,7 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
 
   // history.push(`/products/${valor}`)
 
+
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src={image} class="card-img-top" alt={name} />

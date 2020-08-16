@@ -20,6 +20,7 @@ export default function productComponent({
         image,
     })
     return (
+    <div className="container-fluid  abs-center">
         <div className={s.product_container}>
             <div className={s.product_img}>
                 <img src={image} alt={name} />
@@ -47,5 +48,6 @@ export default function productComponent({
             {/* <rating.js file */}
             <script src="js/addons/rating.js"></script>
         </div>
+    </div>    
     );
 }

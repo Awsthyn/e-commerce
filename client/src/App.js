@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-import Product from "./components/product";
+import Product from "./components/Product";
 //import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido---> (TRAE PRODUCTO)
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 //import productComponent from "./components/product";
@@ -11,11 +11,13 @@ import NewProductForm from "./components/NewProductForm";
 import EditProductForm from "./components/EditProductForm";
 import NewCategoryForm from "./components/NewCategoryForm";
 
+//desde aca agrego Ariel
 
 function App() {
   const [prodsCatalog, setProdsCatalog] = useState([]);
   const [prodsDetail, setProdsDetail] = useState({ id: '', name: '', price: '', image: '', stock: ''})
-
+  const [listCategories, setListCategories] = useState([]);
+  const [listProducts, setListProducts] = useState([]);
   const array = [
     {
       id: 2,
@@ -38,31 +40,27 @@ function App() {
     }
   ];
 
-    const categories = [
-        {
-            id: 1,
-            name: 'category 1'
-        },
-        {
-            id: 2,
-            name: 'category 2'
-        },
-        {
-            id: 3,
-            name: 'category 3'
-        }
-    ];
+    let ejemplo = {
+        id: 1,
+        name: "agus",
+        description: "26 años",
+        price: 50,
+        stock: 50,
+        image: "lorem",
+        category: [1, 2],
+    };
 
-
-  let ejemplo = {
-    id: 1,
-    name: 'agus',
-    description: '26 años',
-    price: 50,
-    stock: 50,
-    image: 'lorem',
-    category: [1, 2]
-  };
+    function onSearch(valor) {
+        fetch(`http://localhost:3001/search?query=${valor}`)
+            .then((r) => r.json())
+            .then((data) => {
+                console.log(data);
+                setProdsCatalog(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
   function toProductDetails(id) {
     fetch(`http://localhost:3001/products/${id}`)
@@ -74,15 +72,36 @@ function App() {
       .catch(error => {console.error(error)})
   }
 
+    function getCategories() {
+        fetch(`http://localhost:3001/categories`)
+            .then((r) => r.json())
+            .then((data) => {
+                
+                setListCategories(data);
+            });
+    }
 
-  function onSearch(valor) {
-    fetch(`http://localhost:3001/search?query=${valor}`)
-      .then(r => r.json())
-      .then((data) => {
-        console.log(data)
-        setProdsCatalog(data) })
-      .catch(error => {console.error(error)})
-  }
+    function getProduct() {
+        fetch(`http://localhost:3001/products`)
+            .then((r) => r.json())
+            .then((data) => {
+                
+                setListProducts(data);
+            });
+    }
+    function getCategory(value) {
+        fetch(`http://localhost:3001/categories/${value}`)
+            .then((r) => r.json())
+            .then((data) => {
+                
+                setListProducts(data.products);
+            });
+    }
+
+    useEffect(() => {
+        getCategories(); // Your code here
+        getProduct(); // Your code here
+    }, []);
 
 
   return (
@@ -93,11 +112,13 @@ function App() {
       />
       <Route
         path = "/catalog"
-        render={() => <Catalog array = {array} toProductDetails = {toProductDetails}/>} //aca le pasamos lista de todos los products
+        render={() => <Catalog array = {listProducts}
+                        categories={listCategories}
+                        filter={getCategory} toProductDetails = {toProductDetails}/>} //aca le pasamos lista de todos los products
       />
       <Route
         path = "/search"
-        render={() => <Catalog array = {prodsCatalog} toProductDetails = {toProductDetails}/>} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        render={() => <Catalog array = {prodsCatalog} categories={listCategories} toProductDetails = {toProductDetails}/>} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         exact path = "/products/:id"
@@ -105,11 +126,11 @@ function App() {
       />
       <Route
         path = "/products/form/new"
-        render={() => <NewProductForm categories={categories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        render={() => <NewProductForm categories={listCategories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         path = "/products/:id/edit"
-        render={() => <EditProductForm categories={categories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        render={() => <EditProductForm categories={listCategories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         path = "/categories/form/new"
@@ -117,6 +138,56 @@ function App() {
       />
     </Router>
   );
+/*
+    return (
+        <Router>
+            <Route
+                path="/"
+                render={() => <Nav onSearch={onSearch} />} //aca le paso prop del fetch que hace searchbar
+            />
+            <Route
+                path="/catalog"
+                render={() => (
+                    <Catalog
+                        array={listProducts}
+                        categories={listCategories}
+                        filter={getCategory}
+                    />
+                )} //aca le pasamos lista de todos los products
+            />
+            <Route
+                path="/search"
+                render={() => (
+                    <Catalog array={prodsCatalog} categories={listCategories} />
+                )} //aca le pasamos lista de todos los products que coinciden (onSearch)
+            />
+            <Route
+                exact
+                path="/products/:id"
+                render={() => (
+                    <Product />
+                )} 
+            />
+            <Route
+                path="/products/form/new"
+                render={() => <NewProductForm categories={listCategories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+            />
+            <Route
+                path="/products/:id/edit"
+                render={() => (
+                    <EditProductForm
+                        categories={listCategories}
+                        product={ejemplo}
+                    />
+                )} //aca le pasamos lista de todos los products que coinciden (onSearch)
+            />
+            <Route
+                path="/categories/form/new"
+                render={() => <NewCategoryForm />}
+            />
+        </Router>
+    );*/
+
 }
 
 export default App;

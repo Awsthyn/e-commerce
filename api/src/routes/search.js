@@ -1,25 +1,34 @@
-const server = require('express').Router();
-const { Product } = require('../db.js');
+const server = require("express").Router();
+const { Product, Category, Image } = require("../db.js");
 var Sequelize = require("sequelize");
 
-
-server.get(`/`, (req, res, next) => {  
+server.get(`/`, (req, res, next) => {
   let { query } = req.query;
-  query = '%' + query + '%'
-    // --> en airTable dice que pasemos por query, como?
-	Product.findAll({
-        where: {
+  query = "%" + query + "%";
+  // --> en airTable dice que pasemos por query, como?
+  Product.findAll({
+    where: {
+      [Sequelize.Op.or]: [
+        {
           name: {
-            [Sequelize.Op.iLike]: query
-          }
-        }
-      })
-      .then(products => {
-          res.json(products);
-        })
+            [Sequelize.Op.iLike]: query,
+          },
+        },
+        {
+          description: {
+            [Sequelize.Op.iLike]: query,
+          },
+        },
+      ],
+    },
+    include: [Category, Image]
+  })
+    .then((products) => {
+      res.json(products);
+    })
 
-        .catch(next);
-        //res.json(query)      
+    .catch(next);
+  //res.json(query)
 });
 
 module.exports = server;
