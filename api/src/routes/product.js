@@ -20,14 +20,16 @@ server.get('/:id', (req, res, next) => {
 });
 
 server.post("/", (req, res,next) =>{
-	const {name, description, price, stock, image} = req.body
+	let {name, description, price, stock, image} = req.body
+	image === '' ? image = "botas" : null;
 	Product.create({
 			name: name,
 			description: description,
 			price: price,
-			stock: stock
+			stock: stock,
+			images: [{url: image },{url: image+2},{url: image+3}]
 		
-	})
+	}, {include: [Image]})
 	.then(() =>{
 		res.sendStatus(201)
 	})
