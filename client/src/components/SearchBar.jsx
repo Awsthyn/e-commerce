@@ -21,7 +21,7 @@ export default function SearchBar({onSearch}) {
     <input className="btn btn-sm btn-outline-light" type="submit" value= "Mostrar"/>
     </form>
   );
-}
+}//
 
 
 

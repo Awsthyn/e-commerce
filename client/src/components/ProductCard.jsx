@@ -33,5 +33,5 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
       </div>
     </div>
   );
-};
+};//
 
