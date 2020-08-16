@@ -32,6 +32,7 @@ const catalogo = ({ array, categories, filter, toProductDetails }) => {
                 {array.map((e) => (
                     <ProductCard
                         key={e}
+                        id = {e.id}
                         name={e.name}
                         price={e.price}
                         toProductDetails= {toProductDetails}

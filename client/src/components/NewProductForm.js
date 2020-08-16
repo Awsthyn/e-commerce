@@ -38,6 +38,15 @@ export default class NewProduct extends React.Component {
             }
         }).then(res => {
             console.info(res)
+            this.setState({
+              name: "",
+              description: "",
+              price: "",
+              stock: "",
+              image: "",
+              category: []
+          })
+          alert("El producto se creó correctamente")
         }).catch(err => console.error(err))
     }
     
@@ -91,7 +100,7 @@ export default class NewProduct extends React.Component {
         </div>
         );
     }
-=======
+
 /*
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
