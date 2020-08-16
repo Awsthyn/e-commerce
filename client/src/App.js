@@ -15,10 +15,10 @@ import NewCategoryForm from "./components/NewCategoryForm";
 
 function App() {
   const [prodsCatalog, setProdsCatalog] = useState([]);
-  const [prodsDetail, setProdsDetail] = useState({ id: '', name: '', price: '', image: '', stock: ''})
+  const [prodsDetail, setProdsDetail] = useState({})
   const [listCategories, setListCategories] = useState([]);
   const [listProducts, setListProducts] = useState([]);
-  const array = [
+  /*const array = [
     {
       id: 2,
       name: "La mano de Dios",
@@ -38,7 +38,7 @@ function App() {
         price: 1000,
         image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
     }
-  ];
+  ];*/
 
     let ejemplo = {
         id: 1,
@@ -66,8 +66,9 @@ function App() {
     fetch(`http://localhost:3001/products/${id}`)
       .then(r => r.json())
       .then((data) => {
-        console.log('data:' + data)
-        setProdsDetail(data)})
+
+        setProdsDetail(data)
+        console.log(prodsDetail)})
         //console.log('prodsDetail:' + prodsDetail)
       .catch(error => {console.error(error)})
   }
@@ -85,7 +86,7 @@ function App() {
         fetch(`http://localhost:3001/products`)
             .then((r) => r.json())
             .then((data) => {
-                
+                console.log(data)
                 setListProducts(data);
             });
     }
@@ -122,7 +123,7 @@ function App() {
       />
       <Route
         exact path = "/products/:id"
-        render={() => <Product stock= {prodsDetail.stock} id= {prodsDetail.id} name={prodsDetail.name} price={prodsDetail.price} image={prodsDetail.image} description={prodsDetail.description}/>} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
+        render={() => <Product stock= {prodsDetail.stock} id= {prodsDetail.id} name={prodsDetail.name} price={prodsDetail.price} image={prodsDetail.images} description={prodsDetail.description}/>} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
       />
       <Route
         path = "/products/form/new"

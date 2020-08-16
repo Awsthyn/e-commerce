@@ -31,7 +31,12 @@ export default class NewCategory extends React.Component {
             }
         }).then(res => {
             console.info(res)
-        }).catch(err => console.error(err))
+            this.setState({
+                name: "",
+                description: ""
+            })
+          alert("La categoría se creó correctamente")
+      }).catch(err => console.error(err))
     }
     
     render() {

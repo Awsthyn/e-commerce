@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink} from 'react-router-dom';
-import SearchBar from './searchBar.jsx';
+import SearchBar from './SearchBar.jsx';
 
 
 function Nav({onSearch}) {
@@ -19,9 +19,6 @@ function Nav({onSearch}) {
             <ul className="navbar-nav mr-auto">
               <li classNameName="nav-item">
                 <NavLink to= "/catalog" className="nav-link">Catalogo</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/products/:id" className="nav-link">Detalle Producto</NavLink>
               </li>
             <li className="nav-item">
                <NavLink to="/products/form/new" className="nav-link">Agregar Producto</NavLink>

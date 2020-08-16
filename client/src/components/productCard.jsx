@@ -14,7 +14,7 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
   //     .catch(error => {console.error(error)})
   // }
 
-  // history.push(`/products/${valor}`)
+  //history.push(`/products/${valor}`)
 
 
   return (
@@ -23,12 +23,12 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
       <div className="card-body d-flex flex-column justify-content-center">
         <h5 className="card-title text-center">{name}</h5>
         <p className="card-text text-center">$ {price}</p>
-        <button /*href= {`/products/${id}`}*/ type= 'button' className="btn btn-primary ml-auto mr-auto" onClick={(e) => {
-          console.log(id)
-          history.push(`/products/${id}`)
-          toProductDetails(id)
+        <button data-id={id} type= 'button' className="btn btn-primary ml-auto mr-auto" onClick={(e) => {
+          
+          history.push(`/products/${e.target.getAttribute('data-id')}`)
+          toProductDetails(e.target.getAttribute('data-id'))
         }}>
-          See more details...
+          Ver más detalles...
         </button>
       </div>
     </div>
