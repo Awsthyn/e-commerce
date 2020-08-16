@@ -20,11 +20,8 @@ function Nav({onSearch}) {
               <li className="nav-item">
                 <NavLink to= "/catalog" className="nav-link">Catalogo</NavLink>
               </li>
-            <li className="nav-item">
-               <NavLink to="/products/form/new" className="nav-link">Agregar Producto</NavLink>
-             </li>
              <li className="nav-item">
-                <NavLink to="/crud" className="nav-link">Editar Productos</NavLink>
+                <NavLink to="/crud" className="nav-link">Administrar Productos</NavLink>
               </li>
             <li className="nav-item">
                <NavLink to="/categories/form/new" className="nav-link">Agregar Categoría</NavLink>
