@@ -91,7 +91,7 @@ export default class NewProduct extends React.Component {
         </div>
         );
     }
-=======
+
 /*
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
