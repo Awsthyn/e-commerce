@@ -17,7 +17,7 @@ function Nav({onSearch}) {
       <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
           <div className="navbar-nav" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li classNameName="nav-item">
+              <li className="nav-item">
                 <NavLink to= "/catalog" className="nav-link">Catalogo</NavLink>
               </li>
             <li className="nav-item">
