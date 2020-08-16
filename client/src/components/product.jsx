@@ -4,12 +4,21 @@ import RatingPage from "./calificacionCaras";
 // import Product from "../../../api/src/models/Product";
 
 export default function productComponent({
+    id,
     name,
     description,
     price,
     stock,
     image,
 }) {
+    console.log({
+        id: id,
+        name: name,
+        description,
+        price,
+        stock,
+        image,
+    })
     return (
         <div className={s.product_container}>
             <div className={s.product_img}>
