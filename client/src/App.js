@@ -10,6 +10,7 @@ import Nav from "./components/Nav";
 import NewProductForm from "./components/NewProductForm";
 import EditProductForm from "./components/EditProductForm";
 import NewCategoryForm from "./components/NewCategoryForm";
+import Crud from "./components/Crud";
 
 //desde aca agrego Ariel
 
@@ -110,6 +111,10 @@ function App() {
       <Route
         path = "/"
         render={() => <Nav onSearch = {onSearch}/>} //aca le paso prop del fetch que hace searchbar
+      />
+      <Route
+        exact path = "/crud"
+        render={() => <Crud products={listProducts} />}
       />
       <Route
         path = "/catalog"
