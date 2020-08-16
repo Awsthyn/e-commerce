@@ -14,44 +14,31 @@ import NewCategoryForm from "./components/NewCategoryForm";
 //desde aca agrego Ariel
 
 function App() {
-    const [prodsCatalog, setProdsCatalog] = useState([]);
-    const [listCategories, setListCategories] = useState([]);
-    const [listProducts, setListProducts] = useState([]);
-
-    //Comentamos para conectar las categorias desde el back
-
-    // const array = [
-    //   {
-    //     name: "La mano de Dios",
-    //     price: 100000,
-    //     image: "http://ecommerce-g5.tk/server-fotos/manodedios.jpg",
-    //   },
-    //   {
-    //     name: "Croma en oferta. Ver descripción.",
-    //     price: 500,
-    //     image: "http://ecommerce-g5.tk/server-fotos/croma.jpeg",
-    //   },
-    //   {
-    //     name: "Poema de Lorem Ipsum",
-    //     price: 1000,
-    //     image: "http://ecommerce-g5.tk/server-fotos/lorem.jpg",
-    //   },
-    // ];
-
-    // const categories = [
-    //   {
-    //     id: 1,
-    //     name: "category 1",
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "category 2",
-    //   },
-    //   {
-    //     id: 3,
-    //     name: "category 3",
-    //   },
-    // ];
+  const [prodsCatalog, setProdsCatalog] = useState([]);
+  const [prodsDetail, setProdsDetail] = useState({ id: '', name: '', price: '', image: '', stock: ''})
+  const [listCategories, setListCategories] = useState([]);
+  const [listProducts, setListProducts] = useState([]);
+  const array = [
+    {
+      id: 2,
+      name: "La mano de Dios",
+      price: 100000,
+      image:
+        "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg",
+    },
+    {
+        id: 3,
+        name: "Croma en oferta. Ver descripción.",
+        price: 500,
+        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
+    },
+    {
+        id: 4,
+        name: "Poema de Lorem Ipsum",
+        price: 1000,
+        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
+    }
+  ];
 
     let ejemplo = {
         id: 1,
@@ -74,6 +61,16 @@ function App() {
                 console.error(error);
             });
     }
+
+  function toProductDetails(id) {
+    fetch(`http://localhost:3001/products/${id}`)
+      .then(r => r.json())
+      .then((data) => {
+        console.log('data:' + data)
+        setProdsDetail(data)})
+        //console.log('prodsDetail:' + prodsDetail)
+      .catch(error => {console.error(error)})
+  }
 
     function getCategories() {
         fetch(`http://localhost:3001/categories`)
@@ -106,6 +103,42 @@ function App() {
         getProduct(); // Your code here
     }, []);
 
+
+  return (
+    <Router>
+      <Route
+        path = "/"
+        render={() => <Nav onSearch = {onSearch}/>} //aca le paso prop del fetch que hace searchbar
+      />
+      <Route
+        path = "/catalog"
+        render={() => <Catalog array = {listProducts}
+                        categories={listCategories}
+                        filter={getCategory} toProductDetails = {toProductDetails}/>} //aca le pasamos lista de todos los products
+      />
+      <Route
+        path = "/search"
+        render={() => <Catalog array = {prodsCatalog} categories={listCategories} toProductDetails = {toProductDetails}/>} //aca le pasamos lista de todos los products que coinciden (onSearch)
+      />
+      <Route
+        exact path = "/products/:id"
+        render={() => <Product stock= {prodsDetail.stock} id= {prodsDetail.id} name={prodsDetail.name} price={prodsDetail.price} image={prodsDetail.image} description={prodsDetail.description}/>} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
+      />
+      <Route
+        path = "/products/form/new"
+        render={() => <NewProductForm categories={listCategories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+      />
+      <Route
+        path = "/products/:id/edit"
+        render={() => <EditProductForm categories={listCategories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+      />
+      <Route
+        path = "/categories/form/new"
+        render={() => <NewCategoryForm />}
+      />
+    </Router>
+  );
+/*
     return (
         <Router>
             <Route
@@ -133,7 +166,7 @@ function App() {
                 path="/products/:id"
                 render={() => (
                     <Product />
-                )} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
+                )} 
             />
             <Route
                 path="/products/form/new"
@@ -153,7 +186,8 @@ function App() {
                 render={() => <NewCategoryForm />}
             />
         </Router>
-    );
+    );*/
+
 }
 
 export default App;

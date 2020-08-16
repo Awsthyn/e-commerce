@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import S from "../css/catalogo.module.css";
 
-const catalogo = ({ array, categories, filter }) => {
+
+const catalogo = ({ array, categories, filter, toProductDetails }) => {
     
     return (
         <div className="container row">
@@ -16,6 +17,7 @@ const catalogo = ({ array, categories, filter }) => {
                                 key={e}
                                 id={e.id}
                                 name={e.name}
+                                
                                 onClick={(e) =>
                                     filter(e.target.getAttribute("name"))
                                 }
@@ -32,12 +34,14 @@ const catalogo = ({ array, categories, filter }) => {
                         key={e}
                         name={e.name}
                         price={e.price}
+                        toProductDetails= {toProductDetails}
                         image={`http://ecommerce-g5.tk/server-fotos/${e.images[1].url}.jpg`}
                     />
                 ))}
             </div>
         </div>
     );
+
 };
 
 export default catalogo;
