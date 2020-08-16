@@ -1,27 +1,12 @@
 import React from 'react'
+import DeleteProduct from './DeleteProduct';
 
 const Crud = ({products}) => {
     console.log(products)
-    function deleteProduct(id){
-        console.log(id)
-        const ProductId = id
-        const url = 'http://localhost:3001/products/' + ProductId;
-    
-            fetch(url, {
-                method: 'DELETE',
-                //body: JSON.stringify({ id : ProductId }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                console.info(res)
-                alert("El Producto se ha Eliminado correctamente")
-            })
-            .catch(err => console.error(err))
-        }
+
     return (
 <div className="container mt-4">
-  <h2 className="text-center">Edición de productos</h2>         
+  <h2 className="text-center">Edición de productos</h2>
   <table className="table">
     <thead className="text-center">
       <tr>
@@ -33,14 +18,16 @@ const Crud = ({products}) => {
     </thead>
     <tbody>
        {products.map((e, i) =>(
-           <tr>
+           <tr key={e.id}>
                    <td>{e.name}</td>
                    <td>{e.description}</td>
                    <td><button className="btn btn-success">Editar</button></td>
-                   <td><button data-id={e.id} className="btn btn-danger" onClick={e => deleteProduct(e.target.getAttribute('data-id'))}>Eliminar</button></td>
+                   <td>
+                   <DeleteProduct id={e.id} />
+                   </td>
            </tr>
-       ))} 
-      
+       ))}
+
 
     </tbody>
   </table>
