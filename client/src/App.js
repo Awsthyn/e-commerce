@@ -41,16 +41,6 @@ function App() {
     }
   ];*/
 
-    let ejemplo = {
-        id: 1,
-        name: "agus",
-        description: "26 años",
-        price: 50,
-        stock: 50,
-        image: "lorem",
-        category: [1, 2],
-    };
-
     function onSearch(valor) {
         fetch(`http://localhost:3001/search?query=${valor}`)
             .then((r) => r.json())
@@ -136,7 +126,9 @@ function App() {
       />
       <Route
         path = "/products/:id/edit"
-        render={() => <EditProductForm categories={listCategories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        render={(props) => (
+                <EditProductForm categories={listCategories} product={props.location.state.product} />
+            )} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         path = "/categories/form/new"

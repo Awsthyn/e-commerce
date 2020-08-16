@@ -1,8 +1,10 @@
 import React from 'react';
+import { withRouter } from "react-router"
+
 import Checkbox from './Checkbox';
 import DeleteProduct from './DeleteProduct';
 
-export default class EditProduct extends React.Component {
+export default  withRouter(class EditProduct extends React.Component {
 
   constructor(props) {
       super(props);
@@ -13,7 +15,7 @@ export default class EditProduct extends React.Component {
             price: props.product.price,
             stock: props.product.stock,
             image:props.product.image,
-            category: props.product.category
+            category: props.product.categories
         }
 
         this.categories = props.categories
@@ -86,7 +88,7 @@ export default class EditProduct extends React.Component {
               <label>Categoria:</label>
             <div className="form-check form-check-inline">
                 {this.categories.map( category => {
-                    const marcado = this.state.category.filter(id => id === category.id).length > 0
+                    const marcado = this.state.category.filter(c => c.id === category.id).length > 0
                     return (
                         <Checkbox key = {category.id} initialState={marcado} category={category} onChange={this.onCheckboxClicked} />
                     )}
@@ -103,3 +105,4 @@ export default class EditProduct extends React.Component {
   }
 
 }
+)

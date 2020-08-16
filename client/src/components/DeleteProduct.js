@@ -22,7 +22,7 @@ function DeleteProduct({ id }){
 
     return (
         <div className="mx-auto">
-            <button className="btn btn-danger" onClick={handleClick}>Delete</button>
+            <button className="btn btn-danger" onClick={handleClick}>Eliminar</button>
         </div>
     )
 }
