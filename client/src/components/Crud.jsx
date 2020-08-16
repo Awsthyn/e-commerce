@@ -8,7 +8,9 @@ const Crud = ({products} ) => {
 
     return (
 <div className="container mt-4">
-  <h2 className="text-center">Edición de productos</h2>
+        <Link to="products/form/new" className="btn btn-success col-1">Nuevo</Link>
+        <h2 className="col-11 text-center">Edición de productos</h2>
+
   <table className="table">
     <thead className="text-center">
       <tr>
@@ -19,25 +21,22 @@ const Crud = ({products} ) => {
       </tr>
     </thead>
     <tbody>
+
         {products.map((e, i) => (
            <tr key={e.id}>
                    <td>{e.name}</td>
                    <td>{e.description}</td>
-                   <td>
-
-                   <button className="btn btn-success" >Editar</button></td>
-                   <td>
-                   <DeleteProduct id={e.id} />
-                   </td>
                    <td> <Link
                        to={{
                          pathname: `/products/${e.id}/edit`,
                          state: { product : e }
                        }}
-                     >Edi</Link></td>
+                       className= "btn btn-success"
+                     >Editar</Link>
+                     </td>
+                     <td><DeleteProduct id={e.id} /></td>
            </tr>
        ))}
-
 
     </tbody>
   </table>
