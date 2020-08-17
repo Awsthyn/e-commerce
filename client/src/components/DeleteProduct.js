@@ -1,6 +1,6 @@
 import React from 'react'
 
-function DeleteProduct({ id }){
+function DeleteProduct({ id, handleDelete }){
     const ProductId = id
 
     function handleClick() {
@@ -15,6 +15,7 @@ function DeleteProduct({ id }){
             }
         }).then(res => {
             console.info(res)
+            handleDelete(ProductId);
             alert("El Producto se ha Eliminado correctamente")
         })
         .catch(err => console.error(err))
