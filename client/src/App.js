@@ -77,20 +77,6 @@ function App() {
             });
     }
 
-    function getProduct() {
-        fetch(`http://localhost:3001/products`)
-            .then((r) => r.json())
-            .then((data) => {
-                console.log(data)
-                setListProducts(data);
-            });
-    }
-    function getCategory(value) {
-        fetch(`http://localhost:3001/categories/${value}`)
-            .then((r) => r.json())
-            .then((data) => {
-
-
   function getProduct() {
     fetch(`http://localhost:3001/products`)
       .then((r) => r.json())
