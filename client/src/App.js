@@ -10,15 +10,16 @@ import Nav from "./components/Nav";
 import NewProductForm from "./components/NewProductForm";
 import EditProductForm from "./components/EditProductForm";
 import NewCategoryForm from "./components/NewCategoryForm";
+import Crud from "./components/Crud";
 
 //desde aca agrego Ariel
 
 function App() {
   const [prodsCatalog, setProdsCatalog] = useState([]);
-  const [prodsDetail, setProdsDetail] = useState({ id: '', name: '', price: '', image: '', stock: ''})
+  const [prodsDetail, setProdsDetail] = useState({})
   const [listCategories, setListCategories] = useState([]);
   const [listProducts, setListProducts] = useState([]);
-  const array = [
+  /*const array = [
     {
       id: 2,
       name: "La mano de Dios",
@@ -38,17 +39,7 @@ function App() {
         price: 1000,
         image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
     }
-  ];
-
-    let ejemplo = {
-        id: 1,
-        name: "agus",
-        description: "26 años",
-        price: 50,
-        stock: 50,
-        image: "lorem",
-        category: [1, 2],
-    };
+  ];*/
 
     function onSearch(valor) {
         fetch(`http://localhost:3001/search?query=${valor}`)
@@ -66,8 +57,9 @@ function App() {
     fetch(`http://localhost:3001/products/${id}`)
       .then(r => r.json())
       .then((data) => {
-        console.log('data:' + data)
-        setProdsDetail(data)})
+
+        setProdsDetail(data)
+        console.log(prodsDetail)})
         //console.log('prodsDetail:' + prodsDetail)
       .catch(error => {console.error(error)})
   }
@@ -76,7 +68,7 @@ function App() {
         fetch(`http://localhost:3001/categories`)
             .then((r) => r.json())
             .then((data) => {
-                
+
                 setListCategories(data);
             });
     }
@@ -85,7 +77,7 @@ function App() {
         fetch(`http://localhost:3001/products`)
             .then((r) => r.json())
             .then((data) => {
-                
+                console.log(data)
                 setListProducts(data);
             });
     }
@@ -93,7 +85,7 @@ function App() {
         fetch(`http://localhost:3001/categories/${value}`)
             .then((r) => r.json())
             .then((data) => {
-                
+
                 setListProducts(data.products);
             });
     }
@@ -103,12 +95,21 @@ function App() {
         getProduct(); // Your code here
     }, []);
 
+    function onDeleteProduct(id) {
+        setListProducts( prev =>
+            prev.filter(p => p.id !== id)
+        )
+    }
 
   return (
     <Router>
       <Route
         path = "/"
         render={() => <Nav onSearch = {onSearch}/>} //aca le paso prop del fetch que hace searchbar
+      />
+      <Route
+        exact path = "/crud"
+        render={() => <Crud products={listProducts} onDeleteProduct={ onDeleteProduct} />}
       />
       <Route
         path = "/catalog"
@@ -122,7 +123,7 @@ function App() {
       />
       <Route
         exact path = "/products/:id"
-        render={() => <Product stock= {prodsDetail.stock} id= {prodsDetail.id} name={prodsDetail.name} price={prodsDetail.price} image={prodsDetail.image} description={prodsDetail.description}/>} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
+        render={() => <Product stock= {prodsDetail.stock} id= {prodsDetail.id} name={prodsDetail.name} price={prodsDetail.price} image={prodsDetail.images} description={prodsDetail.description}/>} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
       />
       <Route
         path = "/products/form/new"
@@ -130,7 +131,9 @@ function App() {
       />
       <Route
         path = "/products/:id/edit"
-        render={() => <EditProductForm categories={listCategories} product={ejemplo} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        render={(props) => (
+                <EditProductForm categories={listCategories} product={props.location.state.product} />
+            )} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         path = "/categories/form/new"
@@ -166,7 +169,7 @@ function App() {
                 path="/products/:id"
                 render={() => (
                     <Product />
-                )} 
+                )}
             />
             <Route
                 path="/products/form/new"

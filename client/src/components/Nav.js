@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink} from 'react-router-dom';
-import SearchBar from './searchBar.jsx';
+import SearchBar from './SearchBar.jsx';
 
 
 function Nav({onSearch}) {
@@ -17,17 +17,11 @@ function Nav({onSearch}) {
       <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
           <div className="navbar-nav" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li classNameName="nav-item">
+              <li className="nav-item">
                 <NavLink to= "/catalog" className="nav-link">Catalogo</NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink to="/products/:id" className="nav-link">Detalle Producto</NavLink>
-              </li>
-            <li className="nav-item">
-               <NavLink to="/products/form/new" className="nav-link">Agregar Producto</NavLink>
-             </li>
              <li className="nav-item">
-                <NavLink to="/products/1/edit" className="nav-link">Editar Producto</NavLink>
+                <NavLink to="/crud" className="nav-link">Administrar Productos</NavLink>
               </li>
             <li className="nav-item">
                <NavLink to="/categories/form/new" className="nav-link">Agregar Categoría</NavLink>
