@@ -11,7 +11,7 @@ export default class NewProduct extends React.Component {
             description: "",
             price: "",
             stock: "",
-            images: "",
+            image: "",
             category: []
         }
         this.categories = props.categories
@@ -43,7 +43,7 @@ export default class NewProduct extends React.Component {
               description: "",
               price: "",
               stock: "",
-              images: "",
+              image: "",
               category: []
           })
           alert("El producto se creó correctamente")
@@ -85,7 +85,7 @@ export default class NewProduct extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>Imagen:</label>
-                    <input type="text" name="image" onChange={this.handleChange} className="form-control" value={this.state.images}/>
+                    <input type="text" name="image" onChange={this.handleChange} className="form-control" value={this.state.image}/>
                 </div>
                     <label>Categoria:</label>
                 <div className="form-check form-check-inline">
