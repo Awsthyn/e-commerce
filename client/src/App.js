@@ -140,23 +140,23 @@ function App() {
       />
       <Route
         path = "/products/form/new"
-        render={() => <NewProductForm categories={listCategories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
+        render={() => <NewProductForm categories={listCategories} listaProducts={listProducts}/>} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         path = "/products/:id/edit"
         render={(props) => (
-                <EditProductForm categories={listCategories} product={props.location.state.product} />
+                <EditProductForm categories={listCategories} product={props.location.state.product} listaProducts={listProducts}/>
             )} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
       <Route
         path = "/categories/form/new"
-        render={() => <NewCategoryForm />}
+        render={() => <NewCategoryForm listaCategories={listCategories}/>}
       />
 
       <Route
         path = "/categories/:id/edit"
         render={(props) => (
-                <EditCategoryForm category={props.location.state.category} />
+                <EditCategoryForm category={props.location.state.category} listaCategories={listCategories}/>
             )} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
     </Router>
