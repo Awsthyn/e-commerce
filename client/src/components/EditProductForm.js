@@ -55,11 +55,15 @@ export default  withRouter(class EditProduct extends React.Component {
        }).then(res => {
            console.info(res)
            alert("El Producto se editó correctamente")
+           window.location = "/crud";
        }).catch(err => console.error(err))
 
    }
 
   render() {
+    const imgOptions = ["billetera", "boom", "botas", "buda", "cohetemenem",
+    "conejo", "croma","escaleraalcielo","excalibur","horrocrux", "lorem", "manodedios",
+     "mesa","momia", "necronomicon", "santogrial"]
       return (
     <div>
         <div className="container-fluid abs-center">
@@ -81,8 +85,12 @@ export default  withRouter(class EditProduct extends React.Component {
                   <input id="stock" name="stock" onChange={this.handleChange} value={this.state.stock} className="form-control" />
               </div>
               <div className="form-group">
-                  <label>Imagen:</label>
-                <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
+              <label>
+                Imagen:
+                <select value={this.state.image} name="image" onChange={this.handleChange}>
+                  {imgOptions.map(e =>{ return (<option value={e}>{e}</option>)})}
+          </select>
+          </label>
               </div>
 
               <label>Categoria:</label>
