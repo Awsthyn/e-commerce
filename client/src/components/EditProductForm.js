@@ -47,7 +47,7 @@ export default  withRouter(class EditProduct extends React.Component {
        const url = 'http://localhost:3001/products/' + this.state.id;
 
        fetch(url, {
-           method: 'POST',
+           method: 'PUT',
            body: JSON.stringify(product),
            headers: {
                'Content-Type': 'application/json'
