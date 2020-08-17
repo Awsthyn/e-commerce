@@ -17,6 +17,7 @@ function DeleteProduct({ id, handleDelete }){
             console.info(res)
             handleDelete(ProductId);
             alert("El Producto se ha Eliminado correctamente")
+            window.location = "/crud";
         })
         .catch(err => console.error(err))
     }
