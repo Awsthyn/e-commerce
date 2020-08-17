@@ -14,6 +14,7 @@ export default class NewProduct extends React.Component {
             image: "",
             category: []
         }
+        this.listaProductos = props.listaProducts
         this.categories = props.categories
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,13 +25,23 @@ export default class NewProduct extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    comparaSiHay(arreglo, obj){
+      for (let i = 0; i < arreglo.length; i++) {
+          if(obj.name.toUpperCase() === arreglo[i].name.toUpperCase() || obj.description.toUpperCase() === arreglo[i].description.toUpperCase()){
+              return true
+          }
+      }
+      return false
+  }
+
     handleSubmit(e){
         e.preventDefault();
         console.log(this.state)
         const product = this.state;
         const url = 'http://localhost:3001/products/';
 
-        fetch(url, {
+        if(!this.comparaSiHay(this.listaProductos, this.state)){
+          fetch(url, {
             method: 'POST',
             body: JSON.stringify(product),
             headers: {
@@ -48,6 +59,9 @@ export default class NewProduct extends React.Component {
           })
           alert("El producto se creó correctamente")
         }).catch(err => console.error(err))
+      } else {alert(`No se puede crear ${this.state.name} porque ya existe.`)}
+
+        
     }
 
     onCheckboxClicked(category, isChecked) {

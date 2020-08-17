@@ -9,6 +9,7 @@ export default class EditCategoryForm extends React.Component {
             name: props.category.name,
             description: props.category.description
         }
+        this.categories = props.listaCategories;
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,13 +19,23 @@ export default class EditCategoryForm extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    comparaSiHay(arregloCategorias, obj){
+        for (let i = 0; i < arregloCategorias.length; i++) {
+            if(obj.name.toUpperCase() === arregloCategorias[i].name.toUpperCase() || obj.description.toUpperCase() === arregloCategorias[i].description.toUpperCase()){
+                return true
+            }
+        }
+        return false
+    }
+
     handleSubmit(e){
         e.preventDefault();
         console.info('putting')
         const category = this.state;
         const url = 'http://localhost:3001/categories/' + this.state.id;
 
-        fetch(url, {
+        if(!this.comparaSiHay(this.categories, this.state)){
+            fetch(url, {
             method: 'PUT',
             body: JSON.stringify(category),
             headers: {
@@ -34,7 +45,8 @@ export default class EditCategoryForm extends React.Component {
             console.info(res)
             alert("La Categoría se editó correctamente")
         }).catch(err => console.error(err))
-
+        }
+        else {alert(`No se puede crear la categoria ${this.state.name} porque ya existe`)}
     }
 
     render() {
