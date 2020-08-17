@@ -68,7 +68,7 @@ function App() {
         fetch(`http://localhost:3001/categories`)
             .then((r) => r.json())
             .then((data) => {
-                
+
                 setListCategories(data);
             });
     }
@@ -85,7 +85,7 @@ function App() {
         fetch(`http://localhost:3001/categories/${value}`)
             .then((r) => r.json())
             .then((data) => {
-                
+
                 setListProducts(data.products);
             });
     }
@@ -95,6 +95,11 @@ function App() {
         getProduct(); // Your code here
     }, []);
 
+    function onDeleteProduct(id) {
+        setListProducts( prev =>
+            prev.filter(p => p.id !== id)
+        )
+    }
 
   return (
     <Router>
@@ -104,7 +109,7 @@ function App() {
       />
       <Route
         exact path = "/crud"
-        render={() => <Crud products={listProducts} />}
+        render={() => <Crud products={listProducts} onDeleteProduct={ onDeleteProduct} />}
       />
       <Route
         path = "/catalog"
@@ -164,7 +169,7 @@ function App() {
                 path="/products/:id"
                 render={() => (
                     <Product />
-                )} 
+                )}
             />
             <Route
                 path="/products/form/new"
