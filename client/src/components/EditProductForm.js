@@ -17,7 +17,7 @@ export default  withRouter(class EditProduct extends React.Component {
             image:props.product.image,
             category: props.product.categories
         }
-
+        this.listaProductos = props.listaProducts
         this.categories = props.categories
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,13 +40,23 @@ export default  withRouter(class EditProduct extends React.Component {
         }
     }
 
-   handleSubmit(e){
-       e.preventDefault();
-       console.info('putting')
-       const product = this.state;
-       const url = 'http://localhost:3001/products/' + this.state.id;
+    comparaSiHay(arreglo, obj){
+        for (let i = 0; i < arreglo.length; i++) {
+            if(obj.name.toUpperCase() === arreglo[i].name.toUpperCase() || obj.description.toUpperCase() === arreglo[i].description.toUpperCase()){
+                return true
+            }
+        }
+        return false
+    }
+    
+    handleSubmit(e){
+        e.preventDefault();
+        console.info('putting')
+        const product = this.state;
+        const url = 'http://localhost:3001/products/' + this.state.id;
 
-       fetch(url, {
+        if(!this.comparaSiHay(this.listaProductos, this.state)){
+            fetch(url, {
            method: 'PUT',
            body: JSON.stringify(product),
            headers: {
@@ -55,11 +65,18 @@ export default  withRouter(class EditProduct extends React.Component {
        }).then(res => {
            console.info(res)
            alert("El Producto se editó correctamente")
+           window.location = "/crud";
        }).catch(err => console.error(err))
+        } else {alert(`No se puede editar a ${this.state.name} porque ya existe un producto con ese nombre.`)}
+
+       
 
    }
 
   render() {
+    const imgOptions = ["billetera", "boom", "botas", "buda", "cohetemenem",
+    "conejo", "croma","escaleraalcielo","excalibur","horrocrux", "lorem", "manodedios",
+     "mesa","momia", "necronomicon", "santogrial"]
       return (
     <div>
         <div className="container-fluid abs-center">
@@ -81,8 +98,12 @@ export default  withRouter(class EditProduct extends React.Component {
                   <input id="stock" name="stock" onChange={this.handleChange} value={this.state.stock} className="form-control" />
               </div>
               <div className="form-group">
-                  <label>Imagen:</label>
-                <input type="text" name="image" onChange={this.handleChange} className="form-control"/>
+              <label>
+                Imagen:
+                <select value={this.state.image} name="image" onChange={this.handleChange}>
+                  {imgOptions.map(e =>{ return (<option value={e}>{e}</option>)})}
+          </select>
+          </label>
               </div>
 
               <label>Categoria:</label>
@@ -99,7 +120,6 @@ export default  withRouter(class EditProduct extends React.Component {
             </div>
           </form>
           </div>
-             <DeleteProduct />
     </div>
       );
   }

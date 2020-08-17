@@ -1,23 +1,22 @@
 import React from 'react'
 
-function DeleteProduct({ id, handleDelete }){
-    const ProductId = id
+function DeleteCategory({ id, handleDelete }){
+    const CategoryId = id
 
     function handleClick() {
-        console.log('Borrando ' + ProductId);
-        const url = 'http://localhost:3001/products/' + ProductId;
+        console.log('Borrando ' + CategoryId);
+        const url = 'http://localhost:3001/categories/' + CategoryId;
 
         fetch(url, {
             method: 'DELETE',
-            body: JSON.stringify({ id : ProductId }),
+            body: JSON.stringify({ id : CategoryId }),
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
             console.info(res)
-            handleDelete(ProductId);
-            alert("El Producto se ha Eliminado correctamente")
-            window.location = "/crud";
+            handleDelete(CategoryId);
+            alert("La categoría se ha Eliminado correctamente")
         })
         .catch(err => console.error(err))
     }
@@ -29,4 +28,4 @@ function DeleteProduct({ id, handleDelete }){
     )
 }
 
-export default DeleteProduct
+export default DeleteCategory

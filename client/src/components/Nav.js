@@ -65,6 +65,7 @@ function Nav({ onSearch, categories, filter, toGetProducts }) {
               </NavLink>
             </li>
             <li className="nav-item">
+
               <NavLink to="/categories/form/new" className="nav-link">
                 Agregar Categoría
               </NavLink>
@@ -72,6 +73,15 @@ function Nav({ onSearch, categories, filter, toGetProducts }) {
           </ul>
           <SearchBar onSearch={onSearch} />
         </div>
+
+               <NavLink to="/CrudCategory" className="nav-link">Administrar Categorías</NavLink>
+             </li>
+           </ul>
+            <SearchBar
+              onSearch={onSearch}
+            />
+            </div>
+
       </nav>
     </div>
   );
