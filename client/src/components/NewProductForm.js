@@ -19,17 +19,17 @@ export default class NewProduct extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
     }
-    
+
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value})
     }
-    
+
     handleSubmit(e){
         e.preventDefault();
         console.log(this.state)
         const product = this.state;
         const url = 'http://localhost:3001/products/';
-        
+
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(product),
@@ -49,7 +49,7 @@ export default class NewProduct extends React.Component {
           alert("El producto se creó correctamente")
         }).catch(err => console.error(err))
     }
-    
+
     onCheckboxClicked(category, isChecked) {
         if(isChecked){
             this.setState({
@@ -61,10 +61,10 @@ export default class NewProduct extends React.Component {
             })
         }
     }
-    
+
     render() {
         return (
-        
+
         <div className="container-fluid abs-center">
             <form onSubmit={this.handleSubmit} className="form-group">
                 <div className="form-group">
@@ -77,7 +77,7 @@ export default class NewProduct extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>Precio:</label>
-                    <input id="price" name="price" onChange={this.handleChange} className="form-control" value={this.state.precio}/>
+                    <input id="price" name="price" onChange={this.handleChange} className="form-control" value={this.state.price }/>
                 </div>
                 <div className="form-group">
                     <label>Stock:</label>
