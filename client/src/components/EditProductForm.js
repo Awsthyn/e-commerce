@@ -99,7 +99,6 @@ export default  withRouter(class EditProduct extends React.Component {
             </div>
           </form>
           </div>
-             <DeleteProduct />
     </div>
       );
   }

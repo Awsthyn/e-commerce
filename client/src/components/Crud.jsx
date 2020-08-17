@@ -13,7 +13,7 @@ const Crud = ({products, onDeleteProduct} ) => {
 
     return (
         <div className="container mt-4">
-        <Link to="products/form/new" className="btn btn-success col-1">Nuevo</Link>
+        <Link to="products/form/new" className="btn btn-success">Nuevo</Link>
         <h2 className="col-11 text-center">Edición de productos</h2>
           <table className="table">
             <thead className="text-center">
