@@ -24,7 +24,6 @@ export default function productComponent({
                 </div>
             </div>
             <div className={s.product_data}>
-               
                 <h3 className="pt-4 pb-3">{name}</h3>
                 <h5>${price}</h5>
                 <hr></hr>

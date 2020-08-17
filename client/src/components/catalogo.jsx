@@ -17,7 +17,6 @@ const catalogo = ({ array, categories, filter, toProductDetails }) => {
                                 key={e}
                                 id={e.id}
                                 name={e.name}
-                                
                                 onClick={(e) =>
                                     filter(e.target.getAttribute("name"))
                                 }
