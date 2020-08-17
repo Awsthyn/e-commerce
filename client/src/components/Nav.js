@@ -24,7 +24,7 @@ function Nav({onSearch}) {
                 <NavLink to="/crud" className="nav-link">Administrar Productos</NavLink>
               </li>
             <li className="nav-item">
-               <NavLink to="/categories/form/new" className="nav-link">Agregar Categoría</NavLink>
+               <NavLink to="/CrudCategory" className="nav-link">Administrar Categorías</NavLink>
              </li>
            </ul>
             <SearchBar
