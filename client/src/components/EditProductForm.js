@@ -38,6 +38,7 @@ export default  withRouter(class EditProduct extends React.Component {
                 category: this.state.category.filter(c => c !== category.id)
             })
         }
+
     }
 
     comparaSiHay(arreglo, obj){
@@ -48,15 +49,15 @@ export default  withRouter(class EditProduct extends React.Component {
         }
         return false
     }
-    
+
     handleSubmit(e){
         e.preventDefault();
         console.info('putting')
         const product = this.state;
         const url = 'http://localhost:3001/products/' + this.state.id;
 
-        if(!this.comparaSiHay(this.listaProductos, this.state)){
-            fetch(url, {
+        //if(!this.comparaSiHay(this.listaProductos, this.state)){
+           fetch(url, {
            method: 'PUT',
            body: JSON.stringify(product),
            headers: {
@@ -67,9 +68,9 @@ export default  withRouter(class EditProduct extends React.Component {
            alert("El Producto se editó correctamente")
            window.location = "/crud";
        }).catch(err => console.error(err))
-        } else {alert(`No se puede editar a ${this.state.name} porque ya existe un producto con ese nombre.`)}
+        /*} else {alert(`No se puede editar a ${this.state.name} porque ya existe un producto con ese nombre.`)}*/
 
-       
+
 
    }
 
