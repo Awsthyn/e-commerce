@@ -69,6 +69,26 @@ function Nav({ onSearch, categories, filter, toGetProducts }) {
                 Administrar Categorías
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to="/CrudUser" className="nav-link">
+                Administrar Usuarios
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/Order" className="nav-link">
+                Orden
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/OrderTable" className="nav-link">
+                Tabla de órdenes
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/ShoppingCart" className="nav-link">
+                Carrito
+              </NavLink>
+            </li>
           </ul>
           <SearchBar onSearch={onSearch} />
         </div>

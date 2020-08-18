@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-// import logo from "./logo.svg";
 import "./App.css";
 import Product from "./components/Product";
-//import Catalog from "./components/product"; //cambiar ruta a catalog cuando este subido---> (TRAE PRODUCTO)
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-//import productComponent from "./components/product";
-import Catalog from "./components/catalogo"; //cambiar ruta a catalog cuando este subido
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Catalog from "./components/catalogo";
 import Nav from "./components/Nav";
 import NewProductForm from "./components/NewProductForm";
 import EditProductForm from "./components/EditProductForm";
 import NewCategoryForm from "./components/NewCategoryForm";
 import Crud from "./components/Crud";
 import CrudCategory from "./components/CrudCategory";
-import EditCategoryForm from "./components/EditCategoryForm";
 import Home from "./components/Home.jsx";
+import CrudUser from "./components/CrudUser";
+import OrderTable from "./components/OrderTable.jsx";
+import Order from "./components/Order.jsx";
+import ShoppingCart from "./components/ShoppingCart.jsx";
 
 function App() {
   const [prodsCatalog, setProdsCatalog] = useState([]);
@@ -75,8 +75,8 @@ function App() {
   }
 
   useEffect(() => {
-    getCategories(); // Your code here
-    getProduct(); // Your code here
+    getCategories(); 
+    getProduct(); 
   }, []);
 
   function onDeleteProduct(id) {
@@ -99,7 +99,7 @@ function App() {
             categories={listCategories}
             filter={getCategory}
           />
-        )} //aca le paso prop del fetch que hace searchbar
+        )} 
       />
         <Route
         exact path="/"
@@ -119,6 +119,22 @@ function App() {
         exact path = "/CrudCategory"
         render={() => <CrudCategory categories = {listCategories} onDeleteCategory = { onDeleteCategory } />}
       />
+      <Route
+        exact path = "/CrudUser"
+        render={() => <CrudUser />}
+      />
+      <Route
+        exact path = "/OrderTable"
+        render={() => <OrderTable />}
+      />
+      <Route
+        exact path = "/Order"
+        render={() => <Order />}
+      />
+      <Route
+        exact path = "/ShoppingCart"
+        render={() => <ShoppingCart />}
+      />
 
       <Route
         path="/catalog"
@@ -130,7 +146,7 @@ function App() {
             toProductDetails={toProductDetails}
             getProd={getProduct}
           />
-        )} //aca le pasamos lista de todos los products
+        )} 
       />
 
       <Route
