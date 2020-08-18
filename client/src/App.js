@@ -191,18 +191,6 @@ function App() {
         )} /* ---> hay que pasarle como prop el producto en el que apretas detalle*/
       />
       <Route
-        path="/products/form/new"
-        render={() => <NewProductForm categories={listCategories} />} //aca le pasamos lista de todos los products que coinciden (onSearch)
-      />
-      <Route
-        path="/products/:id/edit"
-        render={(props) => (
-          <EditProductForm
-            categories={listCategories}
-            product={props.location.state.product}
-          />
-        )} //aca le pasamos lista de todos los products que coinciden (onSearch)
-
         path = "/products/form/new"
         render={() => <NewProductForm categories={listCategories} listaProducts={listProducts}/>} //aca le pasamos lista de todos los products que coinciden (onSearch)
       />
@@ -215,14 +203,6 @@ function App() {
       <Route
         path = "/categories/form/new"
         render={() => <NewCategoryForm listaCategories={listCategories}/>}
-      />
-
-      <Route
-        path = "/categories/:id/edit"
-        render={(props) => (
-                <EditCategoryForm category={props.location.state.category} listaCategories={listCategories}/>
-            )} //aca le pasamos lista de todos los products que coinciden (onSearch)
-
       />
       <Route path="/categories/form/new" render={() => <NewCategoryForm />} />
     </Router>
