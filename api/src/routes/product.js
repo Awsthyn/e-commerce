@@ -4,7 +4,7 @@ const { Product, Category, Image } = require("../db.js");
 server.get("/", (req, res, next) => {
   Product.findAll({ include: [Category, Image] })
     .then((products) => {
-      
+
       res.json(products);
     })
     .catch(next);
@@ -19,20 +19,23 @@ server.get("/:id", (req, res, next) => {
 });
 
 server.post("/", (req, res,next) =>{
-	let {name, description, price, stock, image} = req.body
+	let {name, description, price, stock, image, category} = req.body
 	image === '' ? image = "botas" : null;
-	Product.create({
+
+    const categories = category // Viene del cliente como category pero sería mejor si dijera categories
+    Product.create({
 			name: name,
 			description: description,
 			price: price,
 			stock: stock,
 			images: [{url: image },{url: image+2},{url: image+3}]
-		
-	}, {include: [Image]})
-	.then(() =>{
-		res.sendStatus(201)
-	})
-	.catch(next);
+        })
+    .then(product => categories.forEach(categoryId => {
+            Category.findByPk(categoryId)
+            .then(category => product.addCategory(category))
+        }))
+    .then(() => res.sendStatus(201))
+    .catch(next)
 })
 
 
