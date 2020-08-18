@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+
 export default function ProductCard({ id, name, price, image, toProductDetails }) {
   let history = useHistory()
 
@@ -17,13 +18,14 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
   //history.push(`/products/${valor}`)
 
 
-  return (
-    <div className="card" style={{ width: "18rem" }}>
-      <img src={image} class="card-img-top" alt={name} />
+  return(
+    
+    <div className="card bg-light p-2 m-1" style={{ width: "18rem" }}>
+      <img src={image} className="card-img-top rounded-circle border border-dark" alt={name} />
       <div className="card-body d-flex flex-column justify-content-center">
         <h5 className="card-title text-center">{name}</h5>
         <p className="card-text text-center">$ {price}</p>
-        <button data-id={id} type= 'button' className="btn btn-primary ml-auto mr-auto" onClick={(e) => {
+        <button data-id={id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
           
           history.push(`/products/${e.target.getAttribute('data-id')}`)
           toProductDetails(e.target.getAttribute('data-id'))
@@ -33,5 +35,5 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
       </div>
     </div>
   );
-};//
+};
 
