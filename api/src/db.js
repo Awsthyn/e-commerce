@@ -46,7 +46,11 @@ const { Product, Category, Image, User, Order, OrderLine, Review } = sequelize.m
  Category.belongsToMany(Product, {through: 'productsInCategory'});// <--Angelo Modifico
  Product.hasMany(Image);
  Image.belongsTo(Product);
- //Nota de Angelo: me tira un warning de que tenemos una promesa sin error handler: 
+ User.hasMany(Order);
+ Order.belongsTo(User);
+ User.hasMany(Review);
+ Review.belongsTo(User);
+ //Nota de Angelo: me tira un warning de que tenemos una promesa sin error handler:
  // UnhandledPromiseRejectionWarning: Error: Cyclic dependency found. categories is dependent of itself.
  //   Dependency chain: categories -> products => categories
 
