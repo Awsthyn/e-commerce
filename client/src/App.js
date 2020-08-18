@@ -12,36 +12,14 @@ import EditProductForm from "./components/EditProductForm";
 import NewCategoryForm from "./components/NewCategoryForm";
 import Crud from "./components/Crud";
 import CrudCategory from "./components/CrudCategory";
-import EditCategoryForm from "./components/EditCategoryForm"
-
-//desde aca agrego Ariel
+import EditCategoryForm from "./components/EditCategoryForm";
+import Home from "./components/Home.jsx";
 
 function App() {
   const [prodsCatalog, setProdsCatalog] = useState([]);
   const [prodsDetail, setProdsDetail] = useState({});
   const [listCategories, setListCategories] = useState([]);
   const [listProducts, setListProducts] = useState([]);
-  /*const array = [
-    {
-      id: 2,
-      name: "La mano de Dios",
-      price: 100000,
-      image:
-        "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg",
-    },
-    {
-        id: 3,
-        name: "Croma en oferta. Ver descripción.",
-        price: 500,
-        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
-    },
-    {
-        id: 4,
-        name: "Poema de Lorem Ipsum",
-        price: 1000,
-        image: "https://i.picsum.photos/id/203/200/200.jpg?hmac=fydyJjsULq7iMwTTIg_m6g_PQQ1paJrufNsEiqbJRsg"
-    }
-  ];*/
 
   function onSearch(valor) {
     fetch(`http://localhost:3001/search?query=${valor}`)
@@ -119,6 +97,12 @@ function App() {
             filter={getCategory}
           />
         )} //aca le paso prop del fetch que hace searchbar
+      />
+        <Route
+        exact path="/"
+        render={() => (
+          <Home products={listProducts} />
+        )}
       />
       <Route
         exact
