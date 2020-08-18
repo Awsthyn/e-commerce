@@ -41,7 +41,8 @@ server.post('/', (req, res, next) => {
 server.put('/:id', (req, res) => {
 	const { id } = req.params;
 	const { name, description, price, stock, image, category } = req.body;
-	const categories = category;
+  const categories = category;
+  console.log(categories)
 	try {
 		Product.update(
 			{
@@ -53,12 +54,14 @@ server.put('/:id', (req, res) => {
 			{ where: { id } }
 		)
 			.then(() => {
-				productsInCategory.destroy({ where: { productId: id } });
+        productsInCategory.destroy({ where: { productId: id } })
+        res.sendStatus(200);
 			})
 			.then(() => {
 				productsInCategory.bulkCreate(
 					categories.map((e) => {
-						return { productId: id, categoryId: e };
+            if(typeof e === "object") return { productId: id, categoryId: e.id}
+						else return { productId: id, categoryId: e };
 					})
 				);
 			})
