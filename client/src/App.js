@@ -26,7 +26,9 @@ function App() {
       .then((r) => r.json())
       .then((data) => {
         console.log(data);
-        setProdsCatalog(data);
+        if(!data[0]) { alert(`No se han encontrado productos relacionados con ${valor}`)}
+        setProdsCatalog(data)
+        console.log('estado: '+prodsCatalog);
       })
       .catch((error) => {
         console.error(error);
@@ -68,6 +70,7 @@ function App() {
       .then((r) => r.json())
       .then((data) => {
         setListProducts(data.products);
+        // if(!data) {alert(`No se encontraron productos en la categoría ${value}`)}
       });
   }
 

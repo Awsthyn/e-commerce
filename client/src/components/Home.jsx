@@ -18,7 +18,7 @@ const CarouselPage = () => {
           <MDBView >
             <img
               className="d-block w-100 "
-              src="https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/"
+              src="http://ecommerce-g5.tk/server-fotos/carrusel1.jpg"
               alt="First slide"
             />
           <MDBMask overlay="black-light" />
@@ -32,7 +32,7 @@ const CarouselPage = () => {
           <MDBView>
             <img 
               className="d-block w-100"
-              src="https://www.xtrafondos.com/en/descargar.php?id=4741&resolucion=2560x1440"
+              src="http://ecommerce-g5.tk/server-fotos/carrusel2.jpg"
               alt="Second slide"
             />
           <MDBMask overlay="black-strong" />
@@ -46,7 +46,7 @@ const CarouselPage = () => {
           <MDBView>
             <img
               className="d-block w-100"
-              src="https://i.pinimg.com/originals/dd/5b/9e/dd5b9e4f5e38650c0aec73c395a4eeda.jpg"
+              src="http://ecommerce-g5.tk/server-fotos/carrusel3.jpg"
               alt="Third slide"
             />
           <MDBMask overlay="black-slight" />

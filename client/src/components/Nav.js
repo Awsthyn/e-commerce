@@ -21,10 +21,8 @@ function Nav({ onSearch, categories, filter, toGetProducts }) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-
         <a className="navbar-brand" href="/">
           MERCADO NEGRO
-
         </a>
         <div className="navbar-nav" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">

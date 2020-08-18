@@ -50,7 +50,7 @@ export default class NewCategory extends React.Component {
                 }
                 .alert("La categoría se creó correctamente"))
                 
-            }).catch(err => alert(err))
+            }).catch(err => console.log(err))
         }
         else {alert(`No se puede crear la categoria ${this.state.name} porque ya existe`)}
     }
