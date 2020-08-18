@@ -1,4 +1,12 @@
 .title{
-  padding: 20px 40px;
-  
+  width: 300px;  
+  text-align: center;
+}
+
+
+.housing{
+  background-color: rgb(211, 211, 211);  
+  display: flex;
+  justify-content: center;
+  padding: 20px 1px;
 }
