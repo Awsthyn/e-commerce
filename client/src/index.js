@@ -6,13 +6,17 @@ import * as serviceWorker from "./serviceWorker";
 // import Prod from "./components/product.jsx";
 // import Catalog from "./components/product";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux"
+import store from "./Redux/store"
 
 ReactDOM.render(
-  <Router>
+  <Provider store={store}>
+    <Router>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById("root")
 );
 
