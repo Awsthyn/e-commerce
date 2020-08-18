@@ -22,7 +22,7 @@ function Nav({ onSearch, categories, filter, toGetProducts }) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="/">
-          MERCADO BIZARRO
+          MERCADO NEGRO
         </a>
         <div className="navbar-nav" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
