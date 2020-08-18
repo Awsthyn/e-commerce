@@ -22,7 +22,7 @@ function Nav({ onSearch, categories, filter, toGetProducts }) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="/catalog">
-          NOMBRE / HOME
+          MERCADO NEGRO
         </a>
         <div className="navbar-nav" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
@@ -65,19 +65,16 @@ function Nav({ onSearch, categories, filter, toGetProducts }) {
               </NavLink>
             </li>
             <li className="nav-item">
-            <NavLink to="/CrudCategory" className="nav-link">Administrar Categorías</NavLink>
-             </li>
-           </ul>
-            <SearchBar
-              onSearch={onSearch}
-            />
-            </div>
-
+              <NavLink to="/CrudCategory" className="nav-link">
+                Administrar Categorías
+              </NavLink>
+            </li>
+          </ul>
+          <SearchBar onSearch={onSearch} />
+        </div>
       </nav>
     </div>
   );
-
-
 }
 
 export default Nav;
