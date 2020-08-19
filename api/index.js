@@ -18,8 +18,21 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category, productsInCategory, Image } = require("./src/db.js");
-const { initialCategories, initialProducts, imageUrls, prodXCat } = require("./src/seed.js");
+const {
+  conn,
+  Product,
+  Category,
+  productsInCategory,
+  Image,
+  User,
+  Order,
+} = require("./src/db.js");
+const {
+  initialCategories,
+  initialProducts,
+  imageUrls,
+  prodXCat,
+} = require("./src/seed.js");
 //const Category = require("./src/models/Category.js");
 // Syncing all the models at once.
 conn
@@ -38,18 +51,34 @@ conn
   .then(() => {
     productsInCategory.bulkCreate(prodXCat);
   })
-  .then(()=>{
-    Image.bulkCreate(imageUrls)
+  .then(() => {
+    Image.bulkCreate(imageUrls);
   })
   .then(() => {
     User.create({
       email: "nico@darkmarket.com",
-      first_name: 'Nicolás',
+      first_name: "Nicolás",
       last_name: "Selicki",
       address: "San Martín 123",
       locality: "La Plata",
       state: "Argentina",
       password: "Marti te amo",
-      admin: true
-    })
+      admin: true,
+    });
   })
+  .then(() => {
+    Order.create({
+      orderStatus: "carrito",
+      shippingAdress: "San Martin 123",
+      billingAdress: "San Martín 123",
+      userId: 1,
+    });
+  })
+  .then(() => {
+    Order.create({
+      orderStatus: "procesando",
+      shippingAdress: "San Martin 1234",
+      billingAdress: "San Martín 1234",
+      userId: 1,
+    });
+  });

@@ -1,15 +1,14 @@
 var Sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
 
-
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("order", {
     orderStatus: {
-      type: DataTypes.INTEGER,
-      validate : {
-        isIn: [['carrito', 'creada', 'procesando', 'cancelada', 'completa']],
-      }
+      type: DataTypes.STRING,
+      validate: {
+        isIn: [["carrito", "creada", "procesando", "cancelada", "completa"]],
+      },
     },
     shippingAdress: {
       type: DataTypes.STRING,
@@ -20,8 +19,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     total: {
-      type: DataTypes.DECIMAL
+      type: DataTypes.DECIMAL,
     },
   });
 };
-console.log(orderStatusStr);
