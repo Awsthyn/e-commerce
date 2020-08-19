@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User, Order } = require("../db.js");
+const { User, Order, OrderLine } = require("../db.js");
 var Sequelize = require("sequelize");
 //Ariel
 
@@ -19,13 +19,13 @@ server.get("/:id/order/", (req, res, next) => {
 
 // S38
 server.post("/:userId/cart", (req, res, next) => {
-  const { id, orderStatus, shippingAdress, billingAdress, total } = req.body;
+  const { orderStatus, shippingAdress, billingAdress, total } = req.body;
   Order.create({
     orderStatus,
     shippingAdress,
     billingAdress,
     total,
-    userId: id
+    userId: req.params.userId
   })
     .then(() => {
       res.sendStatus(201);
@@ -35,10 +35,13 @@ server.post("/:userId/cart", (req, res, next) => {
 
 //S39
 server.get("/:userId/cart", (req, res, next) => {
-  Order.findAll()
+  Order.findOne({where: {
+    userId: req.params.userId,
+    orderStatus: 'carrito'
+  }, include: OrderLine })
     .then((orders) => {
       // console.log(products);
-      res.json(orders);
+      res.json(orders.orderLines);
     })
     .catch(next);
 });
@@ -47,7 +50,7 @@ server.get("/:userId/cart", (req, res, next) => {
 server.delete("/:userId/cart", (req, res, next) => {
   try {
     const { id } = req.params;
-    Order.destroy({ where: { userId: id } }).then(() => {
+    Order.destroy({ where: { userId: id, orderStatus: 'carrito' } }).then(() => {
       res.sendStatus(200);
     });
   } catch (error) {
@@ -59,8 +62,7 @@ server.delete("/:userId/cart", (req, res, next) => {
 // S41
 server.put("/:userId/cart", (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { quantity, price } = req.body;
+    const { id, quantity, price } = req.body;
     OrderLine.update(
       {
         quantity,
@@ -81,7 +83,6 @@ server.put("/:userId/cart", (req, res, next) => {
 server.get("/", (req, res, next) => {
   User.findAll()
     .then((data) => {
-      // console.log(products);
       res.json(data);
     })
     .catch(next);
@@ -109,7 +110,7 @@ server.post("/", (req, res, next) => {
 server.delete("/:id", (req, res, next) => {
   try {
     const { id } = req.params;
-    User.destroy({ where: { id: id } }).then(() => {
+    User.destroy({ where: { id } }).then(() => {
       res.sendStatus(200);
     });
   } catch (error) {
