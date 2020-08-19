@@ -4,7 +4,10 @@ const productRouter = require('./product.js');
 const searchRouter = require('./search.js');
 const bodyParser = require('body-parser');
 const categoryRouter = require('./category.js')
-
+const orderRouter = require('./order.js')
+const orderLineRouter = require('./orderLine.js')
+const userRouter = require('./user.js')
+const reviewRouter = require('./review.js')
 
 const router = Router();
 
@@ -15,5 +18,9 @@ router.use(bodyParser.json());
 router.use('/products', productRouter);
 router.use('/categories', categoryRouter);
 router.use('/search', searchRouter);
+router.use('/order', orderRouter);
+router.use('/orderLine', orderLineRouter);
+router.use('/users', userRouter);
+router.use('/review', reviewRouter);
 
 module.exports = router;

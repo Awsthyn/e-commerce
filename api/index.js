@@ -41,3 +41,15 @@ conn
   .then(()=>{
     Image.bulkCreate(imageUrls)
   })
+  .then(() => {
+    User.create({
+      email: "nico@darkmarket.com",
+      first_name: 'Nicolás',
+      last_name: "Selicki",
+      address: "San Martín 123",
+      locality: "La Plata",
+      state: "Argentina",
+      password: "Marti te amo",
+      admin: true
+    })
+  })
