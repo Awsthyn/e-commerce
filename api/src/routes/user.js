@@ -18,13 +18,14 @@ server.get("/:id/order/", (req, res, next) => {
 // order.js
 
 // S38
-server.post("/:id/cart", (req, res, next) => {
-  const { orderStatus, shippingAdress, billingAdress, total } = req.body;
+server.post("/:userId/cart", (req, res, next) => {
+  const { id, orderStatus, shippingAdress, billingAdress, total } = req.body;
   Order.create({
     orderStatus,
     shippingAdress,
     billingAdress,
-    total
+    total,
+    userId: id
   })
     .then(() => {
       res.sendStatus(201);
@@ -33,7 +34,7 @@ server.post("/:id/cart", (req, res, next) => {
 });
 
 //S39
-server.get("/:id/cart", (req, res, next) => {
+server.get("/:userId/cart", (req, res, next) => {
   Order.findAll()
     .then((orders) => {
       // console.log(products);
@@ -43,10 +44,10 @@ server.get("/:id/cart", (req, res, next) => {
 });
 
 //S40
-server.delete("/:id/cart", (req, res, next) => {
+server.delete("/:userId/cart", (req, res, next) => {
   try {
     const { id } = req.params;
-    Order.destroy({ where: { id: id } }).then(() => {
+    Order.destroy({ where: { userId: id } }).then(() => {
       res.sendStatus(200);
     });
   } catch (error) {
@@ -56,7 +57,7 @@ server.delete("/:id/cart", (req, res, next) => {
 
 //orderLine.js
 // S41
-server.put("/:id/cart", (req, res, next) => {
+server.put("/:userId/cart", (req, res, next) => {
   try {
     const { id } = req.params;
     const { quantity, price } = req.body;
@@ -77,4 +78,66 @@ server.put("/:id/cart", (req, res, next) => {
 
 //Pela
 
+server.get("/", (req, res, next) => {
+  User.findAll()
+    .then((data) => {
+      // console.log(products);
+      res.json(data);
+    })
+    .catch(next);
+});
+
+server.post("/", (req, res, next) => {
+  const { email, first_name, last_name, address, locality, state, password, admin } = req.body;
+  User.create({
+    email,
+    first_name,
+    last_name,
+    address,
+    locality,
+    state,
+    password,
+    admin
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(next);
+});
+
+
+server.delete("/:id", (req, res, next) => {
+  try {
+    const { id } = req.params;
+    User.destroy({ where: { id: id } }).then(() => {
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+server.put("/:id", (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { email, first_name, last_name, address, locality, state, password, admin } = req.body;
+    User.update(
+      {
+        email,
+        first_name,
+        last_name,
+        address,
+        locality,
+        state,
+        password,
+        admin
+      },
+      { where: { id } }
+    ).then(() => {
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 module.exports = server;

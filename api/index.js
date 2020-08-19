@@ -65,7 +65,17 @@ conn
       locality: "La Plata",
       state: "Argentina",
       password: "Marti te amo",
-
+      admin: true,
+    });
+  }).then(() => {
+    User.create({
+      email: "marti@darkmarket.com",
+      first_name: "Martina",
+      last_name: "Lamejor",
+      address: "San José 123",
+      locality: "Villa Gesell",
+      state: "Argentina",
+      password: "Pimpumpam",
       admin: true,
     });
   })
