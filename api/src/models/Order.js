@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("order", {
     orderStatus: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       validate : {
         isIn: [['carrito', 'creada', 'procesando', 'cancelada', 'completa']],
       }

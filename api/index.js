@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category, productsInCategory, Image, User } = require("./src/db.js");
+const { conn, Product, Category, productsInCategory, Image, User, Order } = require("./src/db.js");
 const { initialCategories, initialProducts, imageUrls, prodXCat } = require("./src/seed.js");
 //const Category = require("./src/models/Category.js");
 // Syncing all the models at once.
@@ -51,5 +51,12 @@ conn
       state: "Argentina",
       password: "Marti te amo",
       admin: true
+    })
+  })
+  .then(()=> {
+    Order.create({
+      orderStatus: 'carrito',
+      shippingAdress: 'San Martin 123',
+      billingAdress: 'San Martín 123'
     })
   })
