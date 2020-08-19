@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category, productsInCategory, Image } = require("./src/db.js");
+const { conn, Product, Category, productsInCategory, Image, User } = require("./src/db.js");
 const { initialCategories, initialProducts, imageUrls, prodXCat } = require("./src/seed.js");
 //const Category = require("./src/models/Category.js");
 // Syncing all the models at once.

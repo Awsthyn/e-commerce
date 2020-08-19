@@ -24,4 +24,4 @@ module.exports = (sequelize) => {
     },
   });
 };
-console.log(orderStatusStr);
+
