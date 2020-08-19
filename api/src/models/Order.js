@@ -6,9 +6,11 @@ module.exports = (sequelize) => {
   sequelize.define("order", {
     orderStatus: {
       type: DataTypes.STRING,
-      validate: {
-        isIn: [["carrito", "creada", "procesando", "cancelada", "completa"]],
-      },
+
+      validate : {
+        isIn: [['carrito', 'creada', 'procesando', 'cancelada', 'completa']],
+      }
+
     },
     shippingAdress: {
       type: DataTypes.STRING,
@@ -23,3 +25,4 @@ module.exports = (sequelize) => {
     },
   });
 };
+

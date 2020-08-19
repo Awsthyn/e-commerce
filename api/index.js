@@ -18,6 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
+
 const {
   conn,
   Product,
@@ -33,6 +34,7 @@ const {
   imageUrls,
   prodXCat,
 } = require("./src/seed.js");
+
 //const Category = require("./src/models/Category.js");
 // Syncing all the models at once.
 conn
@@ -63,6 +65,7 @@ conn
       locality: "La Plata",
       state: "Argentina",
       password: "Marti te amo",
+
       admin: true,
     });
   })
