@@ -14,13 +14,15 @@ import CrudUser from "./components/CrudUser";
 import OrderTable from "./components/OrderTable.jsx";
 import Order from "./components/Order.jsx";
 import ShoppingCart from "./components/ShoppingCart.jsx";
+import {onSearch} from "./Redux/actions/searchActions"
+import {toProductDetails, getCategories, getProduct, getCategory } from './Redux/actions/productActions'
 
 function App() {
   const [prodsCatalog, setProdsCatalog] = useState([]);
   const [prodsDetail, setProdsDetail] = useState({});
   const [listCategories, setListCategories] = useState([]);
   const [listProducts, setListProducts] = useState([]);
-
+/*
   function onSearch(valor) {
     fetch(`http://localhost:3001/search?query=${valor}`)
       .then((r) => r.json())
@@ -34,51 +36,7 @@ function App() {
         console.error(error);
       });
   }
-
-  function toProductDetails(id) {
-    fetch(`http://localhost:3001/products/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setProdsDetail(data);
-        console.log(prodsDetail);
-      })
-      //console.log('prodsDetail:' + prodsDetail)
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-
-    function getCategories() {
-        fetch(`http://localhost:3001/categories`)
-            .then((r) => r.json())
-            .then((data) => {
-                setListCategories(data);
-            });
-    }
-
-  function getProduct() {
-    fetch(`http://localhost:3001/products`)
-      .then((r) => r.json())
-      .then((data) => {
-        console.log(data);
-        setListProducts(data);
-      });
-  }
-  function getCategory(value) {
-    fetch(`http://localhost:3001/categories/${value}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setListProducts(data.products);
-        // if(!data) {alert(`No se encontraron productos en la categoría ${value}`)}
-      });
-  }
-
-  useEffect(() => {
-    getCategories(); 
-    getProduct(); 
-  }, []);
-
+*/
   function onDeleteProduct(id) {
     setListProducts((prev) => prev.filter((p) => p.id !== id));
   }
@@ -139,13 +97,7 @@ function App() {
       <Route
         path="/catalog"
         render={() => (
-          <Catalog
-            array={listProducts}
-            categories={listCategories}
-            filter={getCategory}
-            toProductDetails={toProductDetails}
-            getProd={getProduct}
-          />
+          <Catalog />
         )} 
       />
 
