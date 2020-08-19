@@ -1,4 +1,4 @@
-import {GET_SEARCHED_PRODUCTS} from './constants';
+import {GET_SEARCHED_PRODUCTS} from '../actions/constants';
 
 // COMENTAR AL LADO PARA QUE SIRVE ESA PROPIEDAD DE ESTADO ↓↓↓↓↓↓
 
@@ -6,7 +6,7 @@ const initialState = {
     searchedProducts: [], // Los productos que coinciden con "x" busqueda
 };
 
-export default function rootReducer (state = initialState, action) {
+export default function (state = initialState, action) {
     switch(action) {
 
         case GET_SEARCHED_PRODUCTS:
@@ -14,6 +14,8 @@ export default function rootReducer (state = initialState, action) {
                 ...state,
                 searchedProducts: action.payload
             } 
+        default:
+            return state;    
 
     }
 
