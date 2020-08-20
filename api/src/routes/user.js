@@ -19,15 +19,22 @@ server.get("/:id/order/", (req, res, next) => {
 
 // S38
 server.post("/:userId/cart", (req, res, next) => {
-  const { orderStatus, shippingAdress, billingAdress, total } = req.body;
-  Order.create({
-    orderStatus,
-    shippingAdress,
-    billingAdress,
+  const { orderStatus, shippingAddress, billingAddress, total, productId, quantity, price } = req.body;
+  Order.findOrCreate({where: {
+    orderStatus: 'carrito',
+    shippingAddress,
+    billingAddress,
     total,
     userId: req.params.userId
+  }
   })
-    .then(() => {
+    .then((data) => {
+      OrderLine.create({
+        productId,
+        price,
+        quantity,
+        orderId: data[0].id
+      })
       res.sendStatus(201);
     })
     .catch(next);
