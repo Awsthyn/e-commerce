@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import S from "../css/catalogo.module.css";
@@ -18,18 +18,18 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
 
     return (
         
-        <div className="container-fluid row">
+        <div className="container-fluid row ">
         <div className="col-md-3">
-            <h1 className={S.title}>Categorias</h1>
-            <Link>
-                <li onClick={()=>(getAllProducts())}>
+            <h1 className={S.title}></h1>
+            <Link to={`/catalog`}>
+                <button type="button" class="btn btn-dark" onClick={()=>(getAllProducts())}>
                     <b>Todos los productos</b>
-                </li>
+                </button>
             </Link>
-                {categories.categories.map((e) => (
-                    <Link to={`/catalogo/${e.name}`}>
+                {/* {categories.map((e) => (
+                    <Link to={`/catalog/${e.name}`}>
                         <li
-                            key={e}
+                            key={e.id}
                             id={e.id}
                             name={e.name}
                             onClick={(e) =>
@@ -38,12 +38,12 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                             {e.name}
                         </li>
                     </Link>
-                ))}
+                ))} */}
         </div>
         <div className="row col-md-9">
-            {products.products.map((e) => (
+            {products.map((e) => (
                 <ProductCard
-                    key={e}
+                    key={e.id}
                     id = {e.id}
                     name={e.name}
                     price={e.price}
@@ -59,8 +59,8 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
 
 function mapStateToProps(state) {
     return {
-        categories: state.categories,
-        products: state.products 
+        categories: state.categories.categories,
+        products: state.products.products 
     };
 }
 
