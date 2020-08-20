@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
+import { getSearchedProducts } from "../Redux/actions"
+import { connect } from "react-redux";
 // import styles from "./SearchBar.module.css";
 
-export default function SearchBar({onSearch}) {
+export function SearchBar(props) {
   const [prod, setProd] = useState("");//setea el estado que todavia no definimos
   let history = useHistory()
   return (
     <form className="form-inline ml-auto" onSubmit={(e) => {
       history.push('/search')
       e.preventDefault();
-      onSearch(prod);
+      props.getSearchedProducts(prod)
+      // props.onSearch(prod);
       setProd("");//vacia el placeholder
     }}>
     <input
@@ -22,6 +25,26 @@ export default function SearchBar({onSearch}) {
     </form>
   );
 }//
+
+
+function mapStateToProps(state) {
+  return {
+      searchedProducts: state.searchedProducts,
+      // categories: state.categories
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      getSearchedProducts: keyword => dispatch(getSearchedProducts(keyword)),
+      // getCategories: () => dispatch(getCategories())
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchBar);
 
 
 

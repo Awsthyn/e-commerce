@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from "react-router"
-
 import Checkbox from './Checkbox';
 import DeleteProduct from './DeleteProduct';
+import { onDeleteCategory } from "../Redux/actions"
+import { connect } from "react-redux";
 
 export default  withRouter(class EditProduct extends React.Component {
 
