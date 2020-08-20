@@ -2,9 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteCategory from './DeleteCategory';
 import EditCategoryForm from './EditCategoryForm';
+import { onDeleteCategory } from "../Redux/actions/actions"
+import { connect } from "react-redux";
 
 
-const CrudCategory = ({ categories, onDeleteCategory }) => {
+export const CrudCategory = ({ categories, onDeleteCategory }) => {
 
     function handleDelete(category) {
         onDeleteCategory(category)
@@ -49,4 +51,20 @@ const CrudCategory = ({ categories, onDeleteCategory }) => {
         </div>)
 }
 
-export default CrudCategory
+function mapStateToProps(state) {
+    return {
+        categories: state.categories,
+        products: state.products 
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onDeleteCategory: (id) => dispatch(onDeleteCategory(id)),
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CrudCategory);

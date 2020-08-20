@@ -1,22 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { toProductDetails } from "../Redux/actions/actions"
+import { connect } from "react-redux";
+import store from "../Redux/store"
 
 
-export default function ProductCard({ id, name, price, image, toProductDetails }) {
+export function ProductCard({ id, name, price, image }) {
   let history = useHistory()
-
-  // function toProductDetails(e) {
-  //   fetch(`http://localhost:3001/products/${valor}`)
-  //     .then(r => r.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       //setProdsCatalog(data) })
-  //     })
-  //     .catch(error => {console.error(error)})
-  // }
-
-  //history.push(`/products/${valor}`)
-
 
   return(
     
@@ -26,9 +16,8 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
         <h5 className="card-title text-center">{name}</h5>
         <p className="card-text text-center">$ {price}</p>
         <button data-id={id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
-          
           history.push(`/products/${e.target.getAttribute('data-id')}`)
-          toProductDetails(e.target.getAttribute('data-id'))
+          store.dispatch(toProductDetails(id))
         }}>
           Ver más detalles...
         </button>
@@ -37,3 +26,21 @@ export default function ProductCard({ id, name, price, image, toProductDetails }
   );
 };
 
+//-------------------- CONEXIONES REDUX ----------------------------------
+
+function mapStateToProps(state) {
+  return {
+    productDetails: state.productDetails,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      toProductDetails: (id) => dispatch(toProductDetails(id)),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductCard);

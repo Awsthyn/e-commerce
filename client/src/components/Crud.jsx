@@ -2,9 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteProduct from './DeleteProduct';
 import EditProductForm from './EditProductForm';
+import { onDeleteProduct } from "../Redux/actions/actions"
+import { connect } from "react-redux";
 
 
-const Crud = ({products, onDeleteProduct} ) => {
+const Crud = ({ products, onDeleteProduct} ) => {
 
     function handleDelete(product) {
         console.info('le digo a app que elimina:', product)
@@ -50,4 +52,20 @@ const Crud = ({products, onDeleteProduct} ) => {
     )
 }
 
-export default Crud
+function mapStateToProps(state) {
+  return {
+      categories: state.categories,
+      products: state.products 
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onDeleteProduct: (id) => dispatch(onDeleteProduct())
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Crud);
