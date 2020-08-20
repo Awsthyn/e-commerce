@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { toProductDetails } from "../Redux/actions/actions"
+import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 import store from "../Redux/store"
 

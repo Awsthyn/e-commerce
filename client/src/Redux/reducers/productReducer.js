@@ -1,28 +1,19 @@
-import {GET_PRODUCTS, GET_ALL_CATEGORIES, SET_DETAILS, DELETE_PRODUCT, DELETE_CATEGORY} from '../actions/constants';
+import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT } from '../actions/constants';
 
 // COMENTAR AL LADO PARA QUE SIRVE ESA PROPIEDAD DE ESTADO ↓↓↓↓↓↓
 
 const initialState = {
     products: [],
     productDetails: {},
-    // searchedProducts: [], // Los productos que coinciden con "x" busqueda
-    // categoryProducts: [],
-    categories: [],
 };
 
-export default function rootReducer (state = initialState, action) {
+export default function productReducer (state = initialState, action) {
     switch(action.type) {
 
         case GET_PRODUCTS:
             return {
                 ...state,
                 products: action.payload
-            }
-
-        case GET_ALL_CATEGORIES:  
-            return {
-                ...state,
-                categories: action.payload
             }
 
         case SET_DETAILS:
@@ -37,13 +28,6 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 products: state.products.filter((p) => p.id !== action.payload)
-            }
-
-        case DELETE_CATEGORY:
-            console.log('categoria eliminada')
-            return {
-                ...state,
-                categories: state.categories.filter((c) => c.id !== action.payload)
             }
 
         default: return {...state}

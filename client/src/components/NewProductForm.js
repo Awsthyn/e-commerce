@@ -1,6 +1,6 @@
 import React from "react";
 import Checkbox from "./Checkbox";
-import { onDeleteCategory } from "../Redux/actions/actions"
+import { onDeleteCategory } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 export class NewProduct extends React.Component {
@@ -128,8 +128,8 @@ export class NewProduct extends React.Component {
 
 function mapStateToProps(state) {
   return {
-      categories: state.categories,
-      products: state.products 
+      categories: state.categories.categories,
+      products: state.products.products 
   };
 }
 
