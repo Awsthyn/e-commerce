@@ -13,6 +13,11 @@ export class Order extends Component {
         <div>
             <h1 className="d-flex justify-content-center m-3">Carrito</h1>
             <OrderLine/>
+            <div className="d-flex justify-content-center m-3">
+            <h5 className ="d-flex ml-auto">Total:</h5>
+            <button className="btn btn-success">Comprar</button>
+            <button className="btn btn-danger">Cancelar</button>
+            </div>
         </div>
     )
   }
