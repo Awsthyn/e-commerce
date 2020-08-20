@@ -7,19 +7,21 @@ class Counter extends Component {
     return (
       <span className="d-flex">
         <button
+          className="btn btn-primary btn-sm"
           onClick={() => {
             this.props.decrement();
           }}
         >
-          {`<=`}
+          <i class="fas fa-arrow-circle-left "></i>
         </button>
         <p>{this.props.count}</p>
         <button
+          className="btn btn-primary btn-sm"
           onClick={() => {
             this.props.increment();
           }}
         >
-          {`=>`}
+          <i class="fas fa-arrow-circle-right"></i>
         </button>
       </span>
     );

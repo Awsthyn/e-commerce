@@ -9,8 +9,8 @@ export class OrderLine extends Component {
       <div>
         <table className="table table-dark mt-2 table-striped ">       
           <tbody>           
-            <tr className="d-flex justify-content ">
-              <td type="button" className="btn btn-default btn btn-danger pull-right">X</td>
+            <tr className="d-flex justify-content ml-5">
+              <td type="button btn-sm" className="btn btn-danger btn-sm">X</td>
               <td>aca una foto</td>
               <td>La Mano de dios</td>
               <td>$ 1000000</td>
@@ -18,7 +18,7 @@ export class OrderLine extends Component {
                   <Counter/>
               </td>
               <td>$ 5000000</td>
-            </tr>            
+            </tr>         
           </tbody>
         </table>
         
