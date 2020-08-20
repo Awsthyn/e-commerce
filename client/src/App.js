@@ -14,8 +14,7 @@ import CrudUser from "./components/CrudUser";
 import OrderTable from "./components/OrderTable.jsx";
 import Order from "./components/Order.jsx";
 import ShoppingCart from "./components/ShoppingCart.jsx";
-import {onSearch} from "./Redux/actions/searchActions"
-import {toProductDetails, getCategories, getProduct, getCategory } from './Redux/actions/productActions'
+
 
 function App() {
 

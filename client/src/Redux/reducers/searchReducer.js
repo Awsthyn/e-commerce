@@ -1,4 +1,4 @@
-import {GET_PRODUCTS, GET_ALL_CATEGORIES, SET_DETAILS, DELETE_PRODUCT, DELETE_CATEGORY} from './constants';
+import {GET_PRODUCTS, GET_ALL_CATEGORIES, SET_DETAILS, DELETE_PRODUCT, DELETE_CATEGORY} from '../actions/constants';
 
 // COMENTAR AL LADO PARA QUE SIRVE ESA PROPIEDAD DE ESTADO ↓↓↓↓↓↓
 
@@ -7,7 +7,6 @@ const initialState = {
     productDetails: {},
     // searchedProducts: [], // Los productos que coinciden con "x" busqueda
     // categoryProducts: [],
-
     categories: [],
 };
 
