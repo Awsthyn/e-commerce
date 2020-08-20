@@ -3,10 +3,13 @@ import s from "../css/product.module.css";
 import RatingPage from "./calificacionCaras";
 import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
+import store from "../Redux/store"
+import { useHistory } from "react-router-dom";
 // import Product from "../../../api/src/models/Product";
 
 export function ProductComponent({ productDetails, products }) {
 console.log('ke', products)
+let history = useHistory()
 
     return (
     <div className="container-fluid mt-4    ">
@@ -21,7 +24,7 @@ console.log('ke', products)
             </div>
             <div className={s.product_data}>
                 <h3 className="pt-4 pb-3">{productDetails.name}</h3>
-                <h5>${productDetails.price}</h5>
+                <h5>${productDetails.name}</h5>
                 <hr></hr>
                 <h6>Stock: {productDetails.stock}</h6>
                 <hr></hr>
@@ -31,7 +34,10 @@ console.log('ke', products)
                     <RatingPage />
                 </div>
                 <hr></hr>
-                <button className="btn btn-success">Agregar al carrito</button>
+                <button data-id={productDetails.id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
+          history.push(`/Order`)
+          store.dispatch(toProductDetails(productDetails.id))
+        }}>Agregar al carrito</button>
             </div>
             {/* <rating.js file */}
             <script src="js/addons/rating.js"></script>
