@@ -14,11 +14,11 @@ export function getAllCategories() {
     }
 }
 
-//------------ ELIMINA UNA CATEGORIA (TODAVIA NO LA ELIMINA)  -----------------------------
+//------------ ELIMINA UNA CATEGORIA  -----------------------------
 
 export function onDeleteCategory(CategoryId) {
     return function(dispatch) {
-        return fetch(`'http://localhost:3001/categories/${CategoryId}`, {
+        return fetch(`http://localhost:3001/categories/${CategoryId}`, {
         method: 'DELETE',
         body: JSON.stringify({ id : CategoryId }),
         headers: {
@@ -26,9 +26,9 @@ export function onDeleteCategory(CategoryId) {
         }
     }).then(res => {
         console.info("fetch delete category")
-        alert("El Producto se ha Eliminado correctamente")
         dispatch({type: DELETE_CATEGORY, payload: res})
-        window.location = "/crud";
+        alert("La Categoria se ha Eliminado correctamente")
+        window.location = "/CrudCategory";
     })
     .catch(err => console.error(err))
     }

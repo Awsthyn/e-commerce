@@ -1,17 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteProduct from './DeleteProduct';
-import EditProductForm from './EditProductForm';
 import { onDeleteProduct } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 
 
-const Crud = ({ products, onDeleteProduct} ) => {
+const Crud = ({ products }) => {
 
-    function handleDelete(product) {
-        console.info('le digo a app que elimina:', product)
-         onDeleteProduct(product)
-    }
 
     return (
         <div className="container mt-4">
@@ -29,23 +24,21 @@ const Crud = ({ products, onDeleteProduct} ) => {
             <tbody>
 
                 {products.map((e, i) => (
-                   <tr key={e.id}>
-                           <td>{e.name}</td>
-                           <td>{e.description}</td>
-                           <td> <Link
-                               to={{
-                                 pathname: `/products/${e.id}/edit`,
-                                 state: { product : e }
-                               }}
-                               className= "btn btn-success"
-                             >Editar</Link>
-                             </td>
-                             <td>
-
-                             <DeleteProduct id={e.id} handleDelete={handleDelete.bind(this)} /></td>
-                   </tr>
-               ))}
-
+                    <tr key={e.id}>
+                            <td>{e.name}</td>
+                            <td>{e.description}</td>
+                            <td> <Link
+                                to={{
+                                  pathname: `/products/${e.id}/edit`,
+                                  state: { product : e }
+                                }}
+                                className= "btn btn-success"
+                              >Editar</Link>
+                              </td>
+                              <td>
+                              <DeleteProduct id={e.id} /></td>
+                    </tr>
+                ))}
             </tbody>
   </table>
 </div>

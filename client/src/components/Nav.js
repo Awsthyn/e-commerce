@@ -43,16 +43,18 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   </Link>
 
                   {categories.map((e) => (
-                    <Link>
+                    <Link to={`/catalog/${e.name}`}>
                       <MDBDropdownItem
                         key={e}
                         data-id={e.id}
                         name={e.name}
                         onClick={(e) => {
+
                           getCategoryProducts(e.target.getAttribute("name"));
                           history.push(
                             `/catalog/${e.target.getAttribute("name")}`
                           );
+
                           e.preventDefault();
                         }}
                       >

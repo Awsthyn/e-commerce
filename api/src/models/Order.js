@@ -11,11 +11,11 @@ module.exports = (sequelize) => {
         isIn: [["carrito", "creada", "procesando", "cancelada", "completa"]],
       },
     },
-    shippingAdress: {
+    shippingAddress: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    billingAdress: {
+    billingAddress: {
       type: DataTypes.STRING,
       allowNull: false,
     },

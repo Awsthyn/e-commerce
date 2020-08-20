@@ -194,20 +194,20 @@ let initialUsers = [
 let initialOrders = [
 	{
 		orderStatus: 'procesando',
-		shippingAdress: 'San Martin 1234',
-		billingAdress: 'San Martín 1234',
+		shippingAddress: 'San Martin 1234',
+		billingAddress: 'San Martín 1234',
 		userId: 1,
 	},
 	{
 		orderStatus: 'carrito',
-		shippingAdress: 'San Martin 123',
-		billingAdress: 'San Martín 123',
+		shippingAddress: 'San Martin 123',
+		billingAddress: 'San Martín 123',
 		userId: 1,
 	},
 	{
 		orderStatus: 'carrito',
-		shippingAdress: 'Sarmiento S/N',
-		billingAdress: 'Sarmiento S/N',
+		shippingAddress: 'Sarmiento S/N',
+		billingAddress: 'Sarmiento S/N',
 		userId: 2,
 	},
 ];
