@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import { getAllCategories, getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions"
+import { getAllCategories, getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions/actions"
 import { connect } from "react-redux";
-import store from "../Redux/store"
 
 export function Nav({ categories, getCategoryProducts }) {
   let [clase, setClase] = useState("btn btn-success");

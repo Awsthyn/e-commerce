@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteCategory from './DeleteCategory';
 import EditCategoryForm from './EditCategoryForm';
-import { onDeleteCategory } from "../Redux/actions"
+import { onDeleteCategory } from "../Redux/actions/actions"
 import { connect } from "react-redux";
 
 

@@ -1,8 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import S from "../css/catalogo.module.css";
-import { getAllCategories, getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions"
+import { getAllCategories, getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions/actions"
 import { connect } from "react-redux";
 import store from "../Redux/store"
 
@@ -38,7 +38,6 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                         </li>
                     </Link>
                 ))}
-            
         </div>
         <div className="row col-md-9">
             {products.map((e) => (
@@ -52,7 +51,6 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
             ))}
         </div>
     </div>
-        
     );
 };
 
@@ -71,7 +69,6 @@ function mapDispatchToProps(dispatch) {
         getSearchedProducts: keyword => dispatch(getSearchedProducts(keyword)),
         getCategoryProducts: category => dispatch(getCategoryProducts(category)),
         getAllCategories: () => dispatch(getAllCategories()),
-
     };
 }
 
@@ -79,6 +76,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Catalogo);
-
-
-

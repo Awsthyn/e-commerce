@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from "react";
 import s from "../css/product.module.css";
 import RatingPage from "./calificacionCaras";
-import { toProductDetails } from "../Redux/actions"
+import { toProductDetails } from "../Redux/actions/actions"
 import { connect } from "react-redux";
-import store from "../Redux/store"
 // import Product from "../../../api/src/models/Product";
 
 export function ProductComponent({ productDetails }) {

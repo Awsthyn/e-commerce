@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
-import { getSearchedProducts } from "../Redux/actions"
+import { getSearchedProducts } from "../Redux/actions/actions"
 import { connect } from "react-redux";
 // import styles from "./SearchBar.module.css";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Checkbox from "./Checkbox";
-import { onDeleteCategory } from "../Redux/actions"
+import { onDeleteCategory } from "../Redux/actions/actions"
 import { connect } from "react-redux";
 
 export class NewProduct extends React.Component {

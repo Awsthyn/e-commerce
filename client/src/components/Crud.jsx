@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteProduct from './DeleteProduct';
 import EditProductForm from './EditProductForm';
-import { onDeleteProduct } from "../Redux/actions"
+import { onDeleteProduct } from "../Redux/actions/actions"
 import { connect } from "react-redux";
 
 
