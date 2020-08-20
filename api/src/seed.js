@@ -160,7 +160,7 @@ const bruteDataImages = [
 	'santogrial',
 ];
 
-let imageUrls = [];
+let imageUrls = []; 
 
 bruteDataImages.map((e, i) => {
 	imageUrls.push({ url: e, productId: i + 1 });
