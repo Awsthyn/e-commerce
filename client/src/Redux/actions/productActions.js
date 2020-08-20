@@ -23,7 +23,7 @@ export function getCategoryProducts(category) {
         return fetch(`http://localhost:3001/categories/${category}`)
         .then(r => r.json())
         .then(data => {
-            console.log('fetch xCateg')
+            console.log('fetch productos xCateg')
             dispatch({type: GET_PRODUCTS, payload: data.products})
         })
         .catch(error => console.log(error))
@@ -60,10 +60,24 @@ export function getAllProducts() {
     } 
 }
 
-//------------ ELIMINAR UN PRODUCTO (TODAVIA NO LO ELIMINA) --------------------------------------------------
+//------------ ELIMINAR UN PRODUCTO --------------------------------------------------
 
-export function onDeleteProduct(id) {
-    console.log('eliminado')
-    return {type: DELETE_PRODUCT, payload: id}
+export function onDeleteProduct(ProductId) {
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/products/${ProductId}`, {
+            method: 'DELETE',
+            body: JSON.stringify({ id : ProductId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            console.info("fetch delete product")
+            dispatch({type: DELETE_PRODUCT, payload: res})
+            alert("El Producto se ha Eliminado correctamente")
+            window.location = "/crud";
+        })
+        .catch(err => console.error(err))
+    }
 }
+
 

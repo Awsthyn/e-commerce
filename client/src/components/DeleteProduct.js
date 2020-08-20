@@ -1,32 +1,33 @@
 import React from 'react'
+import { onDeleteProduct } from "../Redux/actions/productActions"
+import { connect } from "react-redux";
 
-function DeleteProduct({ id, handleDelete }){
-    const ProductId = id
-
-    function handleClick() {
-        console.log('Borrando ' + ProductId);
-        const url = 'http://localhost:3001/products/' + ProductId;
-
-        fetch(url, {
-            method: 'DELETE',
-            body: JSON.stringify({ id : ProductId }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            console.info(res)
-            handleDelete(ProductId);
-            alert("El Producto se ha Eliminado correctamente")
-            window.location = "/crud";
-        })
-        .catch(err => console.error(err))
-    }
+export function DeleteProduct({ id, onDeleteProduct }){
 
     return (
         <div className="mx-auto">
-            <button className="btn btn-danger" onClick={handleClick}>Eliminar</button>
+            <button className="btn btn-danger" onClick={() => onDeleteProduct(id)}>Eliminar</button>
         </div>
     )
 }
 
-export default DeleteProduct
+
+//------------ REDUX --------------------------------
+
+function mapStateToProps(state) {
+    return {
+        categories: state.categories.categories,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onDeleteProduct: (id) => dispatch(onDeleteProduct(id)),
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(DeleteProduct);
+

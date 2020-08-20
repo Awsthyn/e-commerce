@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteCategory from './DeleteCategory';
-import EditCategoryForm from './EditCategoryForm';
 import { onDeleteCategory } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 
-export const CrudCategory = ({ categories, onDeleteCategory }) => {
-
-
+export const CrudCategory = ({ categories }) => {
 
     return (
         <div className="container mt-4">
