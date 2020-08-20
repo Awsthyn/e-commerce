@@ -27,12 +27,16 @@ const {
   Image,
   User,
   Order,
+  OrderLine
 } = require("./src/db.js");
 const {
   initialCategories,
   initialProducts,
   imageUrls,
   prodXCat,
+  initialUsers,
+  initialOrders,
+  initialOrderLines
 } = require("./src/seed.js");
 
 //const Category = require("./src/models/Category.js");
@@ -57,31 +61,11 @@ conn
     Image.bulkCreate(imageUrls);
   })
   .then(() => {
-    User.create({
-      email: "nico@darkmarket.com",
-      first_name: "Nicolás",
-      last_name: "Selicki",
-      address: "San Martín 123",
-      locality: "La Plata",
-      state: "Argentina",
-      password: "Marti te amo",
-
-      admin: true,
-    });
+    User.bulkCreate(initialUsers);
   })
   .then(() => {
-    Order.create({
-      orderStatus: "carrito",
-      shippingAdress: "San Martin 123",
-      billingAdress: "San Martín 123",
-      userId: 1,
-    });
+    Order.bulkCreate(initialOrders);
   })
   .then(() => {
-    Order.create({
-      orderStatus: "procesando",
-      shippingAdress: "San Martin 1234",
-      billingAdress: "San Martín 1234",
-      userId: 1,
-    });
-  });
+    OrderLine.bulkCreate(initialOrderLines)
+  })

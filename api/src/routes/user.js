@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User, Order } = require("../db.js");
+const { User, Order, OrderLine } = require("../db.js");
 var Sequelize = require("sequelize");
 //Ariel
 
@@ -18,13 +18,14 @@ server.get("/:id/order/", (req, res, next) => {
 // order.js
 
 // S38
-server.post("/:id/cart", (req, res, next) => {
+server.post("/:userId/cart", (req, res, next) => {
   const { orderStatus, shippingAdress, billingAdress, total } = req.body;
   Order.create({
     orderStatus,
     shippingAdress,
     billingAdress,
-    total
+    total,
+    userId: req.params.userId
   })
     .then(() => {
       res.sendStatus(201);
@@ -33,20 +34,23 @@ server.post("/:id/cart", (req, res, next) => {
 });
 
 //S39
-server.get("/:id/cart", (req, res, next) => {
-  Order.findAll()
+server.get("/:userId/cart", (req, res, next) => {
+  Order.findOne({where: {
+    userId: req.params.userId,
+    orderStatus: 'carrito'
+  }, include: OrderLine })
     .then((orders) => {
       // console.log(products);
-      res.json(orders);
+      res.json(orders.orderLines);
     })
     .catch(next);
 });
 
 //S40
-server.delete("/:id/cart", (req, res, next) => {
+server.delete("/:userId/cart", (req, res, next) => {
   try {
     const { id } = req.params;
-    Order.destroy({ where: { id: id } }).then(() => {
+    Order.destroy({ where: { userId: id, orderStatus: 'carrito' } }).then(() => {
       res.sendStatus(200);
     });
   } catch (error) {
@@ -56,10 +60,9 @@ server.delete("/:id/cart", (req, res, next) => {
 
 //orderLine.js
 // S41
-server.put("/:id/cart", (req, res, next) => {
+server.put("/:userId/cart", (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { quantity, price } = req.body;
+    const { id, quantity, price } = req.body;
     OrderLine.update(
       {
         quantity,
@@ -77,4 +80,65 @@ server.put("/:id/cart", (req, res, next) => {
 
 //Pela
 
+server.get("/", (req, res, next) => {
+  User.findAll()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(next);
+});
+
+server.post("/", (req, res, next) => {
+  const { email, first_name, last_name, address, locality, state, password, admin } = req.body;
+  User.create({
+    email,
+    first_name,
+    last_name,
+    address,
+    locality,
+    state,
+    password,
+    admin
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(next);
+});
+
+
+server.delete("/:id", (req, res, next) => {
+  try {
+    const { id } = req.params;
+    User.destroy({ where: { id } }).then(() => {
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+server.put("/:id", (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { email, first_name, last_name, address, locality, state, password, admin } = req.body;
+    User.update(
+      {
+        email,
+        first_name,
+        last_name,
+        address,
+        locality,
+        state,
+        password,
+        admin
+      },
+      { where: { id } }
+    ).then(() => {
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 module.exports = server;
