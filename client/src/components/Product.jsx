@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import s from "../css/product.module.css";
 import RatingPage from "./calificacionCaras";
-import { toProductDetails } from "../Redux/actions/actions"
+import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 // import Product from "../../../api/src/models/Product";
 
-export function ProductComponent({ productDetails }) {
-//---- para llamar mas facil abajo ⬇⬇
-    // const producto = store.getState().productDetails;
+export function ProductComponent({ productDetails, products }) {
+console.log('ke', products)
 
     return (
     <div className="container-fluid mt-4    ">
@@ -45,7 +44,7 @@ export function ProductComponent({ productDetails }) {
 
 function mapStateToProps(state) {
     return {
-        productDetails: state.productDetails,
+        productDetails: state.products.productDetails,
     };
 }
 

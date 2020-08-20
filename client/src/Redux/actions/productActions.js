@@ -1,4 +1,4 @@
-import {GET_PRODUCTS, GET_ALL_CATEGORIES, SET_DETAILS, DELETE_PRODUCT, DELETE_CATEGORY} from './constants';
+import {GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT} from './constants';
 
 //------------  PRODUCTOS BUSCADOS  -----------------------------------------------------------
 
@@ -67,23 +67,3 @@ export function onDeleteProduct(id) {
     return {type: DELETE_PRODUCT, payload: id}
 }
 
-//------------  CATEGORIAS  -----------------------------------------------------------
-
-export function getAllCategories() {
-    return function(dispatch){
-        return fetch(`http://localhost:3001/categories`)
-        .then((r) => r.json())
-        .then((data) => {
-            console.log('fetch categ')
-            dispatch({type: GET_ALL_CATEGORIES, payload: data})
-        })
-        .catch((error) => {console.log(error)})
-    }
-}
-
-//------------ ELIMINA UNA CATEGORIA (TODAVIA NO LA ELIMINA)  -----------------------------------------------------------
-
-export function onDeleteCategory(id) {
-    console.log('eliminado')
-    return {type: DELETE_CATEGORY, payload: id}
-}

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteProduct from './DeleteProduct';
 import EditProductForm from './EditProductForm';
-import { onDeleteProduct } from "../Redux/actions/actions"
+import { onDeleteProduct } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 
 
@@ -54,8 +54,8 @@ const Crud = ({ products, onDeleteProduct} ) => {
 
 function mapStateToProps(state) {
   return {
-      categories: state.categories,
-      products: state.products 
+      categories: state.categories.categories,
+      products: state.products.products 
   };
 }
 

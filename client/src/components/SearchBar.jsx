@@ -1,19 +1,18 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
-import { getSearchedProducts } from "../Redux/actions/actions"
+import { getSearchedProducts } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
-// import styles from "./SearchBar.module.css";
 
 export function SearchBar(props) {
   const [prod, setProd] = useState("");//setea el estado que todavia no definimos
   let history = useHistory()
+
   return (
     <form className="form-inline ml-auto" onSubmit={(e) => {
       history.push('/search')
       e.preventDefault();
       props.getSearchedProducts(prod)
-      // props.onSearch(prod);
-      setProd("");//vacia el placeholder
+      setProd("");
     }}>
     <input
       type="text"
@@ -24,20 +23,18 @@ export function SearchBar(props) {
     <input className="btn btn-sm btn-outline-light" type="submit" value= "Mostrar"/>
     </form>
   );
-}//
+}
 
 
 function mapStateToProps(state) {
   return {
       searchedProducts: state.searchedProducts,
-      // categories: state.categories
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
       getSearchedProducts: keyword => dispatch(getSearchedProducts(keyword)),
-      // getCategories: () => dispatch(getCategories())
   };
 }
 

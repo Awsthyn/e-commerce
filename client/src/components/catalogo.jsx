@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import S from "../css/catalogo.module.css";
-import { getAllCategories, getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions/actions"
+import { getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions/productActions"
+import { getAllCategories } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 import store from "../Redux/store"
 
@@ -25,7 +26,7 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                     <b>Todos los productos</b>
                 </li>
             </Link>
-                {categories.map((e) => (
+                {categories.categories.map((e) => (
                     <Link to={`/catalogo/${e.name}`}>
                         <li
                             key={e}
@@ -40,7 +41,7 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                 ))}
         </div>
         <div className="row col-md-9">
-            {products.map((e) => (
+            {products.products.map((e) => (
                 <ProductCard
                     key={e}
                     id = {e.id}

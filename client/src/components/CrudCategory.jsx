@@ -2,15 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteCategory from './DeleteCategory';
 import EditCategoryForm from './EditCategoryForm';
-import { onDeleteCategory } from "../Redux/actions/actions"
+import { onDeleteCategory } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 
 export const CrudCategory = ({ categories, onDeleteCategory }) => {
 
-    function handleDelete(category) {
-        onDeleteCategory(category)
-    }
+
 
     return (
         <div className="container mt-4">
@@ -41,8 +39,7 @@ export const CrudCategory = ({ categories, onDeleteCategory }) => {
                             </Link>
                         </td>
                         <td>
-                            <DeleteCategory id={e.id} handleDelete={handleDelete.bind(this)} />
-                        </td>
+                            <DeleteCategory id={e.id} /></td>
                     </tr>
                 ))}
 
@@ -53,8 +50,8 @@ export const CrudCategory = ({ categories, onDeleteCategory }) => {
 
 function mapStateToProps(state) {
     return {
-        categories: state.categories,
-        products: state.products 
+        categories: state.categories.categories,
+        products: state.products.products 
     };
 }
 

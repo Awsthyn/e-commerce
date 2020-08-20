@@ -1,20 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import { getAllCategories, getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions/actions"
+import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions"
+import { getAllCategories } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 export function Nav({ categories, getCategoryProducts }) {
-  let [clase, setClase] = useState("btn btn-success");
   let history = useHistory();
+  console.log(categories)
 
-  function handleClick(e) {
-    setClase = {
-      clase: "btn btn-success active",
-    };
-    console.log("The link was clicked.");
-  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -96,7 +91,7 @@ export function Nav({ categories, getCategoryProducts }) {
 
 function mapStateToProps(state) {
   return {
-      categories: state.categories,
+      categories: state.categories.categories,
       products: state.products 
   };
 }
@@ -104,7 +99,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
       getAllProducts: () => dispatch(getAllProducts()),
-      getSearchedProducts: keyword => dispatch(getSearchedProducts(keyword)),
       getCategoryProducts: category => dispatch(getCategoryProducts(category)),
       getAllCategories: () => dispatch(getAllCategories()),
   };

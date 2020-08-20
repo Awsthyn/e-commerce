@@ -1,10 +1,10 @@
-// import { combineReducers } from 'redux';
-// import searchReducer from "./searchReducer"
-// import productsReducer from "./productsReducer";
-// import categoriesReducer from './categoriesReducer'
+import { combineReducers } from 'redux';
+import counterReducer from "./counterReducer"
+import productReducer from "./productReducer";
+import categoriesReducer from './categoriesReducer'
 
-// export default combineReducers({
-//     search: searchReducer,
-//     products: productsReducer,
-//     categories: categoriesReducer
-//     });
+export default combineReducers({
+    counter: counterReducer,
+    products: productReducer,
+    categories: categoriesReducer
+    });
