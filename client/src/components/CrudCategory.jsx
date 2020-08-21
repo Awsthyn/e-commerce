@@ -20,7 +20,7 @@ export const CrudCategory = ({ categories }) => {
                         <th>Eliminar</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  className="text-center">
 
                 {categories.map((e, i) => (
                     <tr key={e.id}>
