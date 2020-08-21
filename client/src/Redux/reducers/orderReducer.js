@@ -1,19 +1,25 @@
-import { ADD_PRODUCTS, DELETE_PRODUCT } from "../actions/constants";
+import { ADD_PRODUCT_TO_CART, GET_PRODUCTS_CART } from "../actions/constants";
+
 
 // COMENTAR AL LADO PARA QUE SIRVE ESA PROPIEDAD DE ESTADO ↓↓↓↓↓↓
 
 const initialState = {
-  orderProducts: [],
+  cart: [],
 };
 
 export default function orderReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_PRODUCTS:
+    case GET_PRODUCTS_CART:             
+    return {
+      ...state,
+      cart: action.payload
+  } 
+    case ADD_PRODUCT_TO_CART:
+      let array = [...state.cart, action.payload]
       return {
         ...state,
-        orderProducts: state.orderProducts.concat(action.payload),
-      };
-
+        cart: array
+      }
     default:
       return { ...state };
   }

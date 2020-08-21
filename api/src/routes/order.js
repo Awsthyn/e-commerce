@@ -14,10 +14,7 @@ server.get("/", (req, res, next) => {
     .then((orders) => {
       res.json(orders);
     })
-    .catch();
-  {
-    throw console.error("Status incorrecto");
-  }
+    .catch(next);
 });
 
 //S46
@@ -33,12 +30,10 @@ server.get("/:id", (req, res, next) => {
 server.put("/:id", (req, res, next) => {
   try {
     const { id } = req.params;
-    const { orderStatus, shippingAdress, billingAdress, total } = req.body;
+    const { orderStatus, total } = req.body;
     Order.update(
       {
         orderStatus,
-        shippingAdress,
-        billingAdress,
         total,
       },
       { where: { id } }
