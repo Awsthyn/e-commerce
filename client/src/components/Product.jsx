@@ -4,10 +4,7 @@ import RatingPage from "./calificacionCaras";
 import { addToOrder } from "../Redux/actions/orderLineActions"
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
-import { addToOrder } from "../Redux/actions/orderLineActions"
 import { connect } from "react-redux";
-import s from "../css/product.module.css";
-import RatingPage from "./calificacionCaras";
 import store from "../Redux/store"
 
 

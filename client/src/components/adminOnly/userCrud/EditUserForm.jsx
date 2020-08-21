@@ -1,23 +1,23 @@
 import React from 'react';
-import { Link } from 'react'
-import {createUser} from "../Redux/actions/userActions"
+import {editUser} from "../../../Redux/actions/userActions"
 import {connect} from "react-redux"
+import { withRouter } from "react-router"
 
-
-export class NewUser extends React.Component {
+export class EditUser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
-            first_name: "",
-            last_name: "",
-            address: "",
-            locality: "",
-            state: "",
-            password: "",
-            admin: false
+            id: props.user.id,
+            email: props.user.email,
+            first_name: props.user.first_name,
+            last_name: props.user.last_name,
+            address: props.user.address,
+            locality: props.user.locality,
+            state: props.user.state,
+            password: props.user.password,
+            admin: props.user.admin,
         }
-        this.listUsers = props.listUsers
+        this.users = props.listUsers;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -26,67 +26,60 @@ export class NewUser extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    comparaPassword() {
-        if (!this.state.password || !this.state.repeatPassword) {
-            alert('Por favor complete los campos (*)')
-        }
-        if (this.state.password !== this.state.repeatPassword && this.state.admin !== true) {
-            alert('Las contraseñas no coinciden')
-            return false;
+    comparePws() {
+      if (!this.state.password || !this.state.repeatPassword) {
+          alert('Por favor complete los campos (*)')
+      }
+      if (this.state.password !== this.state.repeatPassword && this.state.admin !== true) {
+          alert('Las contraseñas no coinciden')
+          return false;
         } else {
-            return true;
-
+            if (this.state.password !== this.state.password && this.state.admin !== true) {
+                alert('La contraseña es incorrecta')
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state)
-        const newUser = this.state;
-              this.props.createUser(newUser)
+        const editUser = this.state;
+          this.props.editUser(editUser)
               .then(res => {
                   console.info(res)
-                  this.setState({
-                      email: "",
-                      first_name: "",
-                      last_name: "",
-                      address: "",
-                      locality: "",
-                      state: "",
-                      password: "",
-                      admin: false
-                  })
-                  window.location = "/users";
-                  alert("El usuario se creó correctamente")
+                  window.location = "/Admin/CrudUser";
+                  alert("El usuario se edito correctamente")
               }).catch(err => console.error(err))
           }
 
     render() {
         return (
-            <div>
+            <div className="container-fluid abs-center">
                 <form onSubmit={this.handleSubmit} className="form-group">
                     <div className="form-group">
-                        <label>Correo:*</label>
+                        <label>Nuevo correo:</label>
                         <input type="email" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email} />
                     </div>
                     <div className="form-group">
-                        <label>Nombre:*</label>
+                        <label>Nombre:</label>
                         <input type="text" id="first_name" name="first_name" onChange={this.handleChange} className="form-control" value={this.state.first_name} />
                     </div>
                     <div className="form-group">
-                        <label>Apellido:*</label>
+                        <label>Apellido:</label>
                         <input type="text" id="last_name" name="last_name" onChange={this.handleChange} className="form-control" value={this.state.last_name} />
                     </div>
                     <div className="form-group">
-                        <label>Dirección:*</label>
+                        <label>Dirección:</label>
                         <input type="text" id="address" name="address" onChange={this.handleChange} className="form-control" value={this.state.address} />
                     </div>
                     <div className="form-group">
-                        <label>Localidad:*</label>
+                        <label>Localidad:</label>
                         <input type="text" id="locality" name="locality" onChange={this.handleChange} className="form-control" value={this.state.locality} />
                     </div>
                     <div className="form-group">
-                        <label>Provincia/Estado:*</label>
+                        <label>Provincia/Estado:</label>
                         <input type="text" id="state" name="state" onChange={this.handleChange} className="form-control" value={this.state.state} />
                     </div>
                     <div className="form-group">
@@ -98,24 +91,20 @@ export class NewUser extends React.Component {
                         <input type="password" id="repeatPassword" name="repeatPassword" onChange={this.handleChange} className="form-control" value={this.state.repeatPassword} />
                     </div>
                     <div>
-                        <button type="submit" className="btn btn-warning">Enviar</button>
+                        <button type="submit" className="btn btn-warning">Editar</button>
                     </div>
                 </form>
-
             </div>
         )
     }
 }
-function mapStateToProps(state) {
-    return {
-    }
-}
+
 function mapDispatchToProps(dispatch) {
   return {
-    createUser: user => dispatch(createUser(user)),
+    editUser: user => dispatch(editUser(user)),
   };
 }
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewUser);
+    null,
+    mapDispatchToProps
+)(withRouter(EditUser))

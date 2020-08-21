@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getAllUsers } from "../Redux/actions/userActions"
+import { getAllUsers, deleteUser } from "../../../Redux/actions/userActions"
 import { Link } from 'react-router-dom';
-import store from "../Redux/store"
-import {deleteUser} from "../Redux/actions/userActions"
+import store from "../../../Redux/store"
 
 
 store.dispatch(getAllUsers());

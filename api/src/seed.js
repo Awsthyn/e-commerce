@@ -36,7 +36,7 @@ const initialProducts = [
 		name: 'Botas del Gato con Botas',
 		description: 'Miau! Para levantar muchas gatitas.',
 		price: 100000,
-		stock: 1,
+		stock: 0,
 	},
 	{
 		name: 'Buda en código',
@@ -48,7 +48,7 @@ const initialProducts = [
 		name: 'Cohete espacial',
 		description: 'Te lleva a Japón o a Corea en 90 minutos.',
 		price: 500,
-		stock: 2000,
+		stock: 0,
 	},
 	{
 		name: 'Pata de conejo',
