@@ -8,7 +8,7 @@ import NewProductForm from "./components/adminOnly/productCrud/NewProductForm";
 import EditProductForm from "./components/adminOnly/productCrud/EditProductForm";
 import NewCategoryForm from "./components/adminOnly/categoryCrud/NewCategoryForm";
 import EditCategoryForm from "./components/adminOnly/categoryCrud/EditCategoryForm";
-import CrudProdut from "./components/adminOnly/productCrud/CrudProdut";
+import CrudProduct from "./components/adminOnly/productCrud/CrudProdut";
 import CrudCategory from "./components/adminOnly/categoryCrud/CrudCategory";
 import Home from "./components/Home.jsx";
 import CrudUser from "./components/adminOnly/userCrud/CrudUser";
@@ -18,7 +18,8 @@ import ShoppingCart from "./components/ShoppingCart.jsx";
 import AdminLogin from "./components/adminOnly/adminCruds/AdminLogin";
 import { Admin } from "./components/adminOnly/adminCruds/Admin"
 import { CrudAdmin } from "./components/adminOnly/adminCruds/CrudAdmin"
-
+import NewUser from "./components/adminOnly/userCrud/NewUserForm";
+import EditUser from "./components/adminOnly/userCrud/EditUserForm";
 
 function App() {
 
@@ -47,8 +48,8 @@ function App() {
       />
 {/* -------------- CRUDS PRODUCT ------------------ */}
       <Route
-        exact path="/Admin/CrudProdut"
-        component= { CrudProdut }
+        exact path="/Admin/CrudProduct"
+        component= { CrudProduct }
       />
       <Route
         exact path = "/Admin/products/form/new"
@@ -81,6 +82,15 @@ function App() {
         exact path = "/Admin/CrudUser"
         component= { CrudUser }
       />
+      <Route
+        path = "/CrudUser/form/new"
+        component= { NewUser }
+      />
+      <Route
+        path = "/CrudUser/:id/edit"
+        render = { props =>
+            <EditUser user={props.location.state.user} /> } 
+      />
 {/* -------------- ORDEN Y CARRITO ------------------ */}
       <Route
         exact path = "/OrderTable"
@@ -103,10 +113,10 @@ function App() {
         path="/catalog/:categoriaName"
         component= { Catalog }
       />
-      <Route
+      {/* <Route
         exact path="/category/:id"
         component= { ProductComponent }
-      />
+      /> */}
       <Route
         path="/search"
         component= { Catalog }

@@ -1,14 +1,15 @@
-import { ADD_PRODUCTS, DELETE_PRODUCT } from "../actions/constants";
+import { ADD_PRODUCT_TO_CART, GET_PRODUCTS_CART } from "../actions/constants";
 
-export function addToOrder(id) {
-  return function (dispatch) {
-    return fetch(`http://localhost:3001/products/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({ type: ADD_PRODUCTS, payload: data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+export function getCart(){
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/users/1/cart`)
+        .then((r) => r.json())
+        .then((data) => {
+            console.log('fetch get cart');
+            dispatch({ type: GET_PRODUCTS_CART, payload: data})
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
 }

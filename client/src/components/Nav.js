@@ -1,8 +1,16 @@
 import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
-import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions";
+import {
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from "mdbreact";
+import {
+  getAllProducts,
+  getCategoryProducts,
+} from "../Redux/actions/productActions";
 import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
 import store from "../Redux/store";
@@ -62,18 +70,13 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
               </MDBDropdown>
             </li>
             <li className="nav-item">
-              <NavLink to="/Order" className="nav-link">
-                <i class="fas fa-cart-arrow-down "></i>
-              </NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink to="/OrderTable" className="nav-link">
                 Tabla de órdenes
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/ShoppingCart" className="nav-link">
-                Carrito
+              <NavLink to="/Order" className="nav-link">
+                <i class="fas fa-cart-arrow-down "></i>
               </NavLink>
             </li>
             <li className="nav-item">

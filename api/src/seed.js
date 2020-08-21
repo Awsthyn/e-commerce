@@ -36,7 +36,7 @@ const initialProducts = [
 		name: 'Botas del Gato con Botas',
 		description: 'Miau! Para levantar muchas gatitas.',
 		price: 100000,
-		stock: 1,
+		stock: 0,
 	},
 	{
 		name: 'Buda en código',
@@ -48,7 +48,7 @@ const initialProducts = [
 		name: 'Cohete espacial',
 		description: 'Te lleva a Japón o a Corea en 90 minutos.',
 		price: 500,
-		stock: 2000,
+		stock: 0,
 	},
 	{
 		name: 'Pata de conejo',
@@ -194,20 +194,14 @@ let initialUsers = [
 let initialOrders = [
 	{
 		orderStatus: 'procesando',
-		shippingAddress: 'San Martin 1234',
-		billingAddress: 'San Martín 1234',
 		userId: 1,
 	},
 	{
 		orderStatus: 'carrito',
-		shippingAddress: 'San Martin 123',
-		billingAddress: 'San Martín 123',
 		userId: 1,
 	},
 	{
 		orderStatus: 'carrito',
-		shippingAddress: 'Sarmiento S/N',
-		billingAddress: 'Sarmiento S/N',
 		userId: 2,
 	},
 ];
@@ -275,35 +269,35 @@ const initialReview = [
 		rating: 4,
 		description: "Buenisimo",
 		date: "Thu Aug 20 2020 23:10:01",
-		productId: 2,
+		productId: 5,
 		userId: 1
 	},
 	{
 		rating: 4,
 		description: "",
 		date: "Thu Aug 20 2020 23:10:01",
-		productId: 2,
+		productId: 8,
 		userId: 1
 	},
 	{
 		rating: 2,
 		description: "Saludos a Marti (re chupamedias)",
 		date: "Thu Aug 11 2020 15:10:01",
-		productId: 1,
+		productId: 5,
 		userId: 2
 	},
 	{
 		rating: 3,
 		description: "No se puede tomar fernet en la copa",
 		date: "Thu Aug 10 2020 11:19:01",
-		productId: 1,
+		productId: 11,
 		userId: 2
 	},
 	{
 		rating: 5,
 		description: "Miau!",
 		date: "Thu Aug 01 2020 00:00:00",
-		productId: 2,
+		productId: 9,
 		userId: 2
 	}
 ]
