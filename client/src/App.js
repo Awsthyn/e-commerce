@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import NewProductForm from "./components/NewProductForm";
 import EditProductForm from "./components/EditProductForm";
 import NewCategoryForm from "./components/NewCategoryForm";
+import EditCategoryForm from "./components/EditCategoryForm";
 import Crud from "./components/Crud";
 import CrudCategory from "./components/CrudCategory";
 import Home from "./components/Home.jsx";
@@ -65,6 +66,12 @@ function App() {
         component= { ProductComponent }
       />
       <Route
+        exact path="/categories/:id/edit"
+        render = { props =>
+            <EditCategoryForm category={props.location.state.category} />
+        }
+      />
+      <Route
         path="/search"
         component= { Catalog }
       />
@@ -78,7 +85,10 @@ function App() {
       />
       <Route
         path = "/products/:id/edit"
-        component= { EditProductForm }
+        //component= { EditProductForm }
+        render = { props =>
+            <EditProductForm product={props.location.state.product} />
+        }
       />
       <Route
         path = "/categories/form/new"

@@ -1,10 +1,11 @@
-import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT } from '../actions/constants';
+import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT } from '../actions/constants';
 
 // COMENTAR AL LADO PARA QUE SIRVE ESA PROPIEDAD DE ESTADO ↓↓↓↓↓↓
 
 const initialState = {
     products: [],
     productDetails: {},
+    product: ''
 };
 
 export default function productReducer (state = initialState, action) {
@@ -29,7 +30,12 @@ export default function productReducer (state = initialState, action) {
                 ...state,
                 products: state.products.filter((p) => p.id !== action.payload)
             }
-
+        case EDIT_PRODUCT:
+            console.log('producto editado')
+            return {
+                ...state,
+                products: state.products
+            }
         default: return {...state}
     }
 

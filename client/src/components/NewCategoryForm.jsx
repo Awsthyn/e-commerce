@@ -1,19 +1,20 @@
 import React from 'react';
+import { addCategory } from "../Redux/actions/categoriesActions"
+import { connect } from "react-redux";
 
-export default class NewCategory extends React.Component {
-    
+class NewCategory extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             name: "",
             description: ""
         }
-        this.categories = props.listaCategories;
-        
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
+
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -26,38 +27,28 @@ export default class NewCategory extends React.Component {
         }
         return false
     }
-    
+
 
     handleSubmit(e){
         e.preventDefault();
         console.log(this.state)
         const category = this.state;
-        const url = 'http://localhost:3001/categories/';
+        this.props.addCategory(category).then(() => {
+            console.log(this.categories)
+            this.setState({
+                name: "",
+                description: ""
+            })
+                alert("La categoría se creó correctamente")
+                window.location = '/CrudCategory'
+        }).catch(() => alert("Se produjo un Error al crear Categoría")
+    )
 
-        console.log(this.categories)
-        if(!this.comparaSiHay(this.categories, this.state)){
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(category),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                console.info(res)
-                this.setState({
-                    name: "",
-                    description: ""
-                }
-                .alert("La categoría se creó correctamente"))
-                
-            }).catch(err => console.log(err))
-        }
-        else {alert(`No se puede crear la categoria ${this.state.name} porque ya existe`)}
     }
-    
+
     render() {
         return (
-        
+
         <div className="container-fluid abs-center">
             <form onSubmit={this.handleSubmit} className="form-group">
                 <div className="form-group">
@@ -74,47 +65,21 @@ export default class NewCategory extends React.Component {
         );
     }
 
-/*
-   handleSubmit(e){
-       e.preventDefault();
-       console.log(this.state)
-       const category = this.state;
-       const url = 'http://localhost:3001/categories/';
-
-       fetch(url, {
-           method: 'POST',
-           body: JSON.stringify(category),
-           headers: {
-               'Content-Type': 'application/json'
-           }
-       }).then(res => {
-           console.info(res)
-           this.setState({
-                 name: "",
-                 description: ""
-             })
-           alert("La categoría se creó correctamente")
-       }).catch(err => console.error(err))
-
-   }
-
-  render() {
-      return (
-           <div className="container-fluid abs-center">
-          <form onSubmit={this.handleSubmit} className="form-group">
-              <div className="form-group">
-                  <label>Nombre:</label>
-                  <input type="text" id="name" name="name" onChange={this.handleChange} value={this.state.name} className="form-control"/>
-              </div>
-              <div className="form-group">
-                  <label>Descripcion:</label>
-                  <input type="text" id="description" name="description" onChange={this.handleChange} value={this.state.description} className="form-control"/>
-              </div>
-              <button type="submit" className="btn btn-primary">Crear</button>
-          </form>
-          </div>
-      );
-  }
-
-*/
 }
+
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addCategory: category => dispatch(addCategory(category)),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewCategory);

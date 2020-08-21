@@ -45,7 +45,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   {categories.map((e) => (
                     <Link to={`/catalog/${e.name}`}>
                       <MDBDropdownItem
-                        key={e}
+                        key={e.id}
                         data-id={e.id}
                         name={e.name}
                         onClick={(e) => {

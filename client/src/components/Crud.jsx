@@ -1,13 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteProduct from './DeleteProduct';
-import { onDeleteProduct } from "../Redux/actions/productActions"
+import { onDeleteProduct, getProduct } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 
-
-const Crud = ({ products }) => {
-
-
+const Crud = (props) => {
+    const products = props.products
     return (
         <div className="container mt-4">
         <Link to="products/form/new" className="btn btn-success">Nuevo</Link>
@@ -30,7 +28,7 @@ const Crud = ({ products }) => {
                             <td> <Link
                                 to={{
                                   pathname: `/products/${e.id}/edit`,
-                                  state: { product : e }
+                                   state: { product : e }
                                 }}
                                 className= "btn btn-success"
                               >Editar</Link>
@@ -39,6 +37,7 @@ const Crud = ({ products }) => {
                               <DeleteProduct id={e.id} /></td>
                     </tr>
                 ))}
+
             </tbody>
   </table>
 </div>
@@ -48,13 +47,14 @@ const Crud = ({ products }) => {
 function mapStateToProps(state) {
   return {
       categories: state.categories.categories,
-      products: state.products.products 
+      products: state.products.products
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onDeleteProduct: (id) => dispatch(onDeleteProduct())
+    onDeleteProduct: (id) => dispatch(onDeleteProduct(id)),
+    getProduct: (id) => dispatch(getProduct(id)),
   };
 }
 

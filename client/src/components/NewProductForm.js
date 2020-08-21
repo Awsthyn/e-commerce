@@ -1,6 +1,6 @@
 import React from "react";
 import Checkbox from "./Checkbox";
-import { onDeleteCategory } from "../Redux/actions/categoriesActions"
+import { addProduct } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 
 export class NewProduct extends React.Component {
@@ -8,7 +8,6 @@ export class NewProduct extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
             name: "",
             description: "",
             price: "",
@@ -16,6 +15,7 @@ export class NewProduct extends React.Component {
             image: "",
             category: []
         }
+
         this.listaProductos = props.listaProducts
         this.categories = props.categories
         this.handleChange = this.handleChange.bind(this);
@@ -40,31 +40,19 @@ export class NewProduct extends React.Component {
         e.preventDefault();
         console.log(this.state)
         const product = this.state;
-        const url = 'http://localhost:3001/products/';
 
-        if(!this.comparaSiHay(this.listaProductos, this.state)){
-          fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(product),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            console.info(res)
-            this.setState({
-              name: "",
-              description: "",
-              price: "",
-              stock: "",
-              image: "",
-              category: []
-          })
-          window.location = "/crud";
-          alert("El producto se creó correctamente")
-        }).catch(err => console.error(err))
-      } else {alert(`No se puede crear ${this.state.name} porque ya existe.`)}
+        this.props.addProduct(product)
 
-        
+        this.setState({
+            name: "",
+            description: "",
+            price: "",
+            stock: "",
+            image: "",
+            category: []
+        })
+        alert("El producto se creó correctamente")
+        window.location = '/crud'
     }
 
     onCheckboxClicked(category, isChecked) {
@@ -127,15 +115,14 @@ export class NewProduct extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {
-      categories: state.categories.categories,
-      products: state.products.products 
-  };
+    return {
+        categories: state.categories.categories
+    }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-      onDeleteCategory: (id) => dispatch(onDeleteCategory(id)),
+    addProduct: product => dispatch(addProduct(product)),
   };
 }
 

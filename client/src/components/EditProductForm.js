@@ -1,11 +1,14 @@
 import React from 'react';
 import { withRouter } from "react-router"
-import Checkbox from './Checkbox';
-import DeleteProduct from './DeleteProduct';
-import { onDeleteCategory } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
-export default  withRouter(class EditProduct extends React.Component {
+import { getAllCategories } from '../Redux/actions/categoriesActions'
+import { editProduct } from '../Redux/actions/productActions'
+
+import Checkbox from './Checkbox';
+import DeleteProduct from './DeleteProduct';
+
+class EditProduct extends React.Component {
 
   constructor(props) {
       super(props);
@@ -18,8 +21,9 @@ export default  withRouter(class EditProduct extends React.Component {
             image:props.product.image,
             category: props.product.categories
         }
-        this.listaProductos = props.listaProducts
+
         this.categories = props.categories
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onCheckboxClicked= this.onCheckboxClicked.bind(this);
@@ -32,7 +36,7 @@ export default  withRouter(class EditProduct extends React.Component {
     onCheckboxClicked(category, isChecked) {
         if(isChecked){
             this.setState({
-                category: [...this.state.category, category.id]
+                category: [...this.state.category, category]
             })
         } else {
             this.setState({
@@ -53,33 +57,16 @@ export default  withRouter(class EditProduct extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        console.info('putting')
+        console.info('putting', this.state)
         const product = this.state;
-        const url = 'http://localhost:3001/products/' + this.state.id;
-
-        //if(!this.comparaSiHay(this.listaProductos, this.state)){
-           fetch(url, {
-           method: 'PUT',
-           body: JSON.stringify(product),
-           headers: {
-               'Content-Type': 'application/json'
-           }
-       }).then(res => {
-           console.info(res)
-           alert("El Producto se editó correctamente")
-           window.location = "/crud";
-       }).catch(err => console.error(err))
-        /*} else {alert(`No se puede editar a ${this.state.name} porque ya existe un producto con ese nombre.`)}*/
-
-
-
+        this.props.editProduct(product)
    }
 
   render() {
     const imgOptions = ["billetera", "boom", "botas", "buda", "cohetemenem",
     "conejo", "croma","escaleraalcielo","excalibur","horrocrux", "lorem", "manodedios",
      "mesa","momia", "necronomicon", "santogrial"]
-      return (
+    return (
     <div>
         <div className="container-fluid abs-center">
           <form onSubmit={this.handleSubmit} >
@@ -110,7 +97,7 @@ export default  withRouter(class EditProduct extends React.Component {
 
               <label>Categoria:</label>
             <div className="form-check form-check-inline">
-                {this.categories.map( category => {
+                {this.props.categories.map( category => {
                     const marcado = this.state.category.filter(c => c.id === category.id).length > 0
                     return (
                         <Checkbox key = {category.id} initialState={marcado} category={category} onChange={this.onCheckboxClicked} />
@@ -122,9 +109,26 @@ export default  withRouter(class EditProduct extends React.Component {
             </div>
           </form>
           </div>
-    </div>
-      );
-  }
+    </div>);
+    }
 
 }
-)
+
+function mapStateToProps(state) {
+    return {
+        categories: state.categories.categories,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getAllCategories: () => dispatch(getAllCategories()),
+        editProduct: product => dispatch(editProduct(product)),
+    };
+}
+
+
+export default connect (
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(EditProduct))

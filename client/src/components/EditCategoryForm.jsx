@@ -1,6 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { withRouter } from "react-router"
+import { editCategory } from '../Redux/actions/categoriesActions';
 
-export default class EditCategoryForm extends React.Component {
+class EditCategoryForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -9,7 +12,6 @@ export default class EditCategoryForm extends React.Component {
             name: props.category.name,
             description: props.category.description
         }
-        this.categories = props.listaCategories;
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,21 +34,10 @@ export default class EditCategoryForm extends React.Component {
         e.preventDefault();
         console.info('putting')
         const category = this.state;
-        const url = 'http://localhost:3001/categories/' + this.state.id;
-
-        if(!this.comparaSiHay(this.categories, this.state)){
-            fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(category),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            console.info(res)
-            alert("La Categoría se editó correctamente")
-        }).catch(err => console.error(err))
-        }
-        else {alert(`No se puede crear la categoria ${this.state.name} porque ya existe`)}
+        this.props.editCategory(category).then(() => {
+            alert("La Categoria se Editó correctamente")
+            window.location = "/CrudCategory";
+        }).catch(() => alert("Se produjo un error al editar"))
     }
 
     render() {
@@ -70,3 +61,14 @@ export default class EditCategoryForm extends React.Component {
         );
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        editCategory: category => dispatch(editCategory(category)),
+    };
+}
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(withRouter(EditCategoryForm))
