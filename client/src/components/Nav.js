@@ -1,22 +1,15 @@
 import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
-import {
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-} from "mdbreact";
-import {
-  getAllProducts,
-  getCategoryProducts,
-} from "../Redux/actions/productActions";
+import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
+import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions";
 import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
 import store from "../Redux/store";
 import s from "../css/product.module.css";
 
 //-------- para traer prods al principio y ya esten disponibles -------
+store.dispatch(getAllCategories());
 store.dispatch(getAllProducts());
 
 export function Nav({ categories, getCategoryProducts, getAllProducts }) {
