@@ -1,4 +1,4 @@
-import { GET_ALL_CATEGORIES, DELETE_CATEGORY} from './constants';
+import { GET_ALL_CATEGORIES, DELETE_CATEGORY, EDIT_CATEGORY } from './constants';
 
 //------------  CATEGORIAS  -----------------------------------------------------------
 
@@ -33,3 +33,35 @@ export function onDeleteCategory(CategoryId) {
     .catch(err => console.error(err))
     }
 }
+
+//---------------EDITAR UNA CATEGORIA---------------------------------------------------------
+    export function editCategory(category){
+        return function(dispatch) {
+            return fetch(`http://localhost:3001/categories/${category.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(category),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                dispatch({type: EDIT_CATEGORY, payload: res})
+            }).catch(err => console.error(err))
+        }
+    }
+
+    //-----------------NewCategory
+    export function addCategory(category){
+        return function(dispatch) {
+            return fetch(`http://localhost:3001/categories/`, {
+                method: 'POST',
+                body: JSON.stringify(category),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                console.info(res)
+                dispatch({type: GET_ALL_CATEGORIES, payload: res })
+
+            }).catch(err => console.log(err))
+        }
+    }

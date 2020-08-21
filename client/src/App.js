@@ -66,8 +66,10 @@ function App() {
         component= { ProductComponent }
       />
       <Route
-        exact path="/category/:id/edit"
-        component= { EditCategoryForm }
+        exact path="/categories/:id/edit"
+        render = { props =>
+            <EditCategoryForm category={props.location.state.category} />
+        }
       />
       <Route
         path="/search"
