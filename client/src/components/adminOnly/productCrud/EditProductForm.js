@@ -2,10 +2,10 @@ import React from 'react';
 import { withRouter } from "react-router"
 import { connect } from "react-redux";
 
-import { getAllCategories } from '../Redux/actions/categoriesActions'
-import { editProduct } from '../Redux/actions/productActions'
+import { getAllCategories } from '../../../Redux/actions/categoriesActions'
+import { editProduct } from '../../../Redux/actions/productActions'
 
-import Checkbox from './Checkbox';
+import Checkbox from '../../Checkbox';
 import DeleteProduct from './DeleteProduct';
 
 class EditProduct extends React.Component {

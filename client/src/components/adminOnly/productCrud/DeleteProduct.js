@@ -1,5 +1,5 @@
 import React from 'react'
-import { onDeleteProduct } from "../Redux/actions/productActions"
+import { onDeleteProduct } from "../../../Redux/actions/productActions"
 import { connect } from "react-redux";
 
 export function DeleteProduct({ id, onDeleteProduct }){

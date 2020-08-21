@@ -17,7 +17,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify">
         <a className="navbar-brand" href="/">
           MERCADO NEGRO
         </a>
@@ -51,7 +51,6 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                           history.push(
                             `/catalog/${e.target.getAttribute("name")}`
                           );
-
                           e.preventDefault();
                         }}
                       >
@@ -61,22 +60,6 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   ))}
                 </MDBDropdownMenu>
               </MDBDropdown>
-            </li>
-
-            <li className="nav-item">
-              <NavLink to="/crud" className="nav-link">
-                Administrar Productos
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/CrudCategory" className="nav-link">
-                Administrar Categorías
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/CrudUser" className="nav-link">
-                Administrar Usuarios
-              </NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/Order" className="nav-link">
@@ -91,6 +74,11 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
             <li className="nav-item">
               <NavLink to="/ShoppingCart" className="nav-link">
                 Carrito
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/AdminLogin" className="nav-link">
+                AdminLogin
               </NavLink>
             </li>
           </ul>

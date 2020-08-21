@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteProduct from './DeleteProduct';
-import { onDeleteProduct, getProduct } from "../Redux/actions/productActions"
+import { onDeleteProduct, getProduct } from "../../../Redux/actions/productActions"
 import { connect } from "react-redux";
 
 const Crud = (props) => {
@@ -27,7 +27,7 @@ const Crud = (props) => {
                             <td>{e.description}</td>
                             <td> <Link
                                 to={{
-                                  pathname: `/products/${e.id}/edit`,
+                                  pathname: `/Admin/products/${e.id}/edit`,
                                    state: { product : e }
                                 }}
                                 className= "btn btn-success"
