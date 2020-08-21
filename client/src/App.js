@@ -15,7 +15,8 @@ import CrudUser from "./components/CrudUser";
 import OrderTable from "./components/OrderTable.jsx";
 import Order from "./components/Order.jsx";
 import ShoppingCart from "./components/ShoppingCart.jsx";
-
+import NewUser from "./components/NewUserForm.jsx";
+import EditUser from "./components/EditUserForm.jsx";
 
 function App() {
 
@@ -94,6 +95,14 @@ function App() {
         path = "/categories/form/new"
         component= { NewCategoryForm }
       />
+      <Route
+        path = "/CrudUser/form/new"
+        component= { NewUser }
+      />
+      <Route
+        path = "/CrudUser/:id/edit"
+        render = { props =>
+            <EditUser user={props.location.state.user} /> } />
     </Router>
   );
 }

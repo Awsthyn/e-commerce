@@ -20,7 +20,6 @@ store.dispatch(getAllProducts());
 
 export function Nav({ categories, getCategoryProducts, getAllProducts }) {
   let history = useHistory();
-  console.log(categories);
 
   return (
     <div>
