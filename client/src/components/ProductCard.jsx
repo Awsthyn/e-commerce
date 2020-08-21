@@ -10,7 +10,7 @@ export function ProductCard({ id, name, price, image }) {
 
   return(
     
-    <div className="card bg-light p-2 m-1" style={{ width: "18rem" }}>
+    <div className="card bg-light p-2 m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
       <img src={image} className="card-img-top rounded border border-dark" alt={name} />
       <div className="card-body d-flex flex-column justify-content-center">
         <h5 className="card-title text-center">{name}</h5>
