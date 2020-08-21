@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product, Category, Image, productsInCategory } = require('../db.js');
+const { Product, Category, Image, productsInCategory, Review, initialReview } = require('../db.js');
 
 server.get('/', (req, res, next) => {
 	Product.findAll({ include: [Category, Image] })
@@ -41,8 +41,8 @@ server.post('/', (req, res, next) => {
 server.put('/:id', (req, res) => {
 	const { id } = req.params;
 	const { name, description, price, stock, image, category } = req.body;
-  const categories = category;
-  console.log(categories)
+	const categories = category;
+	console.log(categories)
 	try {
 		Product.update(
 			{
@@ -54,13 +54,13 @@ server.put('/:id', (req, res) => {
 			{ where: { id } }
 		)
 			.then(() => {
-        productsInCategory.destroy({ where: { productId: id } })
-        res.sendStatus(200);
+				productsInCategory.destroy({ where: { productId: id } })
+				res.sendStatus(200);
 			})
 			.then(() => {
 				productsInCategory.bulkCreate(
 					categories.map((e) => {
-            if(typeof e === "object") return { productId: id, categoryId: e.id}
+						if (typeof e === "object") return { productId: id, categoryId: e.id }
 						else return { productId: id, categoryId: e };
 					})
 				);
@@ -82,4 +82,66 @@ server.delete('/:id', (req, res, next) => {
 	}
 });
 
+
+
+// S54
+server.post("/:id/review", (req, res, next) => {
+	const { rating, description, date, userId } = req.body;
+	Review.bulkCreate({
+		where: {
+			rating,
+			description,
+			date,
+			userId,
+			productId: req.params
+		}, include: initialReview
+	})
+		.then(() => {
+			res.sendStatus(201);
+		})
+		.catch(next);
+});
+
+// S55
+server.put("/:id/review/:idReview", (req, res, next) => {
+	const { id, idReview } = req.params;
+	try {
+		Review.update(
+			{
+				rating,
+				description,
+				date
+			},
+			{ where: { productId: id, id: idReview }, include: initialReview }
+		).then(() => {
+			initialReview.destroy({ where: { productId: id } }) ////////////////////////////
+			res.sendStatus(200);
+		})
+	} catch (error) {
+		console.error(error.message);
+	}
+});
+
+
+// S56
+server.delete("/:id/review/:idReview", (req, res, next) => {
+	const { id, idReview } = req.params;
+	try {
+		Review.destroy({ where: { productId: id, id: idReview }, include: initialReview }).then(() => {
+			res.sendStatus(200);
+		});
+	} catch (error) {
+		console.error(error.message);
+	}
+});
+
+// S57
+server.get("/:id/review/", (req, res, next) => {
+	const { id } = req.params;
+	Review.findAll({ where: { productsId: id }, include: initialReview })
+		.then((reviews) => {
+			res.json(reviews);
+		})
+		.catch(next);
+});
 module.exports = server;
