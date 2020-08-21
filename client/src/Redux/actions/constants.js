@@ -11,6 +11,5 @@ export const DELETE_CATEGORY = "DELETE_CATEGORY";
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 
-
-
-
+// ------- USER CONSTANTS ----------
+export const GET_ALL_USERS = "GET_ALL_USERS"
