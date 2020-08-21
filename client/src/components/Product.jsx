@@ -13,7 +13,7 @@ let history = useHistory()
 
     return (
     <div className="container-fluid mt-4    ">
-        <div className={s.product_container}>
+        <div className= "d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded" style={{width: "900px"}}>
             <div className={s.product_img}>
             <img className="m-1" src={productDetails.images == undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[1].url}.jpg`} alt={productDetails.name} />
                 <div className= "d-flex flex-row justify-content-around  w-75">
