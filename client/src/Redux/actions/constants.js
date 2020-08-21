@@ -11,3 +11,7 @@ export const EDIT_CATEGORY = "EDIT_CATEGORY";
 // ----- COUNTER CONSTANTS ------
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
+
+// ------- USER CONSTANTS ----------
+export const GET_ALL_USERS = "GET_ALL_USERS"
+
