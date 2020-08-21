@@ -1,14 +1,26 @@
 import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
-import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions"
-import { getAllCategories } from "../Redux/actions/categoriesActions"
+import {
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from "mdbreact";
+import {
+  getAllProducts,
+  getCategoryProducts,
+} from "../Redux/actions/productActions";
+import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
+import store from "../Redux/store";
 
-export function Nav({ categories, getCategoryProducts }) {
+//-------- para traer prods al principio y ya esten disponibles -------
+store.dispatch(getAllProducts());
+
+export function Nav({ categories, getCategoryProducts, getAllProducts }) {
   let history = useHistory();
-  console.log(categories)
+  console.log(categories);
 
   return (
     <div>
@@ -18,17 +30,18 @@ export function Nav({ categories, getCategoryProducts }) {
         </a>
         <div className="navbar-nav" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <NavLink to="/catalog" className="nav-link">
-                Catalogo
-              </NavLink>
-            </li>
             <li>
               <MDBDropdown>
                 <MDBDropdownToggle caret color="dark">
                   Categorias
                 </MDBDropdownToggle>
                 <MDBDropdownMenu basic>
+                  <Link>
+                    <li onClick={() => getAllProducts()}>
+                      <b>Todos los productos</b>
+                    </li>
+                  </Link>
+
                   {categories.map((e) => (
                     <Link to={`/catalog/${e.name}`}>
                       <MDBDropdownItem
@@ -36,8 +49,12 @@ export function Nav({ categories, getCategoryProducts }) {
                         data-id={e.id}
                         name={e.name}
                         onClick={(e) => {
-                          getCategoryProducts(e.target.getAttribute("name"))
-                          // history.push(`/catalog/${e.target.getAttribute("name")}`);
+
+                          getCategoryProducts(e.target.getAttribute("name"));
+                          history.push(
+                            `/catalog/${e.target.getAttribute("name")}`
+                          );
+
                           e.preventDefault();
                         }}
                       >
@@ -80,30 +97,26 @@ export function Nav({ categories, getCategoryProducts }) {
               </NavLink>
             </li>
           </ul>
-          <SearchBar/>
+          <SearchBar />
         </div>
       </nav>
     </div>
   );
 }
 
-
 function mapStateToProps(state) {
   return {
-      categories: state.categories.categories,
-      products: state.products 
+    categories: state.categories.categories,
+    products: state.products,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-      getAllProducts: () => dispatch(getAllProducts()),
-      getCategoryProducts: category => dispatch(getCategoryProducts(category)),
-      getAllCategories: () => dispatch(getAllCategories()),
+    getAllProducts: () => dispatch(getAllProducts()),
+    getCategoryProducts: (category) => dispatch(getCategoryProducts(category)),
+    getAllCategories: () => dispatch(getAllCategories()),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav);
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

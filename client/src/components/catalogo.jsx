@@ -18,11 +18,13 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
 
     return (
         
-        <div className="container-fluid row ">
-        <div className="col-md-3">
-            <h1 className={S.title}></h1>
-            <Link to={`/catalog`}>
-                <button type="button" class="btn btn-dark" onClick={()=>(getAllProducts())}>
+
+        <div className="container-fluid row">
+        {/* <div className="col-md-3">
+            <h1 className={S.title}>Categorias</h1>
+            <Link>
+                <li onClick={()=>(getAllProducts())}>
+
                     <b>Todos los productos</b>
                 </button>
             </Link>
@@ -38,10 +40,12 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                             {e.name}
                         </li>
                     </Link>
-                ))} */}
-        </div>
-        <div className="row col-md-9">
-            {products.map((e) => (
+
+                ))}
+        </div> */}
+        <div className="row col-md-12 justify-content-center m-3">
+            {products.products.map((e) => (
+
                 <ProductCard
                     key={e.id}
                     id = {e.id}

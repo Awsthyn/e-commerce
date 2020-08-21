@@ -11,16 +11,28 @@ export function ProductCard({ id, name, price, image }) {
   return(
     
     <div className="card bg-light p-2 m-1" style={{ width: "18rem" }}>
-      <img src={image} className="card-img-top rounded-circle border border-dark" alt={name} />
+      <img src={image} className="card-img-top rounded border border-dark" alt={name} />
       <div className="card-body d-flex flex-column justify-content-center">
         <h5 className="card-title text-center">{name}</h5>
         <p className="card-text text-center">$ {price}</p>
+        <div className="row">
         <button data-id={id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
           history.push(`/products/${e.target.getAttribute('data-id')}`)
           store.dispatch(toProductDetails(id))
         }}>
           Ver más detalles...
         </button>
+        <button
+          className="btn btn-dark ml-auto mr-auto"
+          onClick={(e) => {
+            history.push(`/Order`)
+            store.dispatch(toProductDetails(id))
+          }}
+        >
+          <i class="fas fa-cart-plus "></i>
+        </button>
+        </div>
+        
       </div>
     </div>
   );
