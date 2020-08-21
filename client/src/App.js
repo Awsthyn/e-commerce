@@ -54,7 +54,7 @@ function App() {
         component= { ShoppingCart }
       />
       <Route
-        path="/catalog"
+        exact path="/catalog"
         component= { Catalog }
       />
       <Route
