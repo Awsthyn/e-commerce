@@ -27,7 +27,8 @@ const {
   Image,
   User,
   Order,
-  OrderLine
+  OrderLine,
+  Review
 } = require("./src/db.js");
 const {
   initialCategories,
@@ -36,7 +37,8 @@ const {
   prodXCat,
   initialUsers,
   initialOrders,
-  initialOrderLines
+  initialOrderLines,
+  initialReview
 } = require("./src/seed.js");
 
 //const Category = require("./src/models/Category.js");
@@ -68,4 +70,7 @@ conn
   })
   .then(() => {
     OrderLine.bulkCreate(initialOrderLines)
+  })
+  .then(() => {
+    Review.bulkCreate(initialReview)
   })

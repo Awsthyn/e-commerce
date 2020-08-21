@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 export function ProductComponent({ productDetails, products }) {
 console.log('ke', products)
-let history = useHistory()
+let history = useHistory() 
 
     return (
     <div className="container-fluid mt-4    ">

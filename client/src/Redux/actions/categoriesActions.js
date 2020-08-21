@@ -7,7 +7,7 @@ export function getAllCategories() {
         return fetch(`http://localhost:3001/categories`)
         .then((r) => r.json())
         .then((data) => {
-            console.log('fetch categ', data)
+            console.log('fetch categ')
             dispatch({type: GET_ALL_CATEGORIES, payload: data})
         })
         .catch((error) => {console.log(error)})

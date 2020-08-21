@@ -2,15 +2,19 @@ var Sequelize = require("sequelize");
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    
-    sequelize.define('review', {
-      rating: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }
-    });
-  };
+
+  sequelize.define('review', {
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  });
+};
