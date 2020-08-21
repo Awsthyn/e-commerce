@@ -35,7 +35,7 @@ server.post("/:userId/cart", (req, res, next) => {
     })
     .then(() =>{
       res.status(201);
-      res.json({id: productId, quantity, price})
+      res.json({productId: productId, quantity, price})
     })
     .catch(next);
 });

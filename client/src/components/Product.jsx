@@ -1,4 +1,7 @@
 import React from "react";
+import s from "../css/product.module.css";
+import RatingPage from "./calificacionCaras";
+import { addToOrder } from "../Redux/actions/orderLineActions"
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
 import { addToOrder } from "../Redux/actions/orderLineActions"
@@ -38,14 +41,11 @@ export function ProductComponent({id, productDetails, products}) {
                     <RatingPage />
                 </div>
                 <hr></hr>
-                <button data-id={id} type= 'button' 
-                    className="btn btn-dark ml-auto mr-auto"
-                    onClick={(e) => {
-                        history.push(`/Order`)
-                        store.dispatch(addToOrder(id))
-                    }}>
-                    Agregar al carrito
-                </button>
+                <button data-id={productDetails.id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
+          history.push(`/Order`)
+          store.dispatch(addToOrder(productDetails.id))
+        }}>Agregar al carrito</button>
+
             </div>
             <script src="js/addons/rating.js"></script>
         </div>
@@ -64,7 +64,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        toProductDetails: (id) => dispatch(toProductDetails(id)),
+        addToOrder: (id) => dispatch(addToOrder(id)),
     };
 }
 
