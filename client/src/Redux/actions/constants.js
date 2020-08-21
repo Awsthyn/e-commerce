@@ -13,5 +13,7 @@ export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 
 // ------- USER CONSTANTS ----------
-export const GET_ALL_USERS = "GET_ALL_USERS"
+export const GET_ALL_USERS = "GET_ALL_USERS";
 
+// ----- ORDER CONSTANTS ------
+export const ADD_PRODUCTS = "ADD_PRODUCTS";

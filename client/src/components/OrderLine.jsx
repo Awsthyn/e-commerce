@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Counter from '../components/Counter'
-import { toProductDetails } from "../Redux/actions/productActions"
+import {addToOrder } from "../Redux/actions/orderActions"
 
 
-export function OrderLine ({productDetails, products }) {
+export function OrderLine ({productDetails, products, orderProducts }) {
   
     return (
       <div>
@@ -13,13 +13,13 @@ export function OrderLine ({productDetails, products }) {
           <tbody>           
             <tr className="d-flex justify-content ml-5">
               <td type="button btn-sm" className="btn btn-danger btn-sm">X</td>
-              <td>{productDetails.image}image</td>
-              <td>{productDetails.name}</td>
-              <td>$ {productDetails.price}</td>
+              <td>{orderProducts.images}image</td>
+              <td>{orderProducts.name}</td>
+              <td>$ {orderProducts.price}</td>
               <td>
                   <Counter/>
               </td>
-              <td>$ 5000000(harcodeado)</td>
+              <td>$ 5(harcodeado)</td>
             </tr>         
           </tbody>
         </table>
@@ -31,13 +31,13 @@ export function OrderLine ({productDetails, products }) {
 
 function mapStateToProps(state) {
   return {
-      productDetails: state.products.productDetails,
+      orderProducts: state.order.orderProducts,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-      toProductDetails: (id) => dispatch(toProductDetails(id)),
+      addToOrder: (id) => dispatch(addToOrder(id)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OrderLine)
