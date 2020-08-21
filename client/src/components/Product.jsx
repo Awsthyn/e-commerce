@@ -2,17 +2,19 @@ import React from "react";
 import s from "../css/product.module.css";
 import RatingPage from "./calificacionCaras";
 import { addToOrder } from "../Redux/actions/orderLineActions"
-import { toProductDetails } from "../Redux/actions/productActions"
-import { connect } from "react-redux";
-import store from "../Redux/store"
 import { useHistory } from "react-router-dom";
-// import Product from "../../../api/src/models/Product";
+import { toProductDetails } from "../Redux/actions/productActions"
+import { addToOrder } from "../Redux/actions/orderLineActions"
+import { connect } from "react-redux";
+import s from "../css/product.module.css";
+import RatingPage from "./calificacionCaras";
+import store from "../Redux/store"
 
-export function ProductComponent({ productDetails, products }) {
-console.log('ke', products)
-let history = useHistory() 
 
-    return (
+export function ProductComponent({id, productDetails, products}) {
+    let history = useHistory() 
+
+    return (        
     <div className="container-fluid mt-4    ">
         <div className= "d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded" style={{width: "900px"}}>
             <div className="d-flex flex-column align-items-center" style={{ width: "320px" }}>
@@ -31,6 +33,8 @@ let history = useHistory()
                 <hr></hr>
                 <h6>Stock: {productDetails.stock}</h6>
                 <hr></hr>
+                <h5>$ {productDetails.price}</h5>
+                <hr></hr>
                 <p>{productDetails.description}</p>
                 <hr></hr>
                 <div>
@@ -41,8 +45,8 @@ let history = useHistory()
           history.push(`/Order`)
           store.dispatch(addToOrder(productDetails.id))
         }}>Agregar al carrito</button>
+
             </div>
-            {/* <rating.js file */}
             <script src="js/addons/rating.js"></script>
         </div>
     </div>    
@@ -54,6 +58,7 @@ let history = useHistory()
 function mapStateToProps(state) {
     return {
         productDetails: state.products.productDetails,
+        
     };
 }
 

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react'
+import {editUser} from "../Redux/actions/userActions"
+import {connect} from "react-redux"
+import { withRouter } from "react-router"
 
-export class EditUserForm extends React.Component {
+export class EditUser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,32 +18,23 @@ export class EditUserForm extends React.Component {
             admin: props.user.admin,
         }
         this.users = props.listUsers;
-
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
-        this.setState({
-            [e.target.email]: e.target.value,
-            [e.target.first_name]: e.target.value,
-            [e.target.last_name]: e.target.value,
-            [e.target.address]: e.target.value,
-            [e.target.locality]: e.target.value,
-            [e.target.state]: e.target.value,
-            [e.target.password]: e.target.value // Revisar acá si hice bien y no termina comparando las contraseñas en la función "comparePws()"
-        })
+        this.setState({[e.target.name]: e.target.value})
     }
+
     comparePws() {
-        if (!e.target.password || !e.target.repeatPassword) {
-            alert('Por favor complete los campos (*)')
-        }
-        if (e.target.password !== e.target.repeatPassword && this.state.admin !== true) {
-            alert('Las contraseñas no coinciden')
-            return false;
+      if (!this.state.password || !this.state.repeatPassword) {
+          alert('Por favor complete los campos (*)')
+      }
+      if (this.state.password !== this.state.repeatPassword && this.state.admin !== true) {
+          alert('Las contraseñas no coinciden')
+          return false;
         } else {
-            if (e.target.password !== this.state.password && this.state.admin !== true) {
+            if (this.state.password !== this.state.password && this.state.admin !== true) {
                 alert('La contraseña es incorrecta')
                 return false;
             } else {
@@ -52,24 +45,14 @@ export class EditUserForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('editando')
-        const user = this.state;
-        const url = 'http://localhost:3001/users/' + this.state.id;
-
-        if (comparePws()) {
-            fetch(url, {
-                method: 'PUT',
-                body: JSON.stringify(user),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                console.info(res)
-                alert("El usuario se editó correctamente")
-            }).catch(err => console.error(err))
-        }
-        else { alert(`No se pudo editar el usuario ${this.state.first_name} `) }
-    }
+        const editUser = this.state;
+          this.props.editUser(editUser)
+              .then(res => {
+                  console.info(res)
+                  window.location = "/CrudUser";
+                  alert("El usuario se edito correctamente")
+              }).catch(err => console.error(err))
+          }
 
     render() {
         return (
@@ -111,18 +94,17 @@ export class EditUserForm extends React.Component {
                         <button type="submit" className="btn btn-warning">Editar</button>
                     </div>
                 </form>
-
-                <Link to="/newuser">
-                    Crear usuario
-                    <NewUserForm />
-                </Link>
-                <Link to="/CrudUser">
-                    Volver
-                    <CrudUser />
-                </Link>
             </div>
         )
     }
 }
 
-export default EditUserForm
+function mapDispatchToProps(dispatch) {
+  return {
+    editUser: user => dispatch(editUser(user)),
+  };
+}
+export default connect(
+    null,
+    mapDispatchToProps
+)(withRouter(EditUser))

@@ -20,12 +20,11 @@ export const Order = ({cart}) => {
                   <td>Producto</td>
                   <td>Precio</td>
                   <td>Cantidad</td>
-                  <td></td>
                   <td>Subtotal</td>
                 </tr>
               </thead>
               <tbody className="text-center">
-            {cart.map(e => <OrderLine productId={e.productId} price={e.price} quantity={e.quantity} />)}
+            {cart.map(e => <OrderLine name={e.name} price={e.price} />)}
               </tbody>
             </table>  
             <h5 className ="d-flex ml-auto">Total: $</h5>
