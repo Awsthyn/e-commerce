@@ -2,6 +2,7 @@
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const SET_DETAILS = "SET_DETAILS";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 // ----- CATEGORY CONSTANTS ------
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
@@ -10,7 +11,3 @@ export const DELETE_CATEGORY = "DELETE_CATEGORY";
 // ----- COUNTER CONSTANTS ------
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
-
-
-
-
