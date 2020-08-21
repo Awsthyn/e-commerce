@@ -261,28 +261,49 @@ const initialReview = [
 		rating: 1,
 		description: "Pesimo producto, me dio diarrea",
 		date: "Thu Aug 20 2020 23:10:01",
-		productId: 4,
+		productId: 2,
 		userId: 1
 	},
 	{
 		rating: 1,
 		description: "La momia estaba viva todavia",
 		date: "Thu Aug 20 2020 23:10:01",
-		productId: 3,
+		productId: 1,
 		userId: 2
 	},
 	{
 		rating: 4,
 		description: "Buenisimo",
 		date: "Thu Aug 20 2020 23:10:01",
-		productId: 6,
+		productId: 2,
 		userId: 1
 	},
 	{
 		rating: 4,
 		description: "",
 		date: "Thu Aug 20 2020 23:10:01",
-		productId: 11,
+		productId: 2,
+		userId: 1
+	},
+	{
+		rating: 2,
+		description: "Saludos a Marti (re chupamedias)",
+		date: "Thu Aug 11 2020 15:10:01",
+		productId: 1,
+		userId: 2
+	},
+	{
+		rating: 3,
+		description: "No se puede tomar fernet en la copa",
+		date: "Thu Aug 10 2020 11:19:01",
+		productId: 1,
+		userId: 2
+	},
+	{
+		rating: 5,
+		description: "Miau!",
+		date: "Thu Aug 01 2020 00:00:00",
+		productId: 2,
 		userId: 2
 	}
 ]
