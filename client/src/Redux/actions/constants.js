@@ -16,4 +16,10 @@ export const DECREMENT = "DECREMENT";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 
 // ----- ORDER CONSTANTS ------
-export const ADD_PRODUCTS = "ADD_PRODUCTS";
+export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
+export const GET_PRODUCTS_CART = "GET_PRODUCTS_CART"
+
+
+
+
+// ----- ORDERLINE CONSTANTS ------

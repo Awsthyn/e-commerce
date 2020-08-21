@@ -19,12 +19,9 @@ server.get("/:id/order/", (req, res, next) => {
 
 // S38
 server.post("/:userId/cart", (req, res, next) => {
-  const { orderStatus, shippingAddress, billingAddress, total, productId, quantity, price } = req.body;
+  const { total, productId, quantity, price } = req.body;
   Order.findOrCreate({where: {
     orderStatus: 'carrito',
-    shippingAddress,
-    billingAddress,
-    total,
     userId: req.params.userId
   }
   })
@@ -35,7 +32,10 @@ server.post("/:userId/cart", (req, res, next) => {
         quantity,
         orderId: data[0].id
       })
-      res.sendStatus(201);
+    })
+    .then(() =>{
+      res.status(201);
+      res.json({id: productId, quantity, price})
     })
     .catch(next);
 });
