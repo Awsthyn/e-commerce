@@ -17,7 +17,7 @@ store.dispatch(getAllProducts());
 export const Catalogo = ({categories, products, getAllProducts, getCategoryProducts}) => {
 
     return (
-        
+
 
         <div className="container-fluid row">
         {/* <div className="col-md-3">
@@ -44,7 +44,7 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                 ))}
         </div> */}
         <div className="row col-md-12 justify-content-center m-3">
-            {products.products.map((e) => (
+            {products.map((e) => (
 
                 <ProductCard
                     key={e.id}
@@ -64,7 +64,7 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
 function mapStateToProps(state) {
     return {
         categories: state.categories.categories,
-        products: state.products.products 
+        products: state.products.products
     };
 }
 
