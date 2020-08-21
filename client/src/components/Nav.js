@@ -14,6 +14,7 @@ import {
 import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
 import store from "../Redux/store";
+import s from "../css/product.module.css";
 
 //-------- para traer prods al principio y ya esten disponibles -------
 store.dispatch(getAllProducts());
@@ -36,11 +37,16 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   Categorias
                 </MDBDropdownToggle>
                 <MDBDropdownMenu basic>
-                  <Link>
-                    <li onClick={() => getAllProducts()}>
-                      <b>Todos los productos</b>
-                    </li>
-                  </Link>
+                  <li
+                    className={s.pointer}
+                    onClick={(e) => {
+                      getAllProducts(e.target.getAttribute("name"));
+                      history.push(`/catalog/${e.target.getAttribute("name")}`);
+                      e.preventDefault();
+                    }}
+                  >
+                    <b className={s.pointer}>Todos los productos</b>
+                  </li>
 
                   {categories.map((e) => (
                     <Link to={`/catalog/${e.name}`}>
@@ -49,7 +55,6 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                         data-id={e.id}
                         name={e.name}
                         onClick={(e) => {
-
                           getCategoryProducts(e.target.getAttribute("name"));
                           history.push(
                             `/catalog/${e.target.getAttribute("name")}`
@@ -83,7 +88,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
             </li>
             <li className="nav-item">
               <NavLink to="/Order" className="nav-link">
-                Orden
+                <i class="fas fa-cart-arrow-down "></i>
               </NavLink>
             </li>
             <li className="nav-item">
