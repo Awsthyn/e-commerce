@@ -160,7 +160,7 @@ const bruteDataImages = [
 	'santogrial',
 ];
 
-let imageUrls = []; 
+let imageUrls = [];
 
 bruteDataImages.map((e, i) => {
 	imageUrls.push({ url: e, productId: i + 1 });
@@ -213,48 +213,99 @@ let initialOrders = [
 ];
 
 let initialOrderLines = [
-  { 
-  productId: 3, 
-  orderId: 1, 
-  quantity: 6, 
-  price: 50 
-},
-{ 
-  productId: 2, 
-  orderId: 1, 
-  quantity: 3, 
-  price: 12 
-},
-{ 
-  productId: 5, 
-  orderId: 2, 
-  quantity: 7, 
-  price: 2354 
-},
-{ 
-  productId: 7, 
-  orderId: 2, 
-  quantity: 5, 
-  price: 123 
-},
-{ 
-  productId: 12, 
-  orderId: 3, 
-  quantity: 3, 
-  price: 5022 
-},
-{ 
-  productId: 11, 
-  orderId: 3, 
-  quantity: 1, 
-  price: 43 
-},
-{ 
-  productId: 2, 
-  orderId: 3, 
-  quantity: 2, 
-  price: 2 
-},
+	{
+		productId: 3,
+		orderId: 1,
+		quantity: 6,
+		price: 50
+	},
+	{
+		productId: 2,
+		orderId: 1,
+		quantity: 3,
+		price: 12
+	},
+	{
+		productId: 5,
+		orderId: 2,
+		quantity: 7,
+		price: 2354
+	},
+	{
+		productId: 7,
+		orderId: 2,
+		quantity: 5,
+		price: 123
+	},
+	{
+		productId: 12,
+		orderId: 3,
+		quantity: 3,
+		price: 5022
+	},
+	{
+		productId: 11,
+		orderId: 3,
+		quantity: 1,
+		price: 43
+	},
+	{
+		productId: 2,
+		orderId: 3,
+		quantity: 2,
+		price: 2
+	},
 ];
+const initialReview = [
+	{
+		rating: 1,
+		description: "Pesimo producto, me dio diarrea",
+		date: "Thu Aug 20 2020 23:10:01",
+		productId: 2,
+		userId: 1
+	},
+	{
+		rating: 1,
+		description: "La momia estaba viva todavia",
+		date: "Thu Aug 20 2020 23:10:01",
+		productId: 1,
+		userId: 2
+	},
+	{
+		rating: 4,
+		description: "Buenisimo",
+		date: "Thu Aug 20 2020 23:10:01",
+		productId: 2,
+		userId: 1
+	},
+	{
+		rating: 4,
+		description: "",
+		date: "Thu Aug 20 2020 23:10:01",
+		productId: 2,
+		userId: 1
+	},
+	{
+		rating: 2,
+		description: "Saludos a Marti (re chupamedias)",
+		date: "Thu Aug 11 2020 15:10:01",
+		productId: 1,
+		userId: 2
+	},
+	{
+		rating: 3,
+		description: "No se puede tomar fernet en la copa",
+		date: "Thu Aug 10 2020 11:19:01",
+		productId: 1,
+		userId: 2
+	},
+	{
+		rating: 5,
+		description: "Miau!",
+		date: "Thu Aug 01 2020 00:00:00",
+		productId: 2,
+		userId: 2
+	}
+]
 
-module.exports = { initialCategories, initialProducts, imageUrls, prodXCat, initialUsers, initialOrders, initialOrderLines };
+module.exports = { initialCategories, initialProducts, imageUrls, prodXCat, initialUsers, initialOrders, initialOrderLines, initialReview };
