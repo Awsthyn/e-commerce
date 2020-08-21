@@ -1,6 +1,7 @@
 import React from "react";
 import s from "../css/product.module.css";
 import RatingPage from "./calificacionCaras";
+import { addToOrder } from "../Redux/actions/orderLineActions"
 import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 import store from "../Redux/store"
@@ -38,7 +39,7 @@ let history = useHistory()
                 <hr></hr>
                 <button data-id={productDetails.id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
           history.push(`/Order`)
-          store.dispatch(toProductDetails(productDetails.id))
+          store.dispatch(addToOrder(productDetails.id))
         }}>Agregar al carrito</button>
             </div>
             {/* <rating.js file */}
@@ -58,7 +59,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        toProductDetails: (id) => dispatch(toProductDetails(id)),
+        addToOrder: (id) => dispatch(addToOrder(id)),
     };
 }
 
