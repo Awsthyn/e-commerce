@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { getAllOrders , editOrder } from "../Redux/actions/orderActions"
+import { getAllOrders , editOrder } from "../../../Redux/actions/orderActions"
 
 class OrderTable extends React.Component {
     constructor (props) {
@@ -27,7 +27,7 @@ class OrderTable extends React.Component {
     render () {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
         return (
-            
+
             <div className="container mt-4">
                 <h2 className="col-11 text-center">Lista de Ordenes</h2>
                 <table className="table">
