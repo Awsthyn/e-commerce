@@ -35,6 +35,7 @@ Promise.all([order, product])
     quantity,
     orderId: order[0].id
   })
+  res.status(201)
   res.json({order: order[0].id, price: product.price, quantity, product })
 
 })
