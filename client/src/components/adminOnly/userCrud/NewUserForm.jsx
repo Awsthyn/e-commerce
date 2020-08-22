@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react'
+import {createUser} from "../../../Redux/actions/userActions"
+import {connect} from "react-redux"
 
-export default class NewUserForm extends React.Component {
 
+export class NewUser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,41 +23,19 @@ export default class NewUserForm extends React.Component {
     }
 
     handleChange(e) {
-        this.setState({
-            [e.target.email]: e.target.value,
-            [e.target.first_name]: e.target.value,
-            [e.target.last_name]: e.target.value,
-            [e.target.address]: e.target.value,
-            [e.target.locality]: e.target.value,
-            [e.target.state]: e.target.value,
-            [e.target.password]: e.target.value,
-            [e.target.repeatPassword]: e.target.value
-        })
-    }
-
-    comparaSiHay(arrayUser, obj) {
-        for (let i = 0; i < arrayUser.length; i++) {
-            if (obj.id.toUpperCase() === arrayUser[i].id.toUpperCase() || obj.email.toUpperCase() === arrayUser[i].email.toUpperCase()) {
-                return true
-            }
-        }
-        return false
+        this.setState({[e.target.name]: e.target.value})
     }
 
     comparaPassword() {
-        if (!e.target.password || !e.target.repeatPassword) {
+        if (!this.state.password || !this.state.repeatPassword) {
             alert('Por favor complete los campos (*)')
         }
-        if (e.target.password !== e.target.repeatPassword && this.state.admin !== true) {
+        if (this.state.password !== this.state.repeatPassword && this.state.admin !== true) {
             alert('Las contraseñas no coinciden')
             return false;
         } else {
-            if (e.target.password !== this.state.password && this.state.admin !== true) {
-                alert('La contraseña es incorrecta')
-                return false;
-            } else {
-                return true;
-            }
+            return true;
+
         }
     }
 
@@ -63,34 +43,24 @@ export default class NewUserForm extends React.Component {
         e.preventDefault();
         console.log(this.state)
         const newUser = this.state;
-        const url = 'http://localhost:3001/users/';
+              this.props.createUser(newUser)
+              .then(res => {
+                  console.info(res)
+                  this.setState({
+                      email: "",
+                      first_name: "",
+                      last_name: "",
+                      address: "",
+                      locality: "",
+                      state: "",
+                      password: "",
+                      admin: false
+                  })
+                  window.location = "/users";
+                  alert("El usuario se creó correctamente")
+              }).catch(err => console.error(err))
+          }
 
-        if (!this.comparaSiHay(this.listUsers, this.state)) {
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(newUser),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                console.info(res)
-                this.setState({
-                    email: "",
-                    first_name: "",
-                    last_name: "",
-                    address: "",
-                    locality: "",
-                    state: "",
-                    password: "",
-                    admin: false
-                })
-                window.location = "/crud";
-                alert("El usuario se creó correctamente")
-            }).catch(err => console.error(err))
-        } else { alert(`El correo ${this.state.email} ya se encuentra  en uso.`) }
-
-
-    }
     render() {
         return (
             <div>
@@ -131,17 +101,21 @@ export default class NewUserForm extends React.Component {
                         <button type="submit" className="btn btn-warning">Enviar</button>
                     </div>
                 </form>
-                <Link to="/edituser">
-                    Editar usuario
-                    <EditUserForm />
-                </Link>
-                <Link to="/CrudUser">
-                    Volver
-                    <CrudUser />
-                </Link>
+
             </div>
         )
     }
 }
-
-export default NewUserForm
+function mapStateToProps(state) {
+    return {
+    }
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    createUser: user => dispatch(createUser(user)),
+  };
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewUser);

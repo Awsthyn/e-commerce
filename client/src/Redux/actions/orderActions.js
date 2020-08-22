@@ -1,4 +1,4 @@
-import { GET_ALL_ORDERS_USERS } from './constants';
+import { GET_ALL_ORDERS_USERS, GET_PRODUCTS_CART } from './constants';
 
 export function getAllOrders() {
     return function(dispatch){
@@ -22,3 +22,18 @@ export function editOrder(order){
         }).then(() => dispatch(getAllOrders()) )
     }
 }
+
+export function getCart(){
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/users/1/cart`)
+        .then((r) => r.json())
+        .then((data) => {
+            console.log('fetch get cart');
+            dispatch({ type: GET_PRODUCTS_CART, payload: data})
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+}
+

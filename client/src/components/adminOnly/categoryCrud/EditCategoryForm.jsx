@@ -1,14 +1,16 @@
 import React from 'react';
-import { addCategory } from "../Redux/actions/categoriesActions"
-import { connect } from "react-redux";
+import {connect} from 'react-redux';
+import { withRouter } from "react-router"
+import { editCategory } from '../../../Redux/actions/categoriesActions';
 
-class NewCategory extends React.Component {
+class EditCategoryForm extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            description: ""
+            id: props.category.id,
+            name: props.category.name,
+            description: props.category.description
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -28,22 +30,13 @@ class NewCategory extends React.Component {
         return false
     }
 
-
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state)
         const category = this.state;
-        this.props.addCategory(category).then(() => {
-            console.log(this.categories)
-            this.setState({
-                name: "",
-                description: ""
-            })
-                alert("La categoría se creó correctamente")
-                window.location = '/CrudCategory'
-        }).catch(() => alert("Se produjo un Error al crear Categoría")
-    )
-
+        this.props.editCategory(category).then(() => {
+            alert("La Categoria se Editó correctamente")
+            window.location = "/Admin/CrudCategory";
+        }).catch(() => alert("Se produjo un error al editar"))
     }
 
     render() {
@@ -59,27 +52,22 @@ class NewCategory extends React.Component {
                     <label>Descripcion:</label>
                     <input type="text" id="description" name="description" onChange={this.handleChange} className="form-control" value={this.state.description}/>
                 </div>
-                <button type="submit" className="btn btn-dark">Enviar</button>
+                <div>
+                <button type="submit" className="btn btn-warning">Editar</button>
+                </div>
             </form>
         </div>
         );
     }
-
-}
-
-function mapStateToProps(state) {
-    return {
-
-    }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    addCategory: category => dispatch(addCategory(category)),
-  };
+    return {
+        editCategory: category => dispatch(editCategory(category)),
+    };
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewCategory);
+    null,
+    mapDispatchToProps
+)(withRouter(EditCategoryForm))

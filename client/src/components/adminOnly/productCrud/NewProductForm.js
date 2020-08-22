@@ -1,6 +1,6 @@
 import React from "react";
-import Checkbox from "./Checkbox";
-import { addProduct } from "../Redux/actions/productActions"
+import Checkbox from "../../Checkbox";
+import { addProduct } from "../../../Redux/actions/productActions"
 import { connect } from "react-redux";
 
 export class NewProduct extends React.Component {
@@ -38,9 +38,7 @@ export class NewProduct extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state)
         const product = this.state;
-
         this.props.addProduct(product)
 
         this.setState({
@@ -51,8 +49,6 @@ export class NewProduct extends React.Component {
             image: "",
             category: []
         })
-        alert("El producto se creó correctamente")
-        window.location = '/crud'
     }
 
     onCheckboxClicked(category, isChecked) {

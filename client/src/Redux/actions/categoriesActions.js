@@ -7,7 +7,7 @@ export function getAllCategories() {
         return fetch(`http://localhost:3001/categories`)
         .then((r) => r.json())
         .then((data) => {
-            console.log('fetch categ', data)
+            console.log('fetch categ')
             dispatch({type: GET_ALL_CATEGORIES, payload: data})
         })
         .catch((error) => {console.log(error)})
@@ -28,7 +28,7 @@ export function onDeleteCategory(CategoryId) {
         console.info("fetch delete category")
         dispatch({type: DELETE_CATEGORY, payload: res})
         alert("La Categoria se ha Eliminado correctamente")
-        window.location = "/CrudCategory";
+        window.location = "/Admin/CrudCategory";
     })
     .catch(err => console.error(err))
     }
@@ -49,7 +49,7 @@ export function onDeleteCategory(CategoryId) {
         }
     }
 
-    //-----------------NewCategory
+    //----------------- NewCategory ------------------
     export function addCategory(category){
         return function(dispatch) {
             return fetch(`http://localhost:3001/categories/`, {

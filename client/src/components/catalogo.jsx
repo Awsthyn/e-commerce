@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 import store from "../Redux/store"
 
 //-------- para traer cats y prods al principio y ya esten disponibles -------
-store.dispatch(getAllCategories());
-store.dispatch(getAllProducts());
+// store.dispatch(getAllCategories());
+// store.dispatch(getAllProducts());
 
 
 

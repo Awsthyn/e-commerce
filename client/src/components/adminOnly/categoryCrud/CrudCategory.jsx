@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteCategory from './DeleteCategory';
-import { onDeleteCategory } from "../Redux/actions/categoriesActions"
+import { onDeleteCategory } from "../../../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 
@@ -9,7 +9,7 @@ export const CrudCategory = ({ categories }) => {
 
     return (
         <div className="container mt-4">
-            <Link to="categories/form/new" className="btn btn-success">Nuevo</Link>
+            <Link to="/Admin/categories/form/new" className="btn btn-success">Nuevo</Link>
             <h2 className="col-11 text-center">Edición de categorías</h2>
             <table className="table">
                 <thead className="text-center">
@@ -20,7 +20,7 @@ export const CrudCategory = ({ categories }) => {
                         <th>Eliminar</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  className="text-center">
 
                 {categories.map((e, i) => (
                     <tr key={e.id}>
@@ -29,7 +29,7 @@ export const CrudCategory = ({ categories }) => {
                         <td>
                             <Link
                                 to = {{
-                                    pathname: `/categories/${e.id}/edit`,
+                                    pathname: `/Admin/categories/${e.id}/edit`,
                                     state: { category : e }
                                 }}
                                 className= "btn btn-success">Editar

@@ -42,22 +42,24 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product, Category, Image, User, Order, OrderLine, Review } = sequelize.models; // <--Angelo Modifico
 
 // Aca vendrian las relaciones
- Product.belongsToMany(Category, {through: 'productsInCategory'});// <--Angelo Modifico
- Category.belongsToMany(Product, {through: 'productsInCategory'});// <--Angelo Modifico
- Product.hasMany(Image);
- Image.belongsTo(Product);
- User.hasMany(Order);
- Order.belongsTo(User);
- User.hasMany(Review);
- Review.belongsTo(User);
- Order.hasMany(OrderLine)
- OrderLine.belongsTo(Order);
- Product.hasMany(OrderLine);
- OrderLine.belongsTo(Product);
- 
- //Nota de Angelo: me tira un warning de que tenemos una promesa sin error handler:
- // UnhandledPromiseRejectionWarning: Error: Cyclic dependency found. categories is dependent of itself.
- //   Dependency chain: categories -> products => categories
+Product.belongsToMany(Category, { through: 'productsInCategory' });// <--Angelo Modifico
+Category.belongsToMany(Product, { through: 'productsInCategory' });// <--Angelo Modifico
+Product.hasMany(Image);
+Image.belongsTo(Product);
+User.hasMany(Order);
+Order.belongsTo(User);
+User.hasMany(Review);
+Review.belongsTo(User);
+Order.hasMany(OrderLine)
+OrderLine.belongsTo(Order);
+Product.hasMany(OrderLine);
+OrderLine.belongsTo(Product);
+Review.belongsTo(Product);
+Product.hasMany(Review);
+
+//Nota de Angelo: me tira un warning de que tenemos una promesa sin error handler:
+// UnhandledPromiseRejectionWarning: Error: Cyclic dependency found. categories is dependent of itself.
+//   Dependency chain: categories -> products => categories
 
 
 module.exports = {

@@ -1,11 +1,11 @@
 const server = require("express").Router();
-const { User, Order, OrderLine } = require("../db.js");
+const { User, Order, OrderLine, Product } = require("../db.js");
 var Sequelize = require("sequelize");
 //Ariel
 
 //S45
 server.get("/:id/order/", (req, res, next) => {
-  Order.findAll({ where: { userId: req.params.userId } })
+  Order.findAll({ where: { userId: req.params.userId }, include: Product })
     .then((userOrders) => {
       res.json(userOrders);
       console.log(userOrders);
@@ -19,33 +19,35 @@ server.get("/:id/order/", (req, res, next) => {
 
 // S38
 server.post("/:userId/cart", (req, res, next) => {
-  const { orderStatus, shippingAddress, billingAddress, total, productId, quantity, price } = req.body;
-  Order.findOrCreate({where: {
-    orderStatus: 'carrito',
-    shippingAddress,
-    billingAddress,
-    total,
-    userId: req.params.userId
-  }
+const { total, productId, quantity, price } = req.body;
+const order = Order.findOrCreate({where: {
+  orderStatus: 'carrito',
+  userId: req.params.userId}})
+const product = Product.findByPk(productId);
+
+Promise.all([order, product])
+.then(data => {
+  const order = data[0]
+  const product = data[1]
+  OrderLine.create({
+    productId,
+    price: product.price,
+    quantity,
+    orderId: order[0].id
   })
-    .then((data) => {
-      OrderLine.create({
-        productId,
-        price,
-        quantity,
-        orderId: data[0].id
-      })
-      res.sendStatus(201);
-    })
-    .catch(next);
-});
+  res.json({order: order[0].id, price: product.price, quantity, product })
+
+})
+
+ 
+})
 
 //S39
 server.get("/:userId/cart", (req, res, next) => {
   Order.findOne({where: {
     userId: req.params.userId,
     orderStatus: 'carrito'
-  }, include: OrderLine })
+  }, include: { all: true, nested: true } })
     .then((orders) => {
       // console.log(products);
       res.json(orders.orderLines);
