@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export default function orderReduces (state = initialState, action) {
-    
+
     switch(action.type) {
 
         case GET_ALL_ORDERS_USERS:
@@ -26,4 +26,4 @@ export default function orderReduces (state = initialState, action) {
       };
         default: return {...state}
     }
-
+}
