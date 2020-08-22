@@ -13,6 +13,7 @@ export function Admin({ categories, getCategoryProducts, getAllProducts }) {
             <th><Link to="/Admin/CrudCategory" class="btn btn-outline-warning">Editar Categorias</Link></th>
             <th><Link to="/Admin/CrudUser"     class="btn btn-outline-warning">Editar Usuarios</Link></th>
             <th><Link to="/Admin/CrudAdmin"    class="btn btn-outline-warning">Editar Administrador</Link></th>
+            <th><Link to="/Admin/OrderTable"   class="btn btn-outline-warning">Editar Ordenes</Link></th>
           </tr>
         </thead>
       </table>

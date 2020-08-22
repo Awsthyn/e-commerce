@@ -46,9 +46,9 @@ function App() {
         component= { CrudAdmin }
       />
       <Route
-       exact path = "/Admin/OrderTable"
-       component= { OrderTable }
-     />
+        exact path = "/Admin/OrderTable"
+        component= { OrderTable }
+      />
 {/* -------------- CRUDS PRODUCT ------------------ */}
       <Route
         exact path="/Admin/CrudProduct"
