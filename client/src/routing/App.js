@@ -1,25 +1,24 @@
 import React from "react";
-import "./App.css";
-import ProductComponent from "./components/Product";
+import ProductComponent from "../components/Product";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Catalog from "./components/catalogo";
-import Nav from "./components/Nav";
-import NewProductForm from "./components/adminOnly/productCrud/NewProductForm";
-import EditProductForm from "./components/adminOnly/productCrud/EditProductForm";
-import NewCategoryForm from "./components/adminOnly/categoryCrud/NewCategoryForm";
-import EditCategoryForm from "./components/adminOnly/categoryCrud/EditCategoryForm";
-import CrudProduct from "./components/adminOnly/productCrud/CrudProdut";
-import CrudCategory from "./components/adminOnly/categoryCrud/CrudCategory";
-import Home from "./components/Home.jsx";
-import CrudUser from "./components/adminOnly/userCrud/CrudUser";
-import OrderTable from "./components/OrderTable.jsx";
-import Order from "./components/Order.jsx";
-import ShoppingCart from "./components/ShoppingCart.jsx";
-import AdminLogin from "./components/adminOnly/adminCruds/AdminLogin";
-import { Admin } from "./components/adminOnly/adminCruds/Admin"
-import { CrudAdmin } from "./components/adminOnly/adminCruds/CrudAdmin"
-import NewUser from "./components/adminOnly/userCrud/NewUserForm";
-import EditUser from "./components/adminOnly/userCrud/EditUserForm";
+import Catalog from "../components/catalogo";
+import Nav from "../components/Nav";
+import NewProductForm from "../components/adminOnly/productCrud/NewProductForm";
+import EditProductForm from "../components/adminOnly/productCrud/EditProductForm";
+import NewCategoryForm from "../components/adminOnly/categoryCrud/NewCategoryForm";
+import EditCategoryForm from "../components/adminOnly/categoryCrud/EditCategoryForm";
+import CrudProduct from "../components/adminOnly/productCrud/CrudProdut";
+import CrudCategory from "../components/adminOnly/categoryCrud/CrudCategory";
+import Home from "../components/Home.jsx";
+import CrudUser from "../components/adminOnly/userCrud/CrudUser";
+import OrderTable from "../components/OrderTable.jsx";
+import Order from "../components/Order.jsx";
+import ShoppingCart from "../components/ShoppingCart.jsx";
+import AdminLogin from "../components/adminOnly/adminCruds/AdminLogin";
+import { Admin } from "../components/adminOnly/adminCruds/Admin"
+import { CrudAdmin } from "../components/adminOnly/adminCruds/CrudAdmin"
+import NewUser from "../components/adminOnly/userCrud/NewUserForm";
+import EditUser from "../components/adminOnly/userCrud/EditUserForm";
 
 function App() {
 
@@ -83,11 +82,11 @@ function App() {
         component= { CrudUser }
       />
       <Route
-        path = "/CrudUser/form/new"
+        exact path = "/Admin/CrudUser/form/new"
         component= { NewUser }
       />
       <Route
-        path = "/CrudUser/:id/edit"
+        exact path = "/Admin/CrudUser/:id/edit"
         render = { props =>
             <EditUser user={props.location.state.user} /> } 
       />

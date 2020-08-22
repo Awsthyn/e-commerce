@@ -47,7 +47,7 @@ export function editUser(user){
             console.info(res)
             dispatch({type: EDIT_USER, payload: res})
             alert("El Producto se Editó correctamente")
-            window.location = "/CrudUser";
+            window.location = "/Admin/CrudUser";
         }).catch(err => console.error(err))
     }
 }
@@ -65,7 +65,7 @@ export function deleteUser(UserId) {
         console.info("FETCH DELETE USER")
         dispatch({type: DELETE_USER, payload: res})
         // alert("El Usuario se ha Eliminado correctamente")
-        window.location = "/CrudUser";
+        window.location = "/Admin/CrudUser";
     })
     .catch(err => console.error(err))
     }

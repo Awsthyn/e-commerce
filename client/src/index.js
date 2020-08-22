@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import App from "./routing/App";
 import * as serviceWorker from "./serviceWorker";
 // import Prod from "./components/product.jsx";
 // import Catalog from "./components/product";

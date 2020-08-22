@@ -25,9 +25,8 @@ export const CrudUser = ({ users }) => {
                     <tr key={e.id}>
                         <td>{`${e.first_name} ${e.last_name}`}</td>
                         <td><Link
-                                to={{ pathname: `/CrudUser/${e.id}/edit`,
-                                   state: { user : e }}}
-
+                                to={{ pathname: `/Admin/CrudUser/${e.id}/edit`,
+                                    state: { user : e }}}
                                 className= "btn btn-success">Editar</Link></td>
                         <td><button onClick={deleteUser(e.id)} className="btn btn-danger">Eliminar</button></td>
                     </tr>

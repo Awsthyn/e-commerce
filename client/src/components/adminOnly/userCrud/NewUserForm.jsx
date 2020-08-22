@@ -35,7 +35,6 @@ export class NewUser extends React.Component {
             return false;
         } else {
             return true;
-
         }
     }
 
@@ -43,23 +42,23 @@ export class NewUser extends React.Component {
         e.preventDefault();
         console.log(this.state)
         const newUser = this.state;
-              this.props.createUser(newUser)
-              .then(res => {
-                  console.info(res)
-                  this.setState({
-                      email: "",
-                      first_name: "",
-                      last_name: "",
-                      address: "",
-                      locality: "",
-                      state: "",
-                      password: "",
-                      admin: false
-                  })
-                  window.location = "/users";
-                  alert("El usuario se creó correctamente")
-              }).catch(err => console.error(err))
-          }
+        this.props.createUser(newUser)
+        .then(res => {
+            console.info(res)
+            this.setState({
+                email: "",
+                first_name: "",
+                last_name: "",
+                address: "",
+                locality: "",
+                state: "",
+                password: "",
+                admin: false
+            })
+            window.location = "/Admin/CrudUser";
+            alert("El usuario se creó correctamente")
+        }).catch(err => console.error(err))
+    }
 
     render() {
         return (
