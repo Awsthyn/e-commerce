@@ -11,8 +11,10 @@ class NewCategory extends React.Component {
             description: ""
         }
 
+        this.categories = props.categories
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.comparaSiHay = this.comparaSiHay.bind(this);
     }
 
     handleChange(e) {
@@ -21,7 +23,7 @@ class NewCategory extends React.Component {
 
     comparaSiHay(arregloCategorias, obj){
         for (let i = 0; i < arregloCategorias.length; i++) {
-            if(obj.name.toUpperCase() === arregloCategorias[i].name.toUpperCase() || obj.description.toUpperCase() === arregloCategorias[i].description.toUpperCase()){
+            if(obj.name.toUpperCase() === arregloCategorias[i].name.toUpperCase()) {
                 return true
             }
         }
@@ -33,18 +35,25 @@ class NewCategory extends React.Component {
         e.preventDefault();
         console.log(this.state)
         const category = this.state;
-        this.props.addCategory(category).then(() => {
-            console.log(this.categories)
-            this.setState({
-                name: "",
-                description: ""
-            })
+
+        if(!this.comparaSiHay(this.categories, category)){
+            this.props.addCategory(category)
+            .then(() => {
+                console.log(this.categories)
+
+                this.setState({
+                    name: "",
+                    description: ""
+                })
+
                 alert("La categoría se creó correctamente")
                 window.location = '/Admin/CrudCategory'
-        }).catch(() => alert("Se produjo un Error al crear Categoría")
-    )
+            }).catch(() => alert("Se produjo un Error al crear Categoría"))
+        }else{
+                alert("La categoría que intentas crear ya existe")
+            }
+        }
 
-    }
 
     render() {
         return (
@@ -53,11 +62,11 @@ class NewCategory extends React.Component {
             <form onSubmit={this.handleSubmit} className="form-group">
                 <div className="form-group">
                     <label>Nombre:</label>
-                    <input type="text" id="name" name="name" onChange={this.handleChange} className="form-control" value={this.state.name}/>
+                    <input type="text" id="name" name="name" onChange={this.handleChange} className="form-control" value={this.state.name} required/>
                 </div>
                 <div className="form-group">
                     <label>Descripcion:</label>
-                    <input type="text" id="description" name="description" onChange={this.handleChange} className="form-control" value={this.state.description}/>
+                    <input type="text" id="description" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required/>
                 </div>
                 <button type="submit" className="btn btn-dark">Enviar</button>
             </form>
@@ -69,7 +78,7 @@ class NewCategory extends React.Component {
 
 function mapStateToProps(state) {
     return {
-
+        categories: state.categories.categories
     }
 }
 

@@ -15,8 +15,7 @@ export class NewProduct extends React.Component {
             image: "",
             category: []
         }
-
-        this.listaProductos = props.listaProducts
+        this.products = props.products
         this.categories = props.categories
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,28 +26,36 @@ export class NewProduct extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    comparaSiHay(arreglo, obj){
-      for (let i = 0; i < arreglo.length; i++) {
-          if(obj.name.toUpperCase() === arreglo[i].name.toUpperCase() || obj.description.toUpperCase() === arreglo[i].description.toUpperCase()){
-              return true
-          }
-      }
-      return false
-  }
+    comparaSiHay(arregloProductos, obj){
+        for (let i = 0; i < arregloProductos.length; i++) {
+            if(obj.name.toUpperCase() === arregloProductos[i].name.toUpperCase()) {
+                return true
+            }
+        }
+        return false
+    }
 
     handleSubmit(e){
         e.preventDefault();
         const product = this.state;
-        this.props.addProduct(product)
 
-        this.setState({
-            name: "",
-            description: "",
-            price: "",
-            stock: "",
-            image: "",
-            category: []
-        })
+        if(!this.comparaSiHay(this.products, product)){
+            this.props.addProduct(product)
+            .then(() => {
+                this.setState({
+                    name: "",
+                    description: "",
+                    price: "",
+                    stock: "",
+                    image: "",
+                    category: []
+                })
+            alert("El producto se creó correctamente")
+            window.location = '/Admin/CrudProduct'
+        }).catch(() => alert("Se produjo un Error al crear el Producto"))
+        }else{
+            alert("El producto que intentas crear ya existe")
+        }
     }
 
     onCheckboxClicked(category, isChecked) {
@@ -73,19 +80,19 @@ export class NewProduct extends React.Component {
             <form onSubmit={this.handleSubmit} className="form-group">
                 <div className="form-group">
                     <label>Nombre:</label>
-                    <input type="text" id="name" name="name" onChange={this.handleChange} className="form-control" value={this.state.name}/>
+                    <input type="text" id="name" name="name" onChange={this.handleChange} className="form-control" value={this.state.name} required/>
                 </div>
                 <div className="form-group">
                     <label>Descripcion:</label>
-                    <input type="text" id="description" name="description" onChange={this.handleChange} className="form-control" value={this.state.description}/>
+                    <input type="text" id="description" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required/>
                 </div>
                 <div className="form-group">
                     <label>Precio:</label>
-                    <input id="price" name="price" onChange={this.handleChange} className="form-control" value={this.state.price }/>
+                    <input id="price" name="price" onChange={this.handleChange} className="form-control" value={this.state.price } required/>
                 </div>
                 <div className="form-group">
                     <label>Stock:</label>
-                    <input id="stock" name="stock" onChange={this.handleChange} className="form-control" value={this.state.stock}/>
+                    <input id="stock" name="stock" onChange={this.handleChange} className="form-control" value={this.state.stock} required/>
                 </div>
                 <div className="form-group">
                 <label>
@@ -99,7 +106,7 @@ export class NewProduct extends React.Component {
                 <div className="form-check form-check-inline">
                     {this.categories.map( category => {
                         return (
-                        <Checkbox key = {category.id} initialState={false} category={category} onChange={this.onCheckboxClicked} />
+                        <Checkbox key = {category.id} initialState={false} category={category} onChange={this.onCheckboxClicked} required/>
                         )}
                     )}
                 </div>
@@ -112,7 +119,8 @@ export class NewProduct extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        categories: state.categories.categories
+        categories: state.categories.categories,
+        products: state.products.products
     }
 }
 

@@ -45,8 +45,6 @@ export function editUser(user){
         }).then(res => {
             console.info(res)
             dispatch({type: EDIT_USER, payload: res})
-            alert("El Producto se Editó correctamente")
-            window.location = "/Admin/CrudUser";
         }).catch(err => console.error(err))
     }
 }
