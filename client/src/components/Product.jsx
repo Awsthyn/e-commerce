@@ -1,9 +1,8 @@
 import React from "react";
-import s from "../css/product.module.css";
+
 import RatingPage from "./calificacionCaras";
 import { addToOrder } from "../Redux/actions/orderLineActions"
 import { useHistory } from "react-router-dom";
-import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 import store from "../Redux/store"
 

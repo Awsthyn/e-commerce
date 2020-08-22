@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { toProductDetails } from '../Redux/actions/productActions';
 import Counter from '../components/Counter';
 //import {addToOrder } from "../Redux/actions/orderActions"
 
-export function OrderLine({ name, price, quantity }) {
+export function OrderLine({name, price, quantity }) {
 
 	return (
 		<tr>
@@ -28,10 +27,5 @@ function mapStateToProps(state) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		toProductDetails: (id) => dispatch(toProductDetails(id)),
-	};
-}
 
 export default connect(mapStateToProps, null)(OrderLine);

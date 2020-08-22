@@ -32,6 +32,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
         <div className="navbar-nav" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li>
+              <ul>
               <MDBDropdown>
                 <MDBDropdownToggle caret color="dark">
                   Categorias
@@ -49,9 +50,8 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   </li>
 
                   {categories.map((e) => (
-                    <Link to={`/catalog/${e.name}`}>
+                    <Link key={e.name + e.id} to={`/catalog/${e.name}`}>
                       <MDBDropdownItem
-                        key={e.id}
                         data-id={e.id}
                         name={e.name}
                         onClick={(e) => {
@@ -68,6 +68,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   ))}
                 </MDBDropdownMenu>
               </MDBDropdown>
+              </ul>
             </li>
             <li className="nav-item">
               <NavLink to="/OrderTable" className="nav-link">
@@ -76,7 +77,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
             </li>
             <li className="nav-item">
               <NavLink to="/Order" className="nav-link">
-                <i class="fas fa-cart-arrow-down "></i>
+                <i className="fas fa-cart-arrow-down "></i>
               </NavLink>
             </li>
             <li className="nav-item">

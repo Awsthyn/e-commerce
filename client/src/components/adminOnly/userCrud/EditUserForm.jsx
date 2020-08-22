@@ -26,7 +26,7 @@ export class EditUser extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    comparePws() {
+    comparePws() {/*
       if (!this.state.password || !this.state.repeatPassword) {
           alert('Por favor complete los campos (*)')
       }
@@ -40,7 +40,7 @@ export class EditUser extends React.Component {
             } else {
                 return true;
             }
-        }
+        }*/
     }
 
     handleSubmit(e) {

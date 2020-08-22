@@ -6,7 +6,7 @@ import { getAllCategories } from '../../../Redux/actions/categoriesActions'
 import { editProduct } from '../../../Redux/actions/productActions'
 
 import Checkbox from '../../Checkbox';
-import DeleteProduct from './DeleteProduct';
+//import DeleteProduct from './DeleteProduct';
 
 class EditProduct extends React.Component {
 

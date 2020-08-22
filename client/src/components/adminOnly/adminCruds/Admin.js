@@ -1,8 +1,6 @@
 import React from "react";
-import { Link, NavLink, useHistory } from "react-router-dom";
-import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
+import { Link } from "react-router-dom";
 
-import { connect } from "react-redux";
 
 export function Admin({ categories, getCategoryProducts, getAllProducts }) {
 

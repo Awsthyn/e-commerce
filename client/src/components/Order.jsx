@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import {getCart} from "../Redux/actions/orderActions"
-import {addToOrder} from "../Redux/actions/orderLineActions";
 import OrderLine from '../components/OrderLine'
 import store from "../Redux/store"
 
@@ -10,9 +8,6 @@ store.dispatch(getCart());
 
 export const Order = ({cart}) => {
 
-  const sum = () => {
-    Array.from(document.getElementsByClassName("subtotal")).map(e => e.innerHTML)
-  }
     return (
         <div>
             <h1 className="d-flex justify-content-center m-3">Carrito</h1>
@@ -28,7 +23,7 @@ export const Order = ({cart}) => {
                 </tr>
               </thead>
               <tbody className="text-center">
-            {cart.map(e => <OrderLine name={e.product.name} price={e.product.price} quantity={e.quantity} />)}
+            {cart.map(e => <OrderLine key={e.product.name} name={e.product.name} price={e.product.price} quantity={e.quantity} />)}
               </tbody>
             </table>
             <div className="mt-4 d-flex justify-content-around">

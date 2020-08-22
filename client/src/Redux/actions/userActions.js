@@ -6,7 +6,6 @@ export function getAllUsers() {
         return fetch(`http://localhost:3001/users`)
         .then((r) => r.json())
         .then((data) => {
-            console.log('fetch Get all Users');
             dispatch({ type: GET_ALL_USERS, payload: data})
         })
         .catch((error) => {

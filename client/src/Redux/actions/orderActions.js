@@ -28,7 +28,6 @@ export function getCart(){
         return fetch(`http://localhost:3001/users/1/cart`)
         .then((r) => r.json())
         .then((data) => {
-            console.log(data);
             dispatch({ type: GET_PRODUCTS_CART, payload: data})
         })
         .catch((error) => {

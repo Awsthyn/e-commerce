@@ -7,7 +7,6 @@ export function getSearchedProducts(keyword) {
         return fetch(`http://localhost:3001/search?query=${keyword}`)
         .then((r) => r.json())
         .then((data) => {
-            console.log('fetch search');
             dispatch({ type: GET_PRODUCTS, payload: data})
         })
         .catch((error) => {
@@ -23,7 +22,6 @@ export function getCategoryProducts(category) {
         return fetch(`http://localhost:3001/categories/${category}`)
         .then(r => r.json())
         .then(data => {
-            console.log('fetch productos xCateg')
             dispatch({type: GET_PRODUCTS, payload: data.products})
         })
         .catch(error => console.log(error))
@@ -37,7 +35,6 @@ export function toProductDetails(id) {
         return fetch(`http://localhost:3001/products/${id}`)
         .then((r) => r.json())
         .then((data) => {
-            console.log('fetch detalles', data);
             dispatch({type: SET_DETAILS, payload: data})
         })
         .catch((error) => {
@@ -53,7 +50,6 @@ export function getAllProducts() {
         return fetch(`http://localhost:3001/products`)
         .then((r) => r.json())
         .then((data) => {
-            console.log('fetch all prods');
             dispatch({type: GET_PRODUCTS, payload: data})
         })
         .catch((error) => {console.log(error)})
@@ -71,7 +67,6 @@ export function onDeleteProduct(ProductId) {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-            console.info("fetch delete product")
             dispatch({type: DELETE_PRODUCT, payload: res})
             alert("El Producto se ha Eliminado correctamente")
             window.location = "/Admin/CrudProduct";
@@ -91,7 +86,6 @@ export function onDeleteProduct(ProductId) {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                console.info(res)
                 dispatch({type: EDIT_PRODUCT, payload: res})
                 alert("El Producto se Editó correctamente")
                 window.location = "/Admin/CrudProduct";

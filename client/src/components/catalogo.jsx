@@ -1,11 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import S from "../css/catalogo.module.css";
 import { getSearchedProducts, getAllProducts, getCategoryProducts } from "../Redux/actions/productActions"
 import { getAllCategories } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
-import store from "../Redux/store"
 
 //-------- para traer cats y prods al principio y ya esten disponibles -------
 // store.dispatch(getAllCategories());

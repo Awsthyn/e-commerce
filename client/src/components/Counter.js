@@ -12,7 +12,7 @@ class Counter extends Component {
             this.props.decrement();
           }}
         >
-          <i class="fas fa-arrow-circle-left "></i>
+          <i className="fas fa-arrow-circle-left "></i>
         </button>
         <p>{this.props.count}</p>
         <button
@@ -21,7 +21,7 @@ class Counter extends Component {
             this.props.increment();
           }}
         >
-          <i class="fas fa-arrow-circle-right"></i>
+          <i className="fas fa-arrow-circle-right"></i>
         </button>
       </span>
     );

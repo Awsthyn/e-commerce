@@ -5,7 +5,6 @@ import App from "./routing/App";
 import * as serviceWorker from "./serviceWorker";
 // import Prod from "./components/product.jsx";
 // import Catalog from "./components/product";
-import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux"
 import store from "./Redux/store"
 
