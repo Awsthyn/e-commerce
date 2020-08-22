@@ -40,19 +40,18 @@ export function getCart(){
 
 //-----------------------Vaciar carrito (user)------------------------
 
-export function deleteProductFromCart() {
+export function emptyCart() {
     return function(dispatch) {
         return fetch(`http://localhost:3001/users/1/cart`, {
             method: 'DELETE',
-            body: JSON.stringify(),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => {
-            dispatch({type: DELETE_CART, payload: res})
-            alert("Compra cancelada. Carrito vaciado")
-            window.location = "/Order"
         })
-        .catch(err => console.error(err))
+        .then(res => res.json())
+        .then(()=>{
+            dispatch({type: DELETE_CART})
+        })
+        .catch(err => console.log(err))
     }
 }

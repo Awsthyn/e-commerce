@@ -37,9 +37,7 @@ Promise.all([order, product])
   })
   res.status(201)
   res.json({order: order[0].id, price: product.price, quantity, product })
-
 })
-
  
 })
 
@@ -61,14 +59,18 @@ server.delete("/:userId/cart", (req, res, next) => {
   try {
     const { userId } = req.params;
     Order.destroy({ where: { userId, orderStatus: 'carrito' } }).then(() => {
-      res.sendStatus(200);
     })
-    .then(()=>{
+    .then((data)=>{
     Order.create({
       userId,
       orderStatus: "carrito" 
     })
+    .then(data => {
+      res.status(200)
+      res.json([])
     })
+    })
+
   } catch (error) {
     console.error(error.message);
   }
