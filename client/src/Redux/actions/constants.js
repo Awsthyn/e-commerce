@@ -25,3 +25,5 @@ export const GET_PRODUCTS_CART = "GET_PRODUCTS_CART"
 
 // ----- ORDERLINE CONSTANTS ------
 
+//-------- ORDER CONSTANTS ----------
+export const GET_ALL_ORDERS_USERS = "GET_ALL_ORDERS_USERS"

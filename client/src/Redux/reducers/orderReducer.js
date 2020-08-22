@@ -1,25 +1,29 @@
-import { ADD_PRODUCT_TO_CART, GET_PRODUCTS_CART } from "../actions/constants";
-
-// COMENTAR AL LADO PARA QUE SIRVE ESA PROPIEDAD DE ESTADO ↓↓↓↓↓↓
+import { GET_ALL_ORDERS_USERS, ADD_PRODUCT_TO_CART, GET_PRODUCTS_CART } from '../actions/constants';
 
 const initialState = {
-  cart: [],
+    orders: [],
 };
 
-export default function orderReducer(state = initialState, action) {
-  switch (action.type) {
-    case GET_PRODUCTS_CART:
-      return {
+export default function orderReduces (state = initialState, action) {
+    
+    switch(action.type) {
+
+        case GET_ALL_ORDERS_USERS:
+            return {
+                ...state,
+                orders: action.payload
+            }
+        case GET_PRODUCTS_CART:
+         return {
         ...state,
         cart: action.payload,
       };
-    case ADD_PRODUCT_TO_CART:
+        case ADD_PRODUCT_TO_CART:
       let array = [...state.cart, action.payload];
-      return {
+          return {
         ...state,
         cart: array,
       };
-    default:
-      return { ...state };
-  }
-}
+        default: return {...state}
+    }
+

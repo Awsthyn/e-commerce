@@ -1,6 +1,5 @@
 const server = require("express").Router();
-const { Order, OrderLine } = require("../db.js");
-
+const { Order, OrderLine , User } = require("../db.js");
 
 //A partir de Aca agreo Ariel
 
@@ -44,5 +43,11 @@ server.put("/:id", (req, res, next) => {
     console.error(error.message);
   }
 });
+
+server.get('/all/users', (req, res, next) => {
+    Order.findAll({include: User })
+        .then(orders => res.json(orders))
+        .catch(next)
+ });
 
 module.exports = server;
