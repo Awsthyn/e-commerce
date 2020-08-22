@@ -1,10 +1,10 @@
-import {ADD_PRODUCT_TO_CART, GET_PRODUCTS_CART } from '../actions/constants';
+import {ADD_PRODUCT_TO_CART, GET_PRODUCTS_CART, DELETE_CART } from '../actions/constants';
 
 const initialState = {
     cart: [],
 };
 
-export default function orderReduces (state = initialState, action) {
+export default function orderReducer (state = initialState, action) {
     switch(action.type) {
         case GET_PRODUCTS_CART:
           return {
@@ -17,6 +17,11 @@ export default function orderReduces (state = initialState, action) {
         ...state,
         cart: array,
       };
+        case DELETE_CART:
+          return {
+            ...state,
+            cart: []
+          };
         default: return {...state}
     }
   }

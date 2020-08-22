@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import Counter from '../components/Counter';
 //import {addToOrder } from "../Redux/actions/orderActions"
 
-export function OrderLine({name, price, quantity }) {
+export function OrderLine({ dataid, name, price, quantity }) {
 
 	return (
 		<tr>
-			<td type="button btn-sm" className="btn btn-danger btn-sm">
+			<td data-id={dataid} type="button btn-sm" className="btn btn-danger btn-sm">
 				X
 			</td>
 			<td>{name}</td>
