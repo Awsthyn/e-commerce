@@ -24,7 +24,7 @@ export const Order = ({cart}) => {
                 </tr>
               </thead>
               <tbody className="text-center">
-            {cart.map(e => <OrderLine name={e.name} price={e.price} />)}
+            {cart.map(e => <OrderLine name={e.product.name} price={e.product.price} quantity={e.quantity} />)}
               </tbody>
             </table>  
             <h5 className ="d-flex ml-auto">Total: $</h5>

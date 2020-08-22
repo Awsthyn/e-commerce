@@ -40,9 +40,9 @@ export function ProductComponent({id, productDetails, products, name, price, qua
                 <hr></hr>
                 <button data-id={id} type= 'button' 
                     className="btn btn-dark ml-auto mr-auto"
-                    onClick={(e) => {
+                    onClick={() => {
                         history.push(`/Order`)
-                        store.dispatch(addToOrder(name, price, quantity))
+                        store.dispatch(addToOrder(productDetails.id, 5))
                     }}
                 >
             Agregar al carrito</button>
