@@ -21,3 +21,6 @@ export function addToOrder(productId, quantity) {
 			.catch((err) => console.error(err));
 	};
 }
+
+
+

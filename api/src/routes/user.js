@@ -59,10 +59,16 @@ server.get("/:userId/cart", (req, res, next) => {
 //S40
 server.delete("/:userId/cart", (req, res, next) => {
   try {
-    const { id } = req.params;
-    Order.destroy({ where: { userId: id, orderStatus: 'carrito' } }).then(() => {
+    const { userId } = req.params;
+    Order.destroy({ where: { userId, orderStatus: 'carrito' } }).then(() => {
       res.sendStatus(200);
-    });
+    })
+    .then(()=>{
+    Order.create({
+      userId,
+      orderStatus: "carrito" 
+    })
+    })
   } catch (error) {
     console.error(error.message);
   }
