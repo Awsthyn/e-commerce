@@ -18,7 +18,7 @@ server.get("/", (req, res, next) => {
 
 //S46
 server.get("/:id", (req, res, next) => {
-  Order.findByPk(req.params.id, {include: OrderLine})
+  Order.findByPk(req.params.id, {include: {all: true, nested: true}})
     .then((orders) => {
       res.json(orders);
     })
@@ -45,7 +45,7 @@ server.put("/:id", (req, res, next) => {
 });
 
 server.get('/all/users', (req, res, next) => {
-    Order.findAll({include: User })
+    Order.findAll( {include: {all: true, nested: true}})
         .then(orders => res.json(orders))
         .catch(next)
  });
