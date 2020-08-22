@@ -74,7 +74,7 @@ export function onDeleteProduct(ProductId) {
             console.info("fetch delete product")
             dispatch({type: DELETE_PRODUCT, payload: res})
             alert("El Producto se ha Eliminado correctamente")
-            window.location = "/Admin/CrudProdut";
+            window.location = "/Admin/CrudProduct";
         })
         .catch(err => console.error(err))
     }
@@ -94,7 +94,7 @@ export function onDeleteProduct(ProductId) {
                 console.info(res)
                 dispatch({type: EDIT_PRODUCT, payload: res})
                 alert("El Producto se Editó correctamente")
-                window.location = "/Admin/CrudProdut";
+                window.location = "/Admin/CrudProduct";
             }).catch(err => console.error(err))
         }
     }
@@ -129,7 +129,7 @@ export function addProduct(product){
             console.info("producto creado")
             dispatch({type: GET_PRODUCTS, payload: res})
             alert("El producto se creó correctamente")
-            window.location = "/Admin/CrudProdut"
+            window.location = "/Admin/CrudProduct"
         }).catch(err => console.error(err))
     }
 }
