@@ -20,7 +20,7 @@ class OrderTable extends React.Component {
         order.orderStatus = e.target.value
 
         this.props.editOrder(order)
-        .then(() => alert('El estado de la órden fue modificado.'))
+        .then(() => alert('El estado de la orden fue modificado.'))
         .catch(err => alert(`Error: ${err}`))
     }
 

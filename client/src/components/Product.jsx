@@ -42,7 +42,7 @@ export function ProductComponent({id, productDetails, products, name, price, qua
                     className="btn btn-dark ml-auto mr-auto"
                     onClick={() => {
                         history.push(`/Order`)
-                        store.dispatch(addToOrder(productDetails.id, 5))
+                        store.dispatch(addToOrder(productDetails.id, 1))
                     }}
                 >
             Agregar al carrito</button>
@@ -59,7 +59,7 @@ export function ProductComponent({id, productDetails, products, name, price, qua
 function mapStateToProps(state) {
     return {
         productDetails: state.products.productDetails,
-        addToOrder: state.order.addToOrder
+        addToOrder: state.cart.addToOrder
         
     };
 }

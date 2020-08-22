@@ -4,12 +4,14 @@ import productReducer from "./productReducer";
 import categoriesReducer from './categoriesReducer'
 import userReducer from "./userReducer"
 import orderReducer from "./orderReducer"
+import cartReducer from './cartReducer';
 
 export default combineReducers({
     counter: counterReducer,
     products: productReducer,
     categories: categoriesReducer,
     users: userReducer,
-    orders: orderReducer
+    orders: orderReducer,
+    cart: cartReducer
     });
 

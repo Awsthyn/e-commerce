@@ -26,10 +26,10 @@ export function ProductCard({ id, name, price, image, quantity }) {
           className="btn btn-dark ml-auto mr-auto"
           onClick={(e) => {
             history.push(`/Order`)
-            store.dispatch(addToOrder(name, price, quantity))
+            store.dispatch(addToOrder(e.target.getAttribute("data-id"), 1))
           }}
         >
-          <i class="fas fa-cart-plus "></i>
+          <i data-id={id} className="fas fa-cart-plus "></i>
         </button>
         </div>
         
