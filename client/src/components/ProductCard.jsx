@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import store from "../Redux/store"
 
 
-export function ProductCard({ id, name, price, image }) {
+export function ProductCard({ id, name, price, image, quantity }) {
   let history = useHistory()
 
   return(    
@@ -26,7 +26,7 @@ export function ProductCard({ id, name, price, image }) {
           className="btn btn-dark ml-auto mr-auto"
           onClick={(e) => {
             history.push(`/Order`)
-            store.dispatch(addToOrder(id))
+            store.dispatch(addToOrder(name, price, quantity))
           }}
         >
           <i class="fas fa-cart-plus "></i>

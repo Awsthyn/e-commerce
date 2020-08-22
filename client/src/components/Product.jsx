@@ -8,21 +8,21 @@ import { connect } from "react-redux";
 import store from "../Redux/store"
 
 
-export function ProductComponent({id, productDetails, products}) {
+export function ProductComponent({id, productDetails, products, name, price, quantity}) {
     let history = useHistory() 
 
     return (        
     <div className="container-fluid mt-4    ">
         <div className= "d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded" style={{width: "900px"}}>
             <div className="d-flex flex-column align-items-center" style={{ width: "320px" }}>
-            <img id="principal" className="m-1 border border-secondary" style={{ width: "325px" }} src={productDetails.images == undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[1].url}.jpg`} alt={productDetails.name} />
+            <img id="principal" className="m-1 border border-secondary" style={{ width: "325px" }} src={productDetails.images === undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[1].url}.jpg`} alt={productDetails.name} />
                 <div className= "d-flex flex-row justify-content-around  w-75">
                     <img className="w-25 border border-secondary" 
-                    src={productDetails.images == undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[0].url}.jpg`} 
+                    src={productDetails.images === undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[0].url}.jpg`} 
                     alt={productDetails.name}
                     onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
-                    <img className="w-25 border border-secondary" src={productDetails.images == undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[1].url}.jpg`} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
-                    <img className="w-25 border border-secondary" src={productDetails.images == undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[2].url}.jpg`} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
+                    <img className="w-25 border border-secondary" src={productDetails.images === undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[1].url}.jpg`} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
+                    <img className="w-25 border border-secondary" src={productDetails.images === undefined ? "." : `http://ecommerce-g5.tk/server-fotos/${productDetails.images[2].url}.jpg`} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
                 </div>
             </div>
             <div className="ml-4 pl-2" style={{ width: "450px" }}>
@@ -38,10 +38,14 @@ export function ProductComponent({id, productDetails, products}) {
                     <RatingPage />
                 </div>
                 <hr></hr>
-                <button data-id={productDetails.id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
-          history.push(`/Order`)
-          store.dispatch(addToOrder(productDetails.id))
-        }}>Agregar al carrito</button>
+                <button data-id={id} type= 'button' 
+                    className="btn btn-dark ml-auto mr-auto"
+                    onClick={(e) => {
+                        history.push(`/Order`)
+                        store.dispatch(addToOrder(name, price, quantity))
+                    }}
+                >
+            Agregar al carrito</button>
 
             </div>
             <script src="js/addons/rating.js"></script>
@@ -55,6 +59,7 @@ export function ProductComponent({id, productDetails, products}) {
 function mapStateToProps(state) {
     return {
         productDetails: state.products.productDetails,
+        addToOrder: state.order.addToOrder
         
     };
 }
