@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_TO_CART } from '../actions/constants';
+import { ADD_PRODUCT_TO_CART, DELETE_PROD_FROM_CART } from '../actions/constants';
 
 export function addToOrder(productId, quantity) {
 	const url = 'http://localhost:3001/users/1/cart';
@@ -22,5 +22,20 @@ export function addToOrder(productId, quantity) {
 	};
 }
 
+export function deleteProductFromCart(productId) {
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/orderLine/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((data)=>{
+			console.log(productId)
+            dispatch({type: DELETE_PROD_FROM_CART, payload: productId})
+        })
+        .catch(err => console.log(err))
+    }
+}
 
 

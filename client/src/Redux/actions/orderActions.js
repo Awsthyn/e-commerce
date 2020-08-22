@@ -40,7 +40,7 @@ export function getCart(){
 
 //-----------------------Vaciar carrito (user)------------------------
 
-export function deleteProductFromCart() {
+export function emptyCart() {
     return function(dispatch) {
         return fetch(`http://localhost:3001/users/1/cart`, {
             method: 'DELETE',

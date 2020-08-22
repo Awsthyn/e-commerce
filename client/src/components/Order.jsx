@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCart, deleteProductFromCart } from '../Redux/actions/orderActions';
+import { getCart, emptyCart } from '../Redux/actions/orderActions';
+import { deleteProductFromCart } from '../Redux/actions/orderLineActions';
 import OrderLine from '../components/OrderLine';
 
 class Order extends Component {
@@ -35,6 +36,7 @@ componentDidMount() {
 									name={e.product.name}
 									price={e.product.price}
 									quantity={e.quantity}
+									deleteProductFromCart={deleteProductFromCart}
 								/>
 							))}
 						</tbody>
@@ -46,7 +48,7 @@ componentDidMount() {
 						</h5>
 						<div>
 							<button className="btn btn-success">Confirmar compra</button>
-							<button className="btn btn-danger" onClick={this.props.deleteProductFromCart}>
+							<button className="btn btn-danger" onClick={this.props.emptyCart}>
 								Vaciar carrito
 							</button>
 						</div>
@@ -66,7 +68,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
     getCart: () => dispatch(getCart()),
-		deleteProductFromCart: () => dispatch(deleteProductFromCart()),
+	emptyCart: () => dispatch(emptyCart()),
+	deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id))
 	};
 }
 
