@@ -11,7 +11,7 @@ import CrudProduct from "../components/adminOnly/productCrud/CrudProdut";
 import CrudCategory from "../components/adminOnly/categoryCrud/CrudCategory";
 import Home from "../components/Home.jsx";
 import CrudUser from "../components/adminOnly/userCrud/CrudUser";
-import OrderTable from "../components/OrderTable.jsx";
+import OrderTable from "../components/adminOnly/OrderTable/OrderTable.jsx";
 import Order from "../components/Order.jsx";
 import ShoppingCart from "../components/ShoppingCart.jsx";
 import AdminLogin from "../components/adminOnly/adminCruds/AdminLogin";
@@ -44,6 +44,10 @@ function App() {
       <Route
         exact path="/Admin/CrudAdmin"
         component= { CrudAdmin }
+      />
+      <Route
+        exact path = "/Admin/OrderTable"
+        component= { OrderTable }
       />
 {/* -------------- CRUDS PRODUCT ------------------ */}
       <Route
