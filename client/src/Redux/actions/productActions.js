@@ -122,8 +122,7 @@ export function addProduct(product){
         }).then(res => {
             console.info("producto creado")
             dispatch({type: GET_PRODUCTS, payload: res})
-            alert("El producto se creó correctamente")
-            window.location = "/Admin/CrudProduct"
+        
         }).catch(err => console.error(err))
     }
 }

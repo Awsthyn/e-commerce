@@ -15,8 +15,7 @@ export class NewProduct extends React.Component {
             image: "",
             category: []
         }
-
-        this.listaProductos = props.listaProducts
+        this.products = props.products
         this.categories = props.categories
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,28 +26,36 @@ export class NewProduct extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    comparaSiHay(arreglo, obj){
-      for (let i = 0; i < arreglo.length; i++) {
-          if(obj.name.toUpperCase() === arreglo[i].name.toUpperCase() || obj.description.toUpperCase() === arreglo[i].description.toUpperCase()){
-              return true
-          }
-      }
-      return false
-  }
+    comparaSiHay(arregloProductos, obj){
+        for (let i = 0; i < arregloProductos.length; i++) {
+            if(obj.name.toUpperCase() === arregloProductos[i].name.toUpperCase()) {
+                return true
+            }
+        }
+        return false
+    }
 
     handleSubmit(e){
         e.preventDefault();
         const product = this.state;
-        this.props.addProduct(product)
 
-        this.setState({
-            name: "",
-            description: "",
-            price: "",
-            stock: "",
-            image: "",
-            category: []
-        })
+        if(!this.comparaSiHay(this.products, product)){
+            this.props.addProduct(product)
+            .then(() => {
+                this.setState({
+                    name: "",
+                    description: "",
+                    price: "",
+                    stock: "",
+                    image: "",
+                    category: []
+                })
+            alert("El producto se creó correctamente")
+            window.location = '/Admin/CrudProduct'
+        }).catch(() => alert("Se produjo un Error al crear el Producto"))
+        }else{
+            alert("El producto que intentas crear ya existe")
+        }
     }
 
     onCheckboxClicked(category, isChecked) {
@@ -112,7 +119,8 @@ export class NewProduct extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        categories: state.categories.categories
+        categories: state.categories.categories,
+        products: state.products.products
     }
 }
 
