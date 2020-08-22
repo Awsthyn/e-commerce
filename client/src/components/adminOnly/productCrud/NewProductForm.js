@@ -80,19 +80,19 @@ export class NewProduct extends React.Component {
             <form onSubmit={this.handleSubmit} className="form-group">
                 <div className="form-group">
                     <label>Nombre:</label>
-                    <input type="text" id="name" name="name" onChange={this.handleChange} className="form-control" value={this.state.name}/>
+                    <input type="text" id="name" name="name" onChange={this.handleChange} className="form-control" value={this.state.name} required/>
                 </div>
                 <div className="form-group">
                     <label>Descripcion:</label>
-                    <input type="text" id="description" name="description" onChange={this.handleChange} className="form-control" value={this.state.description}/>
+                    <input type="text" id="description" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required/>
                 </div>
                 <div className="form-group">
                     <label>Precio:</label>
-                    <input id="price" name="price" onChange={this.handleChange} className="form-control" value={this.state.price }/>
+                    <input id="price" name="price" onChange={this.handleChange} className="form-control" value={this.state.price } required/>
                 </div>
                 <div className="form-group">
                     <label>Stock:</label>
-                    <input id="stock" name="stock" onChange={this.handleChange} className="form-control" value={this.state.stock}/>
+                    <input id="stock" name="stock" onChange={this.handleChange} className="form-control" value={this.state.stock} required/>
                 </div>
                 <div className="form-group">
                 <label>
@@ -106,7 +106,7 @@ export class NewProduct extends React.Component {
                 <div className="form-check form-check-inline">
                     {this.categories.map( category => {
                         return (
-                        <Checkbox key = {category.id} initialState={false} category={category} onChange={this.onCheckboxClicked} />
+                        <Checkbox key = {category.id} initialState={false} category={category} onChange={this.onCheckboxClicked} required/>
                         )}
                     )}
                 </div>

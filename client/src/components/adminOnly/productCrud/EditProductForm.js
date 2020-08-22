@@ -1,12 +1,10 @@
 import React from 'react';
 import { withRouter } from "react-router"
 import { connect } from "react-redux";
-
 import { getAllCategories } from '../../../Redux/actions/categoriesActions'
 import { editProduct } from '../../../Redux/actions/productActions'
-
 import Checkbox from '../../Checkbox';
-//import DeleteProduct from './DeleteProduct';
+
 
 class EditProduct extends React.Component {
 
@@ -21,7 +19,6 @@ class EditProduct extends React.Component {
             image:props.product.image,
             category: props.product.categories
         }
-
         this.categories = props.categories
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,6 +28,7 @@ class EditProduct extends React.Component {
 
     handleChange(e) {
        this.setState({[e.target.name]: e.target.value})
+
     }
 
     onCheckboxClicked(category, isChecked) {
@@ -72,19 +70,19 @@ class EditProduct extends React.Component {
           <form onSubmit={this.handleSubmit} >
               <div className="form-group">
                   <label>Nombre:</label>
-                  <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} className="form-control"/>
+                  <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} className="form-control" required/>
               </div>
               <div className="form-group">
                   <label>Descripcion:</label>
-                  <input type="text" id="description" name="description" value={this.state.description} onChange={this.handleChange} className="form-control"/>
+                  <input type="text" id="description" name="description" value={this.state.description} onChange={this.handleChange} className="form-control" required />
               </div>
               <div className="form-group">
                   <label>Precio:</label>
-                  <input id="price" name="price" onChange={this.handleChange} value={this.state.price} className="form-control"/>
+                  <input id="price" name="price" onChange={this.handleChange} value={this.state.price} className="form-control" required />
               </div>
               <div className="form-group">
                   <label>Stock:</label>
-                  <input id="stock" name="stock" onChange={this.handleChange} value={this.state.stock} className="form-control" />
+                  <input id="stock" name="stock" onChange={this.handleChange} value={this.state.stock} className="form-control" required />
               </div>
               <div className="form-group">
               <label>
@@ -100,7 +98,7 @@ class EditProduct extends React.Component {
                 {this.props.categories.map( category => {
                     const marcado = this.state.category.filter(c => c.id === category.id).length > 0
                     return (
-                        <Checkbox key = {category.id} initialState={marcado} category={category} onChange={this.onCheckboxClicked} />
+                        <Checkbox key = {category.id} initialState={marcado} category={category} onChange={this.onCheckboxClicked} required />
                     )}
                 )}
             </div>

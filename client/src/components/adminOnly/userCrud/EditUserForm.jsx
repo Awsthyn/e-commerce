@@ -60,35 +60,35 @@ export class EditUser extends React.Component {
                 <form onSubmit={this.handleSubmit} className="form-group">
                     <div className="form-group">
                         <label>Nuevo correo:</label>
-                        <input type="email" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email} />
+                        <input type="email" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email} required/>
                     </div>
                     <div className="form-group">
                         <label>Nombre:</label>
-                        <input type="text" id="first_name" name="first_name" onChange={this.handleChange} className="form-control" value={this.state.first_name} />
+                        <input type="text" id="first_name" name="first_name" onChange={this.handleChange} className="form-control" value={this.state.first_name} required/>
                     </div>
                     <div className="form-group">
                         <label>Apellido:</label>
-                        <input type="text" id="last_name" name="last_name" onChange={this.handleChange} className="form-control" value={this.state.last_name} />
+                        <input type="text" id="last_name" name="last_name" onChange={this.handleChange} className="form-control" value={this.state.last_name} required />
                     </div>
                     <div className="form-group">
                         <label>Dirección:</label>
-                        <input type="text" id="address" name="address" onChange={this.handleChange} className="form-control" value={this.state.address} />
+                        <input type="text" id="address" name="address" onChange={this.handleChange} className="form-control" value={this.state.address} required/>
                     </div>
                     <div className="form-group">
                         <label>Localidad:</label>
-                        <input type="text" id="locality" name="locality" onChange={this.handleChange} className="form-control" value={this.state.locality} />
+                        <input type="text" id="locality" name="locality" onChange={this.handleChange} className="form-control" value={this.state.locality} required />
                     </div>
                     <div className="form-group">
                         <label>Provincia/Estado:</label>
-                        <input type="text" id="state" name="state" onChange={this.handleChange} className="form-control" value={this.state.state} />
+                        <input type="text" id="state" name="state" onChange={this.handleChange} className="form-control" value={this.state.state} required />
                     </div>
                     <div className="form-group">
                         <label>Contraseña:*</label>
-                        <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" value={this.state.password} />
+                        <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" value={this.state.password} required/>
                     </div>
                     <div className="form-group">
                         <label>Repetir contraseña:*</label>
-                        <input type="password" id="repeatPassword" name="repeatPassword" onChange={this.handleChange} className="form-control" value={this.state.repeatPassword} />
+                        <input type="password" id="repeatPassword" name="repeatPassword" onChange={this.handleChange} className="form-control" value={this.state.repeatPassword} required/>
                     </div>
                     <div>
                         <button type="submit" className="btn btn-warning">Editar</button>
