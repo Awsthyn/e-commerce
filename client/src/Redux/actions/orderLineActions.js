@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_TO_CART, GET_PRODUCTS_CART } from '../actions/constants';
+import { ADD_PRODUCT_TO_CART } from '../actions/constants';
 
 export function addToOrder(productId, quantity) {
 	const url = 'http://localhost:3001/users/1/cart';
@@ -21,3 +21,6 @@ export function addToOrder(productId, quantity) {
 			.catch((err) => console.error(err));
 	};
 }
+
+
+

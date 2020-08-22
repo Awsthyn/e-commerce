@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react'
 import {createUser} from "../../../Redux/actions/userActions"
 import {connect} from "react-redux"
 

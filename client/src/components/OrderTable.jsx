@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux'
 import { getAllOrders , editOrder } from "../Redux/actions/orderActions"
 
@@ -20,13 +20,14 @@ class OrderTable extends React.Component {
         order.orderStatus = e.target.value
 
         this.props.editOrder(order)
-        .then(() => alert('El estado de la órden fue modificado.'))
+        .then(() => alert('El estado de la orden fue modificado.'))
         .catch(err => alert(`Error: ${err}`))
     }
 
     render () {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
         return (
+            
             <div className="container mt-4">
                 <h2 className="col-11 text-center">Lista de Ordenes</h2>
                 <table className="table">
@@ -42,7 +43,7 @@ class OrderTable extends React.Component {
                     </tr>
                 </thead>
             <tbody>
-
+            {console.log(this.props.orders)}
             {this.props.orders.map(order =>(
                 <tr key={order.id}>
                     <td>{order.id}</td>
@@ -50,7 +51,7 @@ class OrderTable extends React.Component {
                     <td>{order.user.first_name}</td>
                     <td>{order.user.last_name}</td>
                     <td>{order.user.email}</td>
-                    <td>${order.total || 0}</td>
+                    <td>$ {order.total || order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td>
                     <td>
                     <select name='orderStatus' data-order-id={order.id} value={order.orderStatus.toLowerCase()} onChange={this.handleChange}>
                         {

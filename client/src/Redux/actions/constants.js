@@ -19,9 +19,10 @@ export const EDIT_USER = "EDIT_USER";
 export const DELETE_USER = "DELETE_USER";
 
 
-// ----- ORDER CONSTANTS ------
+// ----- CART CONSTANTS ------
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const GET_PRODUCTS_CART = "GET_PRODUCTS_CART"
+export const DELETE_CART = "DELETE_CART"
 
 // ----- ORDERLINE CONSTANTS ------
 

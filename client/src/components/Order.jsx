@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import {getCart} from "../Redux/actions/orderActions"
-import {addToOrder} from "../Redux/actions/orderLineActions";
 import OrderLine from '../components/OrderLine'
 import store from "../Redux/store"
 
 store.dispatch(getCart());
 
 export const Order = ({cart}) => {
+
     return (
         <div>
             <h1 className="d-flex justify-content-center m-3">Carrito</h1>
@@ -24,12 +23,16 @@ export const Order = ({cart}) => {
                 </tr>
               </thead>
               <tbody className="text-center">
-            {cart.map(e => <OrderLine name={e.product.name} price={e.product.price} quantity={e.quantity} />)}
+            {cart.map(e => <OrderLine key={e.product.name} name={e.product.name} price={e.product.price} quantity={e.quantity} />)}
               </tbody>
-            </table>  
-            <h5 className ="d-flex ml-auto">Total: $</h5>
-            <button className="btn btn-success">Comprar</button>
-            <button className="btn btn-danger">Cancelar</button>
+            </table>
+            <div className="mt-4 d-flex justify-content-around">
+            <h5 className ="">Total: ${cart[0] ? cart.map(e => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}</h5>
+            <div>
+            <button className="btn btn-success">Confirmar compra</button>
+            <button className="btn btn-danger">Vaciar carrito</button>
+            </div>
+            </div>
             </div>
         </div>
     )
@@ -37,7 +40,7 @@ export const Order = ({cart}) => {
 
 function mapStateToProps(state) {
   return {
-      cart: state.order.cart,
+      cart: state.cart.cart,
   }
 }
 
