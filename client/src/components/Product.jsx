@@ -9,6 +9,13 @@ import store from "../Redux/store"
 
 export function ProductComponent({id, productDetails, addToOrder }) {
     let history = useHistory() 
+    function handleCart (id) {
+        if(productDetails.stock>1){
+            addToOrder(id, 1)
+            history.push(`/Order`)
+        }
+        else {alert("No se ha podido agregar a carrito debido a falta temporal de stock.")}
+    }
 
     return (        
     <div className="container-fluid mt-4    ">
@@ -43,8 +50,7 @@ export function ProductComponent({id, productDetails, addToOrder }) {
                 <button data-id={id} type= 'button' 
                     className="btn btn-dark ml-auto mr-auto"
                     onClick={() => {
-                        history.push(`/Order`)
-                        addToOrder(productDetails.id, 1, productDetails.stock)
+                        handleCart(productDetails.id);
                     }}
                 >
             Agregar al carrito</button>
