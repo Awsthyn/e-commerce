@@ -18,6 +18,7 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                             id = {e.id}
                             name={e.name}
                             price={e.price}
+                            stock={e.stock}
                             image={`http://ecommerce-g5.tk/server-fotos/${e.images[1].url}.jpg`}
                         />
                     ))

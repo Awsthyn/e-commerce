@@ -6,8 +6,16 @@ import { connect } from "react-redux";
 import store from "../Redux/store"
 
 
-export function ProductCard({ id, name, price, image, stock }) {
+export function ProductCard({ id, name, price, image, stock, toProductDetails, addToOrder }) {
   let history = useHistory()
+
+  function handleCart (id) {
+    if(stock>1){
+      addToOrder(id, 1)
+      history.push(`/Order`)
+    }
+    else {alert("No se ha podido agregar a carrito debido a falta temporal de stock.")}
+  }
 
   return(
     <div className="card bg-light p-2 m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
@@ -19,15 +27,16 @@ export function ProductCard({ id, name, price, image, stock }) {
         <div className="row">
         <button data-id={id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
           history.push(`/products/${e.target.getAttribute('data-id')}`)
-          store.dispatch(toProductDetails(id))
+          toProductDetails(id)
         }}>
           Ver más detalles...
         </button>
         <button data-id={id} type= 'button'
           className="btn btn-dark ml-auto mr-auto"
           onClick={(e) => {
-            store.dispatch(addToOrder(e.target.getAttribute("data-id"), 1))
-            history.push(`/Order`)
+            handleCart(e.target.getAttribute("data-id"))
+            // addToOrder(e.target.getAttribute("data-id"), 1)
+            // history.push(`/Order`)
           }}
         >
           <i data-id={id} className="fas fa-cart-plus "></i>
@@ -50,6 +59,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
       toProductDetails: (id) => dispatch(toProductDetails(id)),
+      addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity))
   };
 }
 
