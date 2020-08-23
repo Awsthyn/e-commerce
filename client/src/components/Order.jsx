@@ -18,7 +18,7 @@ componentDidMount() {
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
 				<div className="">
-					<table className="table ">
+					<table className="table">
 						<thead className="text-center">
 							<tr>
 								<td></td>
@@ -42,7 +42,7 @@ componentDidMount() {
 						</tbody>
 					</table>
 					<div className="mt-4 d-flex justify-content-around">
-						<h5 class="border border-success">
+						<h5 class="border border-success p-3">
 							Total: $
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
 						</h5>
