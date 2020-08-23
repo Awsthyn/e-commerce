@@ -19,14 +19,14 @@ class Order extends Component {
 					<table className="table ">
 						<thead className="text-center">
 							<tr>
-								<td>X</td>
-								<td>Producto</td>
-								<td>Precio</td>
-								<td>Cantidad</td>
-								<td>Subtotal</td>
+								<td></td>
+								<td class="font-weight-bold text-info border border-secondary bg-dark">Producto</td>
+								<td class="font-weight-bold text-info border border-secondary bg-dark">Precio por unidad</td>
+								<td class="font-weight-bold text-info border border-secondary bg-dark">Cantidad</td>
+								<td class="font-weight-bold text-info border border-secondary bg-dark">Subtotal</td>
 							</tr>
 						</thead>
-						<tbody className="text-center">
+						<tbody className="text-center border">
 							{cart.map((e) => (
 								<OrderLine
 									dataid={e.id}
@@ -40,7 +40,7 @@ class Order extends Component {
 						</tbody>
 					</table>
 					<div className="mt-4 d-flex justify-content-around">
-						<h5 className="">
+						<h5 class="border border-success">
 							Total: $
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
 						</h5>

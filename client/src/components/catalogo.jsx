@@ -4,15 +4,8 @@ import { getSearchedProducts, getAllProducts, getCategoryProducts } from "../Red
 import { getAllCategories } from "../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
-//-------- para traer cats y prods al principio y ya esten disponibles -------
-// store.dispatch(getAllCategories());
-// store.dispatch(getAllProducts());
-
-
-
-
 export const Catalogo = ({categories, products, getAllProducts, getCategoryProducts}) => {
-    console.log("EStoy en Catalogo", products)
+
     return (
         <div className="container-fluid row">
 
@@ -41,8 +34,6 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
             </div>
         </div>);
 };
-
-
 
 function mapStateToProps(state) {
     return {

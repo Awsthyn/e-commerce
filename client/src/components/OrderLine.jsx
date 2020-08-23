@@ -8,13 +8,13 @@ export function OrderLine({ dataid, name, price, quantity, deleteProductFromCart
 
 	return (
 		<tr>
-			<td data-id={dataid} type="button btn-sm" className="btn btn-danger btn-sm" onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
+			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm "  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
 				X
 			</td>
-			<td>{name}</td>
-			<td>{price}</td>
-			<td>{quantity}</td>
-			<td>
+			<td class="border border-info">{name}</td>
+			<td class="border border-info">$ {price}</td>
+			<td class="border border-info">{quantity}</td>
+			<td >
 				<Counter />
 			</td>
 			<td className="subtotal">{quantity * price}</td>
