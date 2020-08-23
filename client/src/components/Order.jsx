@@ -5,16 +5,14 @@ import { deleteProductFromCart } from '../Redux/actions/orderLineActions';
 import OrderLine from '../components/OrderLine';
 
 class Order extends Component {
-  constructor (props) {
-    super(props)
 
-}
-componentDidMount() {
-    this.props.getCart();
-}
+    componentDidMount() {
+        this.props.getCart();
+    }
+    
 	render() {
     const {cart} = this.props;
-		return ( 
+		return (
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
 				<div className="">
