@@ -11,19 +11,19 @@ class Order extends Component {
     }
     
 	render() {
-    const {cart} = this.props;
-		return (
+	const {cart} = this.props;
+		return ( 
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
 				<div className="">
-					<table className="table ">
+					<table className="table">
 						<thead className="text-center">
 							<tr>
 								<td></td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Producto</td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Precio por unidad</td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Cantidad</td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Subtotal</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Producto</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Precio por unidad</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Cantidad</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Subtotal</td>
 							</tr>
 						</thead>
 						<tbody className="text-center border">
@@ -40,7 +40,7 @@ class Order extends Component {
 						</tbody>
 					</table>
 					<div className="mt-4 d-flex justify-content-around">
-						<h5 class="border border-success">
+						<h5 class="border border-success p-3">
 							Total: $
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
 						</h5>

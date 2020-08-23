@@ -80,14 +80,15 @@ server.delete("/:userId/cart", (req, res, next) => {
 // S41
 server.put("/:userId/cart", (req, res, next) => {
   try {
-    const { id, quantity, price } = req.body;
+    const { id, quantity } = req.body;
+    console.log(quantity)
     OrderLine.update(
       {
-        quantity,
-        price
+        quantity
       },
       { where: { id } }
-    ).then(() => {
+    ).then((data) => {
+      console.log(data)
       res.sendStatus(200);
     });
   } catch (error) {
