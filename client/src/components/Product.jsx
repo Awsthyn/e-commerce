@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import store from "../Redux/store"
 
 
-export function ProductComponent({id, productDetails, products, name, price, quantity}) {
+export function ProductComponent({id, productDetails, addToOrder }) {
     let history = useHistory() 
 
     return (        
@@ -44,7 +44,7 @@ export function ProductComponent({id, productDetails, products, name, price, qua
                     className="btn btn-dark ml-auto mr-auto"
                     onClick={() => {
                         history.push(`/Order`)
-                        store.dispatch(addToOrder(productDetails.id, 1))
+                        addToOrder(productDetails.id, 1, productDetails.stock)
                     }}
                 >
             Agregar al carrito</button>

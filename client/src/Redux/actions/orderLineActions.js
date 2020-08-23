@@ -12,14 +12,14 @@ export function addToOrder(productId, quantity) {
 		})
 			.then((res) => res.json())
 			.then((res) => {
-				console.log(res);
+				console.log("fetch add")
 				dispatch({
 					type: ADD_PRODUCT_TO_CART,
 					payload: res,
 				});
 			})
 			.catch((err) => console.error(err));
-	};
+	}    
 }
 
 export function deleteProductFromCart(productId) {
