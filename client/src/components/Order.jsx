@@ -12,11 +12,6 @@ class Order extends Component {
 componentDidMount() {
     this.props.getCart();
 }
-componentWillReceiveProps(prevProps) {
-	// Uso tipico (no olvides de comparar los props):
-	console.log(prevProps.cart)
-	console.log(this.props.cart)
-  }
 	render() {
 	const {cart} = this.props;
 		return ( 
