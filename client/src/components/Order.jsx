@@ -5,13 +5,11 @@ import { deleteProductFromCart } from '../Redux/actions/orderLineActions';
 import OrderLine from '../components/OrderLine';
 
 class Order extends Component {
-  constructor (props) {
-    super(props)
 
-}
-componentDidMount() {
-    this.props.getCart();
-}
+    componentDidMount() {
+        this.props.getCart();
+    }
+    
 	render() {
 	const {cart} = this.props;
 		return ( 
