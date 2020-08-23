@@ -11,9 +11,9 @@ export function OrderLine({ dataid, name, price, quantity, deleteProductFromCart
 			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm "  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
 				X
 			</td>
-			<td class="border border-info">{name}</td>
-			<td class="border border-info">$ {price}</td>
-			<td class="border border-info">{quantity}</td>
+			<td className="border border-info">{name}</td>
+			<td className="border border-info">$ {price}</td>
+			<td className="border border-info">{quantity}</td>
 			<td >
 				<Counter />
 			</td>

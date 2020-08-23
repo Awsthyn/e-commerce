@@ -22,10 +22,10 @@ componentDidMount() {
 						<thead className="text-center">
 							<tr>
 								<td></td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Producto</td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Precio por unidad</td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Cantidad</td>
-								<td class="font-weight-bold text-info border border-secondary bg-dark">Subtotal</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Producto</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Precio por unidad</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Cantidad</td>
+								<td className="font-weight-bold text-info border border-secondary bg-dark">Subtotal</td>
 							</tr>
 						</thead>
 						<tbody className="text-center border">
