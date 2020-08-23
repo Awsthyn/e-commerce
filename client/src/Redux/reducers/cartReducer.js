@@ -23,12 +23,12 @@ export default function orderReducer (state = initialState, action) {
             cart: []
           };
         case DELETE_PROD_FROM_CART: {
-          console.log(state.cart.filter((p) => p.id != action.payload))
+          console.log(state.cart.filter((p) => p.id !== action.payload))
           return {
             ...state,
-            cart: state.cart.filter((p) => p.id != action.payload)
+            cart: state.cart.filter((p) => p.id !== action.payload)
           }
-        }  
+        }
         default: return {...state}
     }
   }
