@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_TO_CART, DELETE_PROD_FROM_CART } from '../actions/constants';
+import { ADD_PRODUCT_TO_CART, DELETE_PROD_FROM_CART, EDIT_QUANTITY_FROM_CART } from '../actions/constants';
 
 export function addToOrder(productId, quantity) {
 	const url = 'http://localhost:3001/users/1/cart';
@@ -38,4 +38,17 @@ export function deleteProductFromCart(productId) {
     }
 }
 
-
+export function editQuantity(orderLine, quantity){
+	return function(dispatch) {
+		dispatch({type: EDIT_QUANTITY_FROM_CART, payload: [orderLine, quantity]})
+		return fetch(`http://localhost:3001/users/1/cart`, {
+			method: 'PUT',
+			body: JSON.stringify({id: orderLine, quantity}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(res => {
+			
+		}).catch(err => console.error(err))
+	}
+}

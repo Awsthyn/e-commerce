@@ -12,8 +12,13 @@ class Order extends Component {
 componentDidMount() {
     this.props.getCart();
 }
+componentWillReceiveProps(prevProps) {
+	// Uso tipico (no olvides de comparar los props):
+	console.log(prevProps.cart)
+	console.log(this.props.cart)
+  }
 	render() {
-    const {cart} = this.props;
+	const {cart} = this.props;
 		return ( 
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>

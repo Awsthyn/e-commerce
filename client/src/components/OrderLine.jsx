@@ -1,25 +1,32 @@
-import React, {useState} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { deleteProductFromCart } from '../Redux/actions/orderLineActions';
+import { editQuantity, deleteProductFromCart } from '../Redux/actions/orderLineActions';
 //import Counter from '../components/Counter';
 //import {addToOrder } from "../Redux/actions/orderActions"
+import { useDispatch, useSelector } from 'react-redux'
 
-
-export function OrderLine({ dataid, name, price, quantity, deleteProductFromCart }) {
-	const [count, setCount] = useState(quantity);
-
-	return (
-		<tr>
+export class OrderLine extends Component {
+	constructor (props) {
+		super(props)
+	}
+	render() {
+		const { dataid, name, price, quantity, deleteProductFromCart, editQuantity } = this.props
+		return (
+			<tr>
 			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2"  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
 				X
 			</td>
 			<td className="border border-info">{name}</td>
 			<td className="border border-info">$ {price}</td>
-			<td className="border border-info"><input type="number" value={count} onChange={(e) => setCount(e.target.value)}/></td>
+			<td className="border border-info"><input type="number" value={quantity} onChange={(e) => {
+				editQuantity(dataid, e.target.value)}}/></td>
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>
-	);
+		)
+	}
 }
+
+
 
 function mapStateToProps(state) {
 	return {
@@ -28,8 +35,35 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
 	return {
-		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id))
+		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
+		editQuantity: (orderLine, quantity) => dispatch(editQuantity(orderLine, quantity))
 	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderLine);
+
+
+
+
+
+
+
+/*
+export function OrderLine({ dataid, name, price, quantity, deleteProductFromCart }) {
+	const [count, setCount] = useState(quantity);
+	const dispatch = useDispatch()
+	return (
+		<tr>
+			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2"  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
+				X
+			</td>
+			<td className="border border-info">{name}</td>
+			<td className="border border-info">$ {price}</td>
+			<td className="border border-info"><input type="number" value={count} onChange={(e) => {
+				setCount(e.target.value)
+				dispatch({ type: 'EDIT_QUANTITY_FROM_CART', payload: [dataid, e.target.value] })}}/></td>
+			<td className="border border-info subtotal">{quantity * price}</td>
+		</tr>
+	);
+}
+*/
