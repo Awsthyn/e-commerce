@@ -10,7 +10,7 @@ export class OrderLine extends Component {
 		super(props)
 	}
 	render() {
-		const { dataid, name, price, quantity, deleteProductFromCart, editQuantity } = this.props
+		const { dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock } = this.props
 		return (
 			<tr>
 			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2"  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
@@ -18,8 +18,9 @@ export class OrderLine extends Component {
 			</td>
 			<td className="border border-info">{name}</td>
 			<td className="border border-info">$ {price}</td>
-			<td className="border border-info"><input type="number" value={quantity} onChange={(e) => {
-				editQuantity(dataid, e.target.value)}}/></td>
+			<td className="border border-info"><input type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={quantity} onChange={(e) => {
+				if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
+				else editQuantity(dataid, e.target.value)}}/></td>
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>
 		)

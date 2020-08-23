@@ -34,6 +34,7 @@ class Order extends Component {
 									name={e.product.name}
 									price={e.product.price}
 									quantity={e.quantity}
+									stock={e.product.stock}
 									deleteProductFromCart={deleteProductFromCart}
 								/>
 							))}
