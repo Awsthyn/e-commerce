@@ -12,48 +12,34 @@ import { connect } from "react-redux";
 
 
 export const Catalogo = ({categories, products, getAllProducts, getCategoryProducts}) => {
-
+    console.log("EStoy en Catalogo", products)
     return (
-
-
         <div className="container-fluid row">
-        {/* <div className="col-md-3">
-            <h1 className={S.title}>Categorias</h1>
-            <Link>
-                <li onClick={()=>(getAllProducts())}>
 
-                    <b>Todos los productos</b>
-                </button>
-            </Link>
-                {/* {categories.map((e) => (
-                    <Link to={`/catalog/${e.name}`}>
-                        <li
+            <div className="row col-md-12 justify-content-center m-3">
+            {
+                products.length > 0 ?
+                    products.map((e) => (
+                        <ProductCard
                             key={e.id}
-                            id={e.id}
+                            id = {e.id}
                             name={e.name}
-                            onClick={(e) =>
-                                getCategoryProducts(e.target.getAttribute("name"))
-                            }>
-                            {e.name}
-                        </li>
-                    </Link>
-
-                ))}
-        </div> */}
-        <div className="row col-md-12 justify-content-center m-3">
-            {products.map((e) => (
-
-                <ProductCard
-                    key={e.id}
-                    id = {e.id}
-                    name={e.name}
-                    price={e.price}
-                    image={`http://ecommerce-g5.tk/server-fotos/${e.images[1].url}.jpg`}
-                />
-            ))}
-        </div>
-    </div>
-    );
+                            price={e.price}
+                            image={`http://ecommerce-g5.tk/server-fotos/${e.images[1].url}.jpg`}
+                        />
+                    ))
+                : <>
+                    <ProductCard
+                        id = {-1}
+                        name={'No existente'}
+                        price = {0.00}
+                        image={'https://cronicaglobal.elespanol.com/uploads/s1/32/73/32/0/wally.jpeg'}
+                    />
+                    <p>No se encontraron resultados</p>
+                  </>
+            }
+            </div>
+        </div>);
 };
 
 
