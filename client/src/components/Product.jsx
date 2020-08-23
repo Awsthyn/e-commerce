@@ -1,7 +1,7 @@
 import React from "react";
 
 import RatingPage from "./calificacionCaras";
-import { addToOrder } from "../Redux/actions/orderLineActions"
+import { addToOrder } from "../Redux/actions/cartActions"
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import store from "../Redux/store"

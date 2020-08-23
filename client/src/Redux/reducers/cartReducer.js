@@ -26,7 +26,7 @@ export default function orderReducer (state = initialState, action) {
           console.log(state.cart.filter((p) => p.id !== action.payload))
           return {
             ...state,
-            cart: state.cart.filter((p) => p.id !== action.payload)
+            cart: state.cart.filter((p) => p.id !== Number(action.payload))
           }
         }
         case EDIT_QUANTITY_FROM_CART: {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
-import { addToOrder } from "../Redux/actions/orderLineActions"
+import { addToOrder } from "../Redux/actions/cartActions"
 import { connect } from "react-redux";
 import store from "../Redux/store"
 
@@ -10,7 +10,7 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
   let history = useHistory()
 
   function handleCart (id) {
-    if(stock>1){
+    if(stock>=1){
       addToOrder(id, 1)
       history.push(`/Order`)
     }

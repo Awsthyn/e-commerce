@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCart, emptyCart } from '../Redux/actions/orderActions';
-import { deleteProductFromCart } from '../Redux/actions/orderLineActions';
+import { getCart, emptyCart, deleteProductFromCart } from '../Redux/actions/cartActions';
 import OrderLine from '../components/OrderLine';
 
 class Order extends Component {
@@ -41,7 +40,7 @@ class Order extends Component {
 						</tbody>
 					</table>
 					<div className="mt-4 d-flex justify-content-around">
-						<h5 class="border border-success p-3">
+						<h5 className="border border-success p-3">
 							Total: $
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
 						</h5>

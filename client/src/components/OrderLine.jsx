@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { editQuantity, deleteProductFromCart } from '../Redux/actions/orderLineActions';
+import { editQuantity, deleteProductFromCart } from '../Redux/actions/cartActions';
 //import Counter from '../components/Counter';
 //import {addToOrder } from "../Redux/actions/orderActions"
-import { useDispatch, useSelector } from 'react-redux'
 
 export class OrderLine extends Component {
 	constructor (props) {
