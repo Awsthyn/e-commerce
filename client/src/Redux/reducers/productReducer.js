@@ -18,7 +18,7 @@ export default function productReducer (state = initialState, action) {
             }
 
         case SET_DETAILS:
-            console.log('productDetails')
+            console.log('productDetails', action.payload)
             return {
                 ...state,
                 productDetails: action.payload

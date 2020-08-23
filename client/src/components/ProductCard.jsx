@@ -6,14 +6,14 @@ import { connect } from "react-redux";
 import store from "../Redux/store"
 
 
-export function ProductCard({ id, name, price, image, quantity }) {
+export function ProductCard({ id, name, price, image, stock }) {
   let history = useHistory()
 
   return(    
     <div className="card bg-light p-2 m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
       <img src={image} className="card-img-top rounded border border-dark" alt={name} />
       <div className="card-body d-flex flex-column justify-content-center">
-        <h5 className="card-title text-center">{name}</h5>
+  {stock<1 ?<h5 className="card-title text-center">{name}<span class="text-danger font-weight-light">       Sin Stock</span></h5>:<h5 className="card-title text-center">{name}</h5>}
         <p className="card-text text-center">$ {price}</p>
         <div className="row">
         <button data-id={id} type= 'button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {

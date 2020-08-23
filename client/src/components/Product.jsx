@@ -25,9 +25,12 @@ export function ProductComponent({id, productDetails, products, name, price, qua
                 </div>
             </div>
             <div className="ml-4 pl-2" style={{ width: "450px" }}>
+            <button onClick={() => window.location = "/catalog"} type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
                 <h3 className="pt-4 pb-3">{productDetails.name}</h3>
                 <hr></hr>
-                <h6>Stock: {productDetails.stock}</h6>
+    {productDetails.stock < 1 ? <h6 class="text-danger">Temporalmente sin Stock</h6> : <h6>Stock: {productDetails.stock}</h6>/* <h6>Stock: {productDetails.stock}</h6> */}
                 <hr></hr>
                 <h5>$ {productDetails.price}</h5>
                 <hr></hr>
