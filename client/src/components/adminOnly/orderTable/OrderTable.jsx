@@ -38,8 +38,8 @@ class OrderTable extends React.Component {
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>Total</th>
                         <th>Editar Estado</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
             <tbody>
@@ -51,7 +51,6 @@ class OrderTable extends React.Component {
                     <td>{order.user.first_name}</td>
                     <td>{order.user.last_name}</td>
                     <td>{order.user.email}</td>
-                    <td>$ {order.total || order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td>
                     <td>
                     <select name='orderStatus' data-order-id={order.id} value={order.orderStatus.toLowerCase()} onChange={this.handleChange}>
                         {
@@ -61,6 +60,7 @@ class OrderTable extends React.Component {
                         }
                     </select>
                     </td>
+                    {order.total !== null? <td>${order.total}</td> : <td>$0</td>}
                 </tr>)
             )}
             </tbody>
