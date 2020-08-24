@@ -20,7 +20,7 @@ export function SearchBar(props) {
       value={prod}
       onChange={e=>setProd(e.target.value)}
       />
-    <input className="btn btn-sm btn-outline-light" type="submit" value= "Mostrar"/>
+    <input className="btn btn-sm btn-outline-info text-info" type="submit" value= "Mostrar"/>
     </form>
   );
 }

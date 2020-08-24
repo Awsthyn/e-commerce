@@ -10,8 +10,8 @@ const Crud = (props) => {
         <div className="container mt-4">
         <Link to="products/form/new" className="btn btn-success">Nuevo</Link>
         <h2 className="col-11 text-center">Edición de productos</h2>
-          <table className="table">
-            <thead className="text-center">
+          <table className="table table-hover">
+            <thead className="text-center font-weight-bold text-info border border-secondary bg-dark">
               <tr>
                 <th>Producto</th>
                 <th>Descripción</th>
@@ -23,8 +23,8 @@ const Crud = (props) => {
 
                 {products.map((e, i) => (
                     <tr key={e.id}>
-                            <td>{e.name}</td>
-                            <td>{e.description}</td>
+                            <td className="border border-info">{e.name}</td>
+                            <td >{e.description}</td>
                             <td> <Link
                                 to={{
                                   pathname: `/Admin/products/${e.id}/edit`,

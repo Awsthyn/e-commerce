@@ -11,7 +11,7 @@ export class OrderLine extends Component {
 	render() {
 		const { dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock } = this.props
 		return (
-			<tr>
+		<tr>
 			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2"  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
 				X
 			</td>

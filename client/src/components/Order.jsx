@@ -15,7 +15,7 @@ class Order extends Component {
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
 				<div className="">
-					<table className="table">
+					<table className="table table-hover">
 						<thead className="text-center">
 							<tr>
 								<td></td>

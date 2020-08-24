@@ -7,6 +7,7 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
 } from "mdbreact";
+import UserIcon from "./UserIcon"
 import {
   getAllProducts,
   getCategoryProducts,
@@ -24,17 +25,17 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
   let history = useHistory();
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify">
-        <a className="navbar-brand" href="/">
+    <div >
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around ">
+        <a className="navbar-brand text-info" href="/">
           MERCADO NEGRO
         </a>
-        <div className="navbar-nav" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
+        <div className="navbar-nav text-info" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto d-flex justify-content-around ">
             <li>
               <ul>
               <MDBDropdown>
-                <MDBDropdownToggle caret color="dark">
+                <MDBDropdownToggle caret color="dark text-info">
                   Categorias
                 </MDBDropdownToggle>
                 <MDBDropdownMenu basic>
@@ -50,7 +51,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   </li>
 
                   {categories.map((e) => (
-                    <Link key={e.name + e.id} to={`/catalog/${e.name}`}>
+                    <Link key={e.name + e.id} to={`/catalog/${e.name}`} class="btn btn-sm btn-outline-info">
                       <MDBDropdownItem
                         data-id={e.id}
                         name={e.name}
@@ -71,17 +72,21 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
               </ul>
             </li>
             <li className="nav-item">
-              <NavLink to="/Order" className="nav-link">
-                <i className="fas fa-cart-arrow-down "></i>
+              <NavLink to="/Order" className="nav-link text-info" >
+                <i className="fas fa-cart-arrow-down"></i>
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/AdminLogin" className="nav-link">
-                AdminLogin
-              </NavLink>
+            <li>
+            <svg width="25" height="23" viewBox="0 0 16 16" class="bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+</svg>
+            </li>
+          <SearchBar />
+          <li>
+          <UserIcon/>
+             
             </li>
           </ul>
-          <SearchBar />
         </div>
       </nav>
     </div>
