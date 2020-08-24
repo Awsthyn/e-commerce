@@ -45,7 +45,12 @@ class Order extends Component {
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
 						</h5>
 						<div>
-							<button className="btn btn-success" onClick={() => this.props.confirmCart(document.getElementById("total").innerHTML.slice(8))}>Confirmar compra</button>
+							<button className="btn btn-success" onClick={() => {
+								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8))
+								alert("La compra se ha procesado exitosamente. En breve nos pondremos en contacto con usted")
+								window.location = "/"
+							}
+								}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={this.props.emptyCart}>
 								Vaciar carrito
 							</button>
