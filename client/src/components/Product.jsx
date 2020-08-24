@@ -74,7 +74,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToOrder: (id) => dispatch(addToOrder(id)),
+        addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity))
     };
 }
 
