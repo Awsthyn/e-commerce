@@ -118,8 +118,10 @@ export function addProduct(product){
             body: JSON.stringify(product),
             headers: {
                 'Content-Type': 'application/json'
-            }
-        }).then(res => {
+            } 
+        })
+        .then(res => res.json())
+        .then(res => {
             console.info("producto creado")
             dispatch({type: GET_PRODUCTS, payload: res})
         
