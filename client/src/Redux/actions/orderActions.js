@@ -1,4 +1,4 @@
-import { GET_ALL_ORDERS_USERS, GET_PRODUCTS_CART, DELETE_CART } from './constants';
+import { GET_ALL_ORDERS_USERS } from './constants';
 
 export function getAllOrders() {
     return function(dispatch){
@@ -20,38 +20,5 @@ export function editOrder(order){
                 'Content-Type': 'application/json'
             }
         }).then(() => dispatch(getAllOrders()) )
-    }
-}
-
-
-//-----------------------Obtener productos del carrito (user) ------------------------
-export function getCart(){
-    return function (dispatch) {
-        return fetch(`http://localhost:3001/users/1/cart`)
-        .then((r) => r.json())
-        .then((data) => {
-            dispatch({ type: GET_PRODUCTS_CART, payload: data})
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
-}
-
-//-----------------------Vaciar carrito (user)------------------------
-
-export function emptyCart() {
-    return function(dispatch) {
-        return fetch(`http://localhost:3001/users/1/cart`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(()=>{
-            dispatch({type: DELETE_CART})
-        })
-        .catch(err => console.log(err))
     }
 }

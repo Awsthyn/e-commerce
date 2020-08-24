@@ -169,32 +169,33 @@ const bruteDataImages = [
 let imageUrls = [];
 
 bruteDataImages.map((e, i) => {
-  imageUrls.push({ url: e + 2, productId: i + 1 });
-  imageUrls.push({ url: e + 2, productId: i + 1 });
-  imageUrls.push({ url: e + 3, productId: i + 1 });
+
+	imageUrls.push({ url: `http://ecommerce-g5.tk/server-fotos/${e}.jpg`, productId: i + 1 });
+	imageUrls.push({ url: `http://ecommerce-g5.tk/server-fotos/${e + 2}.jpg`, productId: i + 1 });
+	imageUrls.push({ url: `http://ecommerce-g5.tk/server-fotos/${e + 3}.jpg`, productId: i + 1 });
 });
 
 let initialUsers = [
-  {
-    email: "nico@darkmarket.com",
-    first_name: "Nicolás",
-    last_name: "Selicki",
-    address: "San Martín 123",
-    locality: "La Plata",
-    state: "Argentina",
-    password: "Marti te amo",
-    admin: true,
-  },
-  {
-    email: "marti@darkmarket.com",
-    first_name: "Martina",
-    last_name: "Lamejor",
-    address: "San José 123",
-    locality: "Villa Gesell",
-    state: "Argentina",
-    password: "Pimpumpam",
-    admin: true,
-  },
+	{
+		email: 'nico@darkmarket.com',
+		first_name: 'Nicolás',
+		last_name: 'Selicki',
+		address: 'San Martín 123',
+		locality: 'La Plata',
+		state: 'Argentina',
+		password: 'Marti te amo',
+		admin: true,
+	},
+	{
+		email: 'leomaglia@darkmarket.com',
+		first_name: 'Leo',
+		last_name: 'Maglia',
+		address: 'San José 123',
+		locality: 'Villa Gesell',
+		state: 'Argentina',
+		password: 'Pimpumpam',
+		admin: true,
+	},
 ];
 
 let initialOrders = [

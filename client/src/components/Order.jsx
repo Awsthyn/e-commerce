@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCart, emptyCart } from '../Redux/actions/orderActions';
-import { deleteProductFromCart } from '../Redux/actions/orderLineActions';
+import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../Redux/actions/cartActions';
 import OrderLine from '../components/OrderLine';
 
 class Order extends Component {
@@ -34,18 +33,24 @@ class Order extends Component {
 									name={e.product.name}
 									price={e.product.price}
 									quantity={e.quantity}
+									stock={e.product.stock}
 									deleteProductFromCart={deleteProductFromCart}
 								/>
 							))}
 						</tbody>
 					</table>
 					<div className="mt-4 d-flex justify-content-around">
-						<h5 class="border border-success p-3">
+						<h5 id="total" className="border border-success p-3" onClick={()=>console.log(document.getElementById("total").innerHTML.slice(8))}>
 							Total: $
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
 						</h5>
 						<div>
-							<button className="btn btn-success">Confirmar compra</button>
+							<button className="btn btn-success" onClick={() => {
+								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8))
+								alert("La compra se ha procesado exitosamente. En breve nos pondremos en contacto con usted")
+								window.location = "/"
+							}
+								}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={this.props.emptyCart}>
 								Vaciar carrito
 							</button>
@@ -67,7 +72,8 @@ function mapDispatchToProps(dispatch) {
 	return {
     getCart: () => dispatch(getCart()),
 	emptyCart: () => dispatch(emptyCart()),
-	deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id))
+	deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
+	confirmCart: (total) => dispatch(confirmCart(total))
 	};
 }
 
