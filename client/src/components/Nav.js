@@ -27,7 +27,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
   return (
     <div >
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around ">
-         <img src={require('../assets/MercadoNegro.gif')} alt="logo" />
+         <img src={require('../assets/MercadoNegro.gif')} alt="logo" onClick={()=>window.location="/"}/>
         <div className="navbar-nav text-info" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto d-flex justify-content-around ">
             <li>
