@@ -16,7 +16,9 @@ class EditProduct extends React.Component {
             description: props.product.description,
             price: props.product.price,
             stock: props.product.stock,
-            image:props.product.image,
+            image1:props.product.images[2].url,
+            image2:props.product.images[1].url,
+            image3:props.product.images[0].url,
             category: props.product.categories
         }
         this.categories = props.categories
@@ -84,14 +86,13 @@ class EditProduct extends React.Component {
                   <label>Stock:</label>
                   <input id="stock" name="stock" onChange={this.handleChange} value={this.state.stock} className="form-control" required />
               </div>
-              <div className="form-group">
-              <label>
-                Imagen:
-                <select value={this.state.image} name="image" onChange={this.handleChange}>
-                  {imgOptions.map(e =>{ return (<option value={e}>{e}</option>)})}
-          </select>
-          </label>
-              </div>
+
+              <div className="form-group d-flex flex-column">
+                <label>Imagen:</label>
+                <input type="text" id="image1" name="image1" value={this.state.image1} onChange={this.handleChange}/>
+                <input type="text" id="image2" name="image2" value={this.state.image2} onChange={this.handleChange}/>
+                <input type="text" id="image3" name="image3" value={this.state.image3} onChange={this.handleChange}/>
+                </div>
 
               <label>Categoria:</label>
             <div className="form-check form-check-inline">

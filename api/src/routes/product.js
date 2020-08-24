@@ -18,16 +18,14 @@ server.get('/:id', (req, res, next) => {
 });
 
 server.post('/', (req, res, next) => {
-	let { name, description, price, stock, image, category } = req.body;
-	image === '' ? (image = 'botas') : null;
-
+	let { name, description, price, stock, image1, image2, image3, category } = req.body;
 	const categories = category; // Viene del cliente como category pero sería mejor si dijera categories
 	Product.create({
 		name: name,
 		description: description,
 		price: price,
 		stock: stock,
-		images: [{ url: `http://ecommerce-g5.tk/server-fotos/${image}.jpg` }, { url: `http://ecommerce-g5.tk/server-fotos/${image}.jpg` }, { url: `http://ecommerce-g5.tk/server-fotos/${image}.jpg` }],
+		images: [{ url: image1 }, { url: image2 }, { url: image3 }],
 	}, { include: [ Image ]})
 		.then((product) =>
 			categories.forEach((categoryId) => {
@@ -40,7 +38,7 @@ server.post('/', (req, res, next) => {
 
 server.put('/:id', (req, res) => {
 	const { id } = req.params;
-	const { name, description, price, stock, image, category } = req.body;
+	const { name, description, price, stock, image1, image2, image3, category } = req.body;
 	const categories = category;
 	console.log(categories)
 	try {
@@ -50,8 +48,9 @@ server.put('/:id', (req, res) => {
 				description,
 				price,
 				stock,
-			},
-			{ where: { id } }
+				images: [{ url: image1 }, { url: image2 }, { url: image3 }],
+			}, { where: { id },
+			include: [ Image ]}
 		)
 			.then(() => {
 				productsInCategory.destroy({ where: { productId: id } })

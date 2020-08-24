@@ -18,7 +18,7 @@ const Checkbox = ({ initialState, category, onChange }) => {
                 onClick={e => onClick(e.target.checked)}
                 defaultChecked={checked}
             />
-            <label className="form-check-label" >
+            <label className="form-check-label mr-3" >
                 {category.name}
             </label>
         </div>

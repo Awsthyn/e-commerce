@@ -1,7 +1,9 @@
 import React from "react";
 import Checkbox from "../../Checkbox";
 import { addProduct } from "../../../Redux/actions/productActions"
+import { getAllCategories } from "../../../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
+//import { get } from "../../../../../api/src/routes/product";
 
 export class NewProduct extends React.Component {
 
@@ -12,7 +14,9 @@ export class NewProduct extends React.Component {
             description: "",
             price: "",
             stock: "",
-            image: "",
+            image1: "https://i.picsum.photos/id/293/200/200.jpg?hmac=6YL5khsW332VGbJLkqIfYLzyXyT1kj358PA64TJtKuw",
+            image2: "https://i.picsum.photos/id/848/200/200.jpg?hmac=9pGbbeC1Q-zsi7TeMrGb93-TjKBmqPVY-tYuubIIqyw",
+            image3: "https://i.picsum.photos/id/468/200/200.jpg?hmac=ebOvOZemklGsjJmYIRJ4_YWUDCNNpt5bE0B7EjYJfEA",
             category: []
         }
         this.products = props.products
@@ -47,7 +51,9 @@ export class NewProduct extends React.Component {
                     description: "",
                     price: "",
                     stock: "",
-                    image: "billetera",
+                    image1: "",
+                    image2: "",
+                    image3: "",
                     category: []
                 })
             console.log(product)    
@@ -70,7 +76,10 @@ export class NewProduct extends React.Component {
             })
         }
     }
-
+    componentDidMount() {
+        this.props.getAllCategories();
+    }
+    
     render() {
       const imgOptions = ["billetera", "boom", "botas", "buda", "cohetemenem",
       "conejo", "croma","escaleraalcielo","excalibur","horrocrux", "lorem", "manodedios",
@@ -95,17 +104,15 @@ export class NewProduct extends React.Component {
                     <label>Stock:</label>
                     <input id="stock" name="stock" onChange={this.handleChange} className="form-control" value={this.state.stock} required/>
                 </div>
-                <div className="form-group">
-                <label>
-                Imagen:
-                <select value={this.state.image} name="image" onChange={this.handleChange}>
-                  {imgOptions.map(e =>{ return (<option value={e}>{e}</option>)})}
-          </select>
-          </label>
+                <div className="form-group d-flex flex-column">
+                <label>Imagen:</label>
+                <input type="text" id="image1" name="image1" value={this.state.image1} onChange={this.handleChange}/>
+                <input type="text" id="image2" name="image2" value={this.state.image2} onChange={this.handleChange}/>
+                <input type="text" id="image3" name="image3" value={this.state.image3} onChange={this.handleChange}/>
                 </div>
-                    <label>Categoria:</label>
+                    <label className="mr-2">Categoria:</label>
                 <div className="form-check form-check-inline">
-                    {this.categories.map( category => {
+                    {this.props.categories.map( category => {
                         return (
                         <Checkbox key = {category.id} initialState={false} category={category} onChange={this.onCheckboxClicked} required/>
                         )}
@@ -128,6 +135,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addProduct: product => dispatch(addProduct(product)),
+    getAllCategories: () => dispatch(getAllCategories()),
   };
 }
 
