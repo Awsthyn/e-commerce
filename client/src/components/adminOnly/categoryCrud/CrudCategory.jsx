@@ -11,7 +11,7 @@ export const CrudCategory = ({ categories }) => {
         <div className="container mt-4">
             <Link to="/Admin/categories/form/new" className="btn btn-success">Nuevo</Link>
             <h2 className="col-11 text-center">Edición de categorías</h2>
-            <table className="table">
+            <table className="table table-hover">
                 <thead className="text-center">
                     <tr>
                         <th>Categoría</th>

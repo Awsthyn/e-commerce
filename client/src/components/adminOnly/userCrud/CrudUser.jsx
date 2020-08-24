@@ -17,7 +17,7 @@ class CrudUser extends React.Component{
             <div className="container mt-4">
                 <Link to="CrudUser/form/new" className="btn btn-success">Nuevo</Link>
                 <h2 className="col-11 text-center">Edición de usuarios</h2>
-                <table className="table">
+                <table className="table table-hover">
                     <thead className="text-center">
                         <tr>
                             <th>Usuario</th>
