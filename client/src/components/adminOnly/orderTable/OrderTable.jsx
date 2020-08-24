@@ -26,6 +26,7 @@ class OrderTable extends React.Component {
 
     render () {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
+    
         return (
 
             <div className="container mt-4">
@@ -43,7 +44,7 @@ class OrderTable extends React.Component {
                     </tr>
                 </thead>
             <tbody>
-            {console.log(this.props.orders)}
+            {console.log(this.props.orders.map(e => e.orderLines))}
             {this.props.orders.map(order =>(
                 <tr key={order.id}>
                     <td>{order.id}</td>
@@ -60,7 +61,7 @@ class OrderTable extends React.Component {
                         }
                     </select>
                     </td>
-                    {order.total !== null? <td>${order.total}</td> : <td>$0</td>}
+                    {order.total !== null? <td>${order.total}</td> : <td>${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td>}
                 </tr>)
             )}
             </tbody>
