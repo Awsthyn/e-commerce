@@ -17,7 +17,7 @@ export class OrderLine extends Component {
 			</td>
 			<td className="border border-info">{name}</td>
 			<td className="border border-info">$ {price}</td>
-			<td className="border border-info"><input type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={quantity} onChange={(e) => {
+			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={quantity} onChange={(e) => {
 				if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
 				else editQuantity(dataid, e.target.value)}}/></td>
 			<td className="border border-info subtotal">{quantity * price}</td>

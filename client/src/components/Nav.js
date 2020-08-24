@@ -51,7 +51,6 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                   </li>
 
                   {categories.map((e) => (
-                    <Link key={e.name + e.id} to={`/catalog/${e.name}`} class="btn btn-sm btn-outline-info">
                       <MDBDropdownItem
                         data-id={e.id}
                         name={e.name}
@@ -65,7 +64,6 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                       >
                         {e.name}
                       </MDBDropdownItem>
-                    </Link>
                   ))}
                 </MDBDropdownMenu>
               </MDBDropdown>
