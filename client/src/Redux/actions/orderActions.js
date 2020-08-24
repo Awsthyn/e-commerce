@@ -22,6 +22,3 @@ export function editOrder(order){
         }).then(() => dispatch(getAllOrders()) )
     }
 }
-
-
-//-----------------------Obtener productos del carrito (user) ------------------------

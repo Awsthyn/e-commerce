@@ -1,5 +1,6 @@
 import { ADD_PRODUCT_TO_CART, DELETE_PROD_FROM_CART, EDIT_QUANTITY_FROM_CART, GET_PRODUCTS_CART, DELETE_CART } from '../actions/constants';
-
+import {getAllOrders} from './orderActions'
+//-----------------------Obtener productos del carrito------------------------
 export function getCart(){
     return function (dispatch) {
         return fetch(`http://localhost:3001/users/1/cart`)
@@ -13,7 +14,7 @@ export function getCart(){
     }
 }
 
-//-----------------------Vaciar carrito (user)------------------------
+//----------------------- Vaciar carrito ------------------------
 
 export function emptyCart() {
     return function(dispatch) {
@@ -33,6 +34,7 @@ export function emptyCart() {
 
 
 
+//----------------------- Agregar producto al carrito -----------------------
 
 export function addToOrder(productId, quantity) {
 	const url = 'http://localhost:3001/users/1/cart';
@@ -56,6 +58,8 @@ export function addToOrder(productId, quantity) {
 	}    
 }
 
+//----------------------- Eliminar producto de carrito ------------------------
+
 export function deleteProductFromCart(productId) {
     return function(dispatch) {
 		dispatch({type: DELETE_PROD_FROM_CART, payload: productId})
@@ -73,6 +77,8 @@ export function deleteProductFromCart(productId) {
     }
 }
 
+//-----------------------Editar cantidad de un producto de carrito ------------------------
+
 export function editQuantity(orderLine, quantity){
 	return function(dispatch) {
 		dispatch({type: EDIT_QUANTITY_FROM_CART, payload: [orderLine, quantity]})
@@ -82,8 +88,22 @@ export function editQuantity(orderLine, quantity){
 			headers: {
 				'Content-Type': 'application/json'
 			}
-		}).then(res => {
-			
-		}).catch(err => console.error(err))
+        })
+        .catch(err => console.error(err))
 	}
+}
+
+
+//-----------------------Confirmar compra ------------------------
+
+export function confirmCart(total){
+    return function(dispatch){
+        return fetch(`http://localhost:3001/users/1/cart/completo`,{
+            method: 'PUT',
+            body: JSON.stringify({total}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => dispatch(getAllOrders()) )
+    }
 }

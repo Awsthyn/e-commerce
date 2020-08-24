@@ -76,6 +76,26 @@ server.delete("/:userId/cart", (req, res, next) => {
   }
 });
 
+server.put("/:userId/cart/completo", (req, res, next) => {
+  try {
+    const { total } = req.body;
+    console.log(total)
+    Order.update(
+      {
+        total,
+        orderStatus: "completa"
+      },
+      { where: { userId: req.params.userId, orderStatus: "carrito" } }
+    ).then((data) => {
+      console.log(data)
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+
 //orderLine.js
 // S41
 server.put("/:userId/cart", (req, res, next) => {
