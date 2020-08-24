@@ -25,7 +25,7 @@ class Order extends Component {
 								<td className="font-weight-bold text-info border border-secondary bg-dark">Subtotal</td>
 							</tr>
 						</thead>
-						<tbody className="text-center border">
+						<tbody className="text-center border bg-light">
 							{cart.map((e) => (
 								<OrderLine
 									dataid={e.id}
