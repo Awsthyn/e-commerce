@@ -27,9 +27,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
   return (
     <div >
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around ">
-        <a className="navbar-brand text-info" href="/">
-          MERCADO NEGRO
-        </a>
+         <img src={require('../assets/MercadoNegro.gif')} alt="logo" />
         <div className="navbar-nav text-info" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto d-flex justify-content-around ">
             <li>
@@ -82,7 +80,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
           <SearchBar />
           <li>
           <UserIcon/>
-             
+
             </li>
           </ul>
         </div>
