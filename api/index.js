@@ -74,3 +74,4 @@ conn
   .then(() => {
     Review.bulkCreate(initialReview)
   })
+  .catch((error) => console.log(error))

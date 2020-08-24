@@ -31,13 +31,13 @@ const initialProducts = [
     name: "BOOM!",
     description:
       "Cada vez que se pronuncia esta palabra, un HENRY consigue trabajo en blanco",
-    price: 99990,
+    price: 4500,
     stock: 500,
   },
   {
     name: "Botas del Gato con Botas",
     description: "Miau! Para levantar muchas gatitas.",
-    price: 100000,
+    price: 5000,
     stock: 0,
   },
   {
@@ -51,7 +51,7 @@ const initialProducts = [
     name: "Cohete espacial",
     description: "Te lleva a Japón o a Corea en 90 minutos.",
     price: 500,
-    stock: 0,
+    stock: 30,
   },
   {
     name: "Pata de conejo",
@@ -70,38 +70,38 @@ const initialProducts = [
     name: "Escalera al cielo",
     description: "Uno de los pocos senderos que te lleva al paraíso (musical).",
     price: 500,
-    stock: 150,
+    stock: 0,
   },
   {
     name: "Excalibur",
     description: "La espada clavada en la piedra.",
-    price: 500,
+    price: 8500,
     stock: 2000,
   },
   {
     name: "Horrocrux",
     description: "Para contener fragmentos de un alma y evitar la muerte.",
-    price: 500,
+    price: 9000,
     stock: 2000,
   },
   {
     name: "Poema de Lorem Ipsum",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    price: 1000,
+    price: 1500,
     stock: 20000,
   },
   {
     name: "La mano de Dios",
     description: "Golazo contra los ingleses en el 86.",
-    price: 100000,
+    price: 120000,
     stock: 1,
   },
   {
     name: "Mesa redonda estilo medieval",
     description:
       "Es como una mesa… pero redonda. Ideal para regalarle a un caballero de Bretaña.",
-    price: 500,
+    price: 9500,
     stock: 2000,
   },
   {
@@ -114,14 +114,14 @@ const initialProducts = [
     name: "Necronomicón",
     description:
       "Libro de saberes arcanos y magia ritual, cuya lectura provoca la locura y la muerte",
-    price: 500,
+    price: 6500,
     stock: 2000,
   },
   {
     name: "Santo Grial",
     description:
       "Copa usada por Jesucristo en la Última Cena. Convierte el agua en vino.",
-    price: 500,
+    price: 800,
     stock: 2000,
   },
 ];

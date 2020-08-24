@@ -27,8 +27,8 @@ server.post('/', (req, res, next) => {
 		description: description,
 		price: price,
 		stock: stock,
-		images: [{ url: image }, { url: image + 2 }, { url: image + 3 }],
-	})
+		images: [{ url: `http://ecommerce-g5.tk/server-fotos/${image}.jpg` }, { url: `http://ecommerce-g5.tk/server-fotos/${image}.jpg` }, { url: `http://ecommerce-g5.tk/server-fotos/${image}.jpg` }],
+	}, { include: [ Image ]})
 		.then((product) =>
 			categories.forEach((categoryId) => {
 				Category.findByPk(categoryId).then((category) => product.addCategory(category));

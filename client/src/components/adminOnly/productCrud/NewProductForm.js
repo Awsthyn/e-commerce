@@ -47,9 +47,10 @@ export class NewProduct extends React.Component {
                     description: "",
                     price: "",
                     stock: "",
-                    image: "",
+                    image: "billetera",
                     category: []
                 })
+            console.log(product)    
             alert("El producto se creó correctamente")
             window.location = '/Admin/CrudProduct'
         }).catch(() => alert("Se produjo un Error al crear el Producto"))
