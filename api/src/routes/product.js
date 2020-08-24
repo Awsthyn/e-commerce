@@ -40,7 +40,6 @@ server.put('/:id', (req, res) => {
 	const { id } = req.params;
 	const { name, description, price, stock, image1, image2, image3, category } = req.body;
 	const categories = category;
-	console.log(categories)
 	try {
 		Product.update(
 			{
@@ -53,16 +52,15 @@ server.put('/:id', (req, res) => {
 			include: [ Image ]}
 		)
 			.then(() => {
+				console.info('categoy', category)
 				productsInCategory.destroy({ where: { productId: id } })
-				res.sendStatus(200);
-			})
-			.then(() => {
-				productsInCategory.bulkCreate(
+				.then(() => productsInCategory.bulkCreate(
 					categories.map((e) => {
 						if (typeof e === "object") return { productId: id, categoryId: e.id }
 						else return { productId: id, categoryId: e };
 					})
-				);
+				))
+				//res.sendStatus(200);
 			})
 			.then(() => res.sendStatus(200));
 	} catch (error) {
