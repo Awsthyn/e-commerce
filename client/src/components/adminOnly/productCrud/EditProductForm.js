@@ -86,9 +86,9 @@ class EditProduct extends React.Component {
 
               <div className="form-group d-flex flex-column">
                 <label>Imagen:</label>
-                <input type="url" pattern="https://.*" id="image1" name="image1" value={this.state.image1} onChange={this.handleChange} required/>
-                <input type="url" pattern="https://.*" id="image2" name="image2" value={this.state.image2} onChange={this.handleChange} required/>
-                <input type="url" pattern="https://.*" id="image3" name="image3" value={this.state.image3} onChange={this.handleChange} required/>
+                <input type="url" id="image1" name="image1" value={this.state.image1} onChange={this.handleChange} required/>
+                <input type="url" id="image2" name="image2" value={this.state.image2} onChange={this.handleChange} required/>
+                <input type="url" id="image3" name="image3" value={this.state.image3} onChange={this.handleChange} required/>
                 </div>
 
               <label>Categoria:</label>
