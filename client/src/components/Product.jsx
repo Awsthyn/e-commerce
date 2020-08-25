@@ -13,16 +13,17 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
       getCart()
     }, [])
     function handleCart (id) {
-        if(productDetails.stock>1){
-            let indexProductCart = cart.findIndex(e => e.product.id == id)
-            console.log(indexProductCart)
+        let indexProductCart = cart.findIndex(e => e.product.id == id)
+        if(productDetails.stock>1  && productDetails.stock > cart[indexProductCart].quantity){
             if(indexProductCart == -1){
             addToOrder(id, 1)
             alert("El producto se agregó al carrito correctamente")
             }
             else {
-                editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)}
-        }
+                editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)
+                alert("El producto se agregó al carrito correctamente")}
+                getCart()}
+        else if (productDetails.stock == cart[indexProductCart].quantity)  alert("Lo sentimos, no disponemos de la cantidad que usted está solicitando")
         else {alert("No se ha podido agregar a carrito debido a falta temporal de stock.")}
     }
     console.log(cart)
