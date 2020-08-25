@@ -1,21 +1,27 @@
 import React, {useEffect} from "react";
 
 import RatingPage from "./calificacionCaras";
-import { addToOrder, getCart } from "../Redux/actions/cartActions"
+import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import styles from '../css/product.module.css'
 
 
-export function ProductComponent({id, productDetails, addToOrder, cart, getCart }) {
+export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity }) {
     let history = useHistory() 
     useEffect(()=>{
       getCart()
     }, [])
     function handleCart (id) {
         if(productDetails.stock>1){
+            let indexProductCart = cart.findIndex(e => e.product.id == id)
+            console.log(indexProductCart)
+            if(indexProductCart == -1){
             addToOrder(id, 1)
             alert("El producto se agregó al carrito correctamente")
+            }
+            else {
+                editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)}
         }
         else {alert("No se ha podido agregar a carrito debido a falta temporal de stock.")}
     }
@@ -72,7 +78,7 @@ function mapStateToProps(state) {
     return {
         productDetails: state.products.productDetails,
         addToOrder: state.cart.addToOrder,
-        cart: state.cart
+        cart: state.cart.cart
         
     };
 }
@@ -80,7 +86,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity)),
-        getCart: () => dispatch(getCart())
+        getCart: () => dispatch(getCart()),
+        editQuantity: (orderLineId, quantity) => dispatch(editQuantity(orderLineId, quantity))
     };
 }
 

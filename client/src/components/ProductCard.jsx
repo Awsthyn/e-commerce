@@ -24,7 +24,6 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
   function handleCart(id) {
     if (stock >= 1) {
       addToOrder(id, 1)
-      // alert("El producto se agregó al carrito correctamente")
       alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
     }
     else { alert("No se ha podido agregar a carrito debido a falta temporal de stock.") }
