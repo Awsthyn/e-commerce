@@ -88,43 +88,38 @@ server.delete('/:id', (req, res, next) => {
 
 
 // S54
-// server.post("/:id/review", (req, res, next) => {
-// 	const { rating, description, date, userId } = req.body;
-// 	Review.bulkCreate({
-// 		where: {
-// 			rating,
-// 			description,
-// 			date,
-// 			userId,
-// 			productId: req.params
-// 		}
-// 	})
-// 		.then((data) => {
-// 			console.log(data)
-// 			res.sendStatus(201);
-// 		})
-// 		.catch(next);
-// });
+ server.post("/:id/review", (req, res, next) => {
+ 	const { rating, userId } = req.body;
+ 	Review.create({
+		rating,
+		description,
+		userId
+ 	})
+ 		.then((data) => {
+			console.log(data)
+			res.sendStatus(201);
+		})
+ 		.catch(next);
+ });
 
 // S55
-// server.put("/:id/review/:idReview", (req, res, next) => {
-// 	const { id, idReview } = req.params;
-// 	const { rating, description, date } = req.body;
-// 	try {
-// 		Review.update(
-// 			{
-// 				rating,
-// 				description,
-// 				date
-// 			},
-// 			{ where: { productId: id, id: idReview } }
-// 		).then(() => {
-// 			res.sendStatus(200);
-// 		})
-// 	} catch (error) {
-// 		console.error(error.message);
-// 	}
-// });
+server.put("/:id/review/:idReview", (req, res, next) => {
+	const { id, idReview } = req.params;
+ 	const { rating, description } = req.body;
+ 	try {
+ 		Review.update(
+ 			{
+ 				rating,
+ 				description
+ 			},
+ 			{ where: { productId: id, id: idReview } }
+ 		).then(() => {
+ 			res.sendStatus(200);
+ 		})
+ 	} catch (error) {
+		console.error(error.message);
+ 	}
+ });
 
 
 // S56
