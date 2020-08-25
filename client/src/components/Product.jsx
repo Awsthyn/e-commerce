@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import RatingPage from "./calificacionCaras";
-import { addToOrder } from "../Redux/actions/cartActions"
+import { addToOrder, getCart } from "../Redux/actions/cartActions"
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import styles from '../css/product.module.css'
 
 
-export function ProductComponent({id, productDetails, addToOrder }) {
+export function ProductComponent({id, productDetails, addToOrder, cart, getCart }) {
     let history = useHistory() 
+    useEffect(()=>{
+      getCart()
+    }, [])
     function handleCart (id) {
         if(productDetails.stock>1){
             addToOrder(id, 1)
@@ -16,7 +19,8 @@ export function ProductComponent({id, productDetails, addToOrder }) {
         }
         else {alert("No se ha podido agregar a carrito debido a falta temporal de stock.")}
     }
-
+    console.log(cart)
+    //console.log(cart.cart.length > 0 ? cart.cart.map(e => e.product.id) : null)
     return (        
     <div className="container-fluid mt-4    ">
         <div className= "d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded" style={{width: "900px"}}>
@@ -67,14 +71,16 @@ export function ProductComponent({id, productDetails, addToOrder }) {
 function mapStateToProps(state) {
     return {
         productDetails: state.products.productDetails,
-        addToOrder: state.cart.addToOrder
+        addToOrder: state.cart.addToOrder,
+        cart: state.cart
         
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity))
+        addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity)),
+        getCart: () => dispatch(getCart())
     };
 }
 

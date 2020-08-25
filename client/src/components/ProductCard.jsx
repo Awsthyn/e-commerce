@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
-import { addToOrder } from "../Redux/actions/cartActions"
+import { addToOrder, getCart } from "../Redux/actions/cartActions"
 import { connect } from "react-redux";
 import swal from 'sweetalert';
 import styles from '../css/product.module.css'
@@ -16,9 +16,11 @@ const alerta = (tit, tex, tim) => {
   window.location = "/Order"
 }
 
-export function ProductCard({ id, name, price, image, stock, toProductDetails, addToOrder }) {
+export function ProductCard({ id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart }) {
   let history = useHistory()
-
+  useEffect(()=>{
+    getCart()
+  }, [])
   function handleCart(id) {
     if (stock >= 1) {
       addToOrder(id, 1)
@@ -27,7 +29,7 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
     }
     else { alert("No se ha podido agregar a carrito debido a falta temporal de stock.") }
   }
-
+  console.log(cart)
   return (
     <div className="card bg-light p-2 m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
       <img src={image} className={styles.product_card} alt={name} />
@@ -64,13 +66,15 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
 function mapStateToProps(state) {
   return {
     productDetails: state.productDetails,
+    cart: state.cart
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     toProductDetails: (id) => dispatch(toProductDetails(id)),
-    addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity))
+    addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity)),
+    getCart: () => dispatch(getCart())
   };
 }
 
