@@ -89,11 +89,12 @@ server.delete('/:id', (req, res, next) => {
 
 // S54
  server.post("/:id/review", (req, res, next) => {
- 	const { rating, userId } = req.body;
+ 	const { rating, description, userId } = req.body;
  	Review.create({
 		rating,
 		description,
-		userId
+		userId,
+		productId: req.params.id
  	})
  		.then((data) => {
 			console.log(data)

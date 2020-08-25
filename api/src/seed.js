@@ -329,6 +329,36 @@ const initialReview = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
     productId: 11,
     userId: 2,
+  },
+  {
+    rating: 5,
+    description: "Nos trajo la copa cumpliendo su sueño, y cada garganta, gritó en cada esquina, es un sentimiento, vamos Argentina!",
+    productId: 12,
+    userId: 2,
+  },
+  {
+    rating: 3,
+    description: "Entran como 12 personas, pero no me entró en el comedor",
+    productId: 13,
+    userId: 2,
+  },
+  {
+    rating: 1,
+    description: "La momia estaba viva, y cuando pedí explicaciones, me cortaron la llamada",
+    productId: 14,
+    userId: 2,
+  },
+  {
+    rating: 5,
+    description: "Se lo regalé a mi ex. Excelentes resultados. Ahora está internada en un manicomio",
+    productId: 15,
+    userId: 2,
+  },
+  {
+    rating: 5,
+    description: "Excelente",
+    productId: 16,
+    userId: 2,
   }
 ];
 
