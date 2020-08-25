@@ -26,12 +26,12 @@ class OrderTable extends React.Component {
 
     render () {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
-    
+        const tot = 0;
         return (
 
             <div className="container mt-4">
                 <h2 className="col-11 text-center">Lista de Ordenes</h2>
-                <table className="table">
+                <table className="table table-responsive">
                     <thead className="text-center">
                     <tr>
                         <th>Nro de Orden</th>
@@ -61,7 +61,10 @@ class OrderTable extends React.Component {
                         }
                     </select>
                     </td>
-                    {order.total !== null? <td>${order.total}</td> : <td>${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td>}
+
+                    {order.total !== null? <td>${order.total}</td>:<></>}
+
+                    {order.orderLines.length >0 ? <td>${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td>$0</td>}
                 </tr>)
             )}
             </tbody>
