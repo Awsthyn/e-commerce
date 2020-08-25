@@ -4,28 +4,41 @@ import RatingPage from "./calificacionCaras";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import swal from 'sweetalert';
 import styles from '../css/product.module.css'
 
+const alerta = (tit, tex, tim) => {
+    swal({
+      title: tit, //"¿Finalizar compra?",
+      text: tex, //"¿Desea completar la compra de los productos del carrito?",
+      icon: "success",
+      timer: tim, //"4000"
+    })
+  }
 
-export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity }) {
+export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock }) {
     let history = useHistory() 
     useEffect(()=>{
       getCart()
     }, [])
-    function handleCart (id) {
-        let indexProductCart = cart.findIndex(e => e.product.id == id)
-        if(productDetails.stock>1  && productDetails.stock > cart[indexProductCart].quantity){
-            if(indexProductCart == -1){
-            addToOrder(id, 1)
-            alert("El producto se agregó al carrito correctamente")
-            }
-            else {
-                editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)
-                alert("El producto se agregó al carrito correctamente")}
-                getCart()}
-        else if (productDetails.stock == cart[indexProductCart].quantity)  alert("Lo sentimos, no disponemos de la cantidad que usted está solicitando")
-        else {alert("No se ha podido agregar a carrito debido a falta temporal de stock.")}
-    }
+    
+    function handleCart(id) {
+        let indexProductCart = cart.findIndex(e => e.product.id == productDetails.id)
+        if(indexProductCart == -1) {
+          if(productDetails.stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
+          else {
+            addToOrder(id, 1); 
+            alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
+        }
+        else {
+          if(stock <= cart[indexProductCart].quantity) {alert("Lo sentimos, no disponemos de la cantidad que usted está solicitando")}
+          else {
+            editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)
+            alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
+            getCart()
+          }
+        }
+
     console.log(cart)
     //console.log(cart.cart.length > 0 ? cart.cart.map(e => e.product.id) : null)
     return (        
