@@ -26,7 +26,6 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                     <ProductCard
                         id = {-1}
                         name={'No se han encontrado productos que coincidan con su búsqueda.'}
-                        price = {0.00}
                         image={'https://cronicaglobal.elespanol.com/uploads/s1/32/73/32/0/wally.jpeg'}
                     />
                     <p>No se encontraron resultados</p>

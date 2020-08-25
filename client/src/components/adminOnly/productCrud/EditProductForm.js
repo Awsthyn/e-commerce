@@ -35,12 +35,10 @@ class EditProduct extends React.Component {
 
     onCheckboxClicked(category, isChecked) {
         if(isChecked){
-            this.setState({
-                category: [...this.state.category, category]
-            })
+            this.setState({category: [...this.state.category, category]})
         } else {
             this.setState({
-                category: this.state.category.filter(c => c !== category.id)
+                category: this.state.category.filter(c => c.id !== category.id)
             })
         }
 
@@ -57,7 +55,6 @@ class EditProduct extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        console.info('putting', this.state)
         const product = this.state;
         this.props.editProduct(product)
    }
