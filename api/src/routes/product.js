@@ -41,25 +41,31 @@ server.put('/:id', (req, res) => {
 	const { name, description, price, stock, image1, image2, image3, category } = req.body;
 	const categories = category;
 	try {
-		Product.update(
-			{
-				name,
-				description,
-				price,
-				stock,
-				images: [{ url: image1 }, { url: image2 }, { url: image3 }],
-			}, { where: { id },
-			include: [ Image ]}
-		)
+		Image.destroy({ where: { productId: id } })
 			.then(() => {
-				console.info('categoy', category)
-				productsInCategory.destroy({ where: { productId: id } })
-				.then(() => productsInCategory.bulkCreate(
-					categories.map((e) => {
-						if (typeof e === "object") return { productId: id, categoryId: e.id }
-						else return { productId: id, categoryId: e };
-					})
-				))
+				Product.update(
+					{
+						name,
+						description,
+						price,
+						stock,
+					},
+					{ where: { id } }
+				);
+			})
+			.then(()=>{
+				Image.bulkCreate([{productId: id, url: image1},{productId: id, url: image2},{productId: id, url: image3}])
+			})
+			.then(() => {
+				console.info('categoy', category);
+				productsInCategory.destroy({ where: { productId: id } }).then(() =>
+					productsInCategory.bulkCreate(
+						categories.map((e) => {
+							if (typeof e === 'object') return { productId: id, categoryId: e.id };
+							else return { productId: id, categoryId: e };
+						})
+					)
+				);
 				//res.sendStatus(200);
 			})
 			.then(() => res.sendStatus(200));
