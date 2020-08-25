@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
-import { addToOrder } from "../Redux/actions/cartActions"
+import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
 import { connect } from "react-redux";
 import swal from 'sweetalert';
 import styles from '../css/product.module.css'
@@ -13,21 +13,28 @@ const alerta = (tit, tex, tim) => {
     icon: "success",
     timer: tim, //"4000"
   })
-  window.location = "/Order"
 }
 
-export function ProductCard({ id, name, price, image, stock, toProductDetails, addToOrder }) {
+export function ProductCard({ id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
   let history = useHistory()
-
+  useEffect(()=>{
+    getCart()
+  }, [])
   function handleCart(id) {
-    if (stock >= 1) {
+    let indexProductCart = cart.findIndex(e => e.product.id == id)
+    if (stock >= 1 && stock > cart[indexProductCart].quantity) {
+      if(indexProductCart == -1){
       addToOrder(id, 1)
-      // alert("El producto se agregó al carrito correctamente")
       alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
+      }
+      else {
+        editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)
+        alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
+        getCart()
     }
+    else if (stock == cart[indexProductCart].quantity)  alert("Lo sentimos, no disponemos de la cantidad que usted está solicitando")
     else { alert("No se ha podido agregar a carrito debido a falta temporal de stock.") }
   }
-
   return (
     <div className="card bg-light p-2 m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
       <img src={image} className={styles.product_card} alt={name} />
@@ -64,13 +71,16 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
 function mapStateToProps(state) {
   return {
     productDetails: state.productDetails,
+    cart: state.cart.cart
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     toProductDetails: (id) => dispatch(toProductDetails(id)),
-    addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity))
+    addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity)),
+    getCart: () => dispatch(getCart()),
+    editQuantity: (orderLineId, quantity) => dispatch(editQuantity(orderLineId, quantity))
   };
 }
 
