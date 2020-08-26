@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 
 import RatingPage from "./calificacionCaras";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
-import { useHistory } from "react-router-dom";
+
 import { connect } from "react-redux";
 import ProductReview from "./ProductReview";
 import swal from 'sweetalert';
@@ -17,14 +17,14 @@ const alerta = (tit, tex, tim) => {
     })
   }
 
-export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock, reviews }) {
-    let history = useHistory() 
+export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock }) {
+
     useEffect(()=>{
       getCart()
     }, [])
     function handleCart(id) {
-        let indexProductCart = cart.findIndex(e => e.product.id == productDetails.id)
-        if(indexProductCart == -1) {
+        let indexProductCart = cart.findIndex(e => e.product.id === productDetails.id)
+        if(indexProductCart === -1) {
           if(productDetails.stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
           else {
             addToOrder(id, 1); 
@@ -47,10 +47,9 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
                 <div className= "d-flex flex-row justify-content-around mt-4 ml-2">
                     <img className= {styles.product_img_min}
                     src={productDetails.images === undefined ? "." : productDetails.images[0].url} alt={productDetails.name}
-                    alt={productDetails.name}
                     onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
                     <img className={styles.product_img_min} src={productDetails.images === undefined ? "." : productDetails.images[1].url} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
-                    <img className={styles.product_img_min} src={productDetails.images === undefined ? "." : productDetails.images[2].url} alt={productDetails.name}alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
+                    <img className={styles.product_img_min} src={productDetails.images === undefined ? "." : productDetails.images[2].url} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
                 </div>
             </div>
             <div className="ml-4 pl-2" style={{ width: "450px" }}>

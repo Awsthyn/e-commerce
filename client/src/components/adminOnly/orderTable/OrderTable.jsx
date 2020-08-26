@@ -26,7 +26,7 @@ class OrderTable extends React.Component {
 
     render () {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
-        const tot = 0;
+        // const tot = 0;
         return (
 
             <div className="container mt-4">

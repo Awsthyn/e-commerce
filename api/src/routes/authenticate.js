@@ -15,9 +15,11 @@ server.get('/login', function(req, res){
 });
 
 server.post('/login', 
-    passport.authenticate('local', { failureRedirect: '/login' }), 
+    passport.authenticate('local'), 
     function(req, res) {
-    res.redirect('/');
+        console.log(req.user)
+        res.json(req.user)
+    // res.redirect('/');
 });
 
 server.get('/logout', function(req, res){
@@ -34,7 +36,7 @@ function isAuthenticated(req, res, next) {
 }
 
 server.get('/profile', isAuthenticated, function(req, res){
-    res.render('profile', { user: req.user });
+    res.json('profile', { user: req.user });
 });
 
 

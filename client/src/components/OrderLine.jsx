@@ -1,15 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import { editQuantity, deleteProductFromCart } from '../Redux/actions/cartActions';
 //import Counter from '../components/Counter';
 //import {addToOrder } from "../Redux/actions/orderActions"
 
-export class OrderLine extends Component {
-	constructor (props) {
-		super(props)
-	}
-	render() {
-		const { dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock } = this.props
+export function OrderLine ({ dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock }){
+
 		return (
 		<tr>
 			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2"  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
@@ -23,7 +19,7 @@ export class OrderLine extends Component {
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>
 		)
-	}
+	
 }
 
 

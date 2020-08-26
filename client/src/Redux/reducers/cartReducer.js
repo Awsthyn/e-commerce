@@ -30,7 +30,7 @@ export default function orderReducer (state = initialState, action) {
           }
         }
         case EDIT_QUANTITY_FROM_CART: {
-          const orderLineUbication = state.cart.findIndex(e => e.id == action.payload[0])
+          const orderLineUbication = state.cart.findIndex(e => e.id === action.payload[0])
           let array = [...state.cart]
           array[orderLineUbication].quantity = Number(action.payload[1])
           return {
