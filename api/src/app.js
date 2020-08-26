@@ -19,9 +19,12 @@ const {User} = require('./db.js');
 //  - Si las credenciales son invalidas --> done(null, false)
 //  - Si hubo un error durante la ejecución de esta función --> done(err)
 
-passport.use(new Strategy(
-  function(username, password, done) {
-    User.findByUsername(username)
+passport.use(new Strategy({
+  usernameField: 'email',
+  passwordField: 'password'
+},
+  function(email, password, done) {
+    User.findOne({ where: { email: email } })
       .then((user) => {
         if(!user) {
           return done(null, false);

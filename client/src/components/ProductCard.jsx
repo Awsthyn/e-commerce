@@ -22,8 +22,8 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
   }, [])
 
   function handleCart(id) {
-    let indexProductCart = cart.findIndex(e => e.product.id == id)
-    if(indexProductCart == -1) {
+    let indexProductCart = cart.findIndex(e => e.product.id === id)
+    if(indexProductCart === -1) {
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
         addToOrder(id, 1); 
