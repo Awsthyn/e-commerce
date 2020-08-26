@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { sessionLogin, sessionLogout } from "../../../Redux/actions/sessionActions"
 import { connect } from "react-redux";
 
-export function AdminLogin () {
+
+export function AdminLogin (props) {
     const [form, setForm] = useState({name: '', password: ''})
     
     let history = useHistory();
@@ -12,8 +14,8 @@ export function AdminLogin () {
     }
 
     function handleSubmit() {
-        alert("Ha ingresado correctamente");
-        history.push('/Admin')
+        props.sessionLogin(form)
+        // history.push('/Admin')
     }
 
         return (
@@ -37,14 +39,15 @@ export function AdminLogin () {
 
 function mapStateToProps(state) {
     return {
-
+        sessionUser: state.session.sessionUser,
     }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // addCategory: category => dispatch(addCategory(category)),
-  };
+    return {
+        sessionLogin: user => dispatch(sessionLogin(user)),
+        sessionLogout: () => dispatch(sessionLogout())
+    };
 }
 
 export default connect(
