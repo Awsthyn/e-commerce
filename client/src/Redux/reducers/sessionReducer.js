@@ -8,7 +8,7 @@ export default function sessionReducer (state = initialState, action) {
     switch (action.type) {
     
     case LOGIN:
-        console.log('LOGOUT redux');
+        console.log('LOGIN redux');
         return {
             ...state,
             sessionUser: action.payload

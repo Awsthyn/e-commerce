@@ -17,7 +17,7 @@ const alerta = (tit, tex, tim) => {
   }
 
 export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock }) {
-    let history = useHistory() 
+    // let history = useHistory() 
     useEffect(()=>{
       getCart()
     }, [])
