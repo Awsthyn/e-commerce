@@ -1,5 +1,6 @@
 import React from 'react'
 import { MDBIcon } from 'mdbreact';
+import moment from 'moment';
 
 const IndividualReview = ({review}) => {
     let stars = []
@@ -17,6 +18,7 @@ const IndividualReview = ({review}) => {
             <div className="mt-2">
                 <h5>{review.user.first_name + ' ' + review.user.last_name}</h5>
                 <p>{review.description}</p></div>
+                <p>{moment(review.updatedAt).fromNow()}</p>
         </div>
     )
 }
