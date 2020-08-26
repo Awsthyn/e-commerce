@@ -2,7 +2,7 @@ const server = require('express').Router();
 const { Product, Category, Image, productsInCategory, Review } = require('../db.js');
 
 server.get('/', (req, res, next) => {
-	Product.findAll({ include: [Category, Image] })
+	Product.findAll({ include: {all: true, nested: true} })
 		.then((products) => {
 			res.json(products);
 		})
@@ -10,7 +10,7 @@ server.get('/', (req, res, next) => {
 });
 
 server.get('/:id', (req, res, next) => {
-	Product.findByPk(req.params.id, { include: [Category, Image] })
+	Product.findByPk(req.params.id, { include: {all: true, nested: true} })
 		.then((product) => {
 			res.json(product);
 		})
