@@ -67,3 +67,16 @@ export function deleteUser(UserId) {
     .catch(err => console.error(err))
     }
 }
+
+export function promoteUser(userId){
+    return function(dispatch){
+        return fetch(`http://localhost:3001/users/auth/promote/${userId}`,{
+            method: 'POST',
+            body: "",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+        }).then(() => dispatch(getAllUsers()) )
+    }
+}
