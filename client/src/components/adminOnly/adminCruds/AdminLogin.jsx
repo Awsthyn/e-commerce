@@ -1,39 +1,51 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import { useHistory } from "react-router-dom";
 import { sessionLogin, sessionLogout } from "../../../Redux/actions/sessionActions"
 import { connect } from "react-redux";
 
 
-export function AdminLogin (props) {
-    const [form, setForm] = useState({email: '', password: ''})
-    
-    // let history = useHistory();
-
-    function handleChange(e) {
-        setForm({[e.target.name]: e.target.value})
+export class AdminLogin extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            password: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    function handleSubmit(e) {
-        props.sessionLogin(form)
+    // let history = useHistory();
+
+    handleChange(e) {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.sessionLogin(this.state) .then(() => {
+            console.log("estad0", this.state)
+            alert("enviado")})
         // history.push('/Admin')
     }
 
+        render() {
         return (
 
         <div className="container-fluid abs-center">
-            <form onSubmit={(e) => handleSubmit(e)} className="form-group">
+            <form onSubmit={this.handleSubmit} className="form-group">
                 <div className="form-group">
                     <label>Nombre:</label>
-                    <input type="text" id="name" name="name" onChange={(e) => handleChange(e)} className="form-control" value={form.email}/>
+                    <input type="text" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email}/>
                 </div>
                 <div className="form-group">
                     <label>Contraseña:</label>
-                    <input type="password" id="password" name="password" onChange={(e) => handleChange(e)} className="form-control" value={form.password}/>
+                    <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" value={this.state.password}/>
                 </div>
-                <button type="submit" className="btn btn-dark">Enviar</button>
+                <button type="submit" className="btn btn-dark" >Enviar</button>
             </form>
         </div>
-        );
+        )};
     
 }
 

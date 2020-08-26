@@ -15,9 +15,10 @@ server.get('/login', function(req, res){
 });
 
 server.post('/login', 
-    passport.authenticate('local', { failureRedirect: '/login' }), 
+    passport.authenticate('local'), 
     function(req, res) {
-    res.redirect('/');
+        res.json('hola')
+    // res.redirect('/');
 });
 
 server.get('/logout', function(req, res){

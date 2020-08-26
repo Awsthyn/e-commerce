@@ -20,11 +20,10 @@ const {User} = require('./db.js');
 //  - Si hubo un error durante la ejecución de esta función --> done(err)
 
 passport.use(new Strategy({
-  usernameField: 'email',
-  passwordField: 'password'
+  usernameField: 'email'
 },
   function(email, password, done) {
-    User.findOne({ where: { email: email } })
+    User.findOne({where: { email: email }})
       .then((user) => {
         if(!user) {
           return done(null, false);
@@ -55,7 +54,7 @@ passport.serializeUser(function(user, done) {
 // Al deserealizar la información del usuario va a quedar almacenada en req.user
 
 passport.deserializeUser(function(id, done) {
-  User.findById(id)
+  User.findByPK(id)
     .then((user) => {
       done(null, user);
     })
