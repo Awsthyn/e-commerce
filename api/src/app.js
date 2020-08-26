@@ -54,7 +54,7 @@ passport.serializeUser(function(user, done) {
 // Al deserealizar la información del usuario va a quedar almacenada en req.user
 
 passport.deserializeUser(function(id, done) {
-  User.findByPK(id)
+  User.findByPk(id)
     .then((user) => {
       done(null, user.get());
     })
