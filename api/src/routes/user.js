@@ -38,7 +38,7 @@ Promise.all([order, product])
   res.status(201)
   res.json({order: order[0].id, price: product.price, quantity, product })
 })
- 
+
 })
 
 //S39
@@ -63,7 +63,7 @@ server.delete("/:userId/cart", (req, res, next) => {
     .then((data)=>{
     Order.create({
       userId,
-      orderStatus: "carrito" 
+      orderStatus: "carrito"
     })
     .then(data => {
       res.status(200)
@@ -180,4 +180,24 @@ server.put("/:id", (req, res, next) => {
     console.error(error.message);
   }
 });
+
+//S67
+
+server.post("/auth/promote/:id", (req, res, next) => {
+  const { id } = req.params;
+
+  User.update({
+    admin: true
+  },
+  { where: { id } })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+        console.error(`Error a promocionar usuario ${id}`)
+        next()
+    });
+});
+
+
 module.exports = server;
