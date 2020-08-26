@@ -2,7 +2,7 @@ const server = require('express').Router();
 const { Product, Category, Image, productsInCategory, Review } = require('../db.js');
 
 server.get('/', (req, res, next) => {
-	Product.findAll({ include: [Category, Image] })
+	Product.findAll({ include: {all: true, nested: true} })
 		.then((products) => {
 			res.json(products);
 		})
@@ -10,7 +10,7 @@ server.get('/', (req, res, next) => {
 });
 
 server.get('/:id', (req, res, next) => {
-	Product.findByPk(req.params.id, { include: [Category, Image] })
+	Product.findByPk(req.params.id, { include: {all: true, nested: true} })
 		.then((product) => {
 			res.json(product);
 		})
@@ -88,43 +88,39 @@ server.delete('/:id', (req, res, next) => {
 
 
 // S54
-// server.post("/:id/review", (req, res, next) => {
-// 	const { rating, description, date, userId } = req.body;
-// 	Review.bulkCreate({
-// 		where: {
-// 			rating,
-// 			description,
-// 			date,
-// 			userId,
-// 			productId: req.params
-// 		}
-// 	})
-// 		.then((data) => {
-// 			console.log(data)
-// 			res.sendStatus(201);
-// 		})
-// 		.catch(next);
-// });
+ server.post("/:id/review", (req, res, next) => {
+ 	const { rating, description, userId } = req.body;
+ 	Review.create({
+		rating,
+		description,
+		userId,
+		productId: req.params.id
+ 	})
+ 		.then((data) => {
+			console.log(data)
+			res.sendStatus(201);
+		})
+ 		.catch(next);
+ });
 
 // S55
-// server.put("/:id/review/:idReview", (req, res, next) => {
-// 	const { id, idReview } = req.params;
-// 	const { rating, description, date } = req.body;
-// 	try {
-// 		Review.update(
-// 			{
-// 				rating,
-// 				description,
-// 				date
-// 			},
-// 			{ where: { productId: id, id: idReview } }
-// 		).then(() => {
-// 			res.sendStatus(200);
-// 		})
-// 	} catch (error) {
-// 		console.error(error.message);
-// 	}
-// });
+server.put("/:id/review/:idReview", (req, res, next) => {
+	const { id, idReview } = req.params;
+ 	const { rating, description } = req.body;
+ 	try {
+ 		Review.update(
+ 			{
+ 				rating,
+ 				description
+ 			},
+ 			{ where: { productId: id, id: idReview } }
+ 		).then(() => {
+ 			res.sendStatus(200);
+ 		})
+ 	} catch (error) {
+		console.error(error.message);
+ 	}
+ });
 
 
 // S56

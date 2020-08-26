@@ -4,6 +4,7 @@ import RatingPage from "./calificacionCaras";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import ProductReview from "./ProductReview";
 import swal from 'sweetalert';
 import styles from '../css/product.module.css'
 
@@ -16,12 +17,11 @@ const alerta = (tit, tex, tim) => {
     })
   }
 
-export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock }) {
+export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock, reviews }) {
     let history = useHistory() 
     useEffect(()=>{
       getCart()
     }, [])
-    
     function handleCart(id) {
         let indexProductCart = cart.findIndex(e => e.product.id == productDetails.id)
         if(indexProductCart == -1) {
@@ -39,8 +39,6 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
           }
         }
 
-    console.log(cart)
-    //console.log(cart.cart.length > 0 ? cart.cart.map(e => e.product.id) : null)
     return (        
     <div className="container-fluid mt-4    ">
         <div className= "d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded" style={{width: "900px"}}>
@@ -82,6 +80,7 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
             </div>
             <script src="js/addons/rating.js"></script>
         </div>
+            <ProductReview reviews={productDetails.reviews} />
     </div>    
     );
 }
