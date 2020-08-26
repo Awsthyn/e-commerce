@@ -20,21 +20,24 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
   useEffect(()=>{
     getCart()
   }, [])
+
   function handleCart(id) {
     let indexProductCart = cart.findIndex(e => e.product.id == id)
-    if (stock >= 1 && stock > cart[indexProductCart].quantity) {
-      if(indexProductCart == -1){
-      addToOrder(id, 1)
-      alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
-      }
+    if(indexProductCart == -1) {
+      if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
+      else {
+        addToOrder(id, 1); 
+        alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
+    }
+    else {
+      if(stock <= cart[indexProductCart].quantity) {swal("Lo sentimos", "no disponemos de la cantidad que usted está solicitando", "error")}
       else {
         editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)
         alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
         getCart()
+      }
     }
-    else if (stock == cart[indexProductCart].quantity)  alert("Lo sentimos, no disponemos de la cantidad que usted está solicitando")
-    else { alert("No se ha podido agregar a carrito debido a falta temporal de stock.") }
-  }
+
   return (
     <div className="card bg-light p-2 m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
       <img src={image} className={styles.product_card} alt={name} />
