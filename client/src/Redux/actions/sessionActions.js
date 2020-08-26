@@ -14,7 +14,8 @@ export function sessionLogin(data){
                 'Content-Type': 'application/json'
             },
             credentials: 'include' 
-        }).then(res => res.json())
+        })
+        .then(res => res.json())
         .then(res => {
             console.info("recibo", res)
             dispatch({type: LOGIN, payload: res})
