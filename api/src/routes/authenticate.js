@@ -17,8 +17,8 @@ server.get('/login', function(req, res){
 server.post('/login', 
     passport.authenticate('local'), 
     function(req, res) {
-        console.log(req.body)
-        res.json(req.body)
+        console.log(req.user)
+        res.json(req.user)
     // res.redirect('/');
 });
 
