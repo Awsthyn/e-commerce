@@ -1,17 +1,9 @@
 import React from "react";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
-import {
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-} from "mdbreact";
-import UserIcon from "./UserIcon";
-import {
-  getAllProducts,
-  getCategoryProducts,
-} from "../Redux/actions/productActions";
+import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
+import UserIcon from "./UserIcon"
+import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions";
 import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
 import store from "../Redux/store";
@@ -85,19 +77,11 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
               </NavLink>
             </li>
             <li>
-              <svg
-                width="25"
-                height="23"
-                viewBox="0 0 16 16"
-                className="mt-2 mr-2 bi bi-heart-fill text-danger"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                />
-              </svg>
+
+            <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+</svg>
+
             </li>
             <SearchBar />
             <li>

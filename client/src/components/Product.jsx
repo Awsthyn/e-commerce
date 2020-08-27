@@ -2,8 +2,9 @@ import React, {useEffect} from "react";
 
 import RatingPage from "./calificacionCaras";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
-import { useHistory } from "react-router-dom";
+
 import { connect } from "react-redux";
+import ProductReview from "./ProductReview";
 import swal from 'sweetalert';
 import styles from '../css/product.module.css'
 
@@ -17,14 +18,13 @@ const alerta = (tit, tex, tim) => {
   }
 
 export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock }) {
-    let history = useHistory() 
+
     useEffect(()=>{
       getCart()
     }, [])
-    
     function handleCart(id) {
-        let indexProductCart = cart.findIndex(e => e.product.id == productDetails.id)
-        if(indexProductCart == -1) {
+        let indexProductCart = cart.findIndex(e => e.product.id === productDetails.id)
+        if(indexProductCart === -1) {
           if(productDetails.stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
           else {
             addToOrder(id, 1); 
@@ -39,8 +39,6 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
           }
         }
 
-    console.log(cart)
-    //console.log(cart.cart.length > 0 ? cart.cart.map(e => e.product.id) : null)
     return (        
     <div className="container-fluid mt-4    ">
         <div className= "d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded" style={{width: "900px"}}>
@@ -49,10 +47,9 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
                 <div className= "d-flex flex-row justify-content-around mt-4 ml-2">
                     <img className= {styles.product_img_min}
                     src={productDetails.images === undefined ? "." : productDetails.images[0].url} alt={productDetails.name}
-                    alt={productDetails.name}
                     onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
                     <img className={styles.product_img_min} src={productDetails.images === undefined ? "." : productDetails.images[1].url} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
-                    <img className={styles.product_img_min} src={productDetails.images === undefined ? "." : productDetails.images[2].url} alt={productDetails.name}alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
+                    <img className={styles.product_img_min} src={productDetails.images === undefined ? "." : productDetails.images[2].url} alt={productDetails.name} onClick={(e)=> console.log(document.getElementById('principal').setAttribute('src', e.target.getAttribute("src")))} />
                 </div>
             </div>
             <div className="ml-4 pl-2" style={{ width: "450px" }}>
@@ -82,6 +79,7 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
             </div>
             <script src="js/addons/rating.js"></script>
         </div>
+            <ProductReview reviews={productDetails.reviews} />
     </div>    
     );
 }

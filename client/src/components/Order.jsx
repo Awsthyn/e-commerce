@@ -30,14 +30,19 @@ const confirmar = (tit, tex, tim, suc, func) => {
 }
 
 class Order extends Component {
+	constructor(props){
+		super(props)
+		console.log(this.props.sessionUser.id)
+		
+	}
 
 	componentDidMount() {
-		this.props.getCart();
+		this.props.getCart(this.props.sessionUser.id);
 	}
 
 
 	render() {
-		const { cart } = this.props;
+		const { cart, sessionUser } = this.props;
 		return (
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
@@ -66,22 +71,23 @@ class Order extends Component {
 							))}
 						</tbody>
 					</table>
-					<div className="mt-4 d-flex justify-content-around">
-						<h5 id="total" className="border border-success p-3" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
-							Total: $
-							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
-						</h5>
-						<div>
+					<div className="mt-4 d-flex float-right mr-5">
+
+						<div className= "row align-items-start">
 							<button className="btn btn-success" onClick={() => {
-								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8))
-								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", this.props.emptyCart)
+								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8), sessionUser.id )
+								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada")
 							}
 							}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
-								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart)
+								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart(this.props.sessionUser.id))
 							}}>
 								Vaciar carrito
 							</button>
+						<h5 id="total" className="border border-success p-3 ml-auto float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
+							Total: $
+							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
+						</h5>
 						</div>
 					</div>
 				</div>
@@ -93,15 +99,16 @@ class Order extends Component {
 function mapStateToProps(state) {
 	return {
 		cart: state.cart.cart,
+		sessionUser: state.session.sessionUser,
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getCart: () => dispatch(getCart()),
-		emptyCart: () => dispatch(emptyCart()),
+		getCart: (userId) => dispatch(getCart(userId)),
+		emptyCart: (userId) => dispatch(emptyCart(userId)),
 		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
-		confirmCart: (total) => dispatch(confirmCart(total))
+		confirmCart: (total, userId) => dispatch(confirmCart(total, userId))
 	};
 }
 

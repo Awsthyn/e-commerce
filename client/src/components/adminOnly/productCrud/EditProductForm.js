@@ -60,9 +60,9 @@ class EditProduct extends React.Component {
    }
 
   render() {
-    const imgOptions = ["billetera", "boom", "botas", "buda", "cohetemenem",
-    "conejo", "croma","escaleraalcielo","excalibur","horrocrux", "lorem", "manodedios",
-     "mesa","momia", "necronomicon", "santogrial"]
+    // const imgOptions = ["billetera", "boom", "botas", "buda", "cohetemenem",
+    // "conejo", "croma","escaleraalcielo","excalibur","horrocrux", "lorem", "manodedios",
+    //  "mesa","momia", "necronomicon", "santogrial"]
     return (
     <div>
         <div className="container-fluid abs-center">

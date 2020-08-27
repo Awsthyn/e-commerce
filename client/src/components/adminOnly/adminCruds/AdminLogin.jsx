@@ -1,50 +1,64 @@
-import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import React from 'react';
+// import { useHistory } from "react-router-dom";
+import { sessionLogin, sessionLogout } from "../../../Redux/actions/sessionActions"
 import { connect } from "react-redux";
 
-export function AdminLogin () {
-    const [form, setForm] = useState({name: '', password: ''})
-    
-    let history = useHistory();
 
-    function handleChange(e) {
-        setForm({[e.target.name]: e.target.value})
+export class AdminLogin extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            password: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    function handleSubmit() {
-        alert("Ha ingresado correctamente");
-        history.push('/Admin')
+    // let history = useHistory();
+
+    handleChange(e) {
+        this.setState({[e.target.name]: e.target.value})
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.sessionLogin(this.state) .then(() => {
+            alert("enviado")})
+        // history.push('/Admin')
+    }
+
+        render() {
         return (
 
         <div className="container-fluid abs-center">
-            <form onSubmit={() => handleSubmit()} className="form-group">
+            <form onSubmit={this.handleSubmit} className="form-group">
                 <div className="form-group">
                     <label>Nombre:</label>
-                    <input type="text" id="name" name="name" onChange={(e) => handleChange(e)} className="form-control" value={form.name}/>
+                    <input type="text" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email}/>
                 </div>
                 <div className="form-group">
                     <label>Contraseña:</label>
-                    <input type="password" id="password" name="password" onChange={(e) => handleChange(e)} className="form-control" value={form.password}/>
+                    <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" value={this.state.password}/>
                 </div>
-                <button type="submit" className="btn btn-dark">Enviar</button>
+                <button type="submit" className="btn btn-dark" >Enviar</button>
             </form>
         </div>
-        );
+        )};
     
 }
 
 function mapStateToProps(state) {
     return {
-
+        sessionUser: state.session.sessionUser,
     }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // addCategory: category => dispatch(addCategory(category)),
-  };
+    return {
+        sessionLogin: user => dispatch(sessionLogin(user)),
+        sessionLogout: () => dispatch(sessionLogout())
+    };
 }
 
 export default connect(

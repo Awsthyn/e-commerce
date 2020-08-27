@@ -28,4 +28,9 @@ export const DELETE_CART = "DELETE_CART";
 export const DELETE_PROD_FROM_CART = "DELETE_PROD_FROM_CART";
 export const EDIT_QUANTITY_FROM_CART = "EDIT_QUANTITY_FROM_CART";
 //-------- ORDER CONSTANTS ----------
-export const GET_ALL_ORDERS_USERS = "GET_ALL_ORDERS_USERS";
+
+export const GET_ALL_ORDERS_USERS = "GET_ALL_ORDERS_USERS"
+//-------- SESSION CONSTANTS --------
+export const LOGIN = "LOGIN"
+export const LOGOUT = "LOGOUT"
+

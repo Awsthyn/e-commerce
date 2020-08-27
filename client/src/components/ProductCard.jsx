@@ -15,26 +15,26 @@ const alerta = (tit, tex, tim) => {
   })
 }
 
-export function ProductCard({ id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
+export function ProductCard({ sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
   let history = useHistory()
   useEffect(()=>{
-    getCart()
+    getCart(sessionUser.id)
   }, [])
 
   function handleCart(id) {
-    let indexProductCart = cart.findIndex(e => e.product.id == id)
-    if(indexProductCart == -1) {
+    let indexProductCart = cart.findIndex(e => e.product.id === id)
+    if(indexProductCart === -1) {
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
-        addToOrder(id, 1); 
+        addToOrder(id, 1, sessionUser.id); 
         alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
     }
     else {
       if(stock <= cart[indexProductCart].quantity) {swal("Lo sentimos", "no disponemos de la cantidad que usted está solicitando", "error")}
       else {
-        editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)
+        editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1, sessionUser.id)
         alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
-        getCart()
+        getCart(sessionUser.id)
       }
     }
 
@@ -74,16 +74,17 @@ export function ProductCard({ id, name, price, image, stock, toProductDetails, a
 function mapStateToProps(state) {
   return {
     productDetails: state.productDetails,
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    sessionUser: state.session.sessionUser,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     toProductDetails: (id) => dispatch(toProductDetails(id)),
-    addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity)),
-    getCart: () => dispatch(getCart()),
-    editQuantity: (orderLineId, quantity) => dispatch(editQuantity(orderLineId, quantity))
+    addToOrder: (productId, quantity, userId) => dispatch(addToOrder(productId, quantity, userId)),
+    getCart: (userId) => dispatch(getCart(userId)),
+    editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))
   };
 }
 
