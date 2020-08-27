@@ -40,5 +40,7 @@ server.get('/profile', isAuthenticated, function(req, res){
     res.json('profile', { user: req.user });
 });
 
+// server.get
+
 
 module.exports = server;
