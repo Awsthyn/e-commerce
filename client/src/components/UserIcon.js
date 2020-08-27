@@ -28,11 +28,13 @@ export function UserIcon(props) {
           />
         </svg>
       </MDBDropdownToggle>
-      <MDBDropdownMenu basic>
+
+      <MDBDropdownMenu right basic>
         <MDBDropdownItem onClick={() => (window.location = "/Profile")}>
           Usuario: {props.sessionUser.first_name}
         </MDBDropdownItem>
         <hr></hr>
+
         <MDBDropdownItem
           onClick={() => (window.location = "/Admin/CrudUser/form/new")}
         >
@@ -42,7 +44,6 @@ export function UserIcon(props) {
           Iniciar Sesión
         </MDBDropdownItem>
         <hr></hr>
-
         <MDBDropdownItem onClick={props.sessionLogout}>
           Cerrar Sesión
         </MDBDropdownItem>
