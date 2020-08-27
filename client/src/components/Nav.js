@@ -6,7 +6,7 @@ import UserIcon from "./UserIcon"
 import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions";
 import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
-import store from "../Redux/store";
+import {store} from "../Redux/store";
 import s from "../css/product.module.css";
 
 //-------- para traer prods al principio y ya esten disponibles -------
