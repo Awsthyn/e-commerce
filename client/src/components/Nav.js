@@ -25,7 +25,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     </NavLink>
   </li>;
   }
-  
+
   function GuestUser(){
     return <li className="nav-item">
     <NavLink to="/GuestCart" className="nav-link text-info" >
@@ -33,7 +33,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     </NavLink>
   </li>;
   }
-  
+
   function UserOrGuest() {
     if(!sessionUser.id){
       return <GuestUser />;
@@ -57,9 +57,20 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
             <h4>MERCADO NEGRO</h4>
           </div>
         </Link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div className="navbar-nav text-info" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto d-flex justify-content-around ">
+        <div className="navbar-nav collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto d-flex justify-content-around collapse navbar-collapse">
             <li>
               <ul>
                 <MDBDropdown>
