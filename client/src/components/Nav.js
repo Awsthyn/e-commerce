@@ -7,7 +7,7 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
 } from "mdbreact";
-import UserIcon from "./UserIcon"
+import UserIcon from "./UserIcon";
 import {
   getAllProducts,
   getCategoryProducts,
@@ -25,30 +25,42 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
   let history = useHistory();
 
   return (
-    <div >
+    <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around ">
-         <img src={require('../assets/MercadoNegro.gif')} alt="logo" onClick={()=>window.location="/"}/>
+        <div className={s.brand}>
+          <img
+            className="px-0"
+            src={require("../assets/MercadoNegro5.gif")}
+            alt="logo"
+            width="70px"
+            onClick={() => (window.location = "/")}
+          />
+          <h4>MERCADO NEGRO</h4>
+        </div>
+
         <div className="navbar-nav text-info" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto d-flex justify-content-around ">
             <li>
               <ul>
-              <MDBDropdown>
-                <MDBDropdownToggle caret color="dark text-info">
-                  Categorias
-                </MDBDropdownToggle>
-                <MDBDropdownMenu basic>
-                  <li
-                    className={s.pointer}
-                    onClick={(e) => {
-                      getAllProducts(e.target.getAttribute("name"));
-                      history.push(`/catalog/${e.target.getAttribute("name")}`);
-                      e.preventDefault();
-                    }}
-                  >
-                    <b className={s.pointer}>Todos los productos</b>
-                  </li>
+                <MDBDropdown>
+                  <MDBDropdownToggle caret color="dark text-info">
+                    Categorias
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu basic>
+                    <li
+                      className={s.pointer}
+                      onClick={(e) => {
+                        getAllProducts(e.target.getAttribute("name"));
+                        history.push(
+                          `/catalog/${e.target.getAttribute("name")}`
+                        );
+                        e.preventDefault();
+                      }}
+                    >
+                      <b className={s.pointer}>Todos los productos</b>
+                    </li>
 
-                  {categories.map((e) => (
+                    {categories.map((e) => (
                       <MDBDropdownItem
                         data-id={e.id}
                         name={e.name}
@@ -62,25 +74,34 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
                       >
                         {e.name}
                       </MDBDropdownItem>
-                  ))}
-                </MDBDropdownMenu>
-              </MDBDropdown>
+                    ))}
+                  </MDBDropdownMenu>
+                </MDBDropdown>
               </ul>
             </li>
             <li className="nav-item">
-              <NavLink to="/Order" className="nav-link text-info" >
+              <NavLink to="/Order" className="nav-link text-info">
                 <i className="fas fa-cart-arrow-down"></i>
               </NavLink>
             </li>
             <li>
-            <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-</svg>
+              <svg
+                width="25"
+                height="23"
+                viewBox="0 0 16 16"
+                className="mt-2 mr-2 bi bi-heart-fill text-danger"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                />
+              </svg>
             </li>
-          <SearchBar />
-          <li>
-          <UserIcon/>
-
+            <SearchBar />
+            <li>
+              <UserIcon />
             </li>
           </ul>
         </div>

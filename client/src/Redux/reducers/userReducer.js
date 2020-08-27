@@ -1,23 +1,28 @@
-import { GET_ALL_USERS, DELETE_USER } from "../actions/constants";
+import { GET_ALL_USERS, DELETE_USER, GET_USER } from "../actions/constants";
 
 const initialState = {
-    users: []
+  users: [],
+  user: {},
 };
 
-export default function userReducer (state = initialState, action) {
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_USERS:
       return {
         ...state,
-    users: action.payload
-  }
-  case DELETE_USER:
-      console.log('Usuario eliminade/x')
+        users: action.payload,
+      };
+    case GET_USER:
       return {
-          ...state,
-          users: state.users.filter((c) => c.id !== action.payload)
-    }
+        user: action.payload,
+      };
+    case DELETE_USER:
+      console.log("Usuario eliminade/x");
+      return {
+        ...state,
+        users: state.users.filter((c) => c.id !== action.payload),
+      };
     default:
-      return state
-}
+      return state;
+  }
 }
