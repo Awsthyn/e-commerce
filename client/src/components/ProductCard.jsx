@@ -21,16 +21,19 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
     getCart(sessionUser.id)
   }, [])
 
+  if(!sessionUser.id) cart = JSON.parse(localStorage.getItem('guestCart'))
+
   function handleCart(id) {
-    let indexProductCart = cart.findIndex(e => e.product.id === id)
+    let indexProductCart = cart.findIndex(e => e.product.id == id)
+    console.log('productId: ' + id)
+    console.log(indexProductCart)
+    console.log(cart)
     if(indexProductCart === -1) {
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
         if(!sessionUser.id){
-          console.log(dataProduct)
-          let getGuestCart = JSON.parse(localStorage.getItem('guestCart'))
-          getGuestCart[getGuestCart.length] = {id: getGuestCart.length + 1, quantity: 1, product: dataProduct}
-          localStorage.setItem("guestCart", JSON.stringify(getGuestCart))
+          cart[cart.length] = {id: cart.length + 1, quantity: 1, product: dataProduct}
+          localStorage.setItem("guestCart", JSON.stringify(cart))
         }
         else {
         addToOrder(id, 1, sessionUser.id); 
@@ -40,9 +43,15 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
     else {
       if(stock <= cart[indexProductCart].quantity) {swal("Lo sentimos", "no disponemos de la cantidad que usted está solicitando", "error")}
       else {
+        if(!sessionUser.id){
+          cart[indexProductCart].quantity++
+          localStorage.setItem("guestCart", JSON.stringify(cart))
+        }
+        else {
         editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1, sessionUser.id)
-        alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
-        getCart(sessionUser.id)
+        alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
+        getCart(sessionUser.id)}
+      }
       }
     }
 
