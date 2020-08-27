@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { connect } from 'react-redux';
 import { editQuantity, deleteProductFromCart, deleteProductFromGuestCart } from '../Redux/actions/cartActions';
 import swal from 'sweetalert';
-import Order from '../components/Order';
+// import Order from '../components/Order';
 
 const confirmar = (tim, fun, dat, prodName) => {
 	swal({
