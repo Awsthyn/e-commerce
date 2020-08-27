@@ -19,6 +19,7 @@ import { Admin } from "../components/adminOnly/adminCruds/Admin"
 import { CrudAdmin } from "../components/adminOnly/adminCruds/CrudAdmin"
 import NewUser from "../components/adminOnly/userCrud/NewUserForm";
 import EditUser from "../components/adminOnly/userCrud/EditUserForm";
+import GuestCart from "../components/GuestCart";
 import  Login  from "../components/adminOnly/adminCruds/Login.js";
 
 function App() {
@@ -107,6 +108,10 @@ function App() {
       <Route
         exact path = "/Order"
         component= { Order }
+      />
+      <Route
+        exact path = "/GuestCart"
+        component= { GuestCart }
       />
       <Route
         exact path = "/ShoppingCart"

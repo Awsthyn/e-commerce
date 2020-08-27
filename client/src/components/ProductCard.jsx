@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
@@ -15,28 +15,45 @@ const alerta = (tit, tex, tim) => {
   })
 }
 
-export function ProductCard({ sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
+export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
   let history = useHistory()
   useEffect(() => {
     getCart(sessionUser.id)
   }, [])
 
+  if(!sessionUser.id) cart = JSON.parse(localStorage.getItem('guestCart'))
+
   function handleCart(id) {
-    let indexProductCart = cart.findIndex(e => e.product.id === id)
-    if (indexProductCart === -1) {
-      if (stock < 1) { swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error") }
+    let indexProductCart = cart.findIndex(e => e.product.id == id)
+    console.log('productId: ' + id)
+    console.log(indexProductCart)
+    console.log(cart)
+    if(indexProductCart === -1) {
+      if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
-        addToOrder(id, 1, sessionUser.id);
-        alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
+        if(!sessionUser.id){
+          cart[cart.length] = {id: cart.length + 1, quantity: 1, product: dataProduct}
+          localStorage.setItem("guestCart", JSON.stringify(cart))
+        }
+        else {
+        addToOrder(id, 1, sessionUser.id); 
+        alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
+
       }
     }
     else {
       if (stock <= cart[indexProductCart].quantity) { swal("Lo sentimos", "no disponemos de la cantidad que usted está solicitando", "error") }
       else {
+        if(!sessionUser.id){
+          cart[indexProductCart].quantity++
+          localStorage.setItem("guestCart", JSON.stringify(cart))
+        }
+        else {
         editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1, sessionUser.id)
         alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
+
+        getCart(sessionUser.id)}
       }
-      getCart(sessionUser.id)
     }
   }
 
@@ -75,7 +92,7 @@ export function ProductCard({ sessionUser, id, name, price, image, stock, toProd
 
 function mapStateToProps(state) {
   return {
-    productDetails: state.productDetails,
+    productDetails: state.products.productDetails,
     cart: state.cart.cart,
     sessionUser: state.session.sessionUser,
   };

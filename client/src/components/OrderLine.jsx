@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux';
 import { editQuantity, deleteProductFromCart } from '../Redux/actions/cartActions';
 import swal from 'sweetalert';
@@ -28,6 +28,19 @@ const confirmar = (tim, fun, dat, prodName) => {
 		});
 }
 export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock }){
+let [counter, setCounter ] = useState(quantity)
+const handleChange = (e) => {
+	if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
+	else {
+		setCounter(e.target.value)
+		if(sessionUser.id) editQuantity(dataid, e.target.value, sessionUser.id)
+		else {
+			let cart = (JSON.parse(localStorage.getItem('guestCart')))
+			cart[dataid-1].quantity = e.target.value
+			window.localStorage.setItem('guestCart', JSON.stringify(cart))
+		}
+}
+}
 
 		return (
 		<tr>
@@ -38,9 +51,7 @@ export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteP
 			</td>
 			<td className="border border-info">{name}</td>
 			<td className="border border-info">$ {price}</td>
-			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={quantity} onChange={(e) => {
-				if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
-				else editQuantity(dataid, e.target.value, sessionUser.id)}}/></td>
+			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={counter} onChange={handleChange}/></td>
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>
 		)
