@@ -14,11 +14,13 @@ import CrudUser from "../components/adminOnly/userCrud/CrudUser";
 import OrderTable from "../components/adminOnly/orderTable/OrderTable.jsx";
 import Order from "../components/Order.jsx";
 import ShoppingCart from "../components/ShoppingCart.jsx";
-import AdminLogin from "../components/adminOnly/adminCruds/AdminLogin";
+import Profile from "../components/adminOnly/adminCruds/Profile.jsx";
 import { Admin } from "../components/adminOnly/adminCruds/Admin"
 import { CrudAdmin } from "../components/adminOnly/adminCruds/CrudAdmin"
 import NewUser from "../components/adminOnly/userCrud/NewUserForm";
 import EditUser from "../components/adminOnly/userCrud/EditUserForm";
+import GuestCart from "../components/GuestCart";
+import  Login  from "../components/adminOnly/adminCruds/Login.js";
 
 function App() {
 
@@ -32,14 +34,18 @@ function App() {
         exact path="/"
         component= { Home }
       />
+      <Route
+        exact path="/Profile"
+        component= { Profile }
+      />
 {/* -------------- ADMINS ------------------ */}
       <Route
         path="/Admin"
         component= { Admin }
       />
       <Route
-        exact path="/AdminLogin"
-        component= { AdminLogin }
+        exact path="/Login"
+        component= { Login }
       />
       <Route
         exact path="/Admin/CrudAdmin"
@@ -102,6 +108,10 @@ function App() {
       <Route
         exact path = "/Order"
         component= { Order }
+      />
+      <Route
+        exact path = "/GuestCart"
+        component= { GuestCart }
       />
       <Route
         exact path = "/ShoppingCart"
