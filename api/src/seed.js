@@ -196,6 +196,16 @@ let initialUsers = [
 		password: 'Pimpumpam',
 		admin: true,
 	},
+  {
+    email: 'pela@pela.com',
+    first_name: 'Pela',
+    last_name: 'Do',
+    address: 'San José 123',
+    locality: 'Villa Gesell',
+    state: 'Argentina',
+    password: '123123',
+    admin: true,
+  },
 ];
 
 let initialOrders = [
