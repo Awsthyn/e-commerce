@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import UserIcon from "./UserIcon"
@@ -46,16 +46,17 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around ">
-        <div className={s.brand}>
-          <img
-            className="px-0"
-            src={require("../assets/MercadoNegro5.gif")}
-            alt="logo"
-            width="70px"
-            onClick={() => (window.location = "/")}
-          />
-          <h4>MERCADO NEGRO</h4>
-        </div>
+        <Link to="/">
+          <div className={s.brand}>
+            <img
+              className="px-0"
+              src={require("../assets/MercadoNegro5.gif")}
+              alt="logo"
+              width="70px"
+            />
+            <h4>MERCADO NEGRO</h4>
+          </div>
+        </Link>
 
         <div className="navbar-nav text-info" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto d-flex justify-content-around ">
@@ -102,9 +103,9 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
 
             <li>
 
-            <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-</svg>
+              <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+              </svg>
 
             </li>
             <SearchBar />
