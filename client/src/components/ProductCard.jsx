@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
@@ -74,9 +74,7 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
             <button data-id={id} type='button'
               className="btn btn-dark ml-auto mr-auto"
               onClick={(e) => {
-                handleCart(e.target.getAttribute("data-id"))
-                // addToOrder(e.target.getAttribute("data-id"), 1)
-                // history.push(`/Order`)
+                handleCart(e.target.getAttribute("data-id"))              
               }}
             >
               <i data-id={id} className="fas fa-cart-plus "></i>
