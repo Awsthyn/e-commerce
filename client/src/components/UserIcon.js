@@ -1,7 +1,9 @@
 import React from 'react';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from 'mdbreact';
+import { sessionLogin, sessionLogout } from "../Redux/actions/sessionActions"
+import { connect } from "react-redux";
 
-export default function UserIcon() {
+export function UserIcon(props) {
 	return (
 		<MDBDropdown>
 			<MDBDropdownToggle caret color="dark text-info">
@@ -26,22 +28,26 @@ export default function UserIcon() {
 					Crear Usuario
 				</MDBDropdownItem>
 				<MDBDropdownItem onClick={() => (window.location = '/AdminLogin')}>Iniciar Sesión</MDBDropdownItem>
-				<MDBDropdownItem onClick={() => (window.location = '/AdminLogin')}>
-					Iniciar como Administrador/a
-				</MDBDropdownItem>
-				<MDBDropdownItem onClick={() => alert('Se ha cerrado la Sesión')}>Cerrar Sesión</MDBDropdownItem>
+				<MDBDropdownItem onClick={props.sessionLogout}>Cerrar Sesión</MDBDropdownItem>
 			</MDBDropdownMenu>
 		</MDBDropdown>
 	);
 }
 
-//         <div class="dropdown">
-//   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+function mapStateToProps(state) {
+    return {
+        sessionUser: state.session.sessionUser,
+    }
+}
 
-//   </button>
-//   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-//     <button class="dropdown-item" type="button">Action</button>
-//     <button class="dropdown-item" type="button">Another action</button>
-//     <button class="dropdown-item" type="button">Something else here</button>
-//   </div>
-// </div>
+function mapDispatchToProps(dispatch) {
+    return {
+        sessionLogin: user => dispatch(sessionLogin(user)),
+        sessionLogout: () => dispatch(sessionLogout())
+    };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserIcon);

@@ -25,14 +25,17 @@ export function sessionLogin(data){
 
 // ----------------- LOGOUT --------
 export function sessionLogout() {
+    console.log('accion despachada')
     return function(dispatch) {
-        return fetch(`http://localhost:3001/auth/logout`)
+        return fetch(`http://localhost:3001/auth/logout`, {
+            credentials: 'include'
+        })
         .then((r) => r.json())
         .then((data) => {
             dispatch({ type: LOGOUT})
         })
         .catch((error) => {
-            console.error(error);
+            console.error('error', error);
         });
     }
 }

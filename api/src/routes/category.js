@@ -4,7 +4,6 @@ const { Category, Product } = require("../db.js");
 server.get("/", (req, res, next) => {
   Category.findAll()
     .then((products) => {
-      console.log(products);
       res.json(products);
     })
     .catch(next);

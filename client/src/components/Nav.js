@@ -1,17 +1,9 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
-import {
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-} from "mdbreact";
+import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import UserIcon from "./UserIcon"
-import {
-  getAllProducts,
-  getCategoryProducts,
-} from "../Redux/actions/productActions";
+import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions";
 import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
 import store from "../Redux/store";

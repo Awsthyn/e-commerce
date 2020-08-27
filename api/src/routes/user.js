@@ -37,7 +37,7 @@ Promise.all([order, product])
   })
   res.status(201)
   res.json({order: order[0].id, price: product.price, quantity, product })
-})
+}).catch(err => console.log(err))
 
 })
 
