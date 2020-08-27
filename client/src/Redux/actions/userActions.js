@@ -1,4 +1,10 @@
-import {GET_ALL_USERS, CREATE_USER, EDIT_USER, DELETE_USER} from "./constants";
+import {
+  GET_ALL_USERS,
+  GET_USER,
+  CREATE_USER,
+  EDIT_USER,
+  DELETE_USER,
+} from "./constants";
 
 // ------------- TRAE TODOS LOS USUARIOS
 export function getAllUsers() {
@@ -35,6 +41,21 @@ export function createUser(user){
     }
 }
 
+// ------------- TRAE SOLO UN USUARIO
+export function getUser(id) {
+  return function (dispatch) {
+    return fetch(`http://localhost:3001/Users/${id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        console.log("getUser:", data);
+        dispatch({ type: GET_USER, payload: data });
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+}
+
 // ------------------ EDITA UN USUARIO
 export function editUser(user){
     console.info('productActions product:', user)
@@ -51,10 +72,12 @@ export function editUser(user){
             dispatch({type: EDIT_USER, payload: res})
         }).catch(err => console.error(err))
     }
+
 }
 
 // ------------------ BORRA UN USUARIO
 export function deleteUser(UserId) {
+
     return function(dispatch) {
         return fetch(`http://localhost:3001/users/${UserId}`, {
         method: 'DELETE',
@@ -66,11 +89,12 @@ export function deleteUser(UserId) {
     }).then(res => {
         console.info("FETCH DELETE USER")
         dispatch({type: DELETE_USER, payload: res})
+
         // alert("El Usuario se ha Eliminado correctamente")
         window.location = "/Admin/CrudUser";
-    })
-    .catch(err => console.error(err))
-    }
+      })
+      .catch((err) => console.error(err));
+  };
 }
 
 export function promoteUser(userId){
@@ -85,4 +109,5 @@ export function promoteUser(userId){
             credentials: 'include'
         }).then(() => dispatch(getAllUsers()) )
     }
+
 }
