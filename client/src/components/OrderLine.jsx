@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux';
-import { editQuantity, deleteProductFromCart } from '../Redux/actions/cartActions';
+import { editQuantity, deleteProductFromCart, deleteProductFromGuestCart } from '../Redux/actions/cartActions';
 import swal from 'sweetalert';
 import Order from '../components/Order';
 
@@ -43,12 +43,16 @@ const handleChange = (e) => {
 		}
 }
 }
-
+	const handleDelete = (arg) => {
+		
+		if(sessionUser.id) return deleteProductFromCart(arg)
+		else return deleteProductFromGuestCart(arg)
+	}
 
 		return (
 		<tr>
 		<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2" onClick={(e) => {
-			confirmar("4000", deleteProductFromCart, e.target.getAttribute('data-id'), name)
+			confirmar("4000", handleDelete, e.target.getAttribute('data-id'), name)
 				}}>
 				X
 			</td>
@@ -62,7 +66,6 @@ const handleChange = (e) => {
 }
 
 
-
 function mapStateToProps(state) {
 	return {
 		productDetails: state.products.productDetails,
@@ -72,34 +75,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
+		deleteProductFromGuestCart: (id) => dispatch(deleteProductFromGuestCart(id)),
 		editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))
 	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderLine);
-
-
-
-
-
-
-
-/*
-export function OrderLine({ dataid, name, price, quantity, deleteProductFromCart }) {
-	const [count, setCount] = useState(quantity);
-	const dispatch = useDispatch()
-	return (
-		<tr>
-			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2"  onClick={(e) => deleteProductFromCart(e.target.getAttribute('data-id'))}>
-				X
-			</td>
-			<td className="border border-info">{name}</td>
-			<td className="border border-info">$ {price}</td>
-			<td className="border border-info"><input type="number" value={count} onChange={(e) => {
-				setCount(e.target.value)
-				dispatch({ type: 'EDIT_QUANTITY_FROM_CART', payload: [dataid, e.target.value] })}}/></td>
-			<td className="border border-info subtotal">{quantity * price}</td>
-		</tr>
-	);
-}
-*/

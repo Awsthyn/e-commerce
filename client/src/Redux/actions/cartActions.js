@@ -16,6 +16,13 @@ export function getCart(userId){
     }
 }
 
+//-----------------------Obtener productos del carrito de Guest ------------------------
+export function getGuestCart(){
+    return function(dispatch){
+    dispatch({ type: GET_PRODUCTS_CART, payload: JSON.parse(localStorage.getItem('guestCart'))})
+}}
+
+
 //----------------------- Vaciar carrito ------------------------
 
 export function emptyCart(userId) {
@@ -35,6 +42,13 @@ export function emptyCart(userId) {
     }
 }
 
+//----------------------- Vaciar carrito ------------------------
+export function emptyGuestCart(){
+    localStorage.setItem('guestCart', JSON.stringify([]))
+    return function(dispatch){
+        dispatch({ type: DELETE_CART })
+    }
+}
 
 
 //----------------------- Agregar producto al carrito -----------------------
@@ -81,6 +95,18 @@ export function deleteProductFromCart(productId) {
         .catch(err => console.log(err))
     }
 }
+
+//----------------------- Eliminar producto de carrito Guest ------------------------
+export function deleteProductFromGuestCart(orderLineId) {
+    let cart = (JSON.parse(localStorage.getItem('guestCart')))
+    cart = cart.filter((p) => p.id !== Number(orderLineId))
+    window.localStorage.setItem('guestCart', JSON.stringify(cart))
+    window.location = "/GuestCart"
+    return function(dispatch){
+        dispatch({ type: DELETE_CART })
+    }
+}
+
 
 //-----------------------Editar cantidad de un producto de carrito ------------------------
 

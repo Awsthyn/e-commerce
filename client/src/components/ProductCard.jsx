@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
-import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
+import { addToOrder, getCart, getGuestCart, editQuantity } from "../Redux/actions/cartActions"
 import { connect } from "react-redux";
 import swal from 'sweetalert';
 import styles from '../css/product.module.css'
@@ -18,10 +18,13 @@ const alerta = (tit, tex, tim) => {
 export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
   let history = useHistory()
   useEffect(() => {
-    getCart(sessionUser.id)
+    if(!sessionUser.id) getGuestCart()
+    else getCart(sessionUser.id)
+    
+    
   }, [])
 
-  if(!sessionUser.id) cart = JSON.parse(localStorage.getItem('guestCart'))
+  //if(!sessionUser.id) cart = JSON.parse(localStorage.getItem('guestCart'))
 
   function handleCart(id) {
     let indexProductCart = cart.findIndex(e => e.product.id == id)
@@ -32,7 +35,7 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
         if(!sessionUser.id){
-          cart[cart.length] = {id: cart.length + 1, quantity: 1, product: dataProduct}
+          cart.length == 0 ? cart[0] = {id: 1, quantity: 1, product: dataProduct} : cart[cart.length] = {id: cart[cart.length-1].id + 1, quantity: 1, product: dataProduct}
           localStorage.setItem("guestCart", JSON.stringify(cart))
         }
         else {
@@ -103,6 +106,7 @@ function mapDispatchToProps(dispatch) {
     toProductDetails: (id) => dispatch(toProductDetails(id)),
     addToOrder: (productId, quantity, userId) => dispatch(addToOrder(productId, quantity, userId)),
     getCart: (userId) => dispatch(getCart(userId)),
+    getGuestCart: () => dispatch(getGuestCart()),
     editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))
   };
 }
