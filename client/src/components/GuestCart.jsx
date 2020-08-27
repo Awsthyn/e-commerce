@@ -29,30 +29,10 @@ const confirmar = (tit, tex, tim, suc, func) => {
 }
 
 
-let cart = [{
-    id: 1,
-    quantity: 5,
-    product:  {
-    name: "Mesa redonda estilo medieval",
-    description: "Es como una mesa… pero redonda. Ideal para regalarle a un caballero de Bretaña.",
-    price: 9500,
-    stock: 2000,
-  }},{
-    id: 2,
-    quantity: 5,
-    product:   {
-        name: "La mano de Dios",
-        description: "Golazo contra los ingleses en el 86.",
-        price: 120000,
-        stock: 1,
-      }}] 
-window.localStorage.setItem('guestCart', JSON.stringify(cart))
-let prueba = JSON.parse(localStorage.getItem('guestCart'))
-console.log(prueba)
 export class GuestCart extends Component {
   
     render() {
-        
+    let cart = JSON.parse(localStorage.getItem('guestCart'))   
         return (
             <div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>

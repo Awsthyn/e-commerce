@@ -92,7 +92,6 @@ class Order extends Component {
 						</div>
 					</div>
 				</div>
-				<GuestCart />
 			</div>
 		);
 	}

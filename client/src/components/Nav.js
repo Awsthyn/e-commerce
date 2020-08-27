@@ -13,9 +13,38 @@ import s from "../css/product.module.css";
 store.dispatch(getAllCategories());
 store.dispatch(getAllProducts());
 
-export function Nav({ categories, getCategoryProducts, getAllProducts }) {
-  let history = useHistory();
+let cart = []
+window.localStorage.setItem('guestCart', JSON.stringify(cart))
+let prueba = JSON.parse(localStorage.getItem('guestCart'))
 
+
+export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUser }) {
+
+  function LoggedUser(){
+    return <li className="nav-item">
+    <NavLink to="/Order" className="nav-link text-info" >
+      <i className="fas fa-cart-arrow-down"></i>
+    </NavLink>
+  </li>;
+  }
+  
+  function GuestUser(){
+    return <li className="nav-item">
+    <NavLink to="/GuestCart" className="nav-link text-info" >
+      <i className="fas fa-cart-arrow-down"></i>
+    </NavLink>
+  </li>;
+  }
+  
+  function UserOrGuest() {
+    if(!sessionUser.id){
+      return <GuestUser />;
+    }
+    return <LoggedUser />
+  }
+
+
+  let history = useHistory();
   return (
     <div >
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around ">
@@ -59,11 +88,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts }) {
               </MDBDropdown>
               </ul>
             </li>
-            <li className="nav-item">
-              <NavLink to="/Order" className="nav-link text-info" >
-                <i className="fas fa-cart-arrow-down"></i>
-              </NavLink>
-            </li>
+              <UserOrGuest />
             <li>
             <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -85,6 +110,7 @@ function mapStateToProps(state) {
   return {
     categories: state.categories.categories,
     products: state.products,
+    sessionUser: state.session.sessionUser,
   };
 }
 
