@@ -4,7 +4,7 @@ import { sessionLogin, sessionLogout } from "../../../Redux/actions/sessionActio
 import { connect } from "react-redux";
 
 
-export class AdminLogin extends React.Component {
+export class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -31,17 +31,21 @@ export class AdminLogin extends React.Component {
         render() {
         return (
 
-        <div className="container-fluid abs-center">
-            <form onSubmit={this.handleSubmit} className="form-group">
+        <div className="d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded m-50 d-flex flex-column align-items-center" >
+            <h3 class="card-title display-4">Inicia sesión para mejorar tu experiencia!</h3>
+            <form onSubmit={this.handleSubmit} className="form-group ">
                 <div className="form-group">
-                    <label>Nombre:</label>
-                    <input type="text" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email}/>
+                    <label class="lead">Mail:</label>
+                    <input type="text" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email} placeholder={'email@ejemplo.com'}/>
                 </div>
                 <div className="form-group">
-                    <label>Contraseña:</label>
-                    <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" value={this.state.password}/>
+                    <label class="lead">Contraseña:</label>
+                    <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" value={this.state.password} placeholder={'contraseña'}/>
                 </div>
-                <button type="submit" className="btn btn-dark" >Enviar</button>
+                <button type="submit" className="btn btn-dark lead" >Enviar</button>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item lead btn" href="#">Primera vez que vienes? Create una cuenta</a>
+                <a class="dropdown-item lead btn" href="#">Olvidaste tu contraseña?</a>
             </form>
         </div>
         )};
@@ -64,4 +68,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AdminLogin);
+)(Login);

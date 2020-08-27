@@ -47,3 +47,8 @@
   border-radius: 3px;
   object-fit: contain;
 }
+.brand{
+  display: flex;
+  color: white;
+  justify-content: left;
+}
