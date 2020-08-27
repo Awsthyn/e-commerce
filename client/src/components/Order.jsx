@@ -66,12 +66,9 @@ class Order extends Component {
 							))}
 						</tbody>
 					</table>
-					<div className="mt-4 d-flex justify-content-around">
-						<h5 id="total" className="border border-success p-3" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
-							Total: $
-							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
-						</h5>
-						<div>
+					<div className="mt-4 d-flex float-right mr-5">
+
+						<div className= "row align-items-start">
 							<button className="btn btn-success" onClick={() => {
 								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8))
 								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", this.props.emptyCart)
@@ -82,6 +79,10 @@ class Order extends Component {
 							}}>
 								Vaciar carrito
 							</button>
+						<h5 id="total" className="border border-success p-3 ml-auto float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
+							Total: $
+							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
+						</h5>
 						</div>
 					</div>
 				</div>
