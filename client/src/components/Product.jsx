@@ -17,30 +17,30 @@ const alerta = (tit, tex, tim) => {
     })
   }
 
-export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock }) {
+export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser }) {
 
     useEffect(()=>{
-      getCart()
+      getCart(sessionUser.id)
     }, [])
-    function handleCart(id) {
+    function handleCart(id, userId) {
         let indexProductCart = cart.findIndex(e => e.product.id === productDetails.id)
         if(indexProductCart === -1) {
           if(productDetails.stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
           else {
-            addToOrder(id, 1); 
+            addToOrder(id, 1, userId); 
             alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
         }
         else {
           if(stock <= cart[indexProductCart].quantity) {alert("Lo sentimos, no disponemos de la cantidad que usted está solicitando")}
           else {
-            editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1)
+            editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1, userId)
             alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
-            getCart()
+            getCart(userId)
           }
         }
 
     return (        
-    <div className="container-fluid mt-4    ">
+    <div className="container-fluid mt-4 ">
         <div className= "d-flex border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded" style={{width: "900px"}}>
             <div className="d-flex flex-column align-items-center" style={{ width: "350px" }}>
             <img id="principal" className={styles.product_img} src={productDetails.images === undefined ? "." : productDetails.images[1].url} alt={productDetails.name} />
@@ -71,7 +71,7 @@ export function ProductComponent({id, productDetails, addToOrder, cart, getCart,
                 <button data-id={id} type= 'button' 
                     className="btn btn-dark ml-auto mr-auto"
                     onClick={() => {
-                        handleCart(productDetails.id);
+                        handleCart(productDetails.id, sessionUser.id);
                     }}
                 >
             Agregar al carrito</button>
@@ -90,16 +90,17 @@ function mapStateToProps(state) {
     return {
         productDetails: state.products.productDetails,
         addToOrder: state.cart.addToOrder,
-        cart: state.cart.cart
+        cart: state.cart.cart,
+        sessionUser: state.session.sessionUser,
         
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToOrder: (productId, quantity) => dispatch(addToOrder(productId, quantity)),
-        getCart: () => dispatch(getCart()),
-        editQuantity: (orderLineId, quantity) => dispatch(editQuantity(orderLineId, quantity))
+        addToOrder: (productId, quantity, userId) => dispatch(addToOrder(productId, quantity, userId)),
+        getCart: (userId) => dispatch(getCart(userId)),
+        editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))
     };
 }
 

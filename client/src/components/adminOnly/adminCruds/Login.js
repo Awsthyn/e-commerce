@@ -44,7 +44,6 @@ export class Login extends React.Component {
                 </div>
                 <button type="submit" className="btn btn-dark lead" >Enviar</button>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item lead btn" href="#">Primera vez que vienes? Create una cuenta</a>
                 <a class="dropdown-item lead btn" href="#">Olvidaste tu contraseña?</a>
             </form>
         </div>
