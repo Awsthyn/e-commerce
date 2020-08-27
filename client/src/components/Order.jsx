@@ -68,6 +68,7 @@ class Order extends Component {
 									quantity={e.quantity}
 									stock={e.product.stock}
 									deleteProductFromCart={deleteProductFromCart}
+									productId={e.product.id}
 								/>
 							))}
 						</tbody>

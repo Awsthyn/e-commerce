@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { connect } from 'react-redux';
 import { editQuantity, deleteProductFromCart } from '../Redux/actions/cartActions';
 import swal from 'sweetalert';
+import Order from '../components/Order';
 
 const confirmar = (tim, fun, dat, prodName) => {
 	swal({
@@ -23,11 +24,12 @@ const confirmar = (tim, fun, dat, prodName) => {
 				console.log("ACEPTADO")
 				fun(dat)
 			} else {
-				console.log("CANELADO")
+				console.log("CANCELADO")
 			}
 		});
 }
-export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock }){
+
+export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock, productId }){
 let [counter, setCounter ] = useState(quantity)
 const handleChange = (e) => {
 	if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
@@ -42,6 +44,7 @@ const handleChange = (e) => {
 }
 }
 
+
 		return (
 		<tr>
 		<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2" onClick={(e) => {
@@ -49,7 +52,7 @@ const handleChange = (e) => {
 				}}>
 				X
 			</td>
-			<td className="border border-info">{name}</td>
+			<td role="button" className="border border-info cursor:pointer;" onClick={() => window.location =`/products/${productId}`}>{name}</td>
 			<td className="border border-info">$ {price}</td>
 			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={counter} onChange={handleChange}/></td>
 			<td className="border border-info subtotal">{quantity * price}</td>
