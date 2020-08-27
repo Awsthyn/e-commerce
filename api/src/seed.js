@@ -169,41 +169,49 @@ const bruteDataImages = [
 let imageUrls = [];
 
 bruteDataImages.map((e, i) => {
-
-	imageUrls.push({ url: `http://ecommerce-g5.tk/server-fotos/${e}.jpg`, productId: i + 1 });
-	imageUrls.push({ url: `http://ecommerce-g5.tk/server-fotos/${e + 2}.jpg`, productId: i + 1 });
-	imageUrls.push({ url: `http://ecommerce-g5.tk/server-fotos/${e + 3}.jpg`, productId: i + 1 });
+  imageUrls.push({
+    url: `http://ecommerce-g5.tk/server-fotos/${e}.jpg`,
+    productId: i + 1,
+  });
+  imageUrls.push({
+    url: `http://ecommerce-g5.tk/server-fotos/${e + 2}.jpg`,
+    productId: i + 1,
+  });
+  imageUrls.push({
+    url: `http://ecommerce-g5.tk/server-fotos/${e + 3}.jpg`,
+    productId: i + 1,
+  });
 });
 
 let initialUsers = [
-	{
-		email: 'nico@darkmarket.com',
-		first_name: 'Nicolás',
-		last_name: 'Selicki',
-		address: 'San Martín 123',
-		locality: 'La Plata',
-		state: 'Argentina',
-		password: 'Marti te amo',
-		admin: true,
-	},
-	{
-		email: 'leomaglia@darkmarket.com',
-		first_name: 'Leo',
-		last_name: 'Maglia',
-		address: 'San José 123',
-		locality: 'Villa Gesell',
-		state: 'Argentina',
-		password: 'Pimpumpam',
-		admin: true,
-	},
   {
-    email: 'pela@pela.com',
-    first_name: 'Pela',
-    last_name: 'Do',
-    address: 'San José 123',
-    locality: 'Villa Gesell',
-    state: 'Argentina',
-    password: '123123',
+    email: "nico@darkmarket.com",
+    first_name: "Nicolás",
+    last_name: "Selicki",
+    address: "San Martín 123",
+    locality: "La Plata",
+    state: "Argentina",
+    password: "Marti te amo",
+    admin: true,
+  },
+  {
+    email: "leomaglia@darkmarket.com",
+    first_name: "Leo",
+    last_name: "Maglia",
+    address: "San José 123",
+    locality: "Villa Gesell",
+    state: "Argentina",
+    password: "Pimpumpam",
+    admin: false,
+  },
+  {
+    email: "pela@pela.com",
+    first_name: "Pela",
+    last_name: "Do",
+    address: "San José 123",
+    locality: "Villa Gesell",
+    state: "Argentina",
+    password: "123123",
     admin: true,
   },
 ];
@@ -300,7 +308,8 @@ const initialReview = [
   },
   {
     rating: 3,
-    description: "Pobre el conejito que se quedó sin una patita. Espero que esté bien. Pero mi abuela ganó el quini",
+    description:
+      "Pobre el conejito que se quedó sin una patita. Espero que esté bien. Pero mi abuela ganó el quini",
     productId: 6,
     userId: 1,
   },
@@ -342,7 +351,8 @@ const initialReview = [
   },
   {
     rating: 5,
-    description: "Nos trajo la copa cumpliendo su sueño, y cada garganta, gritó en cada esquina, es un sentimiento, vamos Argentina!",
+    description:
+      "Nos trajo la copa cumpliendo su sueño, y cada garganta, gritó en cada esquina, es un sentimiento, vamos Argentina!",
     productId: 12,
     userId: 2,
   },
@@ -354,13 +364,15 @@ const initialReview = [
   },
   {
     rating: 1,
-    description: "La momia estaba viva, y cuando pedí explicaciones, me cortaron la llamada",
+    description:
+      "La momia estaba viva, y cuando pedí explicaciones, me cortaron la llamada",
     productId: 14,
     userId: 2,
   },
   {
     rating: 5,
-    description: "Se lo regalé a mi ex. Excelentes resultados. Ahora está internada en un manicomio",
+    description:
+      "Se lo regalé a mi ex. Excelentes resultados. Ahora está internada en un manicomio",
     productId: 15,
     userId: 2,
   },
@@ -369,7 +381,7 @@ const initialReview = [
     description: "Excelente",
     productId: 16,
     userId: 2,
-  }
+  },
 ];
 
 module.exports = {
