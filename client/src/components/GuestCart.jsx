@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../Redux/actions/cartActions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
-import GuestCart from './GuestCart'
 
 const confirmar = (tit, tex, tim, suc, func) => {
 	swal({
@@ -30,22 +28,33 @@ const confirmar = (tit, tex, tim, suc, func) => {
 		});
 }
 
-class Order extends Component {
-	constructor(props){
-		super(props)
-		console.log(this.props.sessionUser.id)
-		
-	}
 
-	componentDidMount() {
-		this.props.getCart(this.props.sessionUser.id);
-	}
-
-
-	render() {
-		const { cart, sessionUser } = this.props;
-		return (
-			<div>
+let cart = [{
+    id: 1,
+    quantity: 5,
+    product:  {
+    name: "Mesa redonda estilo medieval",
+    description: "Es como una mesa… pero redonda. Ideal para regalarle a un caballero de Bretaña.",
+    price: 9500,
+    stock: 2000,
+  }},{
+    id: 2,
+    quantity: 5,
+    product:   {
+        name: "La mano de Dios",
+        description: "Golazo contra los ingleses en el 86.",
+        price: 120000,
+        stock: 1,
+      }}] 
+window.localStorage.setItem('guestCart', JSON.stringify(cart))
+let prueba = JSON.parse(localStorage.getItem('guestCart'))
+console.log(prueba)
+export class GuestCart extends Component {
+  
+    render() {
+        
+        return (
+            <div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
 				<div className="">
 					<table className="table table-hover">
@@ -67,7 +76,6 @@ class Order extends Component {
 									price={e.product.price}
 									quantity={e.quantity}
 									stock={e.product.stock}
-									deleteProductFromCart={deleteProductFromCart}
 								/>
 							))}
 						</tbody>
@@ -75,14 +83,10 @@ class Order extends Component {
 					<div className="mt-4 d-flex float-right mr-5">
 
 						<div className= "row align-items-start">
-							<button className="btn btn-success" onClick={() => {
-								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8), sessionUser.id )
-								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada")
-							}
-							}>Confirmar compra</button>
-							<button className="btn btn-danger" onClick={() => {
-								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart(this.props.sessionUser.id))
-							}}>
+							<button className="btn btn-success">
+							Confirmar compra</button>
+							<button className="btn btn-danger">
+				
 								Vaciar carrito
 							</button>
 						<h5 id="total" className="border border-success p-3 ml-auto float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
@@ -92,26 +96,17 @@ class Order extends Component {
 						</div>
 					</div>
 				</div>
-				<GuestCart />
 			</div>
-		);
-	}
+        )
+    }
 }
 
-function mapStateToProps(state) {
-	return {
-		cart: state.cart.cart,
-		sessionUser: state.session.sessionUser,
-	};
+const mapStateToProps = (state) => ({
+    
+})
+
+const mapDispatchToProps = {
+    
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		getCart: (userId) => dispatch(getCart(userId)),
-		emptyCart: (userId) => dispatch(emptyCart(userId)),
-		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
-		confirmCart: (total, userId) => dispatch(confirmCart(total, userId))
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Order);
+export default connect(mapStateToProps, mapDispatchToProps)(GuestCart)

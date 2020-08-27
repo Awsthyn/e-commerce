@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
@@ -15,7 +15,7 @@ const alerta = (tit, tex, tim) => {
   })
 }
 
-export function ProductCard({ sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
+export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
   let history = useHistory()
   useEffect(()=>{
     getCart(sessionUser.id)
@@ -26,8 +26,16 @@ export function ProductCard({ sessionUser, id, name, price, image, stock, toProd
     if(indexProductCart === -1) {
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
+        if(!sessionUser.id){
+          console.log(dataProduct)
+          let getGuestCart = JSON.parse(localStorage.getItem('guestCart'))
+          getGuestCart[getGuestCart.length] = {id: getGuestCart.length + 1, quantity: 1, product: dataProduct}
+          localStorage.setItem("guestCart", JSON.stringify(getGuestCart))
+        }
+        else {
         addToOrder(id, 1, sessionUser.id); 
         alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
+      }
     }
     else {
       if(stock <= cart[indexProductCart].quantity) {swal("Lo sentimos", "no disponemos de la cantidad que usted está solicitando", "error")}
@@ -73,7 +81,7 @@ export function ProductCard({ sessionUser, id, name, price, image, stock, toProd
 
 function mapStateToProps(state) {
   return {
-    productDetails: state.productDetails,
+    productDetails: state.products.productDetails,
     cart: state.cart.cart,
     sessionUser: state.session.sessionUser,
   };

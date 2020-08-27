@@ -14,6 +14,7 @@ export const Catalogo = ({categories, products, getAllProducts, getCategoryProdu
                 products.length > 0 ?
                     products.map((e) => (
                         <ProductCard
+                            dataProduct={e}
                             key={e.id}
                             id = {e.id}
                             name={e.name}
