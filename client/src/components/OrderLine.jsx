@@ -2,12 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { editQuantity, deleteProductFromCart } from '../Redux/actions/cartActions';
 import swal from 'sweetalert';
-//import Counter from '../components/Counter';
-//import {addToOrder } from "../Redux/actions/orderActions"
-const confirmar = (tit, tex, tim, suc, func) => {
+
+const confirmar = (tim, fun, dat, prodName) => {
 	swal({
-		title: tit, //"¿Finalizar compra?",
-		text: tex, //"¿Desea completar la compra de los productos del carrito?",
+		title: "Remover producto del carrito",
+		text: `¿Desea eliminar el producto ${prodName} del carrito?`,
 		icon: "warning",
 		buttons: ["No", "Si"],
 		dangerMode: true,
@@ -15,25 +14,26 @@ const confirmar = (tit, tex, tim, suc, func) => {
 		.then((willBuy) => {
 			if (willBuy) {
 				swal({
-					text: suc,
+					text: `El producto ${prodName} ha sido eliminado del carrito.`,
 					icon: "success",
 					timer: tim, //"4000"
 				});
 			}
-			if (func && willBuy) {
-				func()
+			if (willBuy) {
 				console.log("ACEPTADO")
+				fun(dat)
 			} else {
-				console.log("CANCELADO")
+				console.log("CANELADO")
 			}
 		});
 }
-
 export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock }){
 
 		return (
 		<tr>
-			<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2"  onClick={(e) => confirmar("¿Eliminar elemento?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", deleteProductFromCart(e.target.getAttribute('data-id')))}>
+		<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2" onClick={(e) => {
+			confirmar("4000", deleteProductFromCart, e.target.getAttribute('data-id'), name)
+				}}>
 				X
 			</td>
 			<td className="border border-info">{name}</td>
@@ -44,7 +44,7 @@ export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteP
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>
 		)
-	
+
 }
 
 

@@ -24,7 +24,7 @@ const confirmar = (tit, tex, tim, suc, func) => {
 				func()
 				console.log("ACEPTADO")
 			} else {
-				console.log("CANELADO")
+				console.log("CANCELADO")
 			}
 		});
 }
@@ -33,7 +33,7 @@ class Order extends Component {
 	constructor(props){
 		super(props)
 		console.log(this.props.sessionUser.id)
-		
+
 	}
 
 	componentDidMount() {
@@ -80,8 +80,8 @@ class Order extends Component {
 							}
 							}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
-								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart(this.props.sessionUser.id))
-							}}>
+									confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart)
+								}}>
 								Vaciar carrito
 							</button>
 						<h5 id="total" className="border border-success p-3 ml-auto float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
