@@ -17,14 +17,15 @@ server.get('/login', function(req, res){
 server.post('/login', 
     passport.authenticate('local'), 
     function(req, res) {
-        console.log(req.user)
+        console.log('inicio de sesion exitoso')
         res.json(req.user)
     // res.redirect('/');
 });
 
 server.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/');
+    res.json({})
+    console.log('cierre de sesion')
 });
 
 function isAuthenticated(req, res, next) {

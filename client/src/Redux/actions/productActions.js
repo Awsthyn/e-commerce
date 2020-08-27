@@ -4,7 +4,9 @@ import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT } from './const
 
 export function getSearchedProducts(keyword) {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/search?query=${keyword}`)
+        return fetch(`http://localhost:3001/search?query=${keyword}`, {
+            credentials: 'include'
+        })
         .then((r) => r.json())
         .then((data) => {
             dispatch({ type: GET_PRODUCTS, payload: data})
@@ -19,7 +21,9 @@ export function getSearchedProducts(keyword) {
 
 export function getCategoryProducts(category) {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/categories/${category}`)
+        return fetch(`http://localhost:3001/categories/${category}`, {
+            credentials: 'include'
+        })
         .then(r => r.json())
         .then(data => {
             dispatch({type: GET_PRODUCTS, payload: data.products})
@@ -32,7 +36,9 @@ export function getCategoryProducts(category) {
 
 export function toProductDetails(id) {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/products/${id}`)
+        return fetch(`http://localhost:3001/products/${id}`, {
+            credentials: 'include'
+        })
         .then((r) => r.json())
         .then((data) => {
             dispatch({type: SET_DETAILS, payload: data})
@@ -47,7 +53,9 @@ export function toProductDetails(id) {
 
 export function getAllProducts() {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/products`)
+        return fetch(`http://localhost:3001/products`, {
+            credentials: 'include'
+        })
         .then((r) => r.json())
         .then((data) => {
             dispatch({type: GET_PRODUCTS, payload: data})
@@ -65,7 +73,8 @@ export function onDeleteProduct(ProductId) {
             body: JSON.stringify({ id : ProductId }),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
         }).then(res => {
             dispatch({type: DELETE_PRODUCT, payload: res})
             alert("El Producto se ha Eliminado correctamente")
@@ -84,7 +93,8 @@ export function onDeleteProduct(ProductId) {
                 body: JSON.stringify(product),
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             }).then(res => {
                 dispatch({type: EDIT_PRODUCT, payload: res})
                 alert("El Producto se Editó correctamente")
@@ -96,7 +106,9 @@ export function onDeleteProduct(ProductId) {
     //----------------------------
     export function getProduct(id) {
         return function(dispatch) {
-            return fetch(`http://localhost:3001/products/${id}`)
+            return fetch(`http://localhost:3001/products/${id}`, {
+                credentials: 'include'
+            })
             .then((r) => r.json())
             .then((data) => {
                 console.log('getProduct:', data);
@@ -111,14 +123,14 @@ export function onDeleteProduct(ProductId) {
 //------------------Creat Producto
 export function addProduct(product){
     const url = 'http://localhost:3001/products/';
-    return function(dispatch)
-    {
+    return function(dispatch) {
         return fetch(url, {
             method: 'POST',
             body: JSON.stringify(product),
             headers: {
                 'Content-Type': 'application/json'
-            } 
+            },
+            credentials: 'include'
         })
         .then(res => res.json())
         .then(res => {

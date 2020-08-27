@@ -2,7 +2,9 @@ import { GET_ALL_ORDERS_USERS } from './constants';
 
 export function getAllOrders() {
     return function(dispatch){
-        return fetch(`http://localhost:3001/order/all/users`)
+        return fetch(`http://localhost:3001/order/all/users`, {
+            credentials: 'include'
+        })
         .then((r) => r.json())
         .then((data) => dispatch({type: GET_ALL_ORDERS_USERS, payload: data}))
         .catch((error) => {console.log(error)})
@@ -18,7 +20,8 @@ export function editOrder(order){
             body: JSON.stringify(order),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
         }).then(() => dispatch(getAllOrders()) )
     }
 }

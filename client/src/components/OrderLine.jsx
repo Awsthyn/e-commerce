@@ -4,7 +4,7 @@ import { editQuantity, deleteProductFromCart } from '../Redux/actions/cartAction
 //import Counter from '../components/Counter';
 //import {addToOrder } from "../Redux/actions/orderActions"
 
-export function OrderLine ({ dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock }){
+export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock }){
 
 		return (
 		<tr>
@@ -15,7 +15,7 @@ export function OrderLine ({ dataid, name, price, quantity, deleteProductFromCar
 			<td className="border border-info">$ {price}</td>
 			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={quantity} onChange={(e) => {
 				if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
-				else editQuantity(dataid, e.target.value)}}/></td>
+				else editQuantity(dataid, e.target.value, sessionUser.id)}}/></td>
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>
 		)
@@ -27,12 +27,13 @@ export function OrderLine ({ dataid, name, price, quantity, deleteProductFromCar
 function mapStateToProps(state) {
 	return {
 		productDetails: state.products.productDetails,
+		sessionUser: state.session.sessionUser,
 	};
 }
 function mapDispatchToProps(dispatch) {
 	return {
 		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
-		editQuantity: (orderLine, quantity) => dispatch(editQuantity(orderLine, quantity))
+		editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))
 	};
 }
 

@@ -3,7 +3,9 @@ import {GET_ALL_USERS, CREATE_USER, EDIT_USER, DELETE_USER} from "./constants";
 // ------------- TRAE TODOS LOS USUARIOS
 export function getAllUsers() {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/users`)
+        return fetch(`http://localhost:3001/users`, {
+            credentials: 'include'
+        })
         .then((r) => r.json())
         .then((data) => {
             dispatch({ type: GET_ALL_USERS, payload: data})
@@ -24,7 +26,8 @@ export function createUser(user){
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
         }).then(res => {
             console.info(res)
             dispatch({type: CREATE_USER, payload: res})
@@ -41,7 +44,8 @@ export function editUser(user){
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
         }).then(res => {
             console.info(res)
             dispatch({type: EDIT_USER, payload: res})
@@ -57,7 +61,8 @@ export function deleteUser(UserId) {
         body: JSON.stringify({ id : UserId }),
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
     }).then(res => {
         console.info("FETCH DELETE USER")
         dispatch({type: DELETE_USER, payload: res})
@@ -77,6 +82,7 @@ export function promoteUser(userId){
                 'Content-Type': 'application/json',
             },
             mode: 'cors',
+            credentials: 'include'
         }).then(() => dispatch(getAllUsers()) )
     }
 }

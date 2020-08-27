@@ -24,7 +24,6 @@ export class AdminLogin extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.sessionLogin(this.state) .then(() => {
-            console.log("estad0", this.state)
             alert("enviado")})
         // history.push('/Admin')
     }
