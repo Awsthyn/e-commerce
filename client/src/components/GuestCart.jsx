@@ -37,7 +37,8 @@ export class GuestCart extends Component {
 		this.props.getGuestCart();
 	}
     render() {
-		const { cart } = this.props;  
+		const { cart, sessionUser } = this.props;
+		!sessionUser.id ? null : window.location = '/Order' 
         return (
             <div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
@@ -89,7 +90,8 @@ export class GuestCart extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    cart: state.cart.cart
+	cart: state.cart.cart,
+	sessionUser: state.session.sessionUser
 })
 
 function mapDispatchToProps(dispatch) {

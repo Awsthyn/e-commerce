@@ -10,6 +10,14 @@ import { connect } from "react-redux";
 import swal from "sweetalert";
 
 export function UserIcon(props) {
+
+
+  const logout = () => {
+  props.sessionLogout()
+  swal("Se ha cerrado sesión")
+  window.location.reload();
+}
+
   return (
     <MDBDropdown>
       <MDBDropdownToggle caret color="dark text-info">
@@ -46,8 +54,7 @@ export function UserIcon(props) {
         </MDBDropdownItem>
         <hr></hr>
         <MDBDropdownItem
-          onClick={props.sessionLogout}
-        // ,swal("Se ha cerrado sesión"))} 
+          onClick={logout}
 
         >
 
