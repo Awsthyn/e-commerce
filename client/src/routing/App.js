@@ -57,6 +57,7 @@ function App() {
         component={EditData}
       />
       {/* -------------- ADMINS ------------------ */}
+      <Route
         exact path="/favourite"
         component= { Favoritos }
       />

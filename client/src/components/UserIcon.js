@@ -50,6 +50,7 @@ export function UserIcon(props) {
         // ,swal("Se ha cerrado sesión"))} 
 
         >
+
           Cerrar Sesión
         </MDBDropdownItem>
       </MDBDropdownMenu>
