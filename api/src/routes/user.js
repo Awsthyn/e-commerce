@@ -41,6 +41,44 @@ Promise.all([order, product])
 
 })
 
+
+//Traspaso de GuestCart a UserCart
+
+server.post("/:userId/guestToCart", (req, res, next) => {
+  const { orderLines } = req.body;
+  const order = Order.findOrCreate({where: {
+    orderStatus: 'carrito',
+    userId: req.params.userId}})
+  const container = []
+  const productsSearch =  orderLines.map((orderLine) => {
+    Product.findByPk(orderLine.product.id).then((data)=>{
+      container.push(data)
+    })
+  })
+
+  Promise.all([order, productsSearch])
+  .then(data => {
+    const order = data[0]
+    console.log(order[0].id)
+    const orderLinesCreation = container.map((p, i) => {
+      OrderLine.upsert({
+        productId: p.id, 
+        orderId: order[0].id, 
+        quantity: orderLines[i].quantity,
+        price: p.price
+    })
+
+  })
+  Promise.all(orderLinesCreation).then(()=> res.sendStatus(200))
+  
+  })
+  .catch(err => console.log(err))
+})
+
+
+
+
+
 //S39
 server.get("/:userId/cart", (req, res, next) => {
   Order.findOne({where: {
