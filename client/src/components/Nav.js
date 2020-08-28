@@ -21,8 +21,9 @@ import s from "../css/product.module.css";
 store.dispatch(getAllCategories());
 store.dispatch(getAllProducts());
 
-let cart = JSON.parse(localStorage.getItem("guestCart"));
-if (cart == null) window.localStorage.setItem("guestCart", JSON.stringify([]));
+
+//let cart = JSON.parse(localStorage.getItem("guestCart"));
+//if (cart == null) window.localStorage.setItem("guestCart", JSON.stringify([]));
 
 export function Nav({
   categories,
