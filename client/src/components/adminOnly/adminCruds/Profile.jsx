@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 
 export class Profile extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         const userId = this.props.sessionUser.id 
         // this.props.toProfile()
@@ -23,25 +23,26 @@ export class Profile extends React.Component {
 
 
 
-        render() {
+    render() {
         return (
 
-                <div className="container mt-4">
-                    <h2 className='card-title text-justify'>Hola! {this.props.sessionUser.first_name}, este es tu perfil.</h2>
-                    <h4 className='lead'>Aca podés editar tus datos, verificar el estado de tus compras, ver tus opiniones.</h4>
+            <div className="container mt-4">
+                <h2 className='card-title text-justify'>Hola! {this.props.sessionUser.first_name}, este es tu perfil.</h2>
+                <h4 className='lead'>Aca podés editar tus datos, verificar el estado de tus compras, ver tus opiniones.</h4>
                 <table>
-                <thead className="text-center table btn-group">
-                    <tr>
-                    <th><Link to={`/Admin/CrudUser/${this.props.sessionUser.id}/edit`} className="btn btn-warning">Editar Mis Datos</Link></th>
-                    <th><Link to="/Admin/CrudCategory" className="btn btn-warning">Estado de mis Compras</Link></th>
-                    <th><Link to="/Admin/CrudUser"     className="btn btn-warning">Mis Opiniones</Link></th>
-                    {this.props.sessionUser.admin ? <th><Link to="/Admin/CrudUser"className="btn btn-warning">Admin Cruds</Link></th> : <th></th>}
-                    </tr>
-                </thead>
+                    <thead className="text-center table btn-group">
+                        <tr>
+                            <th><Link to="/Profile/editdata" className="btn btn-warning">Editar Mis Datos</Link></th>
+                            <th><Link to="/Admin/CrudCategory" className="btn btn-warning">Estado de mis Compras</Link></th>
+                            <th><Link to="/Profile/myreviews" className="btn btn-warning">Mis Opiniones</Link></th>
+                            {this.props.sessionUser.admin ? <th><Link to="/Admin/CrudUser" className="btn btn-warning">Admin Cruds</Link></th> : <th></th>}
+                        </tr>
+                    </thead>
                 </table>
             </div>
-        )};
-    
+        )
+    };
+
 }
 
 function mapStateToProps(state) {
@@ -59,6 +60,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Profile);

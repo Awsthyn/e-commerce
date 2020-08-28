@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../Redux/actions/cartActions';
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
+import GuestCart from './GuestCart'
 
 const confirmar = (tit, tex, tim, suc, func) => {
 	swal({
@@ -30,9 +31,9 @@ const confirmar = (tit, tex, tim, suc, func) => {
 }
 
 class Order extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props)
-		console.log(this.props.sessionUser.id)
+		console.log(this.props.sessionUser)
 
 	}
 
@@ -74,21 +75,21 @@ class Order extends Component {
 					</table>
 					<div className="mt-4 d-flex float-right mr-5">
 
-						<div className= "row align-items-start">
+						<div className="row align-items-start">
 							<button className="btn btn-success" onClick={() => {
-								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8), sessionUser.id )
+								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8), sessionUser.id)
 								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada")
 							}
 							}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
-									confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart)
-								}}>
+								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart)
+							}}>
 								Vaciar carrito
 							</button>
-						<h5 id="total" className="border border-success p-3 ml-auto float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
-							Total: $
+							<h5 id="total" className="border border-success p-3 ml-auto float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
+								Total: $
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
-						</h5>
+							</h5>
 						</div>
 					</div>
 				</div>

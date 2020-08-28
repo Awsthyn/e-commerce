@@ -20,8 +20,11 @@ import { CrudAdmin } from "../components/adminOnly/adminCruds/CrudAdmin"
 import NewUser from "../components/adminOnly/userCrud/NewUserForm";
 import EditUser from "../components/adminOnly/userCrud/EditUserForm";
 import GuestCart from "../components/GuestCart";
+import MyReviews from "../components/adminOnly/singleUserCruds/myReviews";
+import EditData from "../components/adminOnly/singleUserCruds/editData";
 import  Login  from "../components/adminOnly/adminCruds/Login.js";
 import {Favoritos} from "../components/Favoritos"
+
 
 function App() {
 
@@ -29,107 +32,121 @@ function App() {
     <Router>
       <Route
         path="/"
-        component= { Nav }
+        component={Nav}
       />
       <Route
         exact path="/"
-        component= { Home }
+        component={Home}
       />
       <Route
         exact path="/Profile"
-        component= { Profile }
+        component={Profile}
       />
       <Route
+        exact path="/Profile/myreviews"
+        // render={props =>
+        //   <MyReviews sessionUser={props.location.state.sessionUser} />
+        // }
+        component={MyReviews}
+      />
+      <Route
+        exact path="/Profile/editdata"
+        // render={props =>
+        //   <EditData sessionUser={props.location.state.sessionUser} />
+        // }
+        component={EditData}
+      />
+      {/* -------------- ADMINS ------------------ */}
         exact path="/favourite"
         component= { Favoritos }
       />
 {/* -------------- ADMINS ------------------ */}
       <Route
         path="/Admin"
-        component= { Admin }
+        component={Admin}
       />
       <Route
         exact path="/Login"
-        component= { Login }
+        component={Login}
       />
       <Route
         exact path="/Admin/CrudAdmin"
-        component= { CrudAdmin }
+        component={CrudAdmin}
       />
       <Route
-        exact path = "/Admin/OrderTable"
-        component= { OrderTable }
+        exact path="/Admin/OrderTable"
+        component={OrderTable}
       />
-{/* -------------- CRUDS PRODUCT ------------------ */}
+      {/* -------------- CRUDS PRODUCT ------------------ */}
       <Route
         exact path="/Admin/CrudProduct"
-        component= { CrudProduct }
+        component={CrudProduct}
       />
       <Route
-        exact path = "/Admin/products/form/new"
-        component= { NewProductForm }
+        exact path="/Admin/products/form/new"
+        component={NewProductForm}
       />
       <Route
-        exact path = "/Admin/products/:id/edit"
+        exact path="/Admin/products/:id/edit"
         //component= { EditProductForm }
-        render = { props =>
-            <EditProductForm product={props.location.state.product} />
+        render={props =>
+          <EditProductForm product={props.location.state.product} />
         }
       />
-{/* -------------- CRUDS CATEGORY ------------------ */}
+      {/* -------------- CRUDS CATEGORY ------------------ */}
       <Route
-        exact path = "/Admin/CrudCategory"
-        component= { CrudCategory }
+        exact path="/Admin/CrudCategory"
+        component={CrudCategory}
       />
       <Route
-        exact path = "/Admin/categories/form/new"
-        component= { NewCategoryForm }
+        exact path="/Admin/categories/form/new"
+        component={NewCategoryForm}
       />
       <Route
         exact path="/Admin/categories/:id/edit"
-        render = { props =>
-            <EditCategoryForm category={props.location.state.category} />
+        render={props =>
+          <EditCategoryForm category={props.location.state.category} />
         }
       />
-{/* -------------- CRUDS USER ------------------ */}
+      {/* -------------- CRUDS USER ------------------ */}
       <Route
-        exact path = "/Admin/CrudUser"
-        component= { CrudUser }
+        exact path="/Admin/CrudUser"
+        component={CrudUser}
       />
       <Route
-        exact path = "/Admin/CrudUser/form/new"
-        component= { NewUser }
+        exact path="/Admin/CrudUser/form/new"
+        component={NewUser}
       />
       <Route
-        exact path = "/Admin/CrudUser/:id/edit"
-        render = { props =>
-            <EditUser user={props.location.state.user} /> }
+        exact path="/Admin/CrudUser/:id/edit"
+        render={props =>
+          <EditUser user={props.location.state.user} />}
       />
-{/* -------------- ORDEN Y CARRITO ------------------ */}
+      {/* -------------- ORDEN Y CARRITO ------------------ */}
       <Route
-        exact path = "/OrderTable"
-        component= { OrderTable }
-      />
-      <Route
-        exact path = "/Order"
-        component= { Order }
+        exact path="/OrderTable"
+        component={OrderTable}
       />
       <Route
-        exact path = "/GuestCart"
-        component= { GuestCart }
+        exact path="/Order"
+        component={Order}
       />
       <Route
-        exact path = "/ShoppingCart"
-        component= { ShoppingCart }
+        exact path="/GuestCart"
+        component={GuestCart}
       />
-{/* -------------- CATALOGO ------------------ */}
+      <Route
+        exact path="/ShoppingCart"
+        component={ShoppingCart}
+      />
+      {/* -------------- CATALOGO ------------------ */}
       <Route
         exact path="/catalog"
-        component= { Catalog }
+        component={Catalog}
       />
       <Route
         path="/catalog/:categoriaName"
-        component= { Catalog }
+        component={Catalog}
       />
       {/* <Route
         exact path="/category/:id"
@@ -137,11 +154,11 @@ function App() {
       /> */}
       <Route
         path="/search"
-        component= { Catalog }
+        component={Catalog}
       />
       <Route
         exact path="/products/:id"
-        component= { ProductComponent }
+        component={ProductComponent}
       />
     </Router>
   );
