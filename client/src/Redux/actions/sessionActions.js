@@ -33,7 +33,7 @@ export function sessionLogout() {
             credentials: 'include'
         })
         .then((r) => r.json())
-        .then((data) => {
+        .then(() => {
             dispatch({ type: LOGOUT})
         })
         .catch((error) => {
