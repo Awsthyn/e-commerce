@@ -101,9 +101,8 @@ export function deleteProductFromGuestCart(orderLineId) {
     let cart = (JSON.parse(localStorage.getItem('guestCart')))
     cart = cart.filter((p) => p.id !== Number(orderLineId))
     window.localStorage.setItem('guestCart', JSON.stringify(cart))
-    window.location = "/GuestCart"
     return function(dispatch){
-        dispatch({ type: DELETE_CART })
+        dispatch({type: DELETE_PROD_FROM_CART, payload: orderLineId})
     }
 }
 

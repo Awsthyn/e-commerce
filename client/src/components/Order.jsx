@@ -5,7 +5,7 @@ import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
 import GuestCart from './GuestCart'
 
-const confirmar = (tit, tex, tim, suc, func) => {
+const confirmar = (tit, tex, tim, suc, func, userId) => {
 	swal({
 		title: tit, //"¿Finalizar compra?",
 		text: tex, //"¿Desea completar la compra de los productos del carrito?",
@@ -22,7 +22,7 @@ const confirmar = (tit, tex, tim, suc, func) => {
 				});
 			}
 			if (func && willBuy) {
-				func()
+				func(userId)
 				console.log("ACEPTADO")
 			} else {
 				console.log("CANCELADO")
@@ -82,7 +82,7 @@ class Order extends Component {
 							}
 							}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
-								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart)
+								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart, this.props.sessionUser.id)
 							}}>
 								Vaciar carrito
 							</button>
