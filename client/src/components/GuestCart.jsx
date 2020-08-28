@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
+import { getGuestCart, emptyGuestCart, confirmCart } from '../Redux/actions/cartActions';
+
 
 const confirmar = (tit, tex, tim, suc, func) => {
 	swal({
@@ -23,16 +25,19 @@ const confirmar = (tit, tex, tim, suc, func) => {
 				func()
 				console.log("ACEPTADO")
 			} else {
-				console.log("CANELADO")
+				console.log("CANCELADO")
 			}
 		});
 }
 
 
 export class GuestCart extends Component {
-  
+
+	componentDidMount() {
+		this.props.getGuestCart();
+	}
     render() {
-    let cart = JSON.parse(localStorage.getItem('guestCart'))   
+		const { cart } = this.props;  
         return (
             <div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
@@ -65,7 +70,9 @@ export class GuestCart extends Component {
 						<div className= "row align-items-start">
 							<button className="btn btn-success">
 							Confirmar compra</button>
-							<button className="btn btn-danger">
+							<button className="btn btn-danger" onClick={() => {
+									confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyGuestCart)
+								}}>
 				
 								Vaciar carrito
 							</button>
@@ -82,11 +89,14 @@ export class GuestCart extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+    cart: state.cart.cart
 })
 
-const mapDispatchToProps = {
-    
+function mapDispatchToProps(dispatch) {
+	return {
+	getGuestCart: () => dispatch(getGuestCart()),
+	emptyGuestCart: () => dispatch(emptyGuestCart()),
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GuestCart)

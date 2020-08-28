@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../Redux/actions/cartActions';
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
-import GuestCart from './GuestCart'
 
 const confirmar = (tit, tex, tim, suc, func) => {
 	swal({

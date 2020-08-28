@@ -1,46 +1,62 @@
 import React from "react";
 import { NavLink, useHistory, Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
-import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import UserIcon from "./UserIcon"
-import { getAllProducts, getCategoryProducts } from "../Redux/actions/productActions";
+import {
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from "mdbreact";
+import UserIcon from "./UserIcon";
+import {
+  getAllProducts,
+  getCategoryProducts,
+} from "../Redux/actions/productActions";
 import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
-import {store} from "../Redux/store";
+import { store } from "../Redux/store";
 import s from "../css/product.module.css";
 
 //-------- para traer prods al principio y ya esten disponibles -------
 store.dispatch(getAllCategories());
 store.dispatch(getAllProducts());
 
-let cart = (JSON.parse(localStorage.getItem('guestCart')))
-if(cart == null) window.localStorage.setItem('guestCart', JSON.stringify([]))
 
-export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUser }) {
+//let cart = JSON.parse(localStorage.getItem("guestCart"));
+//if (cart == null) window.localStorage.setItem("guestCart", JSON.stringify([]));
 
-  function LoggedUser(){
-    return <li className="nav-item">
-    <NavLink to="/Order" className="nav-link text-info" >
-      <i className="fas fa-cart-arrow-down"></i>
-    </NavLink>
-  </li>;
+export function Nav({
+  categories,
+  getCategoryProducts,
+  getAllProducts,
+  sessionUser,
+}) {
+  function LoggedUser() {
+    return (
+      <li className="nav-item">
+        <NavLink to="/Order" className="nav-link text-info">
+          <i className="fas fa-cart-arrow-down"></i>
+        </NavLink>
+      </li>
+    );
   }
-  
-  function GuestUser(){
-    return <li className="nav-item">
-    <NavLink to="/GuestCart" className="nav-link text-info" >
-      <i className="fas fa-cart-arrow-down"></i>
-    </NavLink>
-  </li>;
+
+  function GuestUser() {
+    return (
+      <li className="nav-item">
+        <NavLink to="/GuestCart" className="nav-link text-info">
+          <i className="fas fa-cart-arrow-down"></i>
+        </NavLink>
+      </li>
+    );
   }
-  
+
   function UserOrGuest() {
-    if(!sessionUser.id){
+    if (!sessionUser.id) {
       return <GuestUser />;
     }
-    return <LoggedUser />
+    return <LoggedUser />;
   }
-
 
   let history = useHistory();
   return (
@@ -57,16 +73,30 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
             <h4>MERCADO NEGRO</h4>
           </div>
         </Link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div className="navbar-nav text-info" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto d-flex justify-content-around ">
+        <div
+          className="navbar-nav collapse navbar-collapse"
+          id="navbarSupportedContent"
+        >
+          <ul className="navbar-nav mr-auto d-flex justify-content-around collapse navbar-collapse">
             <li>
               <ul>
                 <MDBDropdown>
                   <MDBDropdownToggle caret color="dark text-info">
                     Categorias
                   </MDBDropdownToggle>
-                  <MDBDropdownMenu basic>
+                  <MDBDropdownMenu left basic>
                     <li
                       className={s.pointer}
                       onClick={(e) => {
@@ -99,12 +129,19 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
                 </MDBDropdown>
               </ul>
             </li>
+//----------------
               <UserOrGuest />
               <Link to={"/favourite"}> 
               <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
               </svg>
               </Link>
+//----------------
+     //           <path
+     //             fillRule="evenodd"
+     //             d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+     //           />
+//----------------
             <SearchBar />
             <li>
               <UserIcon />
