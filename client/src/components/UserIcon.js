@@ -46,7 +46,7 @@ export function UserIcon(props) {
           Iniciar Sesión
         </MDBDropdownItem>
         <hr></hr>
-        <MDBDropdownItem onClick={props.sessionLogout, swal("Se ha cerrado sesión")}}>
+        <MDBDropdownItem onClick={() => (props.sessionLogout(), swal("Se ha cerrado sesión"))}>
           Cerrar Sesión
         </MDBDropdownItem>
       </MDBDropdownMenu>

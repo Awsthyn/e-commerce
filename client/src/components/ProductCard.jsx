@@ -81,7 +81,7 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
                 <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
               </svg>
         </button>
-            <button data-id={id} type='button' data-toggle="tooltip" data-html="true" title="Agregar a 'Favoritos'"
+            <button data-id={id} type='button' data-toggle="tooltip" data-html="true" title="Agregar a carrito"
               className="btn btn-dark ml-auto mr-auto"
               onClick={(e) => {
                 handleCart(e.target.getAttribute("data-id"))              
