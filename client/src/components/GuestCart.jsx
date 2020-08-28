@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
 import { getGuestCart, emptyGuestCart, confirmCart } from '../Redux/actions/cartActions';
+import { Redirect } from "react-router-dom";
 
 
 const confirmar = (tit, tex, tim, suc, func) => {
@@ -38,7 +39,7 @@ export class GuestCart extends Component {
 	}
     render() {
 		const { cart, sessionUser } = this.props;
-		!sessionUser.id ? null : window.location = '/Order' 
+		if(sessionUser.id) return  (<Redirect to='/Order' />)
         return (
             <div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>

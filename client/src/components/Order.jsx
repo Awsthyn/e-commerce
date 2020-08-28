@@ -4,6 +4,7 @@ import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../Redux
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
 import GuestCart from './GuestCart'
+import { Redirect } from "react-router-dom";
 
 const confirmar = (tit, tex, tim, suc, func, userId) => {
 	swal({
@@ -38,13 +39,14 @@ class Order extends Component {
 	}
 
 	componentDidMount() {
+
 		this.props.getCart(this.props.sessionUser.id);
 	}
 
 
 	render() {
 		const { cart, sessionUser } = this.props;
-		sessionUser.id ? null : window.location = '/GuestCart'
+		if(!sessionUser.id) return  (<Redirect to='/GuestCart' />)
 		return (
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
