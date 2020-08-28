@@ -129,19 +129,19 @@ export function Nav({
                 </MDBDropdown>
               </ul>
             </li>
-//----------------
-              <UserOrGuest />
-              <Link to={"/favourite"}> 
+            //----------------
+            <UserOrGuest />
+            <Link to={"/favourite"}>
               <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
               </svg>
-              </Link>
-//----------------
+            </Link>
+            {/* //----------------
      //           <path
      //             fillRule="evenodd"
      //             d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
      //           />
-//----------------
+//---------------- */}
             <SearchBar />
             <li>
               <UserIcon />
