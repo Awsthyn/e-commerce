@@ -4,6 +4,9 @@ export const SET_DETAILS = "SET_DETAILS";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 
+
+export const GET_REVIEWS = "GET_REVIEWS";
+
 // ----- CATEGORY CONSTANTS ------
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
