@@ -2,6 +2,7 @@ import React from 'react';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from 'mdbreact';
 import { sessionLogin, sessionLogout } from "../Redux/actions/sessionActions"
 import { connect } from "react-redux";
+import swal from 'sweetalert';
 
 export function UserIcon(props) {
 	return (
@@ -30,7 +31,10 @@ export function UserIcon(props) {
 				<MDBDropdownItem onClick={() => (window.location = '/Login')}>Iniciar Sesión</MDBDropdownItem>
 				<MDBDropdownItem onClick={() => (window.location = '/Profile')}>Ver Perfil</MDBDropdownItem>
 				<MDBDropdownItem><div class="dropdown-divider"></div></MDBDropdownItem>
-				<MDBDropdownItem onClick={props.sessionLogout}>Cerrar Sesión</MDBDropdownItem>
+				<MDBDropdownItem onClick={() =>{
+					props.sessionLogout()
+					swal("Se ha cerrado sesión")}
+				}>Cerrar Sesión</MDBDropdownItem>
 			</MDBDropdownMenu>
 		</MDBDropdown>
 	);
@@ -45,7 +49,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         sessionLogin: user => dispatch(sessionLogin(user)),
-        sessionLogout: () => dispatch(sessionLogout())
+		sessionLogout: () => dispatch(sessionLogout())
     };
 }
 

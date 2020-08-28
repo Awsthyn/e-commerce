@@ -194,7 +194,7 @@ let initialUsers = [
 		locality: 'Villa Gesell',
 		state: 'Argentina',
 		password: 'Pimpumpam',
-		admin: true,
+		admin: false,
 	},
   {
     email: 'pela@pela.com',

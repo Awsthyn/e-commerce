@@ -1,4 +1,6 @@
 import { LOGIN, LOGOUT } from './constants';
+import swal from 'sweetalert';
+
 
 
 // ----------------- LOGIN --------
@@ -36,6 +38,28 @@ export function sessionLogout() {
         })
         .catch((error) => {
             console.error('error', error);
+        });
+    }
+}
+
+// -------------- TO PROFILE --------
+export function toProfile() {
+    console.log('To profile despachado')
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/auth/profile`, {
+            credentials: 'include'
+        })
+        .then((r) => r.json())
+        .then((data) => {
+            if(data){return}
+            else {
+                window.location= "/"
+                swal("Primero debes iniciar sesión","", "error")
+            }
+            
+        })
+        .catch((error) => {
+            console.log(error)
         });
     }
 }

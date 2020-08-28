@@ -1,13 +1,26 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { sessionLogin, sessionLogout } from "../../../Redux/actions/sessionActions"
+import { sessionLogin, sessionLogout, toProfile } from "../../../Redux/actions/sessionActions"
 import { connect } from "react-redux";
 
 
 export class Profile extends React.Component {
     constructor(props){
         super(props);
+        const userId = this.props.sessionUser.id 
+        // this.props.toProfile()
+        console.log(this.props.sessionUser)
+        this.props.toProfile()
+
+        // this.isAuthenticated = this.isAuthenticated.bind(this)
+        // this.isAuthenticated()
     }
+
+    // isAuthenticated(){
+    //     if(this.props.sessionUser.id) return
+    //     else {window.location = "/"}
+    // }
+
 
 
         render() {
@@ -19,7 +32,7 @@ export class Profile extends React.Component {
                 <table>
                 <thead className="text-center table btn-group">
                     <tr>
-                    <th><Link to="/Admin/CrudProduct"   className="btn btn-warning">Editar Mis Datos</Link></th>
+                    <th><Link to={`/Admin/CrudUser/${this.props.sessionUser.id}/edit`} className="btn btn-warning">Editar Mis Datos</Link></th>
                     <th><Link to="/Admin/CrudCategory" className="btn btn-warning">Estado de mis Compras</Link></th>
                     <th><Link to="/Admin/CrudUser"     className="btn btn-warning">Mis Opiniones</Link></th>
                     {this.props.sessionUser.admin ? <th><Link to="/Admin/CrudUser"className="btn btn-warning">Admin Cruds</Link></th> : <th></th>}
@@ -40,7 +53,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         sessionLogin: user => dispatch(sessionLogin(user)),
-        sessionLogout: () => dispatch(sessionLogout())
+        sessionLogout: () => dispatch(sessionLogout()),
+        toProfile: () => dispatch(toProfile())
     };
 }
 

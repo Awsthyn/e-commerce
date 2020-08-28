@@ -25,6 +25,7 @@ export class Login extends React.Component {
         e.preventDefault();
         this.props.sessionLogin(this.state) .then(() => {
             alert("enviado")})
+            this.setState({email:"", password:""})
         // history.push('/Admin')
     }
 
