@@ -7,10 +7,9 @@ import {
 } from "mdbreact";
 import { sessionLogin, sessionLogout } from "../Redux/actions/sessionActions";
 import { connect } from "react-redux";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 export function UserIcon(props) {
-
   return (
     <MDBDropdown>
       <MDBDropdownToggle caret color="dark text-info">
@@ -46,7 +45,11 @@ export function UserIcon(props) {
           Iniciar Sesión
         </MDBDropdownItem>
         <hr></hr>
-        <MDBDropdownItem onClick={props.sessionLogout, swal("Se ha cerrado sesión")}>
+        <MDBDropdownItem
+          onClick={props.sessionLogout}
+        // ,swal("Se ha cerrado sesión"))} 
+
+        >
           Cerrar Sesión
         </MDBDropdownItem>
       </MDBDropdownMenu>
