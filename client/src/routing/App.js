@@ -20,9 +20,11 @@ import { CrudAdmin } from "../components/adminOnly/adminCruds/CrudAdmin"
 import NewUser from "../components/adminOnly/userCrud/NewUserForm";
 import EditUser from "../components/adminOnly/userCrud/EditUserForm";
 import GuestCart from "../components/GuestCart";
-import Login from "../components/adminOnly/adminCruds/Login.js";
 import MyReviews from "../components/adminOnly/singleUserCruds/myReviews";
 import EditData from "../components/adminOnly/singleUserCruds/editData";
+import  Login  from "../components/adminOnly/adminCruds/Login.js";
+import {Favoritos} from "../components/Favoritos"
+
 
 function App() {
 
@@ -55,6 +57,10 @@ function App() {
         component={EditData}
       />
       {/* -------------- ADMINS ------------------ */}
+        exact path="/favourite"
+        component= { Favoritos }
+      />
+{/* -------------- ADMINS ------------------ */}
       <Route
         path="/Admin"
         component={Admin}

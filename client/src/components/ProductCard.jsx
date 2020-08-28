@@ -28,15 +28,16 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
 
   function handleCart(id) {
     let indexProductCart = cart.findIndex(e => e.product.id == id)
-    console.log('productId: ' + id)
-    console.log(indexProductCart)
-    console.log(cart)
+    // console.log('productId: ' + id)
+    // console.log(indexProductCart)
+    // console.log(cart)
     if(indexProductCart === -1) {
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
         if(!sessionUser.id){
           cart.length == 0 ? cart[0] = {id: 1, quantity: 1, product: dataProduct} : cart[cart.length] = {id: cart[cart.length-1].id + 1, quantity: 1, product: dataProduct}
           localStorage.setItem("guestCart", JSON.stringify(cart))
+          alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
         }
         else {
         addToOrder(id, 1, sessionUser.id); 
@@ -50,6 +51,7 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
         if(!sessionUser.id){
           cart[indexProductCart].quantity++
           localStorage.setItem("guestCart", JSON.stringify(cart))
+          alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
         }
         else {
         editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1, sessionUser.id)
@@ -74,7 +76,12 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
             }}>
               Ver más detalles...
         </button>
-            <button data-id={id} type='button'
+        <button type='button' className="btn btn-danger ml-auto mr-auto btn-sm" data-toggle="tooltip" data-html="true" title="Agregar a 'Favoritos'">
+        <svg width="20" height="20" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-light" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+              </svg>
+        </button>
+            <button data-id={id} type='button' data-toggle="tooltip" data-html="true" title="Agregar a 'Favoritos'"
               className="btn btn-dark ml-auto mr-auto"
               onClick={(e) => {
                 handleCart(e.target.getAttribute("data-id"))              
