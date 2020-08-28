@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import GuestCart from './GuestCart'
 import { Redirect } from "react-router-dom";
 
-const confirmar = (tit, tex, tim, suc, func, userId) => {
+const confirmar = (tit, tex, tim, suc, func, total, userId) => {
 	swal({
 		title: tit, //"¿Finalizar compra?",
 		text: tex, //"¿Desea completar la compra de los productos del carrito?",
@@ -23,7 +23,7 @@ const confirmar = (tit, tex, tim, suc, func, userId) => {
 				});
 			}
 			if (func && willBuy) {
-				func(userId)
+				func(total, userId)
 				console.log("ACEPTADO")
 			} else {
 				console.log("CANCELADO")
@@ -80,8 +80,8 @@ class Order extends Component {
 
 						<div className="row align-items-start">
 							<button className="btn btn-success" onClick={() => {
-								this.props.confirmCart(document.getElementById("total").innerHTML.slice(8), sessionUser.id)
-								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada")
+								
+								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", this.props.confirmCart, document.getElementById("total").innerHTML.slice(8), sessionUser.id)
 							}
 							}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {

@@ -136,6 +136,28 @@ export function confirmCart(total, userId){
                 'Content-Type': 'application/json'
             },
             credentials: 'include' 
-        }).then(() => dispatch(getAllOrders()) )
+        }).then(() => dispatch({type: DELETE_CART}))
     }
+}
+
+//-----------------------Pasar de GuestCart a UserCart ------------------------
+
+//"/:userId/guestToCart"
+export function guestToCart(userId) {
+	const url = `http://localhost:3001/users/${userId}/cart`;
+	return function (dispatch) {
+		return fetch(url, {
+			method: 'POST',
+			body: localStorage.getItem('guestCart'),
+			headers: {
+				'Content-Type': 'application/json',
+            },
+            credentials: 'include' 
+		})
+			//.then((res) => res.json())
+			.then((res) => {
+                getCart(userId)
+			})
+			.catch((err) => console.error(err));
+	}    
 }
