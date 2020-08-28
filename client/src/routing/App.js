@@ -21,6 +21,7 @@ import NewUser from "../components/adminOnly/userCrud/NewUserForm";
 import EditUser from "../components/adminOnly/userCrud/EditUserForm";
 import GuestCart from "../components/GuestCart";
 import  Login  from "../components/adminOnly/adminCruds/Login.js";
+import {Favoritos} from "../components/Favoritos"
 
 function App() {
 
@@ -37,6 +38,10 @@ function App() {
       <Route
         exact path="/Profile"
         component= { Profile }
+      />
+      <Route
+        exact path="/favourite"
+        component= { Favoritos }
       />
 {/* -------------- ADMINS ------------------ */}
       <Route

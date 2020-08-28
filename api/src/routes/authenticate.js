@@ -32,15 +32,14 @@ function isAuthenticated(req, res, next) {
     if(req.isAuthenticated()) {
         next();
     } else {
-        res.redirect('/login');
+        res.json(false);
     }
 }
 
 server.get('/profile', isAuthenticated, function(req, res){
-    res.json('profile', { user: req.user });
+    res.json(true)
 });
 
-// server.get
 
 
 module.exports = server;
