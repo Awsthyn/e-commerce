@@ -17,12 +17,7 @@ const alerta = (tit, tex, tim) => {
 
 export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
   let history = useHistory()
-  useEffect(() => {
-    if(!sessionUser.id) getGuestCart()
-    else getCart(sessionUser.id)
-    
-    
-  }, [])
+
 
   //if(!sessionUser.id) cart = JSON.parse(localStorage.getItem('guestCart'))
 
@@ -101,7 +96,6 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
 function mapStateToProps(state) {
   return {
     productDetails: state.products.productDetails,
-    cart: state.cart.cart,
     sessionUser: state.session.sessionUser,
   };
 }
