@@ -1,29 +1,51 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getReview } from '../../../Redux/actions/productActions'
+import { getAllProducts } from '../../../Redux/actions/productActions'
 
 
 export class MyReviews extends React.Component {
     constructor(props) {
         super(props)
-        console.log(this.props.sessionUser)
     }
 
     componentDidMount() {
-        this.props.getReview(this.props.sessionUser.id)
+        this.props.getAllProducts(this.props.sessionUser.id)
     }
 
     render() {
-        const { rev, user } = this.props
-        console.log(this.props)
-        console.log(user)
+        const { products, sessionUser } = this.props;
         return (
             <div>
                 <div>
                     <span>
-                        {console.log(this.props.sessionUser)}
-                        {this.props.sessionUser.id === this.props.id ? this.props.review : <></>}
+                        {products[0] !== "undefined" ? (
+                            <div>
+                                {products.map((e) => (
+                                    <div>
+                                        {e.reviews.map((g) => {
+                                            if (g.userId === sessionUser.id) {
+                                                return (
+                                                    <div>
+                                                        <h6>
+                                                            {g.description}
+                                                        </h6>
+                                                        <h4>Rating: {g.rating}</h4>
+                                                        <hr />
+                                                    </div>
+                                                )
+                                            }
+                                        })}
+                                    </div>
+                                ))}
+                            </div>
+                        ) : console.log("Tu hermana")}
                     </span>
+                    <div>
+                        <Link to="/Profile">
+                            <button type="button" className="btn btn-warning" >Volver</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         )
@@ -34,12 +56,13 @@ export class MyReviews extends React.Component {
 function mapStateToProps(state) {
     return {
         sessionUser: state.session.sessionUser,
+        products: state.products.products
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getReview: id => dispatch(getReview(id)),
+        getAllProducts: id => dispatch(getAllProducts(id)),
     };
 }
 
