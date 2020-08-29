@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from 'react-redux';
 import ProductComponent from "../components/Product";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Catalog from "../components/catalogo";
 import Nav from "../components/Nav";
 import NewProductForm from "../components/adminOnly/productCrud/NewProductForm";
@@ -24,7 +25,7 @@ import MyReviews from "../components/adminOnly/singleUserCruds/myReviews";
 import EditData from "../components/adminOnly/singleUserCruds/editData";
 import  Login  from "../components/adminOnly/adminCruds/Login.js";
 import {Favoritos} from "../components/Favoritos"
-
+import AdminRoute from "../components/AdminRoute"
 
 function App() {
 
@@ -62,18 +63,23 @@ function App() {
         component= { Favoritos }
       />
 {/* -------------- ADMINS ------------------ */}
-      <Route
+      {// <Route
+      //   path="/Admin"
+      //   component={Admin}
+      // />
+      }
+      <AdminRoute
         path="/Admin"
         component={Admin}
       />
+
       <Route
         exact path="/Login"
         component={Login}
       />
-      <Route
-        exact path="/Admin/CrudAdmin"
-        component={CrudAdmin}
-      />
+
+      <AdminRoute exact path="/Admin/CrudAdmin" component={CrudAdmin} />
+
       <Route
         exact path="/Admin/OrderTable"
         component={OrderTable}
