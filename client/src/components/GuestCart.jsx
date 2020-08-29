@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
-import { getGuestCart, emptyGuestCart, confirmCart } from '../Redux/actions/cartActions';
+import { getGuestCart, emptyGuestCart } from '../Redux/actions/cartActions';
 import { Redirect } from "react-router-dom";
-
+import LoginModalForm from "./LoginModal.jsx"
 
 const confirmar = (tit, tex, tim, suc, func) => {
 	swal({
@@ -68,9 +68,9 @@ export class GuestCart extends Component {
 						</tbody>
 					</table>
 					<div className="mt-4 d-flex float-right mr-5">
-
 						<div className= "row align-items-start">
-							<button className="btn btn-success">
+							<LoginModalForm />
+							<button className="btn btn-success" data-toggle="modal" data-target="#modalLoginForm">
 							Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
 									confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyGuestCart)

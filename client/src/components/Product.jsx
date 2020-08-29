@@ -20,8 +20,8 @@ const alerta = (tit, tex, tim) => {
 export function ProductComponent({id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser }) {
 
     useEffect(()=>{
-      getCart(sessionUser.id)
-    }, [])
+      getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
     function handleCart(id, userId) {
         let indexProductCart = cart.findIndex(e => e.product.id === productDetails.id)
         if(indexProductCart === -1) {

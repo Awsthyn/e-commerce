@@ -7,9 +7,10 @@ import { connect } from "react-redux";
 
 export const Catalogo = ({getCart, getGuestCart, categories, products, getAllProducts, getCategoryProducts, cart, sessionUser}) => {
     useEffect(() => {
-        console.log(sessionUser)
+        //
         if(sessionUser.id) getCart(sessionUser.id)
         else getGuestCart()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
     return (
         <div className="container-fluid row">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { } from "react";
 import { useHistory } from "react-router-dom";
 import { toProductDetails } from "../Redux/actions/productActions"
 import { addToOrder, getCart, getGuestCart, editQuantity } from "../Redux/actions/cartActions"
@@ -19,18 +19,14 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
   let history = useHistory()
 
 
-  //if(!sessionUser.id) cart = JSON.parse(localStorage.getItem('guestCart'))
-
   function handleCart(id) {
-    let indexProductCart = cart.findIndex(e => e.product.id == id)
-    // console.log('productId: ' + id)
-    // console.log(indexProductCart)
-    // console.log(cart)
+    let indexProductCart = cart.findIndex(e => e.product.id === id)
+
     if(indexProductCart === -1) {
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
         if(!sessionUser.id){
-          cart.length == 0 ? cart[0] = {id: 1, quantity: 1, product: dataProduct} : cart[cart.length] = {id: cart[cart.length-1].id + 1, quantity: 1, product: dataProduct}
+          cart.length === 0 ? cart[0] = {id: 1, quantity: 1, product: dataProduct} : cart[cart.length] = {id: cart[cart.length-1].id + 1, quantity: 1, product: dataProduct}
           localStorage.setItem("guestCart", JSON.stringify(cart))
           alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
         }

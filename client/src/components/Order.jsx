@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../Redux/actions/cartActions';
 import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
-import GuestCart from './GuestCart'
+//import GuestCart from './GuestCart'
 import { Redirect } from "react-router-dom";
 
 const confirmar = (tit, tex, tim, suc, func, total, userId) => {
@@ -34,7 +34,6 @@ const confirmar = (tit, tex, tim, suc, func, total, userId) => {
 class Order extends Component {
 	constructor(props) {
 		super(props)
-		console.log(this.props.sessionUser)
 
 	}
 
