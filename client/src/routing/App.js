@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from 'react-redux';
 import ProductComponent from "../components/Product";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Catalog from "../components/catalogo";
 import Nav from "../components/Nav";
 import NewProductForm from "../components/adminOnly/productCrud/NewProductForm";
@@ -24,9 +25,9 @@ import MyReviews from "../components/adminOnly/singleUserCruds/myReviews";
 import EditData from "../components/adminOnly/singleUserCruds/editData";
 import PurchaseState from "../components/adminOnly/singleUserCruds/purchaseState";
 import Review from "../components/Review";
-import Login from "../components/adminOnly/adminCruds/Login.js";
-import { Favoritos } from "../components/Favoritos"
-
+import  Login  from "../components/adminOnly/adminCruds/Login.js";
+import {Favoritos} from "../components/Favoritos"
+import AdminRoute from "../components/AdminRoute"
 
 function App() {
 
@@ -70,19 +71,25 @@ function App() {
         exact path="/favourite"
         component={Favoritos}
       />
-      {/* -------------- ADMINS ------------------ */}
-      <Route
+
+{/* -------------- ADMINS ------------------ */}
+      {// <Route
+      //   path="/Admin"
+      //   component={Admin}
+      // />
+      }
+      <AdminRoute
         path="/Admin"
         component={Admin}
       />
+
       <Route
         exact path="/Login"
         component={Login}
       />
-      <Route
-        exact path="/Admin/CrudAdmin"
-        component={CrudAdmin}
-      />
+
+      <AdminRoute exact path="/Admin/CrudAdmin" component={CrudAdmin} />
+
       <Route
         exact path="/Admin/OrderTable"
         component={OrderTable}
@@ -135,6 +142,10 @@ function App() {
         exact path="/Admin/CrudUser/:id/edit"
         render={props =>
           <EditUser user={props.location.state.user} />}
+      />
+      <Route
+        path="/register"
+        component={ NewUser }
       />
       {/* -------------- ORDEN Y CARRITO ------------------ */}
       <Route

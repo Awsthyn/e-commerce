@@ -1,5 +1,6 @@
 const server = require("express").Router();
 const { Category, Product } = require("../db.js");
+const isAuthenticated = require('./authenticate').isAuthenticated
 
 server.get("/", (req, res, next) => {
   Category.findAll()
@@ -18,7 +19,10 @@ server.get("/:nombreCat", (req, res, next) => {
   })
 })
 
-server.post("/", (req, res, next) => {
+server.post("/", isAuthenticated, (req, res, next) => {
+	if(!req.user.admin){
+		res.status(403).json('{"error": "Debe ser administrador"}')
+	}
   const { name, description } = req.body;
   Category.create({
     name,
@@ -30,7 +34,10 @@ server.post("/", (req, res, next) => {
     .catch(next);
 });
 
-server.delete("/:id", (req, res, next) => {
+server.delete("/:id", isAuthenticated, (req, res, next) => {
+	if(!req.user.admin){
+		res.status(403).json('{"error": "Debe ser administrador"}')
+	}
   try {
     const { id } = req.params;
     Category.destroy({ where: { id: id } }).then(() => {
@@ -41,7 +48,10 @@ server.delete("/:id", (req, res, next) => {
   }
 });
 
-server.put("/:id", (req, res, next) => {
+server.put("/:id", isAuthenticated, (req, res, next) => {
+	if(!req.user.admin){
+		res.status(403).json('{"error": "Debe ser administrador"}')
+	}
   try {
     const { id } = req.params;
     const { name, description } = req.body;
