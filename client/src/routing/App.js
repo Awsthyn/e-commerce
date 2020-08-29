@@ -129,6 +129,10 @@ function App() {
         render={props =>
           <EditUser user={props.location.state.user} />}
       />
+      <Route
+        path="/register"
+        component={ NewUser }
+      />
       {/* -------------- ORDEN Y CARRITO ------------------ */}
       <Route
         exact path="/OrderTable"

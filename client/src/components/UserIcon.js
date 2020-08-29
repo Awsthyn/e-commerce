@@ -37,9 +37,9 @@ export function UserIcon(props) {
         <hr></hr>
 
         <MDBDropdownItem
-          onClick={() => (window.location = "/Admin/CrudUser/form/new")}
+          onClick={() => (window.location = "/register")}
         >
-          Crear Usuario
+          Registrarse
         </MDBDropdownItem>
         <MDBDropdownItem onClick={() => (window.location = "/Login")}>
           Iniciar Sesión
@@ -47,7 +47,7 @@ export function UserIcon(props) {
         <hr></hr>
         <MDBDropdownItem
           onClick={props.sessionLogout}
-        // ,swal("Se ha cerrado sesión"))} 
+        // ,swal("Se ha cerrado sesión"))}
 
         >
 
