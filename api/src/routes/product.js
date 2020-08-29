@@ -1,5 +1,6 @@
 const server = require('express').Router();
 const { Product, Category, Image, productsInCategory, Review } = require('../db.js');
+const isAuthenticated = require('./authenticate').isAuthenticated
 
 server.get('/', (req, res, next) => {
 	Product.findAll({ include: {all: true, nested: true} })
@@ -10,14 +11,18 @@ server.get('/', (req, res, next) => {
 });
 
 server.get('/:id', (req, res, next) => {
-	Product.findByPk(req.params.id, { include: {all: true, nested: true} })
-		.then((product) => {
-			res.json(product);
+	Product.findByPk(req.params.id, { include: {all: true, nested: true}} )
+		.then((products) => {
+			res.json(products);
 		})
 		.catch(next);
 });
 
-server.post('/', (req, res, next) => {
+
+server.post('/', isAuthenticated, (req, res, next) => {
+	if(!req.user.admin){
+		res.status(403).json('{"error": "Debe ser administrador"}')
+	}
 	let { name, description, price, stock, image1, image2, image3, category } = req.body;
 	const categories = category; // Viene del cliente como category pero sería mejor si dijera categories
 	Product.create({
@@ -36,7 +41,11 @@ server.post('/', (req, res, next) => {
 		.catch(next);
 });
 
-server.put('/:id', (req, res) => {
+server.put('/:id', isAuthenticated, (req, res) => {
+	if(!req.user.admin){
+		res.status(403).json('{"error": "Debe ser administrador"}')
+	}
+	console.info('editando producto')
 	const { id } = req.params;
 	const { name, description, price, stock, image1, image2, image3, category } = req.body;
 	const categories = category;
@@ -74,7 +83,10 @@ server.put('/:id', (req, res) => {
 	}
 });
 
-server.delete('/:id', (req, res, next) => {
+server.delete('/:id', isAuthenticated, (req, res, next) => {
+	if(!req.user.admin){
+		res.status(403).json('{"error": "Debe ser administrador"}')
+	}
 	try {
 		const { id } = req.params;
 		Product.destroy({ where: { id } }).then(() => {
