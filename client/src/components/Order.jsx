@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 //import GuestCart from './GuestCart'
 import { Redirect } from "react-router-dom";
 
-const confirmar = (tit, tex, tim, suc, func, total, userId) => {
+const confirmar = (tit, tex, tim, suc, func, total, userId, cart) => {
 	swal({
 		title: tit, //"¿Finalizar compra?",
 		text: tex, //"¿Desea completar la compra de los productos del carrito?",
@@ -23,7 +23,7 @@ const confirmar = (tit, tex, tim, suc, func, total, userId) => {
 				});
 			}
 			if (func && willBuy) {
-				func(total, userId)
+				func(total, userId, cart)
 				console.log("ACEPTADO")
 			} else {
 				console.log("CANCELADO")
@@ -76,7 +76,7 @@ class Order extends Component {
 						<div className="row align-items-start">
 							<button className="btn btn-success" onClick={() => {
 								
-								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", this.props.confirmCart, document.getElementById("total").innerHTML.slice(8), sessionUser.id)
+								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", this.props.confirmCart, document.getElementById("total").innerHTML.slice(8), sessionUser.id, cart)
 							}
 							}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
@@ -108,7 +108,7 @@ function mapDispatchToProps(dispatch) {
 		getCart: (userId) => dispatch(getCart(userId)),
 		emptyCart: (userId) => dispatch(emptyCart(userId)),
 		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
-		confirmCart: (total, userId) => dispatch(confirmCart(total, userId))
+		confirmCart: (total, userId, cart) => dispatch(confirmCart(total, userId, cart))
 	};
 }
 

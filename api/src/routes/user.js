@@ -124,19 +124,24 @@ server.delete("/:userId/cart", (req, res, next) => {
     console.error(error.message);
   }
 });
-
+//  return OrderLine.increment({quantity: +orderLines[i].quantity},{where: {productId: p.id, orderId: order[0].id}})
 server.put("/:userId/cart/completo", (req, res, next) => {
   try {
-    const { total } = req.body;
-    console.log(total)
-    Order.update(
+    const { total, cart } = req.body;
+    const decreaseStock = cart.map(e => {
+      Product.decrement({stock: e.quantity}, {where: {id: e.product.id}})
+    })
+
+    const orderComplete = Order.update(
       {
         total,
         orderStatus: "completa"
       },
       { where: { userId: req.params.userId, orderStatus: "carrito" } }
-    ).then((data) => {
-      console.log(data)
+    )
+
+Promise.all([orderComplete, decreaseStock])
+  .then((data) => {
       res.sendStatus(200);
     });
   } catch (error) {
