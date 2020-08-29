@@ -96,9 +96,17 @@ export function editProduct(product) {
             },
             credentials: 'include'
         }).then(res => {
-            dispatch({ type: EDIT_PRODUCT, payload: res })
-            alert("El Producto se Editó correctamente")
-            window.location = "/Admin/CrudProduct";
+            if(res.ok){
+                dispatch({ type: EDIT_PRODUCT, payload: res })
+                alert("El Producto se Editó correctamente")
+                window.location = "/Admin/CrudProduct";
+            }else{
+                if(res.status=== 403){
+                    console.log(res)
+                    //window.location = "/login";
+                }
+
+            }
         }).catch(err => console.error(err))
     }
 }
