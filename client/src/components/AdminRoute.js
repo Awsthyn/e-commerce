@@ -10,18 +10,13 @@ const AdminRoute = ({ component: Component, sessionUser, ...rest }) => {
         )
     }
 
-    const redirect = () => {
-        console.info('redirigiendo no autorizado')
-        window.alert('No está autorizado')
-        return (<Redirect to='/' />)
-    }
-
     return (
         <Route {...rest} render={(props) => {
             console.info('sessionUser.admin:', sessionUser.admin)
-            return (sessionUser.admin
-                ? <Component {...props} />
-                : redirect())
+            return (
+                sessionUser.admin
+                     ? <Component {...props} />
+                    : <Redirect to='/' />)
             }
     }/>)
 }
