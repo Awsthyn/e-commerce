@@ -41,6 +41,55 @@ Promise.all([order, product])
 
 })
 
+
+//Traspaso de GuestCart a UserCart
+
+server.post("/:userId/guestToCart", (req, res, next) => {
+  const { orderLines } = req.body;
+  const order = Order.findOrCreate({where: {
+    orderStatus: 'carrito',
+    userId: req.params.userId}})
+  const container = []
+  const productsSearch =  orderLines.map((orderLine) => {
+    Product.findByPk(orderLine.product.id).then((data)=>{
+      container.push(data)
+    })
+  })
+
+  Promise.all([order, productsSearch])
+  .then(data => {
+    const order = data[0]
+    console.log(order[0].id)
+    Promise.all(container.map((p, i) => {
+      console.log({id: p.id, orderId: order[0].id, quantity: orderLines[i].quantity, price: p.price})
+      OrderLine.findOne({where: {productId: p.id, orderId: order[0].id}})
+      .then((data)=>{
+        if(data){
+          return OrderLine.increment({quantity: +orderLines[i].quantity},{where: {productId: p.id, orderId: order[0].id}})
+         //return OrderLine.update({quantity: orderLines[i].quantity}, {where: {productId: p.id, orderId: order[0].id}})
+        }
+        else {
+          return OrderLine.create({
+            productId: p.id, 
+            orderId: order[0].id, 
+            quantity: orderLines[i].quantity,
+            price: p.price
+          })
+        }
+      })
+      
+   
+  })
+    ).then(()=> res.sendStatus(200))
+
+  })
+  .catch(err => console.log(err))
+})
+
+
+
+
+
 //S39
 server.get("/:userId/cart", (req, res, next) => {
   Order.findOne({where: {
@@ -75,19 +124,24 @@ server.delete("/:userId/cart", (req, res, next) => {
     console.error(error.message);
   }
 });
-
+//  return OrderLine.increment({quantity: +orderLines[i].quantity},{where: {productId: p.id, orderId: order[0].id}})
 server.put("/:userId/cart/completo", (req, res, next) => {
   try {
-    const { total } = req.body;
-    console.log(total)
-    Order.update(
+    const { total, cart } = req.body;
+    const decreaseStock = cart.map(e => {
+      Product.decrement({stock: e.quantity}, {where: {id: e.product.id}})
+    })
+
+    const orderComplete = Order.update(
       {
         total,
         orderStatus: "completa"
       },
       { where: { userId: req.params.userId, orderStatus: "carrito" } }
-    ).then((data) => {
-      console.log(data)
+    )
+
+Promise.all([orderComplete, decreaseStock])
+  .then((data) => {
       res.sendStatus(200);
     });
   } catch (error) {
