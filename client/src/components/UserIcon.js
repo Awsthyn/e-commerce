@@ -8,7 +8,7 @@ import {
 import { sessionLogin, sessionLogout } from "../Redux/actions/sessionActions";
 import { connect } from "react-redux";
 import swal from "sweetalert";
-import LoginModalForm from "./LoginModal.jsx"
+//import LoginModalForm from "./LoginModal.jsx"
 
 export function UserIcon(props) {
 
@@ -20,10 +20,9 @@ export function UserIcon(props) {
 }
 
   return (
-    <>
-    <LoginModalForm />
+    
     <MDBDropdown>
-      <MDBDropdownToggle caret color="dark text-info">
+      <MDBDropdownToggle className="" caret color="dark text-info">
         <svg
           width="30"
           height="30"
@@ -60,7 +59,6 @@ export function UserIcon(props) {
         </MDBDropdownItem> : null }
       </MDBDropdownMenu>
     </MDBDropdown>
-    </>
   );
 }
 

@@ -8,6 +8,7 @@ import { getAllCategories } from "../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
 import { store } from "../Redux/store";
 import s from "../css/product.module.css";
+import LoginModalForm from "./LoginModal.jsx"
 
 //-------- para traer prods al principio y ya esten disponibles -------
 store.dispatch(getAllCategories());
@@ -45,7 +46,8 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   let history = useHistory();
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around ">
+      <LoginModalForm />
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around align-items-center">
         <Link to="/">
           <div className={s.brand}>
             <img
@@ -69,7 +71,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div className="navbar-nav collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="navbar-nav collapse navbar-collapse d-flex align-items-center" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto d-flex justify-content-around collapse navbar-collapse">
             <li>
               <ul>
@@ -111,12 +113,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
               </ul>
             </li>
               <UserOrGuest />
-              <Link to={"/favourite"}> 
-              <svg width="25" height="23" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-              </svg>
-              </Link>
-
+              <Link to={"/favourite"}><i className="ml-3 fa fa-heart mt-1" style={{fontSize: "1.4em", color: "#dc3545"}}></i></Link>
             <SearchBar />
             <li>
               <UserIcon />
