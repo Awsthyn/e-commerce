@@ -157,6 +157,7 @@ export function guestToCart(userId) {
 			//.then((res) => res.json())
 			.then((res) => {
                 getCart(userId)
+                window.localStorage.setItem('guestCart', JSON.stringify([]))
 			})
 			.catch((err) => console.error(err));
 	}    

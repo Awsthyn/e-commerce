@@ -29,7 +29,7 @@ export const LoginModal = () => {
       <p className="text-center mt-1">¿Olvidaste tu contraseña?</p>
       </div>
       <div className="modal-footer d-flex justify-content-center mb-3">
-      <button className="font-weight-bold btn btn-success btn-lg">Crear cuenta nueva</button>
+      <button className="font-weight-bold btn btn-success btn-lg">Crear cuenta</button>
       </div>
     </div>
   </div>

@@ -32,10 +32,6 @@ const confirmar = (tit, tex, tim, suc, func, total, userId) => {
 }
 
 class Order extends Component {
-	constructor(props) {
-		super(props)
-
-	}
 
 	componentDidMount() {
 
