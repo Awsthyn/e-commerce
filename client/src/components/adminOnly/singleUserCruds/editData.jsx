@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { editUser } from "../../../Redux/actions/userActions";
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
@@ -34,13 +35,14 @@ export class EditData extends React.Component {
         })
     }
 
-    complete = () => {
+    complete() {
         swal({
             title: "Completado",
             text: "El cambio de perfil ha sido exitoso",
             icon: "success",
             timer: "4000",
         })
+        setTimeout(() => window.location = "/Profile", 4000)
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
@@ -64,6 +66,7 @@ export class EditData extends React.Component {
         return (
             <div className="container-fluid abs-center">
                 <form onSubmit={this.handleSubmit} className="form-group">
+                    <h1>EDITAR PERFIL</h1>
                     <div className="rigth">
                         <div className="form-group">
                             <label>Nuevo correo:</label>
@@ -102,6 +105,11 @@ export class EditData extends React.Component {
                     </div>
                     <div>
                         <button type="submit" className="btn btn-warning">Editar</button>
+                    </div>
+                    <div>
+                        <Link to="/Profile">
+                            <button type="button" className="btn btn-warning" >Volver</button>
+                        </Link>
                     </div>
                 </form>
             </div>

@@ -5,7 +5,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 
-export const GET_REVIEWS = "GET_REVIEWS";
+export const GET_ALL_REVIEWS = "GET_ALL_REVIEWS";
 
 // ----- CATEGORY CONSTANTS ------
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
@@ -33,6 +33,7 @@ export const EDIT_QUANTITY_FROM_CART = "EDIT_QUANTITY_FROM_CART";
 //-------- ORDER CONSTANTS ----------
 
 export const GET_ALL_ORDERS_USERS = "GET_ALL_ORDERS_USERS"
+export const GET_ORDERS = "GET_ORDERS"
 //-------- SESSION CONSTANTS --------
 export const LOGIN = "LOGIN"
 export const LOGOUT = "LOGOUT"

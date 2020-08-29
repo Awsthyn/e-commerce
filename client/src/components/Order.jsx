@@ -42,6 +42,7 @@ class Order extends Component {
 	render() {
 		const { cart, sessionUser } = this.props;
 		if(!sessionUser.id) return  (<Redirect to='/GuestCart' />)
+
 		return (
 			<div>
 				<h1 className="d-flex justify-content-center m-3">Carrito</h1>
