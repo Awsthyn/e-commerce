@@ -51,11 +51,6 @@ conn
     });
   })
   .then(() => {
-      User.bulkCreate(initialUsers, 
-          // para que ejecute el hook beforeCreate y hashee el pasword
-          {individualHooks: true});
-  })
-  .then(() => {
     Category.bulkCreate(initialCategories);
   })
   .then(() => {
@@ -65,15 +60,24 @@ conn
     productsInCategory.bulkCreate(prodXCat);
   })
   .then(() => {
-    Order.bulkCreate(initialOrders);
+    Image.bulkCreate(imageUrls);
   })
   .then(() => {
-    OrderLine.bulkCreate(initialOrderLines)
+    const users = initialUsers.map(u => User.create(u, {individualHooks: true}))
+      /*User.bulkCreate(initialUsers, 
+          // para que ejecute el hook beforeCreate y hashee el pasword
+          {individualHooks: true});*/
+    Promise.all(users)  
+    .then(() => {
+      Order.bulkCreate(initialOrders);
+    })
+    .then(() => {
+      OrderLine.bulkCreate(initialOrderLines)
+    })
+    .then(() => {
+      Review.bulkCreate(initialReview)
+    })
   })
-  .then(() => {
-    Review.bulkCreate(initialReview)
-  })
-  .then(() => {
-      Image.bulkCreate(imageUrls);
-  })
+
+
   .catch((error) => console.log('Error al bulkcreate', error))
