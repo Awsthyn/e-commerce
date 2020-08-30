@@ -60,8 +60,9 @@ server.post("/:userId/guestToCart", (req, res, next) => {
   .then(data => {
     const order = data[0]
     console.log(order[0].id)
+    console.log(container)
     Promise.all(container.map((p, i) => {
-      console.log({id: p.id, orderId: order[0].id, quantity: orderLines[i].quantity, price: p.price})
+      console.log({id: p.id, name: p.name, orderId: order[0].id, quantity: orderLines[i].quantity, price: p.price})
       OrderLine.findOne({where: {productId: p.id, orderId: order[0].id}})
       .then((data)=>{
         if(data){

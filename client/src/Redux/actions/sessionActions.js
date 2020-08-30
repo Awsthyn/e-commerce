@@ -2,7 +2,6 @@ import { LOGIN, LOGOUT } from './constants';
 import swal from 'sweetalert';
 import { persistor } from '../store';
 
-
 // ----------------- LOGIN --------
 export function sessionLogin(data){
     const url = 'http://localhost:3001/auth/login';
@@ -20,6 +19,7 @@ export function sessionLogin(data){
         .then(res => res.json())
         .then(res => {
             dispatch({type: LOGIN, payload: res})
+            console.log(JSON.parse(localStorage.getItem('guestCart')))
             return fetch(`http://localhost:3001/users/${res.id}/guestToCart/`, {
                 method: 'POST',
                 body: JSON.stringify({orderLines: JSON.parse(localStorage.getItem('guestCart'))}),
@@ -30,10 +30,9 @@ export function sessionLogin(data){
             })
         })
         .then(()=>{
-            window.localStorage.setItem('guestCart', JSON.stringify([]))
+            window.location.reload()
             swal('Los productos que estaban en el carrito de invitado pasaron a tu carrito')
-            setTimeout(() => window.location.reload() , 1000);
-        } )
+        })
         .catch(err =>{
             swal('Datos incorrectos'); 
             console.error(err)})
