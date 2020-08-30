@@ -9,6 +9,7 @@ class CrudUser extends React.Component{
         super(props)
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount(){
@@ -21,6 +22,16 @@ class CrudUser extends React.Component{
         if (window.confirm('Presione Aceptar para confirmar la promoción')){
             this.props.promoteUser(userId)
             .then(() => alert('El usuario fue promocionado a Administrador'))
+            .catch(err => alert(`Error: ${err}`))
+        }
+    }
+
+    handleClick(e){
+        const usuarioId = e.target.getAttribute("data-usuarioId")
+        console.log("En on click " , usuarioId)
+        if (window.confirm('Presione Aceptar para eliminar usuario')){
+             this.props.deleteUser(usuarioId)
+            .then(() => alert('El usuario fue eliminado Correctamente'))
             .catch(err => alert(`Error: ${err}`))
         }
     }
@@ -56,7 +67,7 @@ class CrudUser extends React.Component{
                                     to={{ pathname: `/Admin/CrudUser/${user.id}/edit`,
                                         state: { user : user }}}
                                     className= "btn btn-success">Editar</Link></td>
-                            <td><button onClick={() => this.props.deleteUser(user.id)} className="btn btn-danger">Eliminar</button></td>
+                            <td><button onClick={this.handleClick} className="btn btn-danger" data-usuarioId = {user.id} >Eliminar</button></td>
                         </tr>
                     ))}
                     </tbody>
