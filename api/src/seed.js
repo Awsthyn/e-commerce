@@ -214,6 +214,26 @@ let initialUsers = [
     password: "123123",
     admin: true,
   },
+  {
+    email: "ele@admin.com",
+    first_name: "Ele",
+    last_name: "Gonzalez",
+    address: "Av siempre viva 123",
+    locality: "Corrientes",
+    state: "Argentina",
+    password: "123",
+    admin: true,
+  },
+  {
+    email: "ele@market.com",
+    first_name: "Ele",
+    last_name: "Gonzalez",
+    address: "Av siempre viva 123",
+    locality: "Corrientes",
+    state: "Argentina",
+    password: "123",
+    admin: false,
+  },
 ];
 
 let initialOrders = [
