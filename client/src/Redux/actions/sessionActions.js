@@ -19,9 +19,21 @@ export function sessionLogin(data){
         })
         .then(res => res.json())
         .then(res => {
-            console.info("recibo", res)
             dispatch({type: LOGIN, payload: res})
-        }).catch(err => console.error(err))
+            return fetch(`http://localhost:3001/users/${res.id}/guestToCart/`, {
+                method: 'POST',
+                body: JSON.stringify({orderLines: JSON.parse(localStorage.getItem('guestCart'))}),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include' 
+            })
+        })
+        .then(()=>{
+            window.localStorage.setItem('guestCart', JSON.stringify([]))
+            window.location.reload()
+        } )
+        .catch(err => console.error(err))
     }
 }
 
