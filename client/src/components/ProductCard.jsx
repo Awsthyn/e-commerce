@@ -15,13 +15,12 @@ const alerta = (tit, tex, tim) => {
   })
 }
 
-export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, toProductDetails, addToOrder, getCart, cart, editQuantity }) {
+export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, addToOrder, getCart, cart, editQuantity }) {
   let history = useHistory()
 
 
   function handleCart(id) {
-    let indexProductCart = cart.findIndex(e => e.product.id === id)
-
+    let indexProductCart = cart.findIndex(e => Number(e.product.id) === Number(id))
     if(indexProductCart === -1) {
       if(stock < 1) {swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error")}
       else {
@@ -93,6 +92,7 @@ function mapStateToProps(state) {
   return {
     productDetails: state.products.productDetails,
     sessionUser: state.session.sessionUser,
+    cart: state.cart.cart
   };
 }
 
