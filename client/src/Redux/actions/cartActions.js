@@ -1,5 +1,5 @@
 import { ADD_PRODUCT_TO_CART, DELETE_PROD_FROM_CART, EDIT_QUANTITY_FROM_CART, GET_PRODUCTS_CART, DELETE_CART } from '../actions/constants';
-import {getAllOrders} from './orderActions'
+
 //-----------------------Obtener productos del carrito------------------------
 export function getCart(userId){
     return function (dispatch) {
@@ -101,9 +101,8 @@ export function deleteProductFromGuestCart(orderLineId) {
     let cart = (JSON.parse(localStorage.getItem('guestCart')))
     cart = cart.filter((p) => p.id !== Number(orderLineId))
     window.localStorage.setItem('guestCart', JSON.stringify(cart))
-    window.location = "/GuestCart"
     return function(dispatch){
-        dispatch({ type: DELETE_CART })
+        dispatch({type: DELETE_PROD_FROM_CART, payload: orderLineId})
     }
 }
 
@@ -128,15 +127,38 @@ export function editQuantity(orderLine, quantity, userId){
 
 //-----------------------Confirmar compra ------------------------
 
-export function confirmCart(total, userId){
+export function confirmCart(total, userId, cart){
     return function(dispatch){
         return fetch(`http://localhost:3001/users/${userId}/cart/completo`,{
             method: 'PUT',
-            body: JSON.stringify({total}),
+            body: JSON.stringify({total, cart}),
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include' 
-        }).then(() => dispatch(getAllOrders()) )
+        }).then(() => dispatch({type: DELETE_CART}))
     }
+}
+
+//-----------------------Pasar de GuestCart a UserCart ------------------------
+
+//"/:userId/guestToCart"
+export function guestToCart(userId) {
+	const url = `http://localhost:3001/users/${userId}/cart`;
+	return function (dispatch) {
+		return fetch(url, {
+			method: 'POST',
+			body: localStorage.getItem('guestCart'),
+			headers: {
+				'Content-Type': 'application/json',
+            },
+            credentials: 'include' 
+		})
+			//.then((res) => res.json())
+			.then((res) => {
+                getCart(userId)
+                window.localStorage.setItem('guestCart', JSON.stringify([]))
+			})
+			.catch((err) => console.error(err));
+	}    
 }

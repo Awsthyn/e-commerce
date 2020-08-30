@@ -29,7 +29,7 @@ const confirmar = (tim, fun, dat, prodName) => {
 		});
 }
 
-export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromCart, editQuantity, stock, productId }){
+export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromGuestCart, deleteProductFromCart, editQuantity, stock, productId }){
 let [counter, setCounter ] = useState(quantity)
 const handleChange = (e) => {
 	if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)

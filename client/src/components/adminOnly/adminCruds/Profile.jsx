@@ -32,9 +32,9 @@ export class Profile extends React.Component {
                 <table>
                     <thead className="text-center table btn-group">
                         <tr>
-                            <th><Link to="/Profile/editdata" className="btn btn-warning">Editar Mis Datos</Link></th>
-                            <th><Link to="/Admin/CrudCategory" className="btn btn-warning">Estado de mis Compras</Link></th>
-                            <th><Link to="/Profile/myreviews" className="btn btn-warning">Mis Opiniones</Link></th>
+                            <th><Link to={`/Profile/${this.props.sessionUser.id}/editdata`} className="btn btn-warning">Editar Mis Datos</Link></th>
+                            <th><Link to={`/Profile/${this.props.sessionUser.id}/purchasestate`} className="btn btn-warning">Estado de mis Compras</Link></th>
+                            <th><Link to={`/Profile/${this.props.sessionUser.id}/myreviews`} className="btn btn-warning">Mis Opiniones</Link></th>
                             {this.props.sessionUser.admin ? <th><Link to="/Admin/CrudUser" className="btn btn-warning">Admin Cruds</Link></th> : <th></th>}
                         </tr>
                     </thead>

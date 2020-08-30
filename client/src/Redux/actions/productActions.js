@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_REVIEWS } from './constants';
+import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS } from './constants';
 
 //------------  PRODUCTOS BUSCADOS  -----------------------------------------------------------
 
@@ -41,6 +41,7 @@ export function toProductDetails(id) {
         })
             .then((r) => r.json())
             .then((data) => {
+                // console.log(data)
                 dispatch({ type: SET_DETAILS, payload: data })
             })
             .catch((error) => {
@@ -58,6 +59,7 @@ export function getAllProducts() {
         })
             .then((r) => r.json())
             .then((data) => {
+                console.log('allProducts:', data);
                 dispatch({ type: GET_PRODUCTS, payload: data })
             })
             .catch((error) => { console.log(error) })
@@ -149,19 +151,57 @@ export function addProduct(product) {
     }
 }
 
-//---------------------------- Obtener Review
-export function getReview(id) {
+//---------------------------- Crear una review
+export function addReview(prodId) {
+    const url = `http://localhost:3001/products/${prodId}/review/`;
+    return function (dispatch) {
+        return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(prodId),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.info("review creada")
+                dispatch({ type: GET_ALL_REVIEWS, payload: res })
+
+            }).catch(err => console.error(err))
+    }
+}
+
+//---------------------------- Obtener todas las Reviews según ID del usuario
+export function getUserReviews(id) {
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/products/${id}/userReview/`, {
+            credentials: 'include'
+        })
+            .then((r) => r.json())
+            .then((data) => {
+                console.log('get user review:', data);
+                dispatch({ type: GET_ALL_REVIEWS, payload: data })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+}
+
+//---------------------------- Obtener todas las Reviews según ID del producto
+export function getProductReviews(id) {
     return function (dispatch) {
         return fetch(`http://localhost:3001/products/${id}/review/`, {
             credentials: 'include'
         })
             .then((r) => r.json())
             .then((data) => {
-                console.log('getProduct:', data);
-                dispatch({ type: GET_REVIEWS, payload: data })
+                console.log('get product review:', data);
+                dispatch({ type: GET_ALL_REVIEWS, payload: data })
             })
             .catch((error) => {
-                alert(error);
+                console.error(error);
             });
     }
 }

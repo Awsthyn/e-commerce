@@ -23,6 +23,8 @@ import EditUser from "../components/adminOnly/userCrud/EditUserForm";
 import GuestCart from "../components/GuestCart";
 import MyReviews from "../components/adminOnly/singleUserCruds/myReviews";
 import EditData from "../components/adminOnly/singleUserCruds/editData";
+import PurchaseState from "../components/adminOnly/singleUserCruds/purchaseState";
+import Review from "../components/Review";
 import  Login  from "../components/adminOnly/adminCruds/Login.js";
 import {Favoritos} from "../components/Favoritos"
 import AdminRoute from "../components/AdminRoute"
@@ -44,24 +46,32 @@ function App() {
         component={Profile}
       />
       <Route
-        exact path="/Profile/myreviews"
+        path="/Profile/:id/myreviews"
         // render={props =>
         //   <MyReviews sessionUser={props.location.state.sessionUser} />
         // }
         component={MyReviews}
       />
       <Route
-        exact path="/Profile/editdata"
+        path="/Profile/:id/editdata"
         // render={props =>
         //   <EditData sessionUser={props.location.state.sessionUser} />
         // }
         component={EditData}
       />
+      <Route
+        path="/Profile/:id/purchasestate"
+        // render={props =>
+        //   <PurchaseState sessionUser={props.location.state.sessionUser} />
+        // }
+        component={PurchaseState}
+      />
       {/* -------------- ADMINS ------------------ */}
       <Route
         exact path="/favourite"
-        component= { Favoritos }
+        component={Favoritos}
       />
+
 {/* -------------- ADMINS ------------------ */}
       {// <Route
       //   path="/Admin"
@@ -99,6 +109,10 @@ function App() {
         render={props =>
           <EditProductForm product={props.location.state.product} />
         }
+      />
+      <Route
+        exact path="/products/:id/nuevareview"
+        component={Review}
       />
       {/* -------------- CRUDS CATEGORY ------------------ */}
       <Route

@@ -1,17 +1,22 @@
-import { GET_ALL_ORDERS_USERS } from '../actions/constants';
+import { GET_ALL_ORDERS_USERS, GET_ORDERS } from '../actions/constants';
 
 const initialState = {
     orders: [],
 };
 
-export default function orderReduces (state = initialState, action) {
+export default function orderReduces(state = initialState, action) {
 
-    switch(action.type) {
+    switch (action.type) {
         case GET_ALL_ORDERS_USERS:
-          return {
-              ...state,
-              orders: action.payload
+            return {
+                ...state,
+                orders: action.payload
             }
-        default: return {...state}
+        case GET_ORDERS:
+            return {
+                ...state,
+                orders: action.payload
+            }
+        default: return { ...state }
     }
 }
