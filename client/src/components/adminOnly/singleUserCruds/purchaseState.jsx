@@ -48,7 +48,7 @@ export class PurchaseState extends React.Component {
 
 
                                                             <div className="modal-content">
-                                                                <div className="moda</div>l-body">
+                                                                <div className="modal-body">
                                                                     <table>
                                                                         <thead>
                                                                             <tr>

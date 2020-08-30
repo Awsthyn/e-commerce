@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
-
-import RatingPage from "./calificacionCaras";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
 import { toProductDetails } from "../Redux/actions/productActions"
-import  ProductReview  from "./ProductReview"
 import { connect } from "react-redux";
 import Review from "./Review";
+import ProductReview from "./ProductReview";
 import swal from 'sweetalert';
 import styles from '../css/product.module.css'
+import RatingAverage from "./RatingAverage"
 
 const alerta = (tit, tex, tim) => {
     swal({
@@ -25,6 +24,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
     useEffect(()=>{
       toProductDetails(url.slice(ubication+1))  
       getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
 
     function handleCart(id, userId) {
@@ -71,8 +71,8 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     <hr></hr>
                     <p>{productDetails.description}</p>
                     <hr></hr>
-                    <div>
-                        <RatingPage />
+                    <div>                        
+                        <RatingAverage reviews={productDetails.reviews} product={id}/>
                     </div>
                     <hr></hr>
                     <button data-id={id} type='button'
@@ -87,7 +87,9 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                 <script src="js/addons/rating.js"></script>
             </div>
             <ProductReview reviews={productDetails.reviews}/>
+
             <Review product={id} />
+
         </div>
     );
 }

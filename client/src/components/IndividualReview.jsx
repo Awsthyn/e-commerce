@@ -7,10 +7,10 @@ moment.locale('es');
 const IndividualReview = ({review}) => {
     let stars = []
     for(let i = 0; i < Math.floor(review.rating); i++){
-        stars.push(['star', "text-warning"])
+        stars.push(['thumbs-up', "text-warning"])
     }
     for(let j = stars.length; j < 5; j++){
-        stars.push(["star", "text-dark"])
+        stars.push(["thumbs-up", "text-dark"])
     }
 
 
