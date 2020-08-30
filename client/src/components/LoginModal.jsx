@@ -1,48 +1,108 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
+import { sessionLogin, sessionLogout } from '../Redux/actions/sessionActions';
 
-export const LoginModal = () => {
-    return (
-<div className="modal fade mt-4" id="modalLoginForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div className="modal-dialog" role="document">
-    <div className="modal-content">
-      <div className="modal-header text-center">
-        {/*<h4 className="modal-title w-100 font-weight-bold">Log in</h4>*/}
-        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div className="modal-body mx-3">
-        <div className="form mb-1" >
-          <input type="email" id="defaultForm-email" placeholder="Correo electrónico" className="form-control validate form-control-lg"/>
-          <label data-error="wrong" data-success="right" htmlFor="defaultForm-email"></label>
-        </div>
+export class LoginModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			email: '',
+			password: '',
+		};
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
-        <div className="form">
-          <input type="password" id="defaultForm-pass" placeholder="Contraseña" className="form-control validate form-control-lg"/>
-          <label data-error="wrong" data-success="right" htmlFor="defaultForm-pass"></label>
-        </div>
-        <div className="d-flex justify-content-center">
-      <button className="font-weight-bold btn btn-primary btn-lg" style={{width: "400px"}}>Iniciar sesión</button>
-      </div>
-      <p className="text-center mt-1">¿Olvidaste tu contraseña?</p>
-      </div>
-      <div className="modal-footer d-flex justify-content-center mb-3">
-      <button className="font-weight-bold btn btn-success btn-lg">Crear cuenta</button>
-      </div>
-    </div>
-  </div>
-</div>
-    )
+	// let history = useHistory();
+
+	handleChange(e) {
+		this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.sessionLogin(this.state).then(() => {
+      this.setState({email:"", password:""})
+        })
+        
+    // history.push('/Admin')
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
+	render() {
+		return (
+			<form onSubmit={this.handleSubmit} className="form-group ">
+				<div
+					className="modal fade mt-4"
+					id="modalLoginForm"
+					tabIndex="-1"
+					role="dialog"
+					aria-labelledby="myModalLabel"
+					aria-hidden="true"
+				>
+					<div className="modal-dialog" role="document">
+						<div className="modal-content">
+							<div className="modal-header text-center">
+								{/*<h4 className="modal-title w-100 font-weight-bold">Log in</h4>*/}
+								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div className="modal-body mx-3">
+								<div className="form mb-1">
+									<input
+										type="email" name="email"
+										id="defaultForm-email"
+										placeholder="Correo electrónico"
+										value={this.state.email}
+										className="form-control validate form-control-lg"
+										onChange={this.handleChange}
+									/>
+									<label data-error="wrong" data-success="right" htmlFor="defaultForm-email"></label>
+								</div>
+
+								<div className="form">
+									<input
+										type="password" name="password"
+										id="defaultForm-pass"
+										placeholder="Contraseña"
+										className="form-control validate form-control-lg"
+										value={this.state.password}
+										onChange={this.handleChange}
+									/>
+									<label data-error="wrong" data-success="right" htmlFor="defaultForm-pass"></label>
+								</div>
+								<div className="d-flex justify-content-center">
+									<button
+										className="font-weight-bold btn btn-primary btn-lg"
+										style={{ width: '400px' }} type="submit">
+										Iniciar sesión
+									</button>
+								</div>
+								<p className="text-center mt-1">¿Olvidaste tu contraseña?</p>
+							</div>
+							<div className="modal-footer d-flex justify-content-center mb-3">
+								<button className="font-weight-bold btn btn-success btn-lg" onClick={()=>window.location="/register"}>Crear cuenta</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		);
+	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal)
+function mapStateToProps(state) {
+	return {
+		sessionUser: state.session.sessionUser,
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		sessionLogin: (user) => dispatch(sessionLogin(user)),
+		sessionLogout: () => dispatch(sessionLogout()),
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

@@ -1,6 +1,8 @@
 import React from 'react'
 import { MDBIcon } from 'mdbreact';
 import moment from 'moment';
+import 'moment/locale/es';
+moment.locale('es');
 
 const IndividualReview = ({review}) => {
     let stars = []

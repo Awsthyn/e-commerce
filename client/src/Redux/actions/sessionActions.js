@@ -1,6 +1,6 @@
 import { LOGIN, LOGOUT } from './constants';
 import swal from 'sweetalert';
-
+import { persistor } from '../store';
 
 
 // ----------------- LOGIN --------
@@ -19,9 +19,24 @@ export function sessionLogin(data){
         })
         .then(res => res.json())
         .then(res => {
-            console.info("recibo", res)
             dispatch({type: LOGIN, payload: res})
-        }).catch(err => console.error(err))
+            return fetch(`http://localhost:3001/users/${res.id}/guestToCart/`, {
+                method: 'POST',
+                body: JSON.stringify({orderLines: JSON.parse(localStorage.getItem('guestCart'))}),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include' 
+            })
+        })
+        .then(()=>{
+            window.localStorage.setItem('guestCart', JSON.stringify([]))
+            swal('Los productos que estaban en el carrito de invitado pasaron a tu carrito')
+            setTimeout(() => window.location.reload() , 1000);
+        } )
+        .catch(err =>{
+            swal('Datos incorrectos'); 
+            console.error(err)})
     }
 }
 
@@ -29,12 +44,14 @@ export function sessionLogin(data){
 export function sessionLogout() {
     console.log('accion despachada')
     return function(dispatch) {
+        
         return fetch(`http://localhost:3001/auth/logout`, {
             credentials: 'include'
         })
-        .then((r) => r.json())
         .then(() => {
             dispatch({ type: LOGOUT})
+                // para que redux no restaure la session
+                persistor.flush()
         })
         .catch((error) => {
             console.error('error', error);

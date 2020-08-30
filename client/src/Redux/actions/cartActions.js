@@ -142,9 +142,9 @@ export function confirmCart(total, userId, cart){
 
 //-----------------------Pasar de GuestCart a UserCart ------------------------
 
-//"/:userId/guestToCart"
+/*
 export function guestToCart(userId) {
-	const url = `http://localhost:3001/users/${userId}/cart`;
+	const url = `http://localhost:3001/users/${userId}/guestToCart/`;
 	return function (dispatch) {
 		return fetch(url, {
 			method: 'POST',
@@ -156,9 +156,10 @@ export function guestToCart(userId) {
 		})
 			//.then((res) => res.json())
 			.then((res) => {
+                console.log('guestToCart')
                 getCart(userId)
                 window.localStorage.setItem('guestCart', JSON.stringify([]))
 			})
 			.catch((err) => console.error(err));
 	}    
-}
+}*/

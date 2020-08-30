@@ -8,6 +8,7 @@ import {
 import { sessionLogin, sessionLogout } from "../Redux/actions/sessionActions";
 import { connect } from "react-redux";
 import swal from "sweetalert";
+//import LoginModalForm from "./LoginModal.jsx"
 
 export function UserIcon(props) {
 
@@ -19,8 +20,9 @@ export function UserIcon(props) {
 }
 
   return (
+    
     <MDBDropdown>
-      <MDBDropdownToggle caret color="dark text-info">
+      <MDBDropdownToggle className="" caret color="dark text-info">
         <svg
           width="30"
           height="30"
@@ -36,27 +38,25 @@ export function UserIcon(props) {
             d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
           />
         </svg>
+        <span className="pl-2">{props.sessionUser.first_name}</span>
       </MDBDropdownToggle>
 
       <MDBDropdownMenu right basic>
-        <MDBDropdownItem onClick={() => (window.location = "/Profile")}>
-          Usuario: {props.sessionUser.first_name}
-        </MDBDropdownItem>
-        <hr></hr>
-
-        <MDBDropdownItem
+      {props.sessionUser.id ? <MDBDropdownItem onClick={() => (window.location = "/Profile")}>
+          Mi perfil
+        </MDBDropdownItem> : null}
+        {props.sessionUser.id ? null: <MDBDropdownItem
           onClick={() => (window.location = "/register")}
         >
           Registrarse
-        </MDBDropdownItem>
-        <MDBDropdownItem onClick={() => (window.location = "/Login")}>
+        </MDBDropdownItem>}
+        {props.sessionUser.id ? null: <MDBDropdownItem data-toggle="modal" data-target="#modalLoginForm">
           Iniciar Sesión
-        </MDBDropdownItem>
-        <hr></hr>
-        <MDBDropdownItem onClick={logout}>
+        </MDBDropdownItem>}
+        {props.sessionUser.id ?<MDBDropdownItem onClick={logout}>
 
           Cerrar Sesión
-        </MDBDropdownItem>
+        </MDBDropdownItem> : null }
       </MDBDropdownMenu>
     </MDBDropdown>
   );

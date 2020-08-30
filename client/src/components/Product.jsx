@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
+import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 import Review from "./Review";
 import ProductReview from "./ProductReview";
@@ -16,14 +17,18 @@ const alerta = (tit, tex, tim) => {
     })
 }
 
-export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser }) {
-
+export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, toProductDetails }) {
+    const url =  window.location.href
+    const ubication = url.lastIndexOf('/')
+    
     useEffect(()=>{
-        getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
+      toProductDetails(url.slice(ubication+1))  
+      getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
 
     function handleCart(id, userId) {
-        let indexProductCart = cart.findIndex(e => e.product.id === productDetails.id)
+        let indexProductCart = cart.findIndex(e => Number(e.product.id) === Number(productDetails.id))
         if (indexProductCart === -1) {
             if (productDetails.stock < 1) { swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error") }
             else {
@@ -55,7 +60,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     </div>
                 </div>
                 <div className="ml-4 pl-2" style={{ width: "450px" }}>
-                    <button onClick={() => window.location = "/catalog"} type="button" class="close" aria-label="Close">
+                    <button onClick={() => window.location = "/catalog"} type="button" className="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h3 className="pt-4 pb-3">{productDetails.name}</h3>
@@ -82,7 +87,9 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                 <script src="js/addons/rating.js"></script>
             </div>
             <ProductReview reviews={productDetails.reviews}/>
-            
+
+            <Review product={id} />
+
         </div>
     );
 }
@@ -101,6 +108,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        toProductDetails: (id) => dispatch(toProductDetails(id)),
         addToOrder: (productId, quantity, userId) => dispatch(addToOrder(productId, quantity, userId)),
         getCart: (userId) => dispatch(getCart(userId)),
         editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))

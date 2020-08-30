@@ -20,23 +20,23 @@ const {User} = require('./db.js');
 //  - Si hubo un error durante la ejecución de esta función --> done(err)
 
 passport.use(new Strategy({
-  usernameField: 'email'
-},
-  function(email, password, done) {
-    User.findOne({where: { email: email }})
-      .then((user) => {
-        if(!user) {
-          return done(null, false);
-        }
-        if(user.password != password) {
-          return done(null, false);
-        }
-        return done(null, user);
-      })
-    .catch(err => {
-      return done(err);
-    })
-  }));
+    usernameField: 'email'
+    },
+    function(email, password, done) {
+        User.findOne({where: { email: email }})
+        .then((user) => {
+
+            if (user && user.isPasswordValid(password)){
+                return done(null, user)
+            }
+
+            return done(null, false)
+        })
+        .catch(err => {
+            return done(err);
+        })
+    }
+));
 
 
 // Configuración de la persistencia de la sesión autenticada
