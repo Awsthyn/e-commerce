@@ -29,7 +29,6 @@ export function onDeleteCategory(CategoryId) {
     }).then(res => {
         console.info("fetch delete category")
         dispatch({type: DELETE_CATEGORY, payload: res})
-        alert("La Categoria se ha Eliminado correctamente")
         window.location = "/Admin/CrudCategory";
     })
     .catch(err => console.error(err))
