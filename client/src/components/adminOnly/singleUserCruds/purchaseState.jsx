@@ -17,7 +17,7 @@ export class PurchaseState extends React.Component {
     render() {
         return (
             <div>
-                {this.props.orders !== "null" ? (
+                {!!this.props.orders ? (
                     <div>
                         <table className="table table-responsive">
                             <thead className="text-center">
