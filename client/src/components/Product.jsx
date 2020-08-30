@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
-
 import { connect } from "react-redux";
 import Review from "./Review";
 import ProductReview from "./ProductReview";
@@ -68,9 +66,8 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     <hr></hr>
                     <p>{productDetails.description}</p>
                     <hr></hr>
-                    <div>
-                        {/* <Review product={id} /> */}
-                        <RatingAverage product={id}/>
+                    <div>                        
+                        <RatingAverage reviews={productDetails.reviews} product={id}/>
                     </div>
                     <hr></hr>
                     <button data-id={id} type='button'
