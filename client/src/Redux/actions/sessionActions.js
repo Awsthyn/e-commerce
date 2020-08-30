@@ -1,6 +1,6 @@
 import { LOGIN, LOGOUT } from './constants';
 import swal from 'sweetalert';
-
+import { persistor } from '../store';
 
 
 // ----------------- LOGIN --------
@@ -44,9 +44,10 @@ export function sessionLogout() {
         return fetch(`http://localhost:3001/auth/logout`, {
             credentials: 'include'
         })
-        .then((r) => r.json())
         .then(() => {
             dispatch({ type: LOGOUT})
+                // para que redux no restaure la session
+                persistor.flush()
         })
         .catch((error) => {
             console.error('error', error);
