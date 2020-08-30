@@ -28,7 +28,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
 
     function handleCart(id, userId) {
-        let indexProductCart = cart.findIndex(e => e.product.id === productDetails.id)
+        let indexProductCart = cart.findIndex(e => Number(e.product.id) === Number(productDetails.id))
         if (indexProductCart === -1) {
             if (productDetails.stock < 1) { swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error") }
             else {
