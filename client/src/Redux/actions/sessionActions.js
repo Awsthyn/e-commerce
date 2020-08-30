@@ -48,6 +48,7 @@ export function sessionLogout() {
             credentials: 'include'
         })
         .then(() => {
+            window.localStorage.setItem('guestCart', JSON.stringify([]))
             dispatch({ type: LOGOUT})
                 // para que redux no restaure la session
                 persistor.flush()
