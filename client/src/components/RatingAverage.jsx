@@ -1,14 +1,9 @@
 import React from 'react'
-import IndividualReview from "./IndividualReview"
 import { connect } from 'react-redux'
 import { MDBIcon } from 'mdbreact';
-import Review from "./Review";
-import RatingAverage from "./RatingAverage";
 
 
-
-
-export const ProductReview = ({reviews}, id) => {
+export const RatingAverage = ({reviews}, id) => {
     let averageRating = !reviews ? 0 : reviews.map(e => e.rating).reduce((a,b)=>a + b)/reviews.length
 
     let stars = []
@@ -21,18 +16,16 @@ export const ProductReview = ({reviews}, id) => {
     
     return (
         <div className= {!reviews ? null : "border border-secondary m-auto m-0 shadow p-3 mb-5 bg-white rounded mt-4"} style={{width: "900px"}}>
-            <h3>Opiniones sobre el producto</h3>
-            {/* <div className="d-flex flex-row">
+            <div className="d-flex flex-row">
                 <h1 className="d-inline mr-3">{averageRating.toFixed(1)}</h1>
                 <div className="d-flex flex-column">
                     <div>
-                        {stars.map(e =>  <span><MDBIcon icon={e[0]} className={e[1]} /></span>)}
+                        {stars.map(e => <span><MDBIcon icon={e[0]} className={e[1]} /></span>)}
                     </div>
                     <p>Promedio entre {!reviews ? 0 : reviews.length} opiniones</p>
                 </div>
-            </div> */}            
-            <Review product={id} />
-            {!reviews ? null : reviews.map(e => <IndividualReview review={e} />)}
+            </div>
+            
         </div>
     )
 }
@@ -45,4 +38,4 @@ const mapDispatchToProps = {
     
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductReview)
+export default connect(mapStateToProps, mapDispatchToProps)(RatingAverage)

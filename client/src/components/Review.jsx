@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{Rating} from 'react'
 import { connect } from 'react-redux';
 import { addReview, toProductDetails } from "../Redux/actions/productActions";
 import swal from 'sweetalert';
+import RatingThumbs from "./Rating";
+
 
 //S58
 export class Review extends React.Component {
@@ -34,10 +36,8 @@ export class Review extends React.Component {
         e.preventDefault();
         this.props.addReview(this.props.productDetails.id)
             .then(res => {
-                this.setState({
-                    rating: "",
-                    description: ""
-                })
+                this.setState()
+								this.rating()
                 console.info(res)
                 this.complete()
             }).catch(err => console.error(err))
@@ -54,10 +54,11 @@ export class Review extends React.Component {
             <div>
                 {!!this.props.productDetails.id ? (<div>
                     <form onSubmit={this.handleSubmit} className="form-group">
+												<RatingThumbs/>												
                         <label>Escriba su comentario. </label>
                         <input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.state} required />
                         <div>
-                            <button type="submit" className="btn btn-warning">Editar</button>
+                            <button type="submit" className="btn btn-warning">Enviar</button>
                         </div>
                     </form>
                 </div>) : false}
