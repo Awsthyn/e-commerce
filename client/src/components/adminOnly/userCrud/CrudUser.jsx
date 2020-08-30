@@ -56,7 +56,9 @@ class CrudUser extends React.Component{
                         <tr key={user.id}>
                             <td>{`${user.first_name} ${user.last_name}`}</td>
                             <td>
-                             {`${user.admin}`}
+                             {user.admin === true ?
+                              "Administrador"
+                              : "Usuario"}
                             </td>
 
                             <td>
