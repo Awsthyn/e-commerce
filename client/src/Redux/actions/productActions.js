@@ -79,7 +79,6 @@ export function onDeleteProduct(ProductId) {
             credentials: 'include'
         }).then(res => {
             dispatch({ type: DELETE_PRODUCT, payload: res })
-            alert("El Producto se ha Eliminado correctamente")
             window.location = "/Admin/CrudProduct";
         })
             .catch(err => console.error(err))
