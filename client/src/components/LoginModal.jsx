@@ -21,7 +21,7 @@ export class LoginModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.sessionLogin(this.state) .then(() => {
+    this.props.sessionLogin(this.state).then(() => {
       this.setState({email:"", password:""})
         })
         

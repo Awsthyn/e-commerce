@@ -63,7 +63,7 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
           <div className="row">
             <button data-id={id} type='button' className="btn btn-dark ml-auto mr-auto" onClick={(e) => {
               history.push(`/products/${e.target.getAttribute('data-id')}`)
-              toProductDetails(id)
+              //toProductDetails(id)
             }}>
               Ver más detalles...
         </button>

@@ -60,7 +60,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
           </div>
         </Link>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -68,7 +68,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
 
         <div className="navbar-nav collapse navbar-collapse d-flex align-items-center" id="navbarSupportedContent">

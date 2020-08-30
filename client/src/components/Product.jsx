@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import RatingPage from "./calificacionCaras";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
-
+import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 import Review from "./Review";
 import swal from 'sweetalert';
@@ -17,9 +17,12 @@ const alerta = (tit, tex, tim) => {
     })
 }
 
-export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser }) {
-
+export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, toProductDetails }) {
+    const url =  window.location.href
+    const ubication = url.lastIndexOf('/')
+    
     useEffect(()=>{
+      toProductDetails(url.slice(ubication+1))  
       getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
 
@@ -56,7 +59,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     </div>
                 </div>
                 <div className="ml-4 pl-2" style={{ width: "450px" }}>
-                    <button onClick={() => window.location = "/catalog"} type="button" class="close" aria-label="Close">
+                    <button onClick={() => window.location = "/catalog"} type="button" className="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h3 className="pt-4 pb-3">{productDetails.name}</h3>
@@ -101,6 +104,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        toProductDetails: (id) => dispatch(toProductDetails(id)),
         addToOrder: (productId, quantity, userId) => dispatch(addToOrder(productId, quantity, userId)),
         getCart: (userId) => dispatch(getCart(userId)),
         editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))

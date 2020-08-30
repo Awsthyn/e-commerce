@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux';
 import ProductComponent from "../components/Product";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Catalog from "../components/catalogo";
 import Nav from "../components/Nav";
 import NewProductForm from "../components/adminOnly/productCrud/NewProductForm";

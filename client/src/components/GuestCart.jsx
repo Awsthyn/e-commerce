@@ -4,7 +4,6 @@ import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
 import { getGuestCart, emptyGuestCart } from '../Redux/actions/cartActions';
 import { Redirect } from "react-router-dom";
-import LoginModalForm from "./LoginModal.jsx"
 
 const confirmar = (tit, tex, tim, suc, func) => {
 	swal({
