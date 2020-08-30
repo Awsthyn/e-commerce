@@ -51,6 +51,11 @@ conn
     });
   })
   .then(() => {
+      User.bulkCreate(initialUsers, 
+          // para que ejecute el hook beforeCreate y hashee el pasword
+          {individualHooks: true});
+  })
+  .then(() => {
     Category.bulkCreate(initialCategories);
   })
   .then(() => {
@@ -58,12 +63,6 @@ conn
   })
   .then(() => {
     productsInCategory.bulkCreate(prodXCat);
-  })
-  .then(() => {
-    Image.bulkCreate(imageUrls);
-  })
-  .then(() => {
-    User.bulkCreate(initialUsers);
   })
   .then(() => {
     Order.bulkCreate(initialOrders);
@@ -74,4 +73,7 @@ conn
   .then(() => {
     Review.bulkCreate(initialReview)
   })
-  .catch((error) => console.log(error))
+  .then(() => {
+      Image.bulkCreate(imageUrls);
+  })
+  .catch((error) => console.log('Error al bulkcreate', error))

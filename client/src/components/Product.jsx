@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import RatingPage from "./calificacionCaras";
 import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
 import { toProductDetails } from "../Redux/actions/productActions"
+import  ProductReview  from "./ProductReview"
 import { connect } from "react-redux";
 import Review from "./Review";
 import swal from 'sweetalert';
@@ -85,6 +86,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                 </div>
                 <script src="js/addons/rating.js"></script>
             </div>
+            <ProductReview reviews={productDetails.reviews}/>
             <Review product={id} />
         </div>
     );
