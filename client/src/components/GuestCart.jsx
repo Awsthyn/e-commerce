@@ -4,7 +4,6 @@ import OrderLine from '../components/OrderLine';
 import swal from 'sweetalert';
 import { getGuestCart, emptyGuestCart } from '../Redux/actions/cartActions';
 import { Redirect } from "react-router-dom";
-import LoginModalForm from "./LoginModal.jsx"
 
 const confirmar = (tit, tex, tim, suc, func) => {
 	swal({
@@ -69,7 +68,7 @@ export class GuestCart extends Component {
 					</table>
 					<div className="mt-4 d-flex float-right mr-5">
 						<div className= "row align-items-start">
-							<LoginModalForm />
+							
 							<button className="btn btn-success" data-toggle="modal" data-target="#modalLoginForm">
 							Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {

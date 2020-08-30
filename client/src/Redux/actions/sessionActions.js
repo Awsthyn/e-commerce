@@ -31,9 +31,12 @@ export function sessionLogin(data){
         })
         .then(()=>{
             window.localStorage.setItem('guestCart', JSON.stringify([]))
-            window.location.reload()
+            swal('Los productos que estaban en el carrito de invitado pasaron a tu carrito')
+            setTimeout(() => window.location.reload() , 1000);
         } )
-        .catch(err => console.error(err))
+        .catch(err =>{
+            swal('Datos incorrectos'); 
+            console.error(err)})
     }
 }
 
@@ -41,6 +44,7 @@ export function sessionLogin(data){
 export function sessionLogout() {
     console.log('accion despachada')
     return function(dispatch) {
+        
         return fetch(`http://localhost:3001/auth/logout`, {
             credentials: 'include'
         })
