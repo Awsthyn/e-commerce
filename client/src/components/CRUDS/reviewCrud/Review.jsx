@@ -43,11 +43,12 @@ export class Review extends React.Component {
     }
 
 	render() {
+		let wasBought = this.props.productByUser.includes(this.props.productDetails.id)
 		let indexReview = -1
 		if(this.props.productDetails.reviews) indexReview = Number(this.props.productDetails.reviews.findIndex((e)=> Number(e.userId)=== Number(this.props.sessionUser.id)))
 		return (
 			<div>
-				{indexReview === -1 && this.props.sessionUser.id ? (<div>
+				{indexReview === -1 && this.props.sessionUser.id && wasBought ? (<div>
 					<form onSubmit={this.handleSubmit} className="form-group">
 						<RatingThumbs clickHandler={this.handleRating} />
 						<label>Escriba su comentario. </label>
