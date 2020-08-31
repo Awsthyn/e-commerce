@@ -30,7 +30,7 @@ export class Review extends React.Component {
 
 	handleRating(event) {
 		console.log(event)
-		this.setState({ ratin: event })
+		this.setState({ rating: event })
 	}
 
 	handleSubmit(e) {
