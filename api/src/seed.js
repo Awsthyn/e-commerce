@@ -248,16 +248,16 @@ let initialUsers = [
 
 let initialOrders = [
   {
-    orderStatus: "procesando",
+    orderStatus: "completa",
+    userId: 1,
+  },
+  {
+    orderStatus: "completa",
     userId: 1,
   },
   {
     orderStatus: "carrito",
     userId: 1,
-  },
-  {
-    orderStatus: "carrito",
-    userId: 2,
   },
 ];
 
