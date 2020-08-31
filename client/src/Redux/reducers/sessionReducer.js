@@ -10,7 +10,8 @@ export default function sessionReducer (state = initialState, action) {
     switch (action.type) {
     
     case LOGIN:
-        console.log('LOGIN redux', action.payload);
+        delete action.payload.password;
+        delete action.payload.securityAnswer;
         return {
             ...state,
             sessionUser: action.payload
