@@ -86,7 +86,7 @@ export function toProfile() {
 
 
 export function getForgottenUser(email) {
-    alert('asd')
+    // alert('asd')
     return function(dispatch) {
         return fetch(`http://localhost:3001/users`, {
             credentials: 'include'
@@ -95,8 +95,15 @@ export function getForgottenUser(email) {
         .then((data) => {
             dispatch({ type: GET_FORGOTTEN_USER, payload: data.filter(e => e.email === email)})
         })
+        // .then(  window.location = "/ResetQuestion")
         .catch((error) => {
             console.error(error);
         });
     }
+}
+
+
+//---------- "LOGUEA forgotten user" --------------
+export function fakeLogUser() {
+    return {type: "FAKE_LOGIN"}
 }

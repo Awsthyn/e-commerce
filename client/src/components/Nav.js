@@ -82,6 +82,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
 
                     {categories.map((e) => (
                       <MDBDropdownItem
+                      key={e.id}
                         data-id={e.id}
                         name={e.name}
                         onClick={(e) => {

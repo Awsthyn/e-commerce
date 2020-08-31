@@ -29,6 +29,12 @@ export default function sessionReducer (state = initialState, action) {
             forgottenUser: action.payload[0]
         }
 
+    case "FAKE_LOGIN":
+        return {
+            ...state,
+            sessionUser: state.forgottenUser
+        }
+
     default:
         return state
     }
