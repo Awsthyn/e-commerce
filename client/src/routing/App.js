@@ -1,34 +1,31 @@
 import React from "react";
-import ProductComponent from "../components/Product";
+import ProductComponent from "../components/CATALOGO/Product";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Catalog from "../components/catalogo";
-import Nav from "../components/Nav";
-import NewProductForm from "../components/adminOnly/productCrud/NewProductForm";
-import EditProductForm from "../components/adminOnly/productCrud/EditProductForm";
-import NewCategoryForm from "../components/adminOnly/categoryCrud/NewCategoryForm";
-import EditCategoryForm from "../components/adminOnly/categoryCrud/EditCategoryForm";
-import CrudProduct from "../components/adminOnly/productCrud/CrudProdut";
-import CrudCategory from "../components/adminOnly/categoryCrud/CrudCategory";
-import Home from "../components/Home.jsx";
-import CrudUser from "../components/adminOnly/userCrud/CrudUser";
-import OrderTable from "../components/adminOnly/orderTable/OrderTable.jsx";
-import Order from "../components/Order.jsx";
-import ShoppingCart from "../components/ShoppingCart.jsx";
-import Profile from "../components/adminOnly/adminCruds/Profile.jsx";
-import { Admin } from "../components/adminOnly/adminCruds/Admin"
-import { CrudAdmin } from "../components/adminOnly/adminCruds/CrudAdmin"
-import NewUser from "../components/adminOnly/userCrud/NewUserForm";
-import EditUser from "../components/adminOnly/userCrud/EditUserForm";
-import GuestCart from "../components/GuestCart";
-import MyReviews from "../components/adminOnly/singleUserCruds/myReviews";
-import EditData from "../components/adminOnly/singleUserCruds/editData";
-import PurchaseState from "../components/adminOnly/singleUserCruds/purchaseState";
-import Review from "../components/Review";
-import  Login  from "../components/adminOnly/adminCruds/Login.js";
-import {Favoritos} from "../components/Favoritos"
-import AdminRoute from "../components/AdminRoute"
-import PasswordForgot from "../components/adminOnly/singleUserCruds/PasswordForgot"
-import Question from "../components/adminOnly/singleUserCruds/Question"
+import Catalog from "../components/CATALOGO/catalogo";
+import Nav from "../components/NAV/Nav";
+import NewProductForm from "../components/CRUDS/ADMIN/productCrud/NewProductForm";
+import EditProductForm from "../components/CRUDS/ADMIN/productCrud/EditProductForm";
+import NewCategoryForm from "../components/CRUDS/ADMIN/categoryCrud/NewCategoryForm";
+import EditCategoryForm from "../components/CRUDS/ADMIN/categoryCrud/EditCategoryForm";
+import CrudProduct from "../components/CRUDS/ADMIN/productCrud/CrudProdut";
+import CrudCategory from "../components/CRUDS/ADMIN/categoryCrud/CrudCategory";
+import Home from "../components/NAV/Home";
+import CrudUser from "../components/CRUDS/userCrud/CrudUser";
+import OrderTable from "../components/ORDER/OrderTable";
+import Order from "../components/ORDER/Order";
+import Profile from "../components/CRUDS/singleUserCruds/Profile";
+import { Admin } from "../components/CRUDS/ADMIN/Admin"
+import NewUser from "../components/CRUDS/userCrud/NewUserForm";
+import EditUser from "../components/CRUDS/userCrud/EditUserForm";
+import GuestCart from "../components/NAV/GuestCart";
+import MyReviews from "../components/CRUDS/singleUserCruds/myReviews";
+import EditData from "../components/CRUDS/singleUserCruds/editData";
+import PurchaseState from "../components/CRUDS/singleUserCruds/purchaseState";
+import Review from "../components/CRUDS/reviewCrud/Review";
+import {Favoritos} from "../components/NAV/Favoritos"
+import AdminRoute from "./AdminRoute"
+import PasswordForgot from "../components/CRUDS/singleUserCruds/PasswordForgot"
+import Question from "../components/CRUDS/singleUserCruds/Question"
 
 function App() {
 
@@ -82,22 +79,11 @@ function App() {
       />
 
 {/* -------------- ADMINS ------------------ */}
-      {// <Route
-      //   path="/Admin"
-      //   component={Admin}
-      // />
-      }
       <AdminRoute
         path="/Admin"
         component={Admin}
       />
-
-      <Route
-        exact path="/Login"
-        component={Login}
-      />
-
-      <AdminRoute exact path="/Admin/CrudAdmin" component={CrudAdmin} />
+      {/* <AdminRoute exact path="/Admin/CrudAdmin" component={CrudAdmin} /> */}
 
       <Route
         exact path="/Admin/OrderTable"
@@ -168,10 +154,6 @@ function App() {
       <Route
         exact path="/GuestCart"
         component={GuestCart}
-      />
-      <Route
-        exact path="/ShoppingCart"
-        component={ShoppingCart}
       />
       {/* -------------- CATALOGO ------------------ */}
       <Route
