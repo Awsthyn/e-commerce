@@ -6,6 +6,7 @@ export const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 
 export const GET_ALL_REVIEWS = "GET_ALL_REVIEWS";
+export const NEW_REVIEW = "NEW_REVIEW";
 
 // ----- CATEGORY CONSTANTS ------
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
