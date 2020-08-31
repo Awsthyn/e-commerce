@@ -193,7 +193,7 @@ let initialUsers = [
     state: "Argentina",
     password: "Marti te amo",
     admin: true,
-    securityQuestion: "Programa favorito?",
+    securityQuestion: "Cual era tu programa favorito en la infancia?",
     securityAnswer: "los simpsons",
   },
   {
@@ -205,8 +205,8 @@ let initialUsers = [
     state: "Argentina",
     password: "Pimpumpam",
     admin: false,
-    securityQuestion: "Primera mascota?",
-    securityAnswer: "gato",
+    securityQuestion: "Como se llamaba tu primera mascota?",
+    securityAnswer: "pelusa",
   },
   {
     email: "pela@pela.com",
@@ -217,8 +217,8 @@ let initialUsers = [
     state: "Argentina",
     password: "123123",
     admin: true,
-    securityQuestion: "color favorito?",
-    securityAnswer: "naranja",
+    securityQuestion: "Cual era tu trabajo soñado?",
+    securityAnswer: "astronauta",
   },
   {
     email: "ele@admin.com",
@@ -229,8 +229,8 @@ let initialUsers = [
     state: "Argentina",
     password: "123",
     admin: true,
-    securityQuestion: "auto favorito?",
-    securityAnswer: "porche",
+    securityQuestion: "Que comiste en singapur en 2008?",
+    securityAnswer: "mondongo",
   },
   {
     email: "ele@market.com",
@@ -241,8 +241,8 @@ let initialUsers = [
     state: "Argentina",
     password: "123",
     admin: false,
-    securityQuestion: "Comida favorita?",
-    securityAnswer: "milanesa",
+    securityQuestion: "Quien era tu mejor amiga en la primaria?",
+    securityAnswer: "Carla",
   },
 ];
 
