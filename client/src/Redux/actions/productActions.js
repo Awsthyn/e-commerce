@@ -1,5 +1,6 @@
 import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS, ADD_REVIEW } from './constants';
 
+
 //------------  PRODUCTOS BUSCADOS  -----------------------------------------------------------
 
 export function getSearchedProducts(keyword) {
@@ -152,6 +153,7 @@ export function addProduct(product) {
 }
 
 //---------------------------- Crear una review
+
 export function addReview(prodId, reviewState) {
     const url = `http://localhost:3001/products/${prodId}/review/`;
     console.log("ID DEL PRODUCTO " + prodId)
@@ -160,6 +162,7 @@ export function addReview(prodId, reviewState) {
         return fetch(url, {
             method: 'POST',
             body: JSON.stringify(reviewState),
+
             headers: {
                 'Content-Type': 'application/json'
             },

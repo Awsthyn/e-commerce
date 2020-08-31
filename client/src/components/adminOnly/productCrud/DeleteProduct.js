@@ -4,9 +4,18 @@ import { connect } from "react-redux";
 
 export function DeleteProduct({ id, onDeleteProduct }){
 
+    function handleClick(e){
+        const productoId = e.target.getAttribute("producto-id")
+        if (window.confirm('Presione Aceptar para eliminar producto')){
+             onDeleteProduct(productoId)
+            .then(() => alert('El producto fue eliminado Correctamente'))
+            .catch(err => alert(`Error: ${err}`))
+        }
+    }
+
     return (
         <div className="mx-auto">
-            <button className="btn btn-danger" onClick={() => onDeleteProduct(id)}>Eliminar</button>
+            <button className="btn btn-danger" onClick={handleClick} producto-id={id}>Eliminar</button>
         </div>
     )
 }
@@ -30,4 +39,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(DeleteProduct);
-

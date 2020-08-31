@@ -18,12 +18,12 @@ const alerta = (tit, tex, tim) => {
 }
 
 export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, toProductDetails }) {
-    const url =  window.location.href
+    const url = window.location.href
     const ubication = url.lastIndexOf('/')
-    
-    useEffect(()=>{
-      toProductDetails(url.slice(ubication+1))  
-      getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        toProductDetails(url.slice(ubication + 1))
+        getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
 
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
 
@@ -71,8 +71,8 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     <hr></hr>
                     <p>{productDetails.description}</p>
                     <hr></hr>
-                    <div>                        
-                        <RatingAverage reviews={productDetails.reviews} product={id}/>
+                    <div>
+                        <RatingAverage reviews={productDetails.reviews} product={id} />
                     </div>
                     <hr></hr>
                     <button data-id={id} type='button'
@@ -87,8 +87,8 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                 <script src="js/addons/rating.js"></script>
             </div>
             {/* <ProductReview reviews={productDetails.reviews}/> */}
-
             <Review  />
+
 
         </div>
     );
