@@ -50,14 +50,13 @@ server.post("/:userId/guestToCart", (req, res, next) => {
     orderStatus: 'carrito',
     userId: req.params.userId}})
   const container = []
-//----
   const productsSearch =  Promise.all(orderLines.map((orderLine) => {
-    Product.findByPk(orderLine.product.id).then((data)=>{
+   return  Product.findByPk(orderLine.product.id).then((data)=>{
       container.push(data)
     })
   })
   )
-//----
+
   Promise.all([order, productsSearch])
   .then(data => {
     const order = data[0]
