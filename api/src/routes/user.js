@@ -50,18 +50,21 @@ server.post("/:userId/guestToCart", (req, res, next) => {
     orderStatus: 'carrito',
     userId: req.params.userId}})
   const container = []
-  const productsSearch =  orderLines.map((orderLine) => {
+//----
+  const productsSearch =  Promise.all(orderLines.map((orderLine) => {
     Product.findByPk(orderLine.product.id).then((data)=>{
       container.push(data)
     })
   })
-
+  )
+//----
   Promise.all([order, productsSearch])
   .then(data => {
     const order = data[0]
     console.log(order[0].id)
-    Promise.all(container.map((p, i) => {
-      console.log({id: p.id, orderId: order[0].id, quantity: orderLines[i].quantity, price: p.price})
+    console.log(container)
+    return Promise.all(container.map((p, i) => {
+      console.log({id: p.id, name: p.name, orderId: order[0].id, quantity: orderLines[i].quantity, price: p.price})
       OrderLine.findOne({where: {productId: p.id, orderId: order[0].id}})
       .then((data)=>{
         if(data){
@@ -78,7 +81,6 @@ server.post("/:userId/guestToCart", (req, res, next) => {
         }
       })
       
-   
   })
     ).then(()=> res.sendStatus(200))
 
