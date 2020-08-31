@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { addToOrder, getCart, editQuantity, getGuestCart } from "../../Redux/actions/cartActions"
 import { toProductDetails } from "../../Redux/actions/productActions"
+import { purchasedProducts } from "../../Redux/actions/sessionActions"
 import { connect } from "react-redux";
 import ProductReview from "../CRUDS/reviewCrud/ProductReview";
 import swal from 'sweetalert';
@@ -17,13 +18,15 @@ const alerta = (tit, tex, tim) => {
 }
 
 
-export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, getGuestCart, toProductDetails }) {
+export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, getGuestCart, toProductDetails, purchasedProducts }) {
     const url = window.location.href
     const ubication = url.lastIndexOf('/')
 
     useEffect(() => {
         toProductDetails(url.slice(ubication + 1))
-        if(sessionUser.id) getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
+        if(sessionUser.id) {
+            purchasedProducts(sessionUser.id)
+            getCart(sessionUser.id)}// eslint-disable-next-line react-hooks/exhaustive-deps
         else getGuestCart()
 
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,7 +123,8 @@ function mapDispatchToProps(dispatch) {
         addToOrder: (productId, quantity, userId) => dispatch(addToOrder(productId, quantity, userId)),
         getCart: (userId) => dispatch(getCart(userId)),
         getGuestCart: () => dispatch(getGuestCart()),
-        editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))
+        editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId)),
+        purchasedProducts: (userId) => dispatch(purchasedProducts(userId))
     };
 }
 
