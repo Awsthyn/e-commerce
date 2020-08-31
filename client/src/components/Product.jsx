@@ -17,6 +17,7 @@ const alerta = (tit, tex, tim) => {
     })
 }
 
+
 export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, getGuestCart, toProductDetails }) {
     const url = window.location.href
     const ubication = url.lastIndexOf('/')
@@ -25,6 +26,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
         toProductDetails(url.slice(ubication + 1))
         if(sessionUser.id) getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
         else getGuestCart()
+
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
 
     function handleCart(id, userId) {
@@ -85,25 +87,19 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     <hr></hr>
                     <p>{productDetails.description}</p>
                     <hr></hr>
-                    <div>
-                        <RatingAverage reviews={productDetails.reviews} product={id} />
+                    <div>                        
+                        <RatingAverage reviews={productDetails.reviews} product={id}/>
                     </div>
                     <hr></hr>
                     <button data-id={id} type='button'
                         className="btn btn-dark ml-auto mr-auto"
-                        onClick={() => {
-                            handleCart(productDetails.id, sessionUser.id);
-                        }}
-                    >
-                        Agregar al carrito</button>
-
+                        onClick={() => {handleCart(productDetails.id, sessionUser.id);}}>
+                        Agregar al carrito
+                    </button>
                 </div>
                 <script src="js/addons/rating.js"></script>
             </div>
-            {<ProductReview reviews={productDetails.reviews}/>}
-            <Review  />
-
-
+            <ProductReview reviews={productDetails.reviews}/>   
         </div>
     );
 }
