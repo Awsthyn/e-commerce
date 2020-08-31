@@ -50,7 +50,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
         <LoginModalForm />
         <Link to="/">
           <div className={s.brand}>
-            <img className="px-0" src={require("../assets/MercadoNegro5.gif")} alt="logo" width="70px" />
+            <img className="px-0" src={require("../../assets/MercadoNegro5.gif")} alt="logo" width="70px" />
             <h4>MERCADO NEGRO</h4>
           </div>
         </Link>
