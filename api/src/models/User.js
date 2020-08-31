@@ -41,6 +41,14 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
+        securityQuestion: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        securityAnswer: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     })
 
     // debe ser function para que funcione this.password

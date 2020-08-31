@@ -193,6 +193,8 @@ let initialUsers = [
     state: "Argentina",
     password: "Marti te amo",
     admin: true,
+    securityQuestion: "Programa favorito?",
+    securityAnswer: "los simpsons",
   },
   {
     email: "leomaglia@darkmarket.com",
@@ -203,6 +205,8 @@ let initialUsers = [
     state: "Argentina",
     password: "Pimpumpam",
     admin: false,
+    securityQuestion: "Primera mascota?",
+    securityAnswer: "gato",
   },
   {
     email: "pela@pela.com",
@@ -213,6 +217,8 @@ let initialUsers = [
     state: "Argentina",
     password: "123123",
     admin: true,
+    securityQuestion: "color favorito?",
+    securityAnswer: "naranja",
   },
   {
     email: "ele@admin.com",
@@ -223,6 +229,8 @@ let initialUsers = [
     state: "Argentina",
     password: "123",
     admin: true,
+    securityQuestion: "auto favorito?",
+    securityAnswer: "porche",
   },
   {
     email: "ele@market.com",
@@ -233,6 +241,8 @@ let initialUsers = [
     state: "Argentina",
     password: "123",
     admin: false,
+    securityQuestion: "Comida favorita?",
+    securityAnswer: "milanesa",
   },
 ];
 

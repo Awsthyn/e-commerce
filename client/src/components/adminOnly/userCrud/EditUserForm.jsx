@@ -16,6 +16,8 @@ export class EditUser extends React.Component {
             state: props.user.state,
             password: props.user.password,
             admin: props.user.admin,
+            securityQuestion: props.user.securityQuestion,
+            securityAnswer: props.user.securityAnswer,
         }
         this.users = props.listUsers;
         this.handleChange = this.handleChange.bind(this);
@@ -89,6 +91,14 @@ export class EditUser extends React.Component {
                     <div className="form-group">
                         <label>Repetir contraseña:*</label>
                         <input type="password" id="repeatPassword" name="repeatPassword" onChange={this.handleChange} className="form-control" value={this.state.repeatPassword} />
+                    </div>
+                    <div className="form-group">
+                        <label>Pregunta de seguridad:</label>
+                        <input type="text" id="securityQuestion" name="securityQuestion" onChange={this.handleChange} className="form-control" value={this.state.securityQuestion} required />
+                    </div>
+                    <div className="form-group">
+                        <label>Respuesta de seguridad:</label>
+                        <input type="text" id="securityAnswer" name="securityAnswer" onChange={this.handleChange} className="form-control" value={this.state.securityAnswer} required />
                     </div>
                     <div>
                         <button type="submit" className="btn btn-warning">Editar</button>

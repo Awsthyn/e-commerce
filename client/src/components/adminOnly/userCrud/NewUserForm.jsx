@@ -14,7 +14,9 @@ export class NewUser extends React.Component {
             locality: "",
             state: "",
             password: "",
-            admin: false
+            admin: false,
+            securityQuestion: "",
+            securityAnswer: "",
         }
         this.listUsers = props.listUsers
         this.handleChange = this.handleChange.bind(this);
@@ -52,7 +54,9 @@ export class NewUser extends React.Component {
                 locality: "",
                 state: "",
                 password: "",
-                admin: false
+                admin: false,
+                securityQuestion: "",
+                securityAnswer: "",
             })
             window.location = "/Admin/CrudUser";
             alert("El usuario se creó correctamente")
@@ -94,6 +98,14 @@ export class NewUser extends React.Component {
                     <div className="form-group">
                         <label>Repetir contraseña:*</label>
                         <input type="password" id="repeatPassword" name="repeatPassword" onChange={this.handleChange} className="form-control" value={this.state.repeatPassword} required />
+                    </div>
+                    <div className="form-group">
+                            <label>Pregunta de seguridad:</label>
+                            <input type="text" id="securityQuestion" name="securityQuestion" onChange={this.handleChange} className="form-control" value={this.state.securityQuestion} required />
+                    </div>
+                    <div className="form-group">
+                        <label>Respuesta de seguridad:</label>
+                        <input type="text" id="securityAnswer" name="securityAnswer" onChange={this.handleChange} className="form-control" value={this.state.securityAnswer} required />
                     </div>
                     <div>
                         <button type="submit" className="btn btn-warning">Enviar</button>

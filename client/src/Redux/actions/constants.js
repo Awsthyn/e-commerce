@@ -38,4 +38,5 @@ export const GET_ORDERS = "GET_ORDERS"
 //-------- SESSION CONSTANTS --------
 export const LOGIN = "LOGIN"
 export const LOGOUT = "LOGOUT"
+export const GET_FORGOTTEN_USER = "GET_FORGOTTEN_USER"
 
