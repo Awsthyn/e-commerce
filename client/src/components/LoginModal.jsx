@@ -79,7 +79,7 @@ export class LoginModal extends React.Component {
 										Iniciar sesión
 									</button>
 								</div>
-								<p className="text-center mt-1">¿Olvidaste tu contraseña?</p>
+								<a href="/PassForgot" className="text-center mt-1">¿Olvidaste tu contraseña?</a>
 							</div>
 							<div className="modal-footer d-flex justify-content-center mb-3">
 								<button className="font-weight-bold btn btn-success btn-lg" onClick={()=>window.location="/register"}>Crear cuenta</button>

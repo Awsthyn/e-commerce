@@ -10,6 +10,7 @@ const userRouter = require('./user.js')
 const reviewRouter = require('./review.js')
 const authRouter = require('./authenticate')
 
+
 const router = Router();
 
 // load each router on a route

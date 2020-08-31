@@ -1,7 +1,8 @@
-import { LOGIN, LOGOUT } from "../actions/constants";
+import { LOGIN, LOGOUT, GET_FORGOTTEN_USER } from "../actions/constants";
 
 const initialState = {
-    sessionUser: {}
+    sessionUser: {},
+    forgottenUser: {}
 };
 
 export default function sessionReducer (state = initialState, action) {
@@ -19,6 +20,13 @@ export default function sessionReducer (state = initialState, action) {
         return {
             ...state,
             sessionUser: {}
+        }
+
+    case GET_FORGOTTEN_USER:
+        console.log("GET_FORGOTTEN_USER")
+        return {
+            ...state,
+            forgottenUser: action.payload[0]
         }
 
     default:

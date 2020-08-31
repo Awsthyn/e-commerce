@@ -19,6 +19,8 @@ export class EditData extends React.Component {
             password: "",
             repeatPassword: "",
             admin: props.sessionUser.admin,
+            securityQuestion: props.sessionUser.securityQuestion,
+            securityAnswer: props.sessionUser.securityAnswer,
         }
 
 
@@ -102,6 +104,14 @@ export class EditData extends React.Component {
                         <div className="form-group">
                             <label>Repetir contraseña:*</label>
                             <input type="password" id="repeatPassword" name="repeatPassword" onChange={this.handleChange} className="form-control" value={this.state.repeatPassword}  />
+                        </div>
+                        <div className="form-group">
+                            <label>Pregunta de seguridad:</label>
+                            <input type="text" id="securityQuestion" name="securityQuestion" onChange={this.handleChange} className="form-control" value={this.state.securityQuestion} required />
+                        </div>
+                        <div className="form-group">
+                            <label>Respuesta de seguridad:</label>
+                            <input type="text" id="securityAnswer" name="securityAnswer" onChange={this.handleChange} className="form-control" value={this.state.securityAnswer} required />
                         </div>
                     </div>
                     <div>

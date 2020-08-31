@@ -27,6 +27,8 @@ import Review from "../components/Review";
 import  Login  from "../components/adminOnly/adminCruds/Login.js";
 import {Favoritos} from "../components/Favoritos"
 import AdminRoute from "../components/AdminRoute"
+import PasswordForgot from "../components/adminOnly/singleUserCruds/PasswordForgot"
+import Question from "../components/adminOnly/singleUserCruds/Question"
 
 function App() {
 
@@ -69,6 +71,14 @@ function App() {
       <Route
         exact path="/favourite"
         component={Favoritos}
+      />
+      <Route
+        exact path="/PassForgot"
+        component={PasswordForgot}
+      />
+      <Route
+        exact path="/ResetQuestion"
+        component={Question}
       />
 
 {/* -------------- ADMINS ------------------ */}

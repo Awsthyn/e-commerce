@@ -179,12 +179,13 @@ server.get("/", (req, res, next) => {
   User.findAll()
     .then((data) => {
       res.json(data);
+      console.log(data)
     })
     .catch(next);
 });
 
 server.post("/", (req, res, next) => {
-  const { email, first_name, last_name, address, locality, state, password, admin } = req.body;
+  const { email, first_name, last_name, address, locality, state, password, admin, securityQuestion, securityAnswer } = req.body;
   User.create({
     email,
     first_name,
@@ -193,7 +194,9 @@ server.post("/", (req, res, next) => {
     locality,
     state,
     password,
-    admin
+    admin,
+    securityQuestion,
+    securityAnswer,
   })
     .then(() => {
       res.sendStatus(201);
@@ -216,7 +219,7 @@ server.delete("/:id", (req, res, next) => {
 server.put("/:id", (req, res, next) => {
   try {
     const { id } = req.params;
-    const { email, first_name, last_name, address, locality, state, password, admin } = req.body;
+    const { email, first_name, last_name, address, locality, state, password, admin, securityQuestion, securityAnswer } = req.body;
     User.findByPk(id).then(user => {
         if (user) {
             user.email = email
@@ -227,6 +230,8 @@ server.put("/:id", (req, res, next) => {
             user.state = state
             user.password = password
             user.admin = admin
+            user.securityQuestion = securityQuestion
+            user.securityAnswer = securityAnswer
             return user.save()
         }
     })

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from './constants';
+import { LOGIN, LOGOUT, GET_FORGOTTEN_USER } from './constants';
 import swal from 'sweetalert';
 import { persistor } from '../store';
 
@@ -77,6 +77,26 @@ export function toProfile() {
         })
         .catch((error) => {
             console.log(error)
+        });
+    }
+}
+
+
+// ------------- TRAE TODOS LOS USUARIOS, PARA DEJAR EL OLVIDADIZO
+
+
+export function getForgottenUser(email) {
+    alert('asd')
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/users`, {
+            credentials: 'include'
+        })
+        .then((r) => r.json())
+        .then((data) => {
+            dispatch({ type: GET_FORGOTTEN_USER, payload: data.filter(e => e.email === email)})
+        })
+        .catch((error) => {
+            console.error(error);
         });
     }
 }
