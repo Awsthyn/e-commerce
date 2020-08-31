@@ -19,7 +19,6 @@ export function sessionLogin(data){
         .then(res => res.json())
         .then(res => {
             dispatch({type: LOGIN, payload: res})
-            console.log(JSON.parse(localStorage.getItem('guestCart')))
             return fetch(`http://localhost:3001/users/${res.id}/guestToCart/`, {
                 method: 'POST',
                 body: JSON.stringify({orderLines: JSON.parse(localStorage.getItem('guestCart'))}),
