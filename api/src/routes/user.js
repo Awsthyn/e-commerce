@@ -215,19 +215,20 @@ server.put("/:id", (req, res, next) => {
   try {
     const { id } = req.params;
     const { email, first_name, last_name, address, locality, state, password, admin } = req.body;
-    User.update(
-      {
-        email,
-        first_name,
-        last_name,
-        address,
-        locality,
-        state,
-        password,
-        admin
-      },
-      { where: { id } }
-    ).then(() => {
+    User.findByPk(id).then(user => {
+        if (user) {
+            user.email = email
+            user.first_name = first_name
+            user.last_name = last_name
+            user.address = address
+            user.locality = locality
+            user.state = state
+            user.password = password
+            user.admin = admin
+            return user.save()
+        }
+    })
+    .then( () => {
       res.sendStatus(200);
     });
   } catch (error) {

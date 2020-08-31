@@ -61,8 +61,15 @@ module.exports = (sequelize) => {
         })
     }
 
-    User.addHook('beforeCreate', (user, options, cb) =>
-        hashPassword(user.password).then(hash => user.password = hash)
+    User.addHook('beforeCreate', (user, options, cb) => {
+        console.info("en el hook beforeCreate", user)
+        return hashPassword(user.password).then(hash => user.password = hash)}
+    )
+
+    User.addHook('beforeUpdate', (user, options, cb) =>
+    {
+        console.info("en el hook beforeUpdate:", user)
+        return hashPassword(user.password).then(hash => user.password = hash)}
     )
 
     return User
