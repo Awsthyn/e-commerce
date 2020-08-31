@@ -5,6 +5,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 // -----REVIEW CONSTANTS -----
+export const PURCHASED_PRODUCTS = "PURCHASED_PRODUCTS"
 export const GET_ALL_REVIEWS = "GET_ALL_REVIEWS";
 export const ADD_REVIEW = "ADD_REVIEW";
 export const NEW_REVIEW = "NEW_REVIEW";

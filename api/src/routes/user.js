@@ -260,5 +260,16 @@ server.post("/auth/promote/:id", (req, res, next) => {
     });
 });
 
+server.get('/:userId/purchasedProducts', (req, res, next)=>{
+  Order.findAll({ where: { userId: req.params.userId }, include: OrderLine })
+  .then((data) => {
+    const orderLines = data.map(e => e.orderLines)
+    let products = []
+    orderLines.map(o => o.map(p => products.push(p.productId)))
+    res.json(products)
+  })
+})
+
+
 
 module.exports = server;

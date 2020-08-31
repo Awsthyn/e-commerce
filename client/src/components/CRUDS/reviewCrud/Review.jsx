@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { addReview, toProductDetails } from "../../../Redux/actions/productActions";
+import { purchasedProducts } from "../../../Redux/actions/sessionActions";
 import swal from 'sweetalert';
 import RatingThumbs from "./Rating";
 
@@ -71,10 +72,7 @@ export class Review extends React.Component {
 			);
     }
 */
-	componentDidMount() {
-		toProductDetails(this.props.productDetails.id)
-	}
-
+	
 	render() {
 		let indexReview = -1
 		if(this.props.productDetails.reviews) indexReview = Number(this.props.productDetails.reviews.findIndex((e)=> Number(e.userId)=== Number(this.props.sessionUser.id)))
@@ -98,6 +96,7 @@ export class Review extends React.Component {
 function mapStateToProps(state) {
 	return {
 		sessionUser: state.session.sessionUser,
+		productByUser: state.session.productsPurchased,
 		productDetails: state.products.productDetails		
 	}
 }
@@ -105,7 +104,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		addReview: (id, r) => dispatch(addReview(id, r)),
-		toProductDetails: prodId => dispatch(toProductDetails(prodId)),
+		toProductDetails: prodId => dispatch(toProductDetails(prodId))
 	};
 }
 
