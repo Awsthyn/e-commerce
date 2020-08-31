@@ -10,45 +10,58 @@ export class Review extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			rating: "",
-			description: ""
+			rating: 0,
+			userId: this.props.sessionUser.id
 		}
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleRating = this.handleRating.bind(this);
 	}
-    complete() {
-			swal({title: "Enviado", text: "El comentario ha sido enviado con exito", icon: "success", timer: "4000",
-			})        
-    }
+	complete() {
+		swal({
+			title: "Enviado", text: "El comentario ha sido enviado con exito", icon: "success", timer: "4000",
+		})
+	}
 
     handleChange(e) {
-			this.setState({ [this.state.name]: e.target.value })
+			this.setState({ [e.target.name]: e.target.value })
+			
     }
-
+    handleRating(event) {
+		console.log(event)
+		this.setState({ rating: event })
+	}
+		
     handleSubmit(e) {
-			e.preventDefault();
-			this.props.addReview(this.props.productDetails.id)
-				.then(res => {
-					this.setState()					
+			e.preventDefault();			
+			this.props.addReview(this.props.productDetails.id, this.state.rating)
+				.then(res => {										
 					console.info(res)
-					this.complete()
+					this.complete()	
 				}).catch(err => console.error(err))
     }
 
-    componentDidMount() {
-        toProductDetails(this.props.productDetails.id)
-    }
 
-    render() {        
-			console.log(this.props.productDetails.id)
+	handleSubmit(e) {
+		e.preventDefault();
+		this.props.addReview(this.props.productDetails.id, this.state)
+			.then(res => {
+				console.info(res)
+				this.complete()
+			}).catch(err => console.error(err))
+	}
+
+/*
+    render() { 
+			console.log(this.props.productDetails.reviews)       			
 			return (
 				<div>
 					{!!this.props.productDetails.id ? (<div>
 						<form onSubmit={this.handleSubmit} className="form-group">
 							<RatingThumbs/>												
 							<label>Escriba su comentario. </label>
-							<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.state} required />
+							<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required />
 							<div>
 								<button type="submit" className="btn btn-warning">Enviar</button>
 							</div>
@@ -57,18 +70,41 @@ export class Review extends React.Component {
 				</div>
 			);
     }
+*/
+	componentDidMount() {
+		toProductDetails(this.props.productDetails.id)
+	}
+
+	render() {
+		let indexReview = -1
+		if(this.props.productDetails.reviews) indexReview = Number(this.props.productDetails.reviews.findIndex((e)=> Number(e.userId)=== Number(this.props.sessionUser.id)))
+		return (
+			<div>
+				{indexReview === -1 && this.props.sessionUser.id ? (<div>
+					<form onSubmit={this.handleSubmit} className="form-group">
+						<RatingThumbs clickHandler={this.handleRating} />
+						<label>Escriba su comentario. </label>
+						<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required />
+						<div>
+							<button type="submit" className="btn btn-warning">Enviar</button>
+						</div>
+					</form>
+				</div>) : false}
+			</div>
+		);
+	}
 };
 
 function mapStateToProps(state) {
 	return {
 		sessionUser: state.session.sessionUser,
-		productDetails: state.products.productDetails
+		productDetails: state.products.productDetails		
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		addReview: id => dispatch(addReview(id)),
+		addReview: (id, r) => dispatch(addReview(id, r)),
 		toProductDetails: prodId => dispatch(toProductDetails(prodId)),
 	};
 }

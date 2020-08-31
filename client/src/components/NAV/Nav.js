@@ -46,32 +46,19 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   let history = useHistory();
   return (
     <div>
-      <LoginModalForm />
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-justify d-flex justify-content-around align-items-center">
+        <LoginModalForm />
         <Link to="/">
           <div className={s.brand}>
-            <img
-              className="px-0"
-              src={require("../../assets/MercadoNegro5.gif")}
-              alt="logo"
-              width="70px"
-            />
+            <img className="px-0" src={require("../assets/MercadoNegro5.gif")} alt="logo" width="70px" />
             <h4>MERCADO NEGRO</h4>
           </div>
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="navbar-nav collapse navbar-collapse d-flex align-items-center" id="navbarSupportedContent">
+        <div className="navbar collapse navbar-collapse " id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto d-flex justify-content-around collapse navbar-collapse">
             <li>
               <ul>
@@ -113,8 +100,8 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
                 </MDBDropdown>
               </ul>
             </li>
-              <UserOrGuest />
-              <Link to={"/favourite"}><i className="ml-3 fa fa-heart mt-1" style={{fontSize: "1.4em", color: "#dc3545"}}></i></Link>
+            <UserOrGuest />
+            <Link to={"/favourite"}><i className="ml-3 fa fa-heart mt-1" style={{ fontSize: "1.4em", color: "#dc3545" }}></i></Link>
             <SearchBar />
             <li>
               <UserIcon />

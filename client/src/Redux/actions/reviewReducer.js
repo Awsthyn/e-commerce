@@ -1,8 +1,8 @@
-import { GET_ALL_REVIEWS, ADD_REVIEW } from "../actions/constants";
+import { GET_ALL_REVIEWS, NEW_REVIEW } from "../actions/constants";
 
 const initialState = {
   reviews: [],
-  review: {}
+  review: {},
 };
 
 export default function reviewReducer(state = initialState, action) {
@@ -12,7 +12,7 @@ export default function reviewReducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
-    case ADD_REVIEW:
+    case NEW_REVIEW:
       return {
         ...state,
         review: action.payload,

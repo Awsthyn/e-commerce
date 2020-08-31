@@ -1,4 +1,5 @@
-import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS } from './constants';
+import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS, ADD_REVIEW } from './constants';
+
 
 //------------  PRODUCTOS BUSCADOS  -----------------------------------------------------------
 
@@ -79,6 +80,7 @@ export function onDeleteProduct(ProductId) {
             credentials: 'include'
         }).then(res => {
             dispatch({ type: DELETE_PRODUCT, payload: res })
+            alert("El Producto se ha Eliminado correctamente")
             window.location = "/Admin/CrudProduct";
         })
             .catch(err => console.error(err))
@@ -97,12 +99,12 @@ export function editProduct(product) {
             },
             credentials: 'include'
         }).then(res => {
-            if(res.ok){
+            if (res.ok) {
                 dispatch({ type: EDIT_PRODUCT, payload: res })
                 alert("El Producto se Editó correctamente")
                 window.location = "/Admin/CrudProduct";
-            }else{
-                if(res.status=== 403){
+            } else {
+                if (res.status === 403) {
                     console.log(res)
                     //window.location = "/login";
                 }
@@ -151,12 +153,16 @@ export function addProduct(product) {
 }
 
 //---------------------------- Crear una review
-export function addReview(prodId) {
+
+export function addReview(prodId, reviewState) {
     const url = `http://localhost:3001/products/${prodId}/review/`;
+    console.log("ID DEL PRODUCTO " + prodId)
+    console.log("REVIEW DEL PRODUCTO " + reviewState.rating + " " + reviewState.description)
     return function (dispatch) {
         return fetch(url, {
             method: 'POST',
-            body: JSON.stringify(prodId),
+            body: JSON.stringify(reviewState),
+
             headers: {
                 'Content-Type': 'application/json'
             },
