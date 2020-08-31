@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 export class Profile extends React.Component {
     constructor(props) {
         super(props);
-        const userId = this.props.sessionUser.id 
+        // const userId = this.props.sessionUser.id 
         // this.props.toProfile()
         console.log(this.props.sessionUser)
         this.props.toProfile()
