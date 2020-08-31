@@ -24,14 +24,24 @@ export class Review extends React.Component {
 		})
 	}
 
-	handleChange(e) {
-		this.setState({ [e.target.name]: e.target.value })
-	}
-
-	handleRating(event) {
+    handleChange(e) {
+			this.setState({ [e.target.name]: e.target.value })
+			
+    }
+    handleRating(event) {
 		console.log(event)
 		this.setState({ rating: event })
 	}
+		
+    handleSubmit(e) {
+			e.preventDefault();			
+			this.props.addReview(this.props.productDetails.id, this.state.rating)
+				.then(res => {										
+					console.info(res)
+					this.complete()	
+				}).catch(err => console.error(err))
+    }
+
 
 	handleSubmit(e) {
 		e.preventDefault();
@@ -42,6 +52,25 @@ export class Review extends React.Component {
 			}).catch(err => console.error(err))
 	}
 
+/*
+    render() { 
+			console.log(this.props.productDetails.reviews)       			
+			return (
+				<div>
+					{!!this.props.productDetails.id ? (<div>
+						<form onSubmit={this.handleSubmit} className="form-group">
+							<RatingThumbs/>												
+							<label>Escriba su comentario. </label>
+							<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required />
+							<div>
+								<button type="submit" className="btn btn-warning">Enviar</button>
+							</div>
+						</form>
+					</div>) : false}
+				</div>
+			);
+    }
+*/
 	componentDidMount() {
 		toProductDetails(this.props.productDetails.id)
 	}
@@ -70,7 +99,7 @@ export class Review extends React.Component {
 function mapStateToProps(state) {
 	return {
 		sessionUser: state.session.sessionUser,
-		productDetails: state.products.productDetails
+		productDetails: state.products.productDetails		
 	}
 }
 

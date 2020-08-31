@@ -1,4 +1,5 @@
-import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS, NEW_REVIEW } from './constants';
+import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS, ADD_REVIEW } from './constants';
+
 
 //------------  PRODUCTOS BUSCADOS  -----------------------------------------------------------
 
@@ -152,14 +153,16 @@ export function addProduct(product) {
 }
 
 //---------------------------- Crear una review
-export function addReview(prodId, aaa) {
+
+export function addReview(prodId, reviewState) {
     const url = `http://localhost:3001/products/${prodId}/review/`;
-    console.log('ID DEL PRODUCTO' + prodId)
-    console.log('REVIEW DEL PRODUCTO ' + aaa.rating + " " + aaa.description)
+    console.log("ID DEL PRODUCTO " + prodId)
+    console.log("REVIEW DEL PRODUCTO " + reviewState.rating + " " + reviewState.description)
     return function (dispatch) {
         return fetch(url, {
             method: 'POST',
-            body: JSON.stringify(aaa),
+            body: JSON.stringify(reviewState),
+
             headers: {
                 'Content-Type': 'application/json'
             },

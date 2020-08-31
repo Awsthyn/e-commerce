@@ -86,9 +86,9 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                 </div>
                 <script src="js/addons/rating.js"></script>
             </div>
-            {/* <ProductReview reviews={productDetails.reviews} /> */}
+            {/* <ProductReview reviews={productDetails.reviews}/> */}
+            <Review  />
 
-            <Review />
 
         </div>
     );
@@ -102,7 +102,6 @@ function mapStateToProps(state) {
         addToOrder: state.cart.addToOrder,
         cart: state.cart.cart,
         sessionUser: state.session.sessionUser,
-
     };
 }
 
