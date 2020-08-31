@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { addReview, toProductDetails } from "../../../Redux/actions/productActions";
-import { purchasedProducts } from "../../../Redux/actions/sessionActions";
 import swal from 'sweetalert';
 import RatingThumbs from "./Rating";
 
@@ -43,36 +42,6 @@ export class Review extends React.Component {
 				}).catch(err => console.error(err))
     }
 
-
-	handleSubmit(e) {
-		e.preventDefault();
-		this.props.addReview(this.props.productDetails.id, this.state)
-			.then(res => {
-				console.info(res)
-				this.complete()
-			}).catch(err => console.error(err))
-	}
-
-/*
-    render() { 
-			console.log(this.props.productDetails.reviews)       			
-			return (
-				<div>
-					{!!this.props.productDetails.id ? (<div>
-						<form onSubmit={this.handleSubmit} className="form-group">
-							<RatingThumbs/>												
-							<label>Escriba su comentario. </label>
-							<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required />
-							<div>
-								<button type="submit" className="btn btn-warning">Enviar</button>
-							</div>
-						</form>
-					</div>) : false}
-				</div>
-			);
-    }
-*/
-	
 	render() {
 		let indexReview = -1
 		if(this.props.productDetails.reviews) indexReview = Number(this.props.productDetails.reviews.findIndex((e)=> Number(e.userId)=== Number(this.props.sessionUser.id)))
