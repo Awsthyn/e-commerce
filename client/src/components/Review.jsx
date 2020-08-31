@@ -10,29 +10,28 @@ export class Review extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			rating: "",
-			description: ""
+			rating: "",			
 		}
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
     complete() {
-			swal({title: "Enviado", text: "El comentario ha sido enviado con exito", icon: "success", timer: "4000",
+			swal({title:"Enviado",text:"El comentario ha sido enviado con exito",icon:"success",timer:"4000",
 			})        
     }
 
     handleChange(e) {
-			this.setState({ [this.state.name]: e.target.value })
+			this.setState({ [e.target.name]: e.target.value })
+			
     }
-
+		
     handleSubmit(e) {
-			e.preventDefault();
-			this.props.addReview(this.props.productDetails.id)
-				.then(res => {
-					this.setState()					
+			e.preventDefault();			
+			this.props.addReview(this.props.productDetails.id, this.state.rating)
+				.then(res => {										
 					console.info(res)
-					this.complete()
+					this.complete()	
 				}).catch(err => console.error(err))
     }
 
@@ -40,15 +39,15 @@ export class Review extends React.Component {
         toProductDetails(this.props.productDetails.id)
     }
 
-    render() {        
-			console.log(this.props.productDetails.id)
+    render() { 
+			console.log(this.props.productDetails.reviews)       			
 			return (
 				<div>
 					{!!this.props.productDetails.id ? (<div>
 						<form onSubmit={this.handleSubmit} className="form-group">
 							<RatingThumbs/>												
 							<label>Escriba su comentario. </label>
-							<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.state} required />
+							<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required />
 							<div>
 								<button type="submit" className="btn btn-warning">Enviar</button>
 							</div>
@@ -62,13 +61,13 @@ export class Review extends React.Component {
 function mapStateToProps(state) {
 	return {
 		sessionUser: state.session.sessionUser,
-		productDetails: state.products.productDetails
+		productDetails: state.products.productDetails		
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		addReview: id => dispatch(addReview(id)),
+		addReview: (id, r) => dispatch(addReview(id, r)),
 		toProductDetails: prodId => dispatch(toProductDetails(prodId)),
 	};
 }
