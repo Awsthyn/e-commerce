@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { addToOrder, getCart, editQuantity } from "../Redux/actions/cartActions"
+import { addToOrder, getCart, getGuestCart, editQuantity } from "../Redux/actions/cartActions"
 import { toProductDetails } from "../Redux/actions/productActions"
 import { connect } from "react-redux";
 import Review from "./Review";
@@ -17,14 +17,14 @@ const alerta = (tit, tex, tim) => {
     })
 }
 
-export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, toProductDetails }) {
+export function ProductComponent({ id, productDetails, addToOrder, cart, getCart, editQuantity, stock, sessionUser, getGuestCart, toProductDetails }) {
     const url = window.location.href
     const ubication = url.lastIndexOf('/')
 
     useEffect(() => {
         toProductDetails(url.slice(ubication + 1))
-        getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
-
+        if(sessionUser.id) getCart(sessionUser.id)// eslint-disable-next-line react-hooks/exhaustive-deps
+        else getGuestCart()
     }, [])// eslint-disable-next-line react-hooks/exhaustive-deps
 
     function handleCart(id, userId) {
@@ -32,15 +32,29 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
         if (indexProductCart === -1) {
             if (productDetails.stock < 1) { swal("Lo sentimos", "No se ha podido agregar a carrito debido a falta temporal de stock.", "error") }
             else {
+                if(sessionUser.id) {
                 addToOrder(id, 1, userId);
-                alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
+                alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
+                else {
+                    console.log( {id: 1, quantity: 1, product: productDetails})
+                    cart.length === 0 ? cart[0] = {id: 1, quantity: 1, product: productDetails} : cart[cart.length] = {id: cart[cart.length-1].id + 1, quantity: 1, product: productDetails}
+                    localStorage.setItem("guestCart", JSON.stringify(cart))
+                    alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")    
+                }
             }
         }
         else {
             if (stock <= cart[indexProductCart].quantity) { alert("Lo sentimos, no disponemos de la cantidad que usted está solicitando") }
             else {
+                if(!sessionUser.id){
+                    cart[indexProductCart].quantity++
+                    localStorage.setItem("guestCart", JSON.stringify(cart))
+                    alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
+                }
+                else{
                 editQuantity(cart[indexProductCart].id, cart[indexProductCart].quantity + 1, userId)
                 alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
+            }
             }
             getCart(userId)
         }
@@ -110,6 +124,7 @@ function mapDispatchToProps(dispatch) {
         toProductDetails: (id) => dispatch(toProductDetails(id)),
         addToOrder: (productId, quantity, userId) => dispatch(addToOrder(productId, quantity, userId)),
         getCart: (userId) => dispatch(getCart(userId)),
+        getGuestCart: () => dispatch(getCart()),
         editQuantity: (orderLineId, quantity, userId) => dispatch(editQuantity(orderLineId, quantity, userId))
     };
 }
