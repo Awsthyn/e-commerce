@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getAllUsers, deleteUser , promoteUser} from "../../../Redux/actions/userActions"
+import { getAllUsers, deleteUser , editUser} from "../../../Redux/actions/userActions"
 
 class CrudUser extends React.Component{
     constructor (props) {
@@ -17,13 +17,14 @@ class CrudUser extends React.Component{
     }
 
     handleChange(e) {
-        const userId = e.target.getAttribute("data-user-id")
+        const userId = Number.parseInt(e.target.getAttribute('data-user-id'))
+        const user = this.props.users.find(a => a.id === userId)
+        user.admin = String(e.target.value) === "Administrador"
 
-        if (window.confirm('Presione Aceptar para confirmar la promoción')){
-            this.props.promoteUser(userId)
-            .then(() => alert('El usuario fue promocionado a Administrador'))
+        if (window.confirm('Presione Aceptar para confirmar la acción'))
+        this.props.editUser(user)
+            .then(() => alert('El usuario fue modificado Correctamente'))
             .catch(err => alert(`Error: ${err}`))
-        }
     }
 
     handleClick(e){
@@ -36,17 +37,18 @@ class CrudUser extends React.Component{
         }
     }
 
+
     render () {
-        const adminOptions = ["administrador", "usuario"]
+        const adminOptions = ["Administrador", "Usuario"]
         return (
-            <div className="container mt-4">
-                <Link to="CrudUser/form/new" className="btn btn-success">Nuevo</Link>
-                <h2 className="col-11 text-center">Edición de usuarios</h2>
-                <table className="table table-hover">
-                    <thead className="text-center">
+                <div className="container mt-4">
+                    <Link to="CrudUser/form/new" className="btn btn-success">Nuevo</Link>
+                    <h2 className="col-11 text-center">Edición de Usuarios</h2>
+                    <table className="table table-hover">
+                        <thead className="text-center">
                         <tr>
                             <th>Usuario</th>
-                            <td>Tipo</td>
+                            <th>Promover</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -56,15 +58,14 @@ class CrudUser extends React.Component{
                         <tr key={user.id}>
                             <td>{`${user.first_name} ${user.last_name}`}</td>
                             <td>
-                             {user.admin === true ?
-                              "Administrador"
-                              : "Usuario"}
-                            </td>
-
-                            <td>
-                            {user.admin ? adminOptions[0] : <label><input type="radio" name="admin" checked={user.admin} onChange={this.handleChange} data-user-id={user.id} />Hacer Administrador</label>}
-                            </td>
-
+                                <select name='admin' className = "form-control-sm chosen-select" data-user-id={user.id} value={this.userType} onChange={this.handleChange}>
+                                    {
+                                        adminOptions.map((o) => (
+                                            <option key={o} value={o}>{o}</option>
+                                        ))
+                                    }
+                                </select>
+                                </td>
                             <td><Link
                                     to={{ pathname: `/Admin/CrudUser/${user.id}/edit`,
                                         state: { user : user }}}
@@ -89,7 +90,7 @@ function mapDispatchToProps(dispatch) {
     return {
       getAllUsers: () => dispatch(getAllUsers()),
       deleteUser: (id) => dispatch(deleteUser(id)),
-      promoteUser: (userId) => dispatch(promoteUser(userId))
+     editUser: (user) => dispatch(editUser(user))
     };
 }
 
