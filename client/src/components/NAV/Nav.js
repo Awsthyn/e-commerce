@@ -78,7 +78,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     <UserOrGuest />
   {sessionUser.id ? <Link to={"/favourite"}><i className="ml-3 fa fa-heart" style={{ fontSize: "1.4em", color: "#dc3545" }}></i></Link> : null}
   {sessionUser.id ? <i role="button" className="ml-3 text-info fas fa-user-circle" style={{ fontSize: "1.4em"}}></i> : null}
-  {sessionUser.id ?<span className="ml-2  text-info">{sessionUser.first_name}</span> : null}
+  {sessionUser.id ?<span  role="button" onClick={()=>history.push('/Profile')} className="ml-2  text-info">{sessionUser.first_name}</span> : null}
   {sessionUser.id ? <i role="button" onClick={logout} className="ml-3 text-info fas fa-sign-out-alt" style={{ fontSize: "1.4em"}}></i> : null}
   {sessionUser.id ? null : <i role="button" className="ml-3 text-info fas fa-user-plus" style={{ fontSize: "1.4em"}}></i>}
   {sessionUser.id ? null : <i role="button" data-toggle="modal" data-target="#modalLoginForm" className="ml-3 mr-3 text-info fas fa-sign-in-alt" style={{ fontSize: "1.4em"}}></i>}
