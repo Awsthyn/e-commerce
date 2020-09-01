@@ -43,7 +43,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     console.log( {id: 1, quantity: 1, product: productDetails})
                     cart.length === 0 ? cart[0] = {id: 1, quantity: 1, product: productDetails} : cart[cart.length] = {id: cart[cart.length-1].id + 1, quantity: 1, product: productDetails}
                     localStorage.setItem("guestCart", JSON.stringify(cart))
-                    alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")    
+                    alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
                 }
             }
         }
@@ -89,7 +89,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                     <hr></hr>
                     <p>{productDetails.description}</p>
                     <hr></hr>
-                    <div>                        
+                    <div>
                         <RatingAverage reviews={productDetails.reviews} product={id}/>
                     </div>
                     <hr></hr>
@@ -101,7 +101,7 @@ export function ProductComponent({ id, productDetails, addToOrder, cart, getCart
                 </div>
                 <script src="js/addons/rating.js"></script>
             </div>
-            <ProductReview reviews={productDetails.reviews}/>   
+            <ProductReview reviews={productDetails.reviews}/>
         </div>
     );
 }

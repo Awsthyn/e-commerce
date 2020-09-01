@@ -5,6 +5,10 @@ import { addToOrder, getCart, getGuestCart, editQuantity } from "../../Redux/act
 import { connect } from "react-redux";
 import swal from 'sweetalert';
 import styles from '../../css/product.module.css'
+import RatingAverage from "../CRUDS/reviewCrud/RatingAverage"
+// import ProductComponent from '/Product'
+import ProductReview from "../CRUDS/reviewCrud/ProductReview";
+
 
 const alerta = (tit, tex, tim) => {
   swal({
@@ -15,7 +19,7 @@ const alerta = (tit, tex, tim) => {
   })
 }
 
-export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, addToOrder, getCart, cart, editQuantity }) {
+export function ProductCard({dataProduct, sessionUser, id, name, price, image, stock, addToOrder, getCart, cart, editQuantity, productDetails }) {
   let history = useHistory()
 
 
@@ -30,7 +34,7 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
           alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")
         }
         else {
-        addToOrder(id, 1, sessionUser.id); 
+        addToOrder(id, 1, sessionUser.id);
         alerta("Agregado", "El producto se agregó al carrito correctamente", "4000")}
 
       }
@@ -74,14 +78,22 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
             <button data-id={id} type='button' data-toggle="tooltip" data-html="true" title="Agregar a carrito"
               className="btn btn-dark ml-auto mr-auto"
               onClick={(e) => {
-                handleCart(e.target.getAttribute("data-id"))              
+                handleCart(e.target.getAttribute("data-id"))
               }}
             >
+
               <i data-id={id} className="fas fa-cart-plus "></i>
+
             </button>
+              <small className="text-dark font-weight-bold pt-4 pb-0" >
+              <RatingAverage reviews={dataProduct.reviews}/>
+
+              </small>
           </div>
+
           : <></>}
       </div>
+
     </div>
   );
 };
