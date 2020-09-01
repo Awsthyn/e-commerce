@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS, ADD_REVIEW } from './constants';
+import { GET_PRODUCTS, SET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_REVIEWS } from './constants';
 
 
 //------------  PRODUCTOS BUSCADOS  -----------------------------------------------------------
