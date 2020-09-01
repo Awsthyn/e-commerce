@@ -21,7 +21,7 @@ export function UserIcon(props) {
 
   return (
     
-    <MDBDropdown>
+    <MDBDropdown className="d-none d-sm-block">
       <MDBDropdownToggle className="" caret color="dark text-info">
         <svg
           width="30"
