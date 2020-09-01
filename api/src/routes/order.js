@@ -8,7 +8,7 @@ server.get("/", (req, res, next) => {
   Order.findAll({
     where: {
       orderStatus: req.query.orderStatus,
-    },
+    }, include: {all: true, nested: true}
   })
     .then((orders) => {
       res.json(orders);
