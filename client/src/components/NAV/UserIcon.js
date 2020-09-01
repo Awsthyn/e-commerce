@@ -20,7 +20,7 @@ export function UserIcon(props) {
 }
 
   return (
-    
+
     <MDBDropdown>
       <MDBDropdownToggle className="" caret color="dark text-info">
         <svg
@@ -53,6 +53,10 @@ export function UserIcon(props) {
         {props.sessionUser.id ? null: <MDBDropdownItem data-toggle="modal" data-target="#modalLoginForm">
           Iniciar Sesión
         </MDBDropdownItem>}
+
+
+        <a href="/auth/google">Sign In with Google</a>
+
         {props.sessionUser.id ?<MDBDropdownItem onClick={logout}>
 
           Cerrar Sesión
