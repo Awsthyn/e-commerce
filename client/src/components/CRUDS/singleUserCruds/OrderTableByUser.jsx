@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getAllOrders, editOrder } from "../../../Redux/actions/orderActions";
 import { Link } from "react-router-dom";
-
+import moment from "moment";
+import 'moment/locale/es';
+moment.locale('es');
 
 class OrderTableByUser extends React.Component {
 	constructor(props) {
@@ -33,51 +35,48 @@ class OrderTableByUser extends React.Component {
 	render() {
 		return (
 			<div className="container mt-4">
-				<h2 className="col-11 text-center">Lista de Ordenes</h2>
-				<table className="table table-hover table-responsive " >
+				<h2 className="text-center">Lista de Ordenes</h2>
+				<table className="table table-hover" >
 					<thead className="text-center ">
 						<tr>
-							<th>Nro de Orden</th>
-							<th>Usuario</th>
-							<th>Status</th>							
-							<th>Fecha / Hora</th>							
-							<th>Total</th>							
-							<th>Ver</th>
+							<th className="font-weight-bold text-info border border-secondary bg-dark">#</th>
+							<th className="font-weight-bold text-info border border-secondary bg-dark">Status</th>							
+							<th className="font-weight-bold text-info border border-secondary bg-dark"> Fecha</th>
+							<th className="font-weight-bold text-info border border-secondary bg-dark">Hora</th>							
+							<th className="font-weight-bold text-info border border-secondary bg-dark">Total</th>							
+							<th className="font-weight-bold text-info border border-secondary bg-dark">Ver</th>
 						</tr>
 					</thead>
 					<tbody className="text-center">					
 					{!!this.props.orders ? 
 					this.props.orders.filter(e => Number(e.userId) === Number(this.props.sessionUser.id)).map(order => (
 							<tr key={order.id}>
-									<td>{order.id}</td>
-									<td>{order.user.first_name}</td>
-									<td>{order.orderStatus}</td>
-									<td>{order.createdAt}</td>
-									{order.orderLines.length > 0 ? <td>${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td>$0</td>}											
-									<td>
+									<td className="border border-info">{order.id}</td>
+									<td className="border border-info">{order.orderStatus.charAt(0).toUpperCase()+order.orderStatus.slice(1)}</td>
+									<td className="border border-info">{moment(order.updatedAt).format('l')}</td>
+									<td className="border border-info">{moment(order.updatedAt).format('LT')}</td>
+									{order.orderLines.length > 0 ? <td className="border border-info">${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td>$0</td>}											
+									<td className="border border-info">
 										<button type="button" className="btn btn-warning" data-toggle="modal" data-target={`#order${order.id}`} >Detalles</button>
 										<div className="modal fade" id={'order' + order.id} role="dialog">
-											<div className="modal-dialog">
+											<div className="modal-dialog modal-lg">
 												<div className="modal-content">
 													<div className="modal-body">
-														<table>
+														<table className="table table-hover">
 															<thead className="text-center">
 																<tr>
-																	<th>Nombre del producto</th>
-																	<th>Cantidad</th>
-																	<th>Precio</th>
-																	<th>Total</th>																	
+																	<th className="font-weight-bold text-info border border-secondary bg-dark">Nombre del producto</th>
+																	<th className="font-weight-bold text-info border border-secondary bg-dark">Cantidad</th>
+																	<th className="font-weight-bold text-info border border-secondary bg-dark">Precio</th>
+																	<th className="font-weight-bold text-info border border-secondary bg-dark">Total</th>																	
 																</tr>
 															</thead>
 															{order.orderLines.map((g) => (
 																<tr>
-																	<td>{g.product.name}</td>
+																	<td><Link to={`/products/${g.product.id}`}>{g.product.name}</Link></td>
 																	<td>{g.quantity}</td>
 																	<td>{g.product.price}</td>
 																	<td>{g.product.price * g.quantity}</td>
-																	<Link to={`/products/${g.product.id}`}>
-																	<button type="button" className="btn btn-warning d-flex align-text-center" data-toggle="modal" data-target={`#order${order.id}`} >Ver</button>
-																	</Link>
 																</tr>
 															))}
 														</table>

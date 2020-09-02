@@ -261,7 +261,7 @@ server.post("/auth/promote/:id", (req, res, next) => {
 });
 
 server.get('/:userId/purchasedProducts', (req, res, next)=>{
-  Order.findAll({ where: { userId: req.params.userId }, include: OrderLine })
+  Order.findAll({ where: { orderStatus: "completa", userId: req.params.userId }, include: OrderLine })
   .then((data) => {
     const orderLines = data.map(e => e.orderLines)
     let products = []
