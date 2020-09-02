@@ -56,7 +56,7 @@ server.get('/profile', isAuthenticated, function(req, res){
 //   request.  The first step in Google authentication will involve
 //   redirecting the user to google.com.  After authorization, Google
 //   will redirect the user back to this application at /auth/google/callback
-server.get('/auth/google',
+server.get('/google',
   passport.authenticate('google', { scope: ['profile' , 'email'] }));
 
 
@@ -66,7 +66,7 @@ server.get('/auth/google',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-server.get('/auth/google/callback',
+server.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
     res.redirect('/good');
@@ -82,7 +82,7 @@ const isLoggedId = (req, res, next) => {
     }
 }
 
-server.get("/auth/google/redirect",passport.authenticate('google'));
+server.get("/google/redirect",passport.authenticate('google'));
 
 server.get("/filed", (req, res) => res.sen("Fallo al loguearte"))
 server.get("/good", isLoggedId, (req, res) => res.sen("Bienvenido a Mercado Negro"))
