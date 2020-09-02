@@ -9,7 +9,7 @@ const orderLineRouter = require('./orderLine.js')
 const userRouter = require('./user.js')
 const reviewRouter = require('./review.js')
 const authRouter = require('./authenticate')
-
+const emailRouter = require('./email')
 
 const router = Router();
 
@@ -17,6 +17,7 @@ const router = Router();
 // i.e: router.use('/auth', authRouter);
 // router.use('/auth', authRouter);
 router.use(bodyParser.json());
+router.use('/email', emailRouter);
 router.use('/auth', authRouter);
 router.use('/products', productRouter);
 router.use('/categories', categoryRouter);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from "react-router"
-import { editCategory } from '../../../../Redux/actions/categoriesActions';
+import { editCategory } from '../../../Redux/actions/categoriesActions';
 
 class EditCategoryForm extends React.Component {
 

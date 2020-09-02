@@ -1,5 +1,5 @@
 import React from 'react'
-import { onDeleteCategory } from "../../../../Redux/actions/categoriesActions"
+import { onDeleteCategory } from "../../../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 export function DeleteCategory({ id, onDeleteCategory }){
