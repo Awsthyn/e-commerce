@@ -5,6 +5,8 @@ import OrderLine from './OrderLine';
 import swal from 'sweetalert';
 //import GuestCart from './GuestCart'
 import { Redirect } from "react-router-dom";
+import Checkout from './Checkout';
+
 
 const confirmar = (tit, tex, tim, suc, func, total, userId, cart) => {
 	swal({
@@ -76,10 +78,10 @@ class Order extends Component {
 
 						<div className="row align-items-start">
 							<button className="btn btn-success" onClick={() => {
-								
+
 								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", this.props.confirmCart, document.getElementById("total").innerHTML.slice(8), sessionUser.id, cart)
-							}
-							}>Confirmar compra</button>
+								window.location = ('/Checkout')}
+								}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
 								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart, this.props.sessionUser.id)
 							}}>
