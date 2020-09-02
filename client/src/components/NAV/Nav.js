@@ -88,7 +88,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
             history.push('/catalog')
              getAllProducts()}}>
               Todos los productos</li>
-            {categories.map(e =><li className="text-muted nav-item d-block d-sm-none" name={e.name} onClick={e => {
+            {categories.map(e =><li key={e.name} className="text-muted nav-item d-block d-sm-none" name={e.name} onClick={e => {
              history.push('/catalog')
              getCategoryProducts(e.target.getAttribute("name"))}}>
                {e.name}</li>)}        
