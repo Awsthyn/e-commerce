@@ -1,4 +1,4 @@
-import { GET_ALL_ORDERS_USERS, GET_ORDERS, GET_ORDERS_BY_USER } from './constants';
+import { GET_ALL_ORDERS_USERS, GET_ORDERS } from './constants';
 
 export function getAllOrders() {
     return function (dispatch) {

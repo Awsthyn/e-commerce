@@ -81,7 +81,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     <span className="navbar-toggler-icon"></span>
   </button>
   <div className="collapse navbar-collapse" id="navbarToggler">
-  <ul class="navbar-nav">
+  <ul className="navbar-nav">
     <li role="button" className="font-weight-light pt-1 pb-1 d-block d-sm-none text-white" onClick={()=> {history.push('/Order')}}>Carrito</li>
     <li role="button" className="font-weight-light pt-1 pb-1 d-block d-sm-none text-white" data-toggle="collapse" data-target="#collapseCategories">Categorias</li>
     <ul id="collapseCategories" className="collapse navbar-collapse list-unstyled">
