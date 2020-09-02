@@ -47,8 +47,9 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
 
   let history = useHistory();
   return (
+    <>
+    <LoginModalForm />
 <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-<LoginModalForm />
   <Link to="/">
   <div className={s.brand}>
     <img className="px-0" src={require("../../assets/MercadoNegro5.gif")} alt="logo" width="70px" />
@@ -111,6 +112,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   {sessionUser.id ? null : <i role="button" data-toggle="modal" data-target="#modalLoginForm" className="ml-3 mr-3 text-info fas fa-sign-in-alt" style={{ fontSize: "1.4em"}}></i>}
   */}</div>
 </nav>
+</>
   );
 }
 
