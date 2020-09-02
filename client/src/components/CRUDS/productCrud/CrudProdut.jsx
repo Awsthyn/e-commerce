@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteProduct from './DeleteProduct';
-import { onDeleteProduct, getProduct } from "../../../../Redux/actions/productActions"
+import { onDeleteProduct, getProduct } from "../../../Redux/actions/productActions"
 import { connect } from "react-redux";
 
 const Crud = (props) => {

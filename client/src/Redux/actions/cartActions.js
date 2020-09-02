@@ -140,6 +140,28 @@ export function confirmCart(total, userId, cart){
     }
 }
 
+
+//------------------ envia email de confirmacion de compra ------------------------
+export function sendEmail(email, tipoDeMail) {
+	const url = `http://localhost:3001/email/send`;
+	return function (dispatch) {
+		return fetch(url, {
+			method: 'POST',
+			body: JSON.stringify({ email, tipoDeMail }),
+			headers: {
+				'Content-Type': 'application/json',
+            },
+            credentials: 'include' 
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				console.log('Mail enviado')
+			})
+			.catch((err) => console.error(err));
+	}    
+}
+
+
 //-----------------------Pasar de GuestCart a UserCart ------------------------
 
 /*
