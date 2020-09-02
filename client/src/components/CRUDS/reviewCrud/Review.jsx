@@ -11,6 +11,7 @@ export class Review extends React.Component {
 		super(props)
 		this.state = {
 			rating: 0,
+			description: '',
 			userId: this.props.sessionUser.id
 		}
 
@@ -34,11 +35,13 @@ export class Review extends React.Component {
 	}
 		
     handleSubmit(e) {
-			e.preventDefault();			
-			this.props.addReview(this.props.productDetails.id, this.state.rating)
+			e.preventDefault();
+			if(this.state.rating === 0) return swal({text: "Por favor puntuá el producto", icon: "warning"})			
+			this.props.addReview(this.props.productDetails.id, this.state)
 				.then(res => {										
 					console.info(res)
-					this.complete()	
+					this.complete()
+					window.location.reload()
 				}).catch(err => console.error(err))
     }
 
