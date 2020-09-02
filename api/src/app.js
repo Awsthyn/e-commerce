@@ -8,6 +8,10 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 
 const {User} = require('./db.js');
+
+//---- Autenticar con Google
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 // ---> passport ---->
 // Configuración de estrategia local de Passport.
 
@@ -37,6 +41,26 @@ passport.use(new Strategy({
         })
     }
 ));
+
+
+
+// Use the GoogleStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and Google
+//   profile), and invoke a callback with a user object.
+passport.use(new GoogleStrategy({
+    clientID: "586918322902-7njd86fdgbo49hiedpl2blekl5fkl0b0.apps.googleusercontent.com",
+    clientSecret:"AkHGr9lcji6-mknhSuqwcIPg",
+    callbackURL: "http://localhost:3001/auth/google/callback",
+    //passReqToCallback: true
+  },
+  function(accessToken, refreshToken, profile, done) {
+      console.log("Soy profile " ,profile)
+      console.log("access token: ", accessToken);
+      User.findOrCreate({ googleId: profile.id }, function (err, user) {
+         return done(null, profile);
+       })
+  }))
 
 
 // Configuración de la persistencia de la sesión autenticada

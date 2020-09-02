@@ -50,14 +50,13 @@ server.post("/:userId/guestToCart", (req, res, next) => {
     orderStatus: 'carrito',
     userId: req.params.userId}})
   const container = []
-//----
   const productsSearch =  Promise.all(orderLines.map((orderLine) => {
-    Product.findByPk(orderLine.product.id).then((data)=>{
+   return  Product.findByPk(orderLine.product.id).then((data)=>{
       container.push(data)
     })
   })
   )
-//----
+
   Promise.all([order, productsSearch])
   .then(data => {
     const order = data[0]
@@ -260,6 +259,17 @@ server.post("/auth/promote/:id", (req, res, next) => {
         next()
     });
 });
+
+server.get('/:userId/purchasedProducts', (req, res, next)=>{
+  Order.findAll({ where: { userId: req.params.userId }, include: OrderLine })
+  .then((data) => {
+    const orderLines = data.map(e => e.orderLines)
+    let products = []
+    orderLines.map(o => o.map(p => products.push(p.productId)))
+    res.json(products)
+  })
+})
+
 
 
 module.exports = server;

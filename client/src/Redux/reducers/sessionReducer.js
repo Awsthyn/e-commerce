@@ -1,15 +1,17 @@
-import { LOGIN, LOGOUT, GET_FORGOTTEN_USER } from "../actions/constants";
+import { LOGIN, LOGOUT, GET_FORGOTTEN_USER, PURCHASED_PRODUCTS } from "../actions/constants";
 
 const initialState = {
     sessionUser: {},
-    forgottenUser: {}
+    forgottenUser: {},
+    productsPurchased: []
 };
 
 export default function sessionReducer (state = initialState, action) {
     switch (action.type) {
     
     case LOGIN:
-        console.log('LOGIN redux', action.payload);
+        delete action.payload.password;
+        delete action.payload.securityAnswer;
         return {
             ...state,
             sessionUser: action.payload
@@ -34,6 +36,11 @@ export default function sessionReducer (state = initialState, action) {
             ...state,
             sessionUser: state.forgottenUser
         }
+    case PURCHASED_PRODUCTS:
+        return {
+        ...state,
+        productsPurchased: action.payload
+      }      
 
     default:
         return state

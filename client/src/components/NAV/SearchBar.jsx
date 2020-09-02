@@ -8,7 +8,7 @@ export function SearchBar(props) {
   let history = useHistory()
 
   return (
-    <form className="form-inline ml-auto" onSubmit={(e) => {
+    <form className="form-inline ml-auto d-flex flex-row" onSubmit={(e) => {
       history.push('/search')
       e.preventDefault();
       props.getSearchedProducts(prod)

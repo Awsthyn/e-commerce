@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllOrders, editOrder } from "../../Redux/actions/orderActions";
+import { getAllOrders, getOrdersByStatus, editOrder } from "../../Redux/actions/orderActions";
 
 
 class OrderTable extends React.Component {
@@ -38,9 +38,13 @@ class OrderTable extends React.Component {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
         return (
             <div className="container mt-4">
-                <h2 className="col-11 text-center">Lista de Ordenes</h2>
-                <table className="table table-responsive">
-                    <thead className="text-center">
+                <h2 className="col-11 text-center mb-2">Lista de Ordenes</h2>
+                <div className="d-flex flex-row justify-content-center mb-4">
+                <button className="btn btn-primary mr-1 ml-1" onClick={()=> this.props.getAllOrders()}>Todas</button>    
+        {estadosOptions.map((e, i) => <button name={e} className="mr-1 ml-1 btn btn-primary" key={e+i} onClick={e => this.props.getOrdersByStatus(e.target.getAttribute('name'))}>{e}</button>)}
+                </div>
+                <table className="table table-hover table-responsive">
+                    {this.props.orders.length > 0 ? <thead className="text-center">
                         <tr>
                             <th>Nro de Orden</th>
                             <th>Status</th>
@@ -49,9 +53,10 @@ class OrderTable extends React.Component {
                             <th>Email</th>
                             <th>Total</th>
                             <th>Editar Estado</th>
+                            <th>Ver</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                    </thead> : <h2 className="text-center">No se encontraron órdenes que cumplan con esta condición</h2>}
+                    <tbody className="text-center">
                         {this.props.orders.map(order => (
                             <tr key={order.id}>
                                 <td>{order.id}</td>
@@ -59,10 +64,10 @@ class OrderTable extends React.Component {
                                 <td>{order.user.first_name}</td>
                                 <td>{order.user.last_name}</td>
                                 <td>{order.user.email}</td>
-                                {order.total !== null ? <td>${order.total}</td> : <></>}
+
                                 {order.orderLines.length > 0 ? <td>${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td>$0</td>}
                                 <td>
-                                    <select name='orderStatus' data-order-id={order.id} value={order.orderStatus.toLowerCase()} onChange={this.handleChange}>
+                                    <select name='orderStatus' className = "form-control-sm chosen-select" data-order-id={order.id} value={order.orderStatus.toLowerCase()} onChange={this.handleChange}>
                                         {
                                             estadosOptions.map((o) => (
                                                 <option key={o} value={o}>{o}</option>
@@ -128,6 +133,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         getAllOrders: () => dispatch(getAllOrders()),
+        getOrdersByStatus: (status) => dispatch(getOrdersByStatus(status)),
         editOrder: (order) => dispatch(editOrder(order)),
     };
 }

@@ -19,10 +19,11 @@ import NewUser from "../components/CRUDS/userCrud/NewUserForm";
 import EditUser from "../components/CRUDS/userCrud/EditUserForm";
 import GuestCart from "../components/NAV/GuestCart";
 import MyReviews from "../components/CRUDS/singleUserCruds/myReviews";
+import OrderTableByUser from "../components/CRUDS/singleUserCruds/OrderTableByUser";
 import EditData from "../components/CRUDS/singleUserCruds/editData";
 import PurchaseState from "../components/CRUDS/singleUserCruds/purchaseState";
 import Review from "../components/CRUDS/reviewCrud/Review";
-import {Favoritos} from "../components/NAV/Favoritos"
+import { Favoritos } from "../components/NAV/Favoritos"
 import AdminRoute from "./AdminRoute"
 import PasswordForgot from "../components/CRUDS/singleUserCruds/PasswordForgot"
 import Question from "../components/CRUDS/singleUserCruds/Question"
@@ -64,6 +65,13 @@ function App() {
         // }
         component={PurchaseState}
       />
+      <Route
+        path="/Profile/:id/OrderTableByUser"
+        // render={props =>
+        //   <PurchaseState sessionUser={props.location.state.sessionUser} />
+        // }
+        component={OrderTableByUser}
+      />
       {/* -------------- ADMINS ------------------ */}
       <Route
         exact path="/favourite"
@@ -78,7 +86,7 @@ function App() {
         component={Question}
       />
 
-{/* -------------- ADMINS ------------------ */}
+      {/* -------------- ADMINS ------------------ */}
       <AdminRoute
         path="/Admin"
         component={Admin}
@@ -140,7 +148,7 @@ function App() {
       />
       <Route
         path="/register"
-        component={ NewUser }
+        component={NewUser}
       />
       {/* -------------- ORDEN Y CARRITO ------------------ */}
       <Route

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import S from "../../../css/rating.module.css"
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import {FaThumbsUp} from "react-icons/fa"
+import { FaThumbsUp } from "react-icons/fa"
 
-const RatingThumbs = () => {
-	const[rating, setRating] = useState(null);
-	const[hover, setHover] = useState(null);
+const RatingThumbs = (props) => {
+	const [rating, setRating] = useState(null);
+	const [hover, setHover] = useState(null);
 
 	return (
 		<div>
@@ -14,8 +14,12 @@ const RatingThumbs = () => {
 
 				return (
 					<label>
-						<input type="radio" name="rating" value={ratingValue} onClick={()=> setRating(ratingValue)}/>
-						<FaThumbsUp className={S.thumb} color={ratingValue<=(hover || rating) ? "#ffc107":"#e4e5e9"} size={30} onMouseEnter={()=> setHover(ratingValue)} onMouseLeave ={()=>setHover(null)}/>
+						<input type="radio" name="rating" value={ratingValue} onClick={() => {
+							props.clickHandler(ratingValue)
+							setRating(ratingValue)
+							console.log(ratingValue)
+						}} />
+						<FaThumbsUp className={S.thumb} color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"} size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)} />
 					</label>
 				)
 			})}
@@ -23,7 +27,7 @@ const RatingThumbs = () => {
 	)
 }
 
-export default RatingThumbs; 
+export default RatingThumbs;
 
 
 

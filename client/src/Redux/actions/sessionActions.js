@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, GET_FORGOTTEN_USER } from './constants';
+import { LOGIN, LOGOUT, GET_FORGOTTEN_USER, PURCHASED_PRODUCTS } from './constants';
 import swal from 'sweetalert';
 import { persistor } from '../store';
 
@@ -19,7 +19,6 @@ export function sessionLogin(data){
         .then(res => res.json())
         .then(res => {
             dispatch({type: LOGIN, payload: res})
-            console.log(JSON.parse(localStorage.getItem('guestCart')))
             return fetch(`http://localhost:3001/users/${res.id}/guestToCart/`, {
                 method: 'POST',
                 body: JSON.stringify({orderLines: JSON.parse(localStorage.getItem('guestCart'))}),
@@ -106,4 +105,23 @@ export function getForgottenUser(email) {
 //---------- "LOGUEA forgotten user" --------------
 export function fakeLogUser() {
     return {type: "FAKE_LOGIN"}
+}
+
+
+// -----------------TRAE LOS PRODUCTOS COMPRADOS DEL USUARIO LOGUEADO --------
+export function purchasedProducts(userId){
+    console.log(userId)
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/users/${userId}/purchasedproducts`, {
+            credentials: 'include' 
+        })
+        .then((r) => r.json())
+        .then((data) => {
+            
+            dispatch({ type: PURCHASED_PRODUCTS, payload: data})
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
 }
