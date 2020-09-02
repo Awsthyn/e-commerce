@@ -31,9 +31,6 @@ class OrderTableByUser extends React.Component {
 	}
 
 	render() {
-		const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
-		// console.log(this.props.orders)
-		console.log(this.props.sessionUser)
 		return (
 			<div className="container mt-4">
 				<h2 className="col-11 text-center">Lista de Ordenes</h2>
@@ -50,7 +47,7 @@ class OrderTableByUser extends React.Component {
 					</thead>
 					<tbody className="text-center">					
 					{!!this.props.orders ? 
-					this.props.orders.filter(e => e.userId == this.props.sessionUser.id).map(order => (
+					this.props.orders.filter(e => Number(e.userId) === Number(this.props.sessionUser.id)).map(order => (
 							<tr key={order.id}>
 									<td>{order.id}</td>
 									<td>{order.user.first_name}</td>

@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 import styles from '../../css/product.module.css'
 import RatingAverage from "../CRUDS/reviewCrud/RatingAverage"
 // import ProductComponent from '/Product'
-import ProductReview from "../CRUDS/reviewCrud/ProductReview";
+// import ProductReview from "../CRUDS/reviewCrud/ProductReview";
 
 
 const alerta = (tit, tex, tim) => {

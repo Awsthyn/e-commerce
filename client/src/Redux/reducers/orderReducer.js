@@ -1,4 +1,4 @@
-import { GET_ALL_ORDERS_USERS, GET_ORDERS, GET_ORDERS_BY_USER } from '../actions/constants';
+import { GET_ALL_ORDERS_USERS, GET_ORDERS } from '../actions/constants';
 
 const initialState = {
     orders: [],
