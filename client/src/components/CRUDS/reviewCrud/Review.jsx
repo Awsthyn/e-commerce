@@ -43,7 +43,8 @@ export class Review extends React.Component {
     }
 
 	render() {
-		let wasBought = this.props.productByUser.includes(this.props.productDetails.id)
+		let wasBought = false
+		if (this.props.productByUser) wasBought = this.props.productByUser.includes(this.props.productDetails.id)
 		let indexReview = -1
 		if(this.props.productDetails.reviews) indexReview = Number(this.props.productDetails.reviews.findIndex((e)=> Number(e.userId)=== Number(this.props.sessionUser.id)))
 		return (
