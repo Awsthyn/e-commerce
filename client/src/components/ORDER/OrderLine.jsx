@@ -51,15 +51,12 @@ const handleChange = (e) => {
 
 		return (
 		<tr>
-		<td data-id={dataid} type="button btn-sm " className="btn btn-danger btn-sm mb-2" onClick={(e) => {
-			confirmar("4000", handleDelete, e.target.getAttribute('data-id'), name)
-				}}>
-				X
-			</td>
 			<td role="button" className="border border-info cursor:pointer;" onClick={() => window.location =`/products/${productId}`}>{name}</td>
 			<td className="border border-info">$ {price}</td>
-			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={counter} onChange={handleChange}/></td>
-			<td className="border border-info subtotal">{quantity * price}</td>
+			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={counter} onChange={handleChange}/>
+			</td>
+			<td className="border border-info subtotal">{quantity * price}<i style={{ fontSize: "1.4em"}} role="button" className="ml-3 far fa-trash-alt text-danger"
+			onClick={(e) => { confirmar("4000", handleDelete, e.target.getAttribute('data-id'), name)}}></i></td>
 		</tr>
 		)
 
