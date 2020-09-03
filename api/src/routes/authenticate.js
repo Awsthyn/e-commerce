@@ -74,7 +74,7 @@ server.get('/google',
 server.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    res.json('Good Login with Google');
+    res.send(req.user);
   });
 
 //

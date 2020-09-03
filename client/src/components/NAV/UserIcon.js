@@ -20,7 +20,7 @@ export function UserIcon(props) {
 }
 
   return (
-    
+
     <MDBDropdown className="d-none d-sm-block">
 
       <MDBDropdownToggle className="" caret color="dark text-info">
@@ -56,7 +56,7 @@ export function UserIcon(props) {
         </MDBDropdownItem>}
 
 
-        <a href="/auth/google">Sign In with Google</a>
+        <a href="http://localhost:3001/auth/google">Sign In with Google</a>
 
         {props.sessionUser.id ?<MDBDropdownItem onClick={logout}>
 
