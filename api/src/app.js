@@ -29,6 +29,7 @@ passport.use(new Strategy({
     function(email, password, done) {
         User.findOne({where: { email: email }})
         .then((user) => {
+            if (!user) return done(null, false)
             user.isPasswordValid(password)
             .then(validation => {
               if(user && validation) return done(null, user)
