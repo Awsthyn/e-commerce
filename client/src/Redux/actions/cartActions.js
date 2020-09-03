@@ -142,12 +142,12 @@ export function confirmCart(total, userId, cart){
 
 
 //------------------ envia email de confirmacion de compra ------------------------
-export function sendEmail(email, tipoDeMail) {
-	const url = `http://localhost:3001/email/send`;
+export function sendEmail(email, tipo) {
+	const url = `http://localhost:3001/email/${tipo}`;
 	return function (dispatch) {
 		return fetch(url, {
 			method: 'POST',
-			body: JSON.stringify({ email, tipoDeMail }),
+			body: JSON.stringify({ email }),
 			headers: {
 				'Content-Type': 'application/json',
             },
