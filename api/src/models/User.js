@@ -23,15 +23,15 @@ module.exports = (sequelize) => {
         },
         address: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         locality: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         state: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         password: {
             type: DataTypes.STRING,
@@ -49,6 +49,9 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        googleId: {type: DataTypes.STRING,
+            allowNull: true,
+        }
     })
 
     // debe ser function para que funcione this.password

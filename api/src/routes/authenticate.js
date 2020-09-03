@@ -14,6 +14,7 @@ server.get('/login', function(req, res){
     res.render('login');
 });
 
+
 server.post('/login',
     passport.authenticate('local'),
     function(req, res) {
@@ -57,8 +58,12 @@ server.get('/profile', isAuthenticated, function(req, res){
 //   redirecting the user to google.com.  After authorization, Google
 //   will redirect the user back to this application at /auth/google/callback
 server.get('/google',
-  passport.authenticate('google', { scope: ['profile' , 'email'] }));
-
+  passport.authenticate('google', { scope: ['profile' , 'email'] }),
+  function(req, res) {
+      console.log('inicio de sesion exitoso')
+      res.json(req.user)
+  // res.redirect('/'););
+  })
 
 
 // GET /auth/google/callback
@@ -69,7 +74,7 @@ server.get('/google',
 server.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    res.redirect('/good');
+    res.json('Good Login with Google');
   });
 
 //
