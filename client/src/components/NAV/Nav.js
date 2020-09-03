@@ -48,8 +48,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   let history = useHistory();
   return (
     <>
-    <LoginModalForm />
-<nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
   <Link to="/">
   <div className={s.brand}>
     <img className="px-0" src={require("../../assets/MercadoNegro5.gif")} alt="logo" width="70px" />
@@ -81,7 +80,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     <span className="navbar-toggler-icon"></span>
   </button>
   <div className="collapse navbar-collapse" id="navbarToggler">
-  <ul class="navbar-nav">
+  <ul className="navbar-nav">
     <li role="button" className="font-weight-light pt-1 pb-1 d-block d-sm-none text-white" onClick={()=> {history.push('/Order')}}>Carrito</li>
     <li role="button" className="font-weight-light pt-1 pb-1 d-block d-sm-none text-white" data-toggle="collapse" data-target="#collapseCategories">Categorias</li>
     <ul id="collapseCategories" className="collapse navbar-collapse list-unstyled">
@@ -89,7 +88,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
             history.push('/catalog')
              getAllProducts()}}>
               Todos los productos</li>
-            {categories.map(e =><li className="text-muted nav-item d-block d-sm-none" name={e.name} onClick={e => {
+            {categories.map(e =><li key={e.name} className="text-muted nav-item d-block d-sm-none" name={e.name} onClick={e => {
              history.push('/catalog')
              getCategoryProducts(e.target.getAttribute("name"))}}>
                {e.name}</li>)}        
@@ -112,6 +111,7 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   {sessionUser.id ? null : <i role="button" data-toggle="modal" data-target="#modalLoginForm" className="ml-3 mr-3 text-info fas fa-sign-in-alt" style={{ fontSize: "1.4em"}}></i>}
   */}</div>
 </nav>
+<LoginModalForm />
 </>
   );
 }

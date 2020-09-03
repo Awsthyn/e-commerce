@@ -1,6 +1,6 @@
 import React from 'react';
 // import { useHistory } from "react-router-dom";
-import { sessionLogin, sessionLogout } from "../../../../Redux/actions/sessionActions"
+import { sessionLogin, sessionLogout } from "../../../Redux/actions/sessionActions"
 import { connect } from "react-redux";
 
 

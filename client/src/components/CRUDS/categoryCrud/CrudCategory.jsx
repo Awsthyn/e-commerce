@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DeleteCategory from './DeleteCategory';
-import { onDeleteCategory } from "../../../../Redux/actions/categoriesActions"
+import { onDeleteCategory } from "../../../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 

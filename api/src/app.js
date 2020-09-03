@@ -43,24 +43,31 @@ passport.use(new Strategy({
 ));
 
 
-
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
 passport.use(new GoogleStrategy({
-    clientID: "586918322902-7njd86fdgbo49hiedpl2blekl5fkl0b0.apps.googleusercontent.com",
-    clientSecret:"AkHGr9lcji6-mknhSuqwcIPg",
-    callbackURL: "http://localhost:3001/auth/google/callback",
-    //passReqToCallback: true
-  },
-  function(accessToken, refreshToken, profile, done) {
-      console.log("Soy profile " ,profile)
-      console.log("access token: ", accessToken);
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-         return done(null, profile);
-       })
-  }))
+  clientID: "586918322902-7njd86fdgbo49hiedpl2blekl5fkl0b0.apps.googleusercontent.com",
+  clientSecret:"AkHGr9lcji6-mknhSuqwcIPg",
+  callbackURL: "http://localhost:3001/auth/google/callback",
+  //passReqToCallback: true
+},
+function(accessToken, refreshToken, profile, done) {
+    console.log("Soy profile " ,profile)
+    console.log("access token: ", accessToken);
+    User.findOrCreate({ where: {googleId: profile.id}, defaults: {
+      first_name: profile.name.givenName,
+      last_name: profile.name.familyName,
+      email: profile.emails[0].value,
+      password: profile.id,
+      admin: false
+      } })
+      .then((user)=>{
+        console.log(user)
+         return done(null, user)})
+     })
+)
 
 
 // Configuración de la persistencia de la sesión autenticada
@@ -70,7 +77,7 @@ passport.use(new GoogleStrategy({
 // es serializando el ID del usuario para luego al deserealizar a partir de dicho ID obtener
 // los demás datos de ese usuario. Esto permite que la información almacenada en la sesión sea
 // lo más simple y pequeña posible
-
+/*
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -86,6 +93,17 @@ passport.deserializeUser(function(id, done) {
       return done(err);
     })
 });
+*/
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+
+
 // <--- passport <---
 
 const server = express();

@@ -47,7 +47,7 @@ export class GuestCart extends Component {
 					<table className="table table-hover">
 						<thead className="text-center">
 							<tr>
-								<td></td>
+								
 								<td className="font-weight-bold text-info border border-secondary bg-dark">Producto</td>
 								<td className="font-weight-bold text-info border border-secondary bg-dark">Precio por unidad</td>
 								<td className="font-weight-bold text-info border border-secondary bg-dark">Cantidad</td>

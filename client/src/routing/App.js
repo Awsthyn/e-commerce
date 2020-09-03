@@ -3,12 +3,12 @@ import ProductComponent from "../components/CATALOGO/Product";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Catalog from "../components/CATALOGO/catalogo";
 import Nav from "../components/NAV/Nav";
-import NewProductForm from "../components/CRUDS/ADMIN/productCrud/NewProductForm";
-import EditProductForm from "../components/CRUDS/ADMIN/productCrud/EditProductForm";
-import NewCategoryForm from "../components/CRUDS/ADMIN/categoryCrud/NewCategoryForm";
-import EditCategoryForm from "../components/CRUDS/ADMIN/categoryCrud/EditCategoryForm";
-import CrudProduct from "../components/CRUDS/ADMIN/productCrud/CrudProdut";
-import CrudCategory from "../components/CRUDS/ADMIN/categoryCrud/CrudCategory";
+import NewProductForm from "../components/CRUDS/productCrud/NewProductForm";
+import EditProductForm from "../components/CRUDS/productCrud/EditProductForm";
+import NewCategoryForm from "../components/CRUDS/categoryCrud/NewCategoryForm";
+import EditCategoryForm from "../components/CRUDS/categoryCrud/EditCategoryForm";
+import CrudProduct from "../components/CRUDS/productCrud/CrudProdut";
+import CrudCategory from "../components/CRUDS/categoryCrud/CrudCategory";
 import Home from "../components/NAV/Home";
 import CrudUser from "../components/CRUDS/userCrud/CrudUser";
 import OrderTable from "../components/ORDER/OrderTable";
@@ -27,6 +27,7 @@ import { Favoritos } from "../components/NAV/Favoritos"
 import AdminRoute from "./AdminRoute"
 import PasswordForgot from "../components/CRUDS/singleUserCruds/PasswordForgot"
 import Question from "../components/CRUDS/singleUserCruds/Question"
+import Checkout from "../components/ORDER/Checkout.jsx"
 
 function App() {
 
@@ -183,6 +184,10 @@ function App() {
       <Route
         exact path="/products/:id"
         component={ProductComponent}
+      />
+      <Route
+        exact path="/Checkout"
+        component={Checkout}
       />
     </Router>
   );

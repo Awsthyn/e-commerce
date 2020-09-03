@@ -1,5 +1,5 @@
 import React from 'react';
-import { addCategory } from "../../../../Redux/actions/categoriesActions"
+import { addCategory } from "../../../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
 class NewCategory extends React.Component {

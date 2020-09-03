@@ -1,7 +1,7 @@
 import React from "react";
 import Checkbox from "./Checkbox";
-import { addProduct } from "../../../../Redux/actions/productActions"
-import { getAllCategories } from "../../../../Redux/actions/categoriesActions";
+import { addProduct } from "../../../Redux/actions/productActions"
+import { getAllCategories } from "../../../Redux/actions/categoriesActions";
 import { connect } from "react-redux";
 //import { get } from "../../../../../api/src/routes/product";
 

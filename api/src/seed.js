@@ -244,6 +244,18 @@ let initialUsers = [
     securityQuestion: "Quien era tu mejor amiga en la primaria?",
     securityAnswer: "Carla",
   },
+  {
+  email: "darkmarket666@gmail.com",
+  first_name: "Dark",
+  last_name: "Market",
+  address: "Av siempre viva 123",
+  locality: "Corrientes",
+  state: "Argentina",
+  password: "123",
+  admin: false,
+  securityQuestion: "Quien era tu mejor amiga en la primaria?",
+  securityAnswer: "Carla",
+  }
 ];
 
 let initialOrders = [
