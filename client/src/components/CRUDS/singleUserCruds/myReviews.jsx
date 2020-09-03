@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getAllProducts } from '../../../Redux/actions/productActions'
-import IndividualReview from "../reviewCrud/IndividualReview"
+import IndividualReviewSN from "../reviewCrud/IndividualReviewSN"
 
 
 export class MyReviews extends React.Component {
@@ -19,7 +19,7 @@ export class MyReviews extends React.Component {
 					<table className="table table-hover" >
 					<thead className="text-center ">
 						<tr>							
-							<th className="font-weight-bold text-info border border-secondary bg-dark">Mis Opiniones</th>								
+							<th className="font-weight-bold text-info border border-secondary bg-dark">Calificacion</th>								
 						</tr>
 					</thead>
 					<tbody className="text-center mx-auto">					
@@ -28,8 +28,8 @@ export class MyReviews extends React.Component {
 								<div>{e.reviews.map((g) => {
 									if (g.userId === sessionUser.id) {
 										return (
-											<tr className="d-flex justify-content-center border border-info " style={{width: "100%"}}>												
-												{!e.reviews ? null : e.reviews.map(e => <IndividualReview review={e} />)}		
+											<tr className="d-flex justify-content-center" style={{width: "100%"}}>												
+												{!e.reviews ? null : e.reviews.map(e => <IndividualReviewSN review={e} />)}		
 											</tr>
 										)
 									}
