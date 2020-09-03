@@ -128,7 +128,7 @@ server.delete("/:userId/cart", (req, res, next) => {
 //  return OrderLine.increment({quantity: +orderLines[i].quantity},{where: {productId: p.id, orderId: order[0].id}})
 server.put("/:userId/cart/completo", (req, res, next) => {
   try {
-    const { total, cart } = req.body;
+    const { total, cart, locality, address, state, checkoutDate } = req.body;
     const decreaseStock = cart.map(e => {
       Product.decrement({stock: e.quantity}, {where: {id: e.product.id}})
     })
@@ -136,7 +136,11 @@ server.put("/:userId/cart/completo", (req, res, next) => {
     const orderComplete = Order.update(
       {
         total,
-        orderStatus: "completa"
+        orderStatus: "creada",
+        locality,
+        address,
+        state,
+        checkoutDate
       },
       { where: { userId: req.params.userId, orderStatus: "carrito" } }
     )
