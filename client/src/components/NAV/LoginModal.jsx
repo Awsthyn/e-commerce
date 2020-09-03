@@ -48,13 +48,13 @@ export class LoginModal extends React.Component {
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div className="modal-body mx-3">
+							<form className="modal-body mx-3">
 								<div className="form mb-1">
 									<input
 										type="email" name="email"
 										id="defaultForm-email"
 										placeholder="Correo electrónico"
-										value={this.state.email}
+										value={this.state.email} required
 										className="form-control validate form-control-lg"
 										onChange={this.handleChange}
 									/>
@@ -67,20 +67,20 @@ export class LoginModal extends React.Component {
 										id="defaultForm-pass"
 										placeholder="Contraseña"
 										className="form-control validate form-control-lg"
-										value={this.state.password}
+										value={this.state.password} required
 										onChange={this.handleChange}
 									/>
 									<label data-error="wrong" data-success="right" htmlFor="defaultForm-pass"></label>
 								</div>
 								<div className="d-flex justify-content-center">
-									<button
+									<input
 										className="font-weight-bold btn btn-primary btn-lg"
-										style={{ width: '400px' }} type="submit">
-										Iniciar sesión
-									</button>
+										style={{ width: '400px' }} type="submit"
+										value="Iniciar sesión"
+									/>
 								</div>
 								<a href="/PassForgot" className="text-center mt-1">¿Olvidaste tu contraseña?</a>
-							</div>
+							</form>
 							<div className="modal-footer d-flex justify-content-center mb-3">
 								<button className="font-weight-bold btn btn-success btn-lg" onClick={()=>window.location="/register"}>Crear cuenta</button>
 							</div>
