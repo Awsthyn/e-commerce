@@ -14,5 +14,21 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL,
       allowNull: true,
     },
+    checkoutDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    locality: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 };

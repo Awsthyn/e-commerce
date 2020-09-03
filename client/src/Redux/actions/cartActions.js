@@ -127,11 +127,11 @@ export function editQuantity(orderLine, quantity, userId){
 
 //-----------------------Confirmar compra ------------------------
 
-export function confirmCart(total, userId, cart){
+export function confirmCart(total, userId, cart, address, locality){
     return function(dispatch){
         return fetch(`http://localhost:3001/users/${userId}/cart/completo`,{
             method: 'PUT',
-            body: JSON.stringify({total, cart}),
+            body: JSON.stringify({total, cart, address, locality, checkoutDate: Date()}),
             headers: {
                 'Content-Type': 'application/json'
             },
