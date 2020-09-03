@@ -8,10 +8,10 @@ export const RatingAverage = ({reviews}, id) => {
 
   let stars = []
   for(let i = 0; i < Math.floor(averageRating); i++){
-    stars.push(['thumbs-up', "text-warning"])
+    stars.push(['thumbs-up', "text-warning mr-1"])
   }
   for(let j = stars.length; j < 5; j++){
-    stars.push(["thumbs-up", "text-dark"])
+    stars.push(["thumbs-up", "text-dark mr-1"])
   }
   
   return (
