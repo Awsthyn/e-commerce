@@ -67,10 +67,11 @@ export class EditData extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid abs-center">
+            <div className="container abs-center">
                 <form onSubmit={this.handleSubmit} className="form-group">
-                    <h1>EDITAR PERFIL</h1>
-                    <div className="rigth">
+                    <h1 className="text-center">EDITAR PERFIL</h1>
+                    <div className="container d-flex">
+                    <div className="mx-4">
                         <div className="form-group">
                             <label>Nuevo correo:</label>
                             <input type="email" id="email" name="email" onChange={this.handleChange} className="form-control" value={this.state.email} required />
@@ -87,12 +88,12 @@ export class EditData extends React.Component {
                             <label>Dirección:</label>
                             <input type="text" id="address" name="address" onChange={this.handleChange} className="form-control" value={this.state.address} required />
                         </div>
-                    </div>
-                    <div className="rigth">
                         <div className="form-group">
                             <label>Localidad:</label>
                             <input type="text" id="locality" name="locality" onChange={this.handleChange} className="form-control" value={this.state.locality} required />
                         </div>
+                    </div>
+                    <div className="mx-4">
                         <div className="form-group">
                             <label>Provincia/Estado:</label>
                             <input type="text" id="state" name="state" onChange={this.handleChange} className="form-control" value={this.state.state} required />
@@ -114,14 +115,18 @@ export class EditData extends React.Component {
                             <input type="text" id="securityAnswer" name="securityAnswer" onChange={this.handleChange} className="form-control" value={this.state.securityAnswer} required />
                         </div>
                     </div>
-                    <div>
-                        <button type="submit" className="btn btn-warning">Editar</button>
                     </div>
-                    <div>
-                        <Link to="/Profile">
-                            <button type="button" className="btn btn-warning" >Volver</button>
-                        </Link>
+                    <div className="container d-flex">
+                        <div>
+                            <button type="submit" className="btn btn-warning mx-2">Editar</button>
+                        </div>
+                        <div>
+                            <Link to="/Profile">
+                                <button type="button" className="btn btn-warning mx-2" >Volver</button>
+                            </Link>
+                        </div>
                     </div>
+                   
                 </form>
             </div>
         )

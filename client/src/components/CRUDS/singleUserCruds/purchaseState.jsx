@@ -17,9 +17,9 @@ export class PurchaseState extends React.Component {
 				<div>
 					{!!this.props.orders ? (
 						<div>
-							<table className="table table-responsive">
+							<table className="table table-hover table responsive container">
 								<thead className="text-center">
-									<tr>
+									<tr className="font-weight-bold text-info border border-secondary bg-dark">
 										<th>Nombre</th>
 										<th>Descripción</th>
 										<th>Categoria</th>
@@ -29,14 +29,14 @@ export class PurchaseState extends React.Component {
 										<th>Total</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody className="text-center mx-auto">
 										{!!this.props.orders.orderLines ?
 										this.props.orders.orderLines.map((e) => (                                        
 											<tr>
-												<td>{e.product.name}</td>
-												<td>{e.product.description}</td>
-												<td>{e.product.categories.map((c) => (<p>{c.name}, </p>))}</td>
-												<td>{e.product.reviews.map((r) => (
+												<td className=" justify-content-center border border-info ">{e.product.name}</td>
+												<td className=" justify-content-center border border-info ">{e.product.description}</td>
+												<td className=" justify-content-center border border-info ">{e.product.categories.map((c) => (<p>{c.name}, </p>))}</td>
+												<td className=" justify-content-center border border-info ">{e.product.reviews.map((r) => (
 													<div>
 														<button type="button" className="btn btn-warning" data-toggle="modal" data-target={`#order${r.id}`} >Detalles</button>
 														<div className="modal fade" id={'order' + r.id} role="dialog">
@@ -64,16 +64,16 @@ export class PurchaseState extends React.Component {
 														</div>
 													</div>
 												))}</td>
-												<td>{e.product.price}</td>
-												<td>{e.quantity}</td>
-												<td>{e.quantity * e.product.price}</td>
+												<td className=" justify-content-center border border-info ">{e.product.price}</td>
+												<td className=" justify-content-center border border-info ">{e.quantity}</td>
+												<td className=" justify-content-center border border-info ">{e.quantity * e.product.price}</td>
 											</tr>
 										)) : false}
 								</tbody>
 							</table>
 						</div>
 					) : false}
-						<div>
+						<div className="container">
 							<Link to="/Profile">
 								<button type="button" className="btn btn-warning" >Volver</button>
 							</Link>

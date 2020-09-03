@@ -371,7 +371,7 @@ const initialReview = [
     rating: 4,
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
     productId: 11,
-    userId: 1,
+    userId: 2,
   },
   {
     rating: 4,

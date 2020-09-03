@@ -2,38 +2,44 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getAllProducts } from '../../../Redux/actions/productActions'
+import IndividualReview from "../reviewCrud/IndividualReview"
 
 
 export class MyReviews extends React.Component {
-
-
 	componentDidMount() {
 		this.props.getAllProducts(this.props.sessionUser.id)
 	}
-
 	render() {
 			const { products, sessionUser } = this.props;
 			return (
 				<div>
-					<div>
-						<span>{products[0] !== "undefined" ? (
+					<div className="container mt-4">
+					<h2 className="text-center">Mis Opiniones</h2>
+				
+					<table className="table table-hover" >
+					<thead className="text-center ">
+						<tr>							
+							<th className="font-weight-bold text-info border border-secondary bg-dark">Mis Opiniones</th>								
+						</tr>
+					</thead>
+					<tbody className="text-center mx-auto">					
+					{products[0] !== "undefined" ? (
 							<div>{products.map((e) => (
 								<div>{e.reviews.map((g) => {
 									if (g.userId === sessionUser.id) {
 										return (
-											<div>
-												<h6>{g.description}</h6>
-												<h4>Rating: {g.rating}</h4>
-												<hr />
-											</div>
+											<tr className="d-flex justify-content-center border border-info " style={{width: "100%"}}>												
+												{!e.reviews ? null : e.reviews.map(e => <IndividualReview review={e} />)}		
+											</tr>
 										)
 									}
 								})}
 								</div>
 								))}
 							</div>
-								) : console.log("Tu hermana")}
-						</span>
+								) : console.log("Fin Tabla")}					
+					</tbody>
+				</table>
 						<div>
 							<Link to="/Profile">
 								<button type="button" className="btn btn-warning">Volver</button>
@@ -59,7 +65,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(MyReviews);
+export default connect(mapStateToProps,	mapDispatchToProps)(MyReviews);
