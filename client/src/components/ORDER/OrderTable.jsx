@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getAllOrders, getOrdersByStatus, editOrder } from "../../Redux/actions/orderActions";
+import { sendEmail } from "../../Redux/actions/cartActions"
 
 
 class OrderTable extends React.Component {
@@ -28,6 +29,10 @@ class OrderTable extends React.Component {
         const orderId = Number.parseInt(e.target.getAttribute('data-order-id'))
         const order = this.props.orders.find(o => o.id === orderId)
         order.orderStatus = e.target.value
+        const orderEmail = e.target.getAttribute('order-email')
+
+
+        this.props.sendEmail(orderEmail, order.orderStatus)
 
         this.props.editOrder(order)
             .then(() => alert('El estado de la orden fue modificado.'))
@@ -67,7 +72,7 @@ class OrderTable extends React.Component {
 
                                 {order.orderLines.length > 0 ? <td>${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td>$0</td>}
                                 <td>
-                                    <select name='orderStatus' className = "form-control-sm chosen-select" data-order-id={order.id} value={order.orderStatus.toLowerCase()} onChange={this.handleChange}>
+                                    <select name='orderStatus' className = "form-control-sm chosen-select" order-email={order.user.email} data-order-id={order.id} value={order.orderStatus.toLowerCase()} onChange={this.handleChange}>
                                         {
                                             estadosOptions.map((o) => (
                                                 <option key={o} value={o}>{o}</option>
@@ -99,8 +104,8 @@ class OrderTable extends React.Component {
                                                             <tr>
                                                                 <td>{g.product.name}</td>
                                                                 <td>{g.quantity}</td>
-                                                                <td>{g.product.price}</td>
-                                                                <td>{g.product.price * g.quantity}</td>
+                                                                <td>$ {g.product.price}</td>
+                                                                <td>$ {g.product.price * g.quantity}</td>
                                                             </tr>
                                                         ))}
                                                     </table>
@@ -135,6 +140,7 @@ function mapDispatchToProps(dispatch) {
         getAllOrders: () => dispatch(getAllOrders()),
         getOrdersByStatus: (status) => dispatch(getOrdersByStatus(status)),
         editOrder: (order) => dispatch(editOrder(order)),
+        sendEmail: (email, tipo) => dispatch(sendEmail(email, tipo)),
     };
 }
 

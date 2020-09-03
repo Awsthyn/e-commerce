@@ -75,8 +75,8 @@ class OrderTableByUser extends React.Component {
 																<tr>
 																	<td><Link to={`/products/${g.product.id}`}>{g.product.name}</Link></td>
 																	<td>{g.quantity}</td>
-																	<td>{g.product.price}</td>
-																	<td>{g.product.price * g.quantity}</td>
+																	<td>$ {g.product.price}</td>
+																	<td>$ {g.product.price * g.quantity}</td>
 																</tr>
 															))}
 														</table>
