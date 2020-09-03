@@ -54,8 +54,6 @@ passport.use(new GoogleStrategy({
   //passReqToCallback: true
 },
 function(accessToken, refreshToken, profile, done) {
-    console.log("Soy profile " ,profile)
-    console.log("access token: ", accessToken);
     User.findOrCreate({ where: {googleId: profile.id}, defaults: {
       first_name: profile.name.givenName,
       last_name: profile.name.familyName,
@@ -63,8 +61,7 @@ function(accessToken, refreshToken, profile, done) {
       password: profile.id,
       admin: false
       } })
-      .then((user)=>{
-        console.log(user)
+      .then(([user, created])=> {
          return done(null, user)})
      })
 )
@@ -77,9 +74,9 @@ function(accessToken, refreshToken, profile, done) {
 // es serializando el ID del usuario para luego al deserealizar a partir de dicho ID obtener
 // los demás datos de ese usuario. Esto permite que la información almacenada en la sesión sea
 // lo más simple y pequeña posible
-/*
+
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+    done(null, user.id);
 });
 
 // Al deserealizar la información del usuario va a quedar almacenada en req.user
@@ -87,19 +84,11 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
   User.findByPk(id)
     .then((user) => {
-      done(null, user.get());
+      done(null, user);
     })
     .catch(err => {
       return done(err);
     })
-});
-*/
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser((user, done) => {
-  done(null, user);
 });
 
 
