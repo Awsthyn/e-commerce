@@ -15,7 +15,7 @@ export const RatingAverage = ({reviews}, id) => {
   }
   
   return (
-    <div style={{width: "900px"}}>
+    <div >
       <div className="d-flex flex-row">
         <h1 className="d-inline mr-3">{averageRating.toFixed(1)}</h1>
         <div className="d-flex flex-column">

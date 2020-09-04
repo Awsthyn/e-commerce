@@ -8,23 +8,12 @@ const CarouselPage = () => {
   return (
     <div>
       <div>
-      <MDBContainer className="container-fluid row col-md-12 justify-content-center">
-      <MDBCarousel
-      activeItem={1}
-      length={3}
-      showControls={true}
-      showIndicators={true}
-      className="z-depth-1"
-      // style={{height:"700px"}}
-    >
+      <MDBContainer>
+      <MDBCarousel activeItem={1} length={3} showControls={true} showIndicators={true} className="z-depth-1">
       <MDBCarouselInner>
         <MDBCarouselItem itemId="1">
-          <MDBView >
-            <img
-              className="d-block w-100 "
-              src="http://ecommerce-g5.tk/server-fotos/carrusel1.jpg"
-              alt="First slide"
-            />
+          <MDBView>
+            <img className="d-block w-100 " src="http://ecommerce-g5.tk/server-fotos/carrusel1.jpg" alt="First slide"/>
           <MDBMask overlay="black-light" />
           </MDBView>
           <MDBCarouselCaption>
@@ -34,11 +23,7 @@ const CarouselPage = () => {
         </MDBCarouselItem>
         <MDBCarouselItem itemId="2">
           <MDBView>
-            <img 
-              className="d-block w-100"
-              src="http://ecommerce-g5.tk/server-fotos/carrusel2.jpg"
-              alt="Second slide"
-            />
+            <img className="d-block w-100" src="http://ecommerce-g5.tk/server-fotos/carrusel2.jpg" alt="Second slide"/>
           <MDBMask overlay="black-strong" />
           </MDBView>
           <MDBCarouselCaption>
@@ -48,11 +33,7 @@ const CarouselPage = () => {
         </MDBCarouselItem>
         <MDBCarouselItem itemId="3">
           <MDBView>
-            <img
-              className="d-block w-100"
-              src="http://ecommerce-g5.tk/server-fotos/carrusel3.jpg"
-              alt="Third slide"
-            />
+            <img className="d-block w-100" src="http://ecommerce-g5.tk/server-fotos/carrusel3.jpg" alt="Third slide"/>
           <MDBMask overlay="black-slight" />
           </MDBView>
           <MDBCarouselCaption>

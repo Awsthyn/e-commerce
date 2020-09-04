@@ -13,9 +13,9 @@ export const Catalogo = ({ getCart, getGuestCart, categories, products, getAllPr
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <div className="row col-md-12 justify-content-center my-3 ">
+        <div>
 
-            <div className="row col-md-12 justify-content-center my-3">
+            <div className="row justify-content-center">
                 {
                     products.length > 0 ?
                         products.map((e) => (

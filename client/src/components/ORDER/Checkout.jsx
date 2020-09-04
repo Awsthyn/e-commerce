@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { confirmCart, getCart } from "../../Redux/actions/cartActions"
+import { sendEmail } from "../../Redux/actions/cartActions"
 import swal from 'sweetalert';
+
 
 
 export class Checkout extends React.Component {
@@ -63,6 +65,11 @@ export class Checkout extends React.Component {
         })
         this.confirm()
         window.location = "/Profile";
+
+				alert("Pago Procesado - Gracias por su compra!!");
+				this.props.sendEmail(this.state.email, e.target.value) //aca le paso la funcion de despachar mail
+
+
       }).catch(err => console.error(err))
   }
 
@@ -169,7 +176,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     confirmCart: (total, userId, cart, address, locality) => dispatch(confirmCart(total, userId, cart, address, locality)),
-    getCart: (userId) => dispatch(getCart(userId)),
+		getCart: (userId) => dispatch(getCart(userId)),
+		sendEmail: (email, tipo) => dispatch(sendEmail(email, tipo)),
   };
 }
 
