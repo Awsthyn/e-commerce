@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../../Redux/actions/cartActions';
+import { getLoguedUser } from '../../Redux/actions/sessionActions';
+
 import OrderLine from './OrderLine';
 import swal from 'sweetalert';
 //import GuestCart from './GuestCart'
@@ -36,8 +38,9 @@ const confirmar = (tit, tex, tim, suc, func, total, userId, cart) => {
 class Order extends Component {
 
 	componentDidMount() {
+		Promise.resolve(this.props.getLoguedUser())
+		.then((res) => this.props.getCart(res.id))
 
-		this.props.getCart(this.props.sessionUser.id);
 	}
 
 
@@ -108,6 +111,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getCart: (userId) => dispatch(getCart(userId)),
+		getLoguedUser: () => dispatch(getLoguedUser()),
 		emptyCart: (userId) => dispatch(emptyCart(userId)),
 		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
 		confirmCart: (total, userId, cart) => dispatch(confirmCart(total, userId, cart))

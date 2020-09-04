@@ -29,7 +29,7 @@ const confirmar = (tim, fun, dat, prodName) => {
 		});
 }
 
-export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromGuestCart, deleteProductFromCart, editQuantity, stock, productId }){
+export function OrderLine ({ sessionUser, position, dataid, name, price, quantity, deleteProductFromGuestCart, deleteProductFromCart, editQuantity, stock, productId }){
 let [counter, setCounter ] = useState(quantity)
 const handleChange = (e) => {
 	if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
@@ -38,7 +38,7 @@ const handleChange = (e) => {
 		if(sessionUser.id) editQuantity(dataid, e.target.value, sessionUser.id)
 		else {
 			let cart = (JSON.parse(localStorage.getItem('guestCart')))
-			cart[dataid-1].quantity = e.target.value
+			cart[position].quantity = e.target.value
 			window.localStorage.setItem('guestCart', JSON.stringify(cart))
 		}
 }

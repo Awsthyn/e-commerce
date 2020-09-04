@@ -1,6 +1,5 @@
 import { LOGIN, LOGOUT, GET_FORGOTTEN_USER, PURCHASED_PRODUCTS } from './constants';
 import swal from 'sweetalert';
-import { persistor } from '../store';
 
 // ----------------- LOGIN --------
 export function sessionLogin(data){
@@ -19,18 +18,7 @@ export function sessionLogin(data){
         .then(res => res.json())
         .then(res => {
             dispatch({type: LOGIN, payload: res})
-            return fetch(`http://localhost:3001/users/${res.id}/guestToCart/`, {
-                method: 'POST',
-                body: JSON.stringify({orderLines: JSON.parse(localStorage.getItem('guestCart'))}),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include' 
-            })
-        })
-        .then(()=>{
             window.location.reload()
-            swal('Los productos que estaban en el carrito de invitado pasaron a tu carrito')
         })
         .catch(err =>{
             swal('Datos incorrectos'); 
@@ -49,8 +37,6 @@ export function sessionLogout() {
         .then(() => {
             window.localStorage.setItem('guestCart', JSON.stringify([]))
             dispatch({ type: LOGOUT})
-                // para que redux no restaure la session
-                persistor.flush()
         })
         .catch((error) => {
             console.error('error', error);
@@ -123,5 +109,26 @@ export function purchasedProducts(userId){
         .catch((error) => {
             console.error(error);
         });
+    }
+}
+
+
+//Trae req.user
+
+export function getLoguedUser() {
+    return function(dispatch) {
+        return fetch("http://localhost:3001", {
+            method: "GET",
+            credentials: "include"
+  })
+    .then(response => {
+      if (response.status === 200) return response.json();
+      throw new Error("failed to authenticate user");
+    })
+    .then(res => {
+        console.log(res)
+        dispatch({type: "LOGIN", payload: res})
+        return res
+    })
     }
 }
