@@ -44,7 +44,7 @@ const handleChange = (e) => {
 }
 }
 	const handleDelete = (arg) => {
-		
+
 		if(sessionUser.id) return deleteProductFromCart(arg)
 		else return deleteProductFromGuestCart(arg)
 	}
