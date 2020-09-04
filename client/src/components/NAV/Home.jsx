@@ -8,13 +8,14 @@ const CarouselPage = () => {
   return (
     <div>
       <div>
-      <MDBContainer>
+      <MDBContainer className="container-fluid row col-md-12 justify-content-center">
       <MDBCarousel
       activeItem={1}
       length={3}
       showControls={true}
       showIndicators={true}
       className="z-depth-1"
+      // style={{height:"700px"}}
     >
       <MDBCarouselInner>
         <MDBCarouselItem itemId="1">
