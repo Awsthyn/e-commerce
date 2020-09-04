@@ -79,10 +79,11 @@ export class LoginModal extends React.Component {
 										value="Iniciar sesión"
 									/>
 								</div>
-								<a href="/PassForgot" className="text-center mt-1">¿Olvidaste tu contraseña?</a>
+								
 							</form>
+							<a href="/PassForgot" className="text-center">¿Olvidaste tu contraseña?</a>
 							<div className="modal-footer d-flex- flex-column justify-content-center mb-3">
-								<a className="btn btn-lg bg-danger text-white" href= "http://localhost:3001/auth/google"><i className="mr-2 fab fa-google text-white"></i>Ingresar con Google</a>
+								<a style={{ width: '400px' }} className="font-weight-bold btn btn-lg bg-danger text-white" href= "http://localhost:3001/auth/google"><i className="mr-2 fab fa-google text-white"></i>Ingresar con Google</a>
 								<button className="font-weight-bold btn btn-success btn-lg" onClick={()=>window.location="/register"}>Crear cuenta</button>
 							</div>
 						</div>
