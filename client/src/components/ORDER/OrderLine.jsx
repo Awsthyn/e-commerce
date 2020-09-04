@@ -54,7 +54,7 @@ const handleChange = (e) => {
 			<td role="button" className="border border-info cursor:pointer;" onClick={() => window.location =`/products/${productId}`}>{name}</td>
 			<td className="border border-info">$ {price}</td>
 			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={counter} onChange={handleChange}/>
-			<i style={{ fontSize: "1.4em"}} role="button" className="ml-3 far fa-trash-alt text-danger"
+			<i data-id={dataid} style={{ fontSize: "1.4em"}} role="button" className="ml-3 far fa-trash-alt text-danger"
 			onClick={(e) => { confirmar("4000", handleDelete, e.target.getAttribute('data-id'), name)}}></i></td>
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>
