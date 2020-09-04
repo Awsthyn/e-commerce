@@ -5,40 +5,39 @@ import { getGuestCart, getCart } from "../../Redux/actions/cartActions"
 import { getAllCategories } from "../../Redux/actions/categoriesActions"
 import { connect } from "react-redux";
 
-export const Catalogo = ({getCart, getGuestCart, categories, products, getAllProducts, getCategoryProducts, cart, sessionUser}) => {
+export const Catalogo = ({ getCart, getGuestCart, categories, products, getAllProducts, getCategoryProducts, cart, sessionUser }) => {
     useEffect(() => {
         //
-        if(sessionUser.id) getCart(sessionUser.id)
+        if (sessionUser.id) getCart(sessionUser.id)
         else getGuestCart()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [])
+    }, [])
     return (
         <div className="row col-md-12 justify-content-center my-3 ">
 
             <div className="row col-md-12 justify-content-center my-3">
-            {
-                products.length > 0 ?
-                    products.map((e) => (
-                        <ProductCard
-                            cart = {cart}
-                            dataProduct={e}
-                            key={e.id}
-                            id = {e.id}
-                            name={e.name}
-                            price={e.price}
-                            stock={e.stock}
-                            image={e.images[1].url}
-                        />
-                    ))
-                : <>
-                    <ProductCard
-                        id = {-1}
-                        name={'No se han encontrado productos que coincidan con su búsqueda.'}
-                        image={'https://cronicaglobal.elespanol.com/uploads/s1/32/73/32/0/wally.jpeg'}
-                    />
-                    <p>No se encontraron resultados</p>
-                  </>
-            }
+                {
+                    products.length > 0 ?
+                        products.map((e) => (
+                            <ProductCard
+                                cart={cart}
+                                dataProduct={e}
+                                key={e.id}
+                                id={e.id}
+                                name={e.name}
+                                price={e.price}
+                                stock={e.stock}
+                                image={e.images[1].url}
+                            />
+                        ))
+                        : <>
+                            <ProductCard
+                                id={-1}
+                                name={'No se han encontrado productos que coincidan con su búsqueda.'}
+                                image={'https://cronicaglobal.elespanol.com/uploads/s1/32/73/32/0/wally.jpeg'}
+                            />
+                        </>
+                }
             </div>
         </div>);
 };
