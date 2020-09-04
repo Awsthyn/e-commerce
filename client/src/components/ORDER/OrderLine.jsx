@@ -29,7 +29,7 @@ const confirmar = (tim, fun, dat, prodName) => {
 		});
 }
 
-export function OrderLine ({ sessionUser, dataid, name, price, quantity, deleteProductFromGuestCart, deleteProductFromCart, editQuantity, stock, productId }){
+export function OrderLine ({ sessionUser, position, dataid, name, price, quantity, deleteProductFromGuestCart, deleteProductFromCart, editQuantity, stock, productId }){
 let [counter, setCounter ] = useState(quantity)
 const handleChange = (e) => {
 	if(e.target.value > stock) alert(`Actualmente solamente poseemos ${stock} unidades de este producto`)
@@ -38,13 +38,13 @@ const handleChange = (e) => {
 		if(sessionUser.id) editQuantity(dataid, e.target.value, sessionUser.id)
 		else {
 			let cart = (JSON.parse(localStorage.getItem('guestCart')))
-			cart[dataid-1].quantity = e.target.value
+			cart[position].quantity = e.target.value
 			window.localStorage.setItem('guestCart', JSON.stringify(cart))
 		}
 }
 }
 	const handleDelete = (arg) => {
-		
+
 		if(sessionUser.id) return deleteProductFromCart(arg)
 		else return deleteProductFromGuestCart(arg)
 	}
@@ -54,7 +54,7 @@ const handleChange = (e) => {
 			<td role="button" className="border border-info cursor:pointer;" onClick={() => window.location =`/products/${productId}`}>{name}</td>
 			<td className="border border-info">$ {price}</td>
 			<td className="border border-info"><input className="text-right" style={{width: "80px"}}  type="number" min="1" max={stock} oninput="validity.valid||(value='');" value={counter} onChange={handleChange}/>
-			<i style={{ fontSize: "1.4em"}} role="button" className="ml-3 far fa-trash-alt text-danger"
+			<i data-id={dataid} style={{ fontSize: "1.4em"}} role="button" className="ml-3 far fa-trash-alt text-danger"
 			onClick={(e) => { confirmar("4000", handleDelete, e.target.getAttribute('data-id'), name)}}></i></td>
 			<td className="border border-info subtotal">{quantity * price}</td>
 		</tr>

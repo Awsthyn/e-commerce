@@ -20,7 +20,7 @@ export const RatingAverage = ({reviews}, id) => {
         <h1 className="d-inline mr-3">{averageRating.toFixed(1)}</h1>
         <div className="d-flex flex-column">
           <div>
-            {stars.map(e => <span><MDBIcon icon={e[0]} className={e[1]} /></span>)}
+            {stars.map(e => <span className="mr-1"><MDBIcon icon={e[0]} className={e[1]} /></span>)}
           </div>
           <p>Promedio entre {!reviews ? 0 : reviews.length} opiniones</p>
         </div>

@@ -55,8 +55,9 @@ export class GuestCart extends Component {
 							</tr>
 						</thead>
 						<tbody className="text-center border bg-light">
-							{cart.map((e) => (
+							{cart.map((e,i) => (
 								<OrderLine
+									position={i}
 									dataid={e.id}
 									key={e.product.name}
 									name={e.product.name}

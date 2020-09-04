@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCart, emptyCart, deleteProductFromCart, confirmCart } from '../../Redux/actions/cartActions';
+import { getLoguedUser } from '../../Redux/actions/sessionActions';
+
 import OrderLine from './OrderLine';
 import swal from 'sweetalert';
 //import GuestCart from './GuestCart'
 import { Redirect } from "react-router-dom";
-import Checkout from './Checkout';
 
 
 const confirmar = (tit, tex, tim, suc, func, total, userId, cart) => {
@@ -27,6 +28,7 @@ const confirmar = (tit, tex, tim, suc, func, total, userId, cart) => {
 			if (func && willBuy) {
 				func(total, userId, cart)
 				console.log("ACEPTADO")
+				window.location = ('/Checkout')
 			} else {
 				console.log("CANCELADO")
 			}
@@ -36,14 +38,15 @@ const confirmar = (tit, tex, tim, suc, func, total, userId, cart) => {
 class Order extends Component {
 
 	componentDidMount() {
+		Promise.resolve(this.props.getLoguedUser())
+		.then((res) => this.props.getCart(res.id))
 
-		this.props.getCart(this.props.sessionUser.id);
 	}
 
 
 	render() {
 		const { cart, sessionUser } = this.props;
-		if(!sessionUser.id) return  (<Redirect to='/GuestCart' />)
+		if (!sessionUser.id) return (<Redirect to='/GuestCart' />)
 
 		return (
 			<div>
@@ -78,9 +81,9 @@ class Order extends Component {
 						<div className="row align-items-start">
 							<button className="btn btn-success" onClick={() => {
 
-								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Su compra ha sido finalizada", this.props.confirmCart, document.getElementById("total").innerHTML.slice(8), sessionUser.id, cart)
-								window.location = ('/Checkout')}
-								}>Confirmar compra</button>
+								confirmar("¿Finalizar compra?", "¿Desea completar la compra de los productos del carrito?", "4000", "Buena suerte", this.props.confirmCart, document.getElementById("total").innerHTML.slice(8), sessionUser.id, cart)
+							}
+							}>Confirmar compra</button>
 							<button className="btn btn-danger" onClick={() => {
 								confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyCart, this.props.sessionUser.id)
 							}}>
@@ -108,6 +111,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getCart: (userId) => dispatch(getCart(userId)),
+		getLoguedUser: () => dispatch(getLoguedUser()),
 		emptyCart: (userId) => dispatch(emptyCart(userId)),
 		deleteProductFromCart: (id) => dispatch(deleteProductFromCart(id)),
 		confirmCart: (total, userId, cart) => dispatch(confirmCart(total, userId, cart))

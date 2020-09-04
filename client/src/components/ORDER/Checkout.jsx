@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { confirmCart, getCart } from "../../Redux/actions/cartActions"
 import { sendEmail } from "../../Redux/actions/cartActions"
+import swal from 'sweetalert';
+
 
 
 export class Checkout extends React.Component {
@@ -13,7 +15,7 @@ export class Checkout extends React.Component {
       address: "",
       locality: "",
       state: "",
-      typeOfCard: "credit",
+      typeOfCard: "credit" || "debit",
       cardName: "",
       cardNumber: "",
       cardExpiration: "",
@@ -22,6 +24,16 @@ export class Checkout extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  confirm = () => {
+    swal({
+      title: "¡Compra finalizada!",
+      text: "Pago Procesado - ¡Gracias por su compra!",
+      icon: "success",
+      timer: "4000"
+    })
+  }
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ typeOfCard: e.target.value });
@@ -51,9 +63,12 @@ export class Checkout extends React.Component {
           cardExpiration: "",
           cardCvv: "",
         })
+        this.confirm()
         window.location = "/Profile";
+
 				alert("Pago Procesado - Gracias por su compra!!");
 				this.props.sendEmail(this.state.email, e.target.value) //aca le paso la funcion de despachar mail
+
 
       }).catch(err => console.error(err))
   }
@@ -139,7 +154,7 @@ export class Checkout extends React.Component {
                 <input type="submit" className="btn btn-danger btn-lg btn-block" value="Cancelar" />
               </Link>
               <div className="col-md-6 col-sm-6 col-xs-6 pad-adjust">
-                <button class="btn btn-success btn-lg btn-block" type="submit">Finalizar Compra</button>
+                <button class="btn btn-success btn-lg btn-block" type="submit" >Finalizar Compra</button>
               </div>
             </div>
           </div>

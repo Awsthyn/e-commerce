@@ -58,7 +58,7 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
 
   return (
     <div className="card bg-light p-2 m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
-      <img src={image} className={styles.product_card} alt={name} />
+      <img src={image} className={styles.product_card} alt={name} role="button" onClick={() => window.location =`/products/${id}`} />
       <div className="card-body d-flex flex-column justify-content-center">
         {stock < 1 ? <h5 className="card-title text-center"><sup className="bg-danger text-white mr-2 pl-2 pr-2 rounded">Sin Stock</sup>{name}</h5> : <h5 className="card-title text-center">{name}</h5>}
         {!price ? <p className="card-text text-center"></p> : <p className="card-text text-center">${price}</p>}
@@ -70,11 +70,9 @@ export function ProductCard({dataProduct, sessionUser, id, name, price, image, s
             }}>
               Ver más detalles...
         </button>
-        <button type='button' className="btn btn-danger ml-auto mr-auto btn-sm" data-toggle="tooltip" data-html="true" title="Agregar a 'Favoritos'">
-        <svg width="20" height="20" viewBox="0 0 16 16" className="mt-2 mr-2 bi bi-heart-fill text-light" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-              </svg>
-        </button>
+        {sessionUser.id ? <button type='button' className="btn btn-danger ml-auto mr-auto btn-sm" data-toggle="tooltip" data-html="true" title="Agregar a 'Favoritos'">
+        <i className="fas fa-heart text-white" style={{ fontSize: "1.2em"}}></i>
+        </button> : null}
             <button data-id={id} type='button' data-toggle="tooltip" data-html="true" title="Agregar a carrito"
               className="btn btn-dark ml-auto mr-auto"
               onClick={(e) => {
