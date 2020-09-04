@@ -16,7 +16,7 @@ const IndividualReview = ({review}) => {
 
     return (
         <div className="mt-4">
-            {stars.map(e =>  <span><MDBIcon icon={e[0]} className={e[1]} /></span>)}
+            {stars.map(e =>  <span className="mr-1"><MDBIcon icon={e[0]} className={e[1]} /></span>)}
             <div className="mt-2">
                 <h5>{review.user.first_name + ' ' + review.user.last_name}</h5>
                 <p>{review.description}</p></div>

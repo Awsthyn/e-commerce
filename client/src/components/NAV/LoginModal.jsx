@@ -31,7 +31,7 @@ export class LoginModal extends React.Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit} className="form-group ">
+			<form className="form-group ">
 				<div
 					className="modal fade mt-4"
 					id="modalLoginForm"
@@ -73,15 +73,17 @@ export class LoginModal extends React.Component {
 									<label data-error="wrong" data-success="right" htmlFor="defaultForm-pass"></label>
 								</div>
 								<div className="d-flex justify-content-center">
-									<input
+									<input onClick={this.handleSubmit}
 										className="font-weight-bold btn btn-primary btn-lg"
 										style={{ width: '400px' }} type="submit"
 										value="Iniciar sesión"
 									/>
 								</div>
-								<a href="/PassForgot" className="text-center mt-1">¿Olvidaste tu contraseña?</a>
+								
 							</form>
-							<div className="modal-footer d-flex justify-content-center mb-3">
+							<a href="/PassForgot" className="text-center">¿Olvidaste tu contraseña?</a>
+							<div className="modal-footer d-flex- flex-column justify-content-center mb-3">
+								<a style={{ width: '400px' }} className="font-weight-bold btn btn-lg bg-danger text-white" href= "http://localhost:3001/auth/google"><i className="mr-2 fab fa-google text-white"></i>Ingresar con Google</a>
 								<button className="font-weight-bold btn btn-success btn-lg" onClick={()=>window.location="/register"}>Crear cuenta</button>
 							</div>
 						</div>

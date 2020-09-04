@@ -55,9 +55,6 @@ export function UserIcon(props) {
           Iniciar Sesión
         </MDBDropdownItem>}
 
-
-        <a href="http://localhost:3001/auth/google">Sign In with Google</a>
-
         {props.sessionUser.id ?<MDBDropdownItem onClick={logout}>
 
           Cerrar Sesión

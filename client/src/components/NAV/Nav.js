@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { getAllProducts, getCategoryProducts } from "../../Redux/actions/productActions";
 import { getAllCategories } from "../../Redux/actions/categoriesActions";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { store } from "../../Redux/store";
 import s from "../../css/product.module.css";
 import LoginModalForm from "./LoginModal.jsx"
@@ -19,7 +19,7 @@ let cart = (JSON.parse(localStorage.getItem('guestCart')))
 if (cart == null) window.localStorage.setItem('guestCart', JSON.stringify([]))
 
 export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUser, sessionLogout }) {
-
+  const dispatch = useDispatch()
   const logout = () => {
     sessionLogout()
     swal("Se ha cerrado sesión")
@@ -44,8 +44,25 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     return <LoggedUser />
   }
 
-
   let history = useHistory();
+
+  useEffect(()=>{
+    fetch("http://localhost:3001", {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(response => {
+        if (response.status === 200) return response.json();
+        throw new Error("failed to authenticate user");
+      })
+      .then(res => {
+        dispatch({type: "LOGIN", payload: res})
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }, [])
+  
   return (
     <>
 <nav className="navbar navbar-expand-sm bg-dark navbar-dark">

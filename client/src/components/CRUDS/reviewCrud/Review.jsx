@@ -56,7 +56,7 @@ export class Review extends React.Component {
 					<form onSubmit={this.handleSubmit} className="form-group">
 						<RatingThumbs clickHandler={this.handleRating} />
 						<label>Escriba su comentario. </label>
-						<input type="textarea" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required />
+						<input type="textarea" minlength="10" id="state" name="description" onChange={this.handleChange} className="form-control" value={this.state.description} required />
 						<div>
 							<button type="submit" className="btn btn-warning">Enviar</button>
 						</div>

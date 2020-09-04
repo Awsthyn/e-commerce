@@ -17,6 +17,9 @@ const router = Router();
 // i.e: router.use('/auth', authRouter);
 // router.use('/auth', authRouter);
 router.use(bodyParser.json());
+router.get("/", (req, res, next) => {
+    res.json(req.user)
+  });
 router.use('/email', emailRouter);
 router.use('/auth', authRouter);
 router.use('/products', productRouter);

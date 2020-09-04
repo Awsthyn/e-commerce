@@ -74,7 +74,7 @@ server.get('/google',
 server.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    res.send(req.user);
+    res.redirect('//localhost:3000'); 
   });
 
 //
