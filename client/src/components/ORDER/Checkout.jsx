@@ -11,7 +11,7 @@ export class Checkout extends React.Component {
 			address:"",
 			locality:"",
 			state:"",
-			typeOfCard:"Credit",
+			typeOfCard:"",
 			cardName:"",
 			cardNumber:"",
 			cardExpiration:"",
@@ -27,7 +27,7 @@ export class Checkout extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		const checkout = this.state;
-		this.props.confirmCart(checkout)// aca esta el ERROR!!!!!
+		this.props.confirmCart(checkout)
 		.then(res => {
 				console.info(res)
 				this.setState({
