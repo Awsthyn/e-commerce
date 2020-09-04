@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { getAllProducts, getCategoryProducts } from "../../Redux/actions/productActions";
 import { getAllCategories } from "../../Redux/actions/categoriesActions";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { store } from "../../Redux/store";
 import s from "../../css/product.module.css";
 import LoginModalForm from "./LoginModal.jsx"
@@ -19,7 +19,7 @@ let cart = (JSON.parse(localStorage.getItem('guestCart')))
 if (cart == null) window.localStorage.setItem('guestCart', JSON.stringify([]))
 
 export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUser, sessionLogout }) {
-
+  const dispatch = useDispatch()
   const logout = () => {
     sessionLogout()
     swal("Se ha cerrado sesión")
@@ -43,9 +43,6 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     }
     return <LoggedUser />
   }
-  const [user, setUser] = useState({})
-  const [error, setError] = useState(null);
-  const [authenticated, setAuthenticated] = useState(false)
 
   let history = useHistory();
 
@@ -58,14 +55,11 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
         if (response.status === 200) return response.json();
         throw new Error("failed to authenticate user");
       })
-      .then(responseJson => {
-        console.log(responseJson)
-        setAuthenticated(true)
-        setUser(responseJson.email)
+      .then(res => {
+        dispatch({type: "LOGIN", payload: res})
       })
       .catch(error => {
-        setAuthenticated(false)
-        setError("Failed to authenticate user")
+        console.log(error)
       });
   }, [])
   
