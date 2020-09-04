@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { getAllProducts, getCategoryProducts } from "../../Redux/actions/productActions";
+import { getCart } from '../../Redux/actions/cartActions';
 import { getAllCategories } from "../../Redux/actions/categoriesActions";
 import { connect, useDispatch } from "react-redux";
 import { store } from "../../Redux/store";
 import s from "../../css/product.module.css";
 import LoginModalForm from "./LoginModal.jsx"
-import { sessionLogin, sessionLogout } from "../../Redux/actions/sessionActions";
+import { sessionLogout } from "../../Redux/actions/sessionActions";
 import swal from "sweetalert";
 import UserIcon from "./UserIcon"
 
@@ -15,7 +16,7 @@ import UserIcon from "./UserIcon"
 store.dispatch(getAllCategories());
 store.dispatch(getAllProducts());
 
-let cart = (JSON.parse(localStorage.getItem('guestCart')))
+let cart = JSON.parse(window.localStorage.getItem('guestCart'))
 if (cart == null) window.localStorage.setItem('guestCart', JSON.stringify([]))
 
 export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUser, sessionLogout }) {
@@ -47,17 +48,34 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   let history = useHistory();
 
   useEffect(()=>{
-    fetch("http://localhost:3001", {
+    let userId = undefined
+    return Promise.resolve(fetch("http://localhost:3001", {
       method: "GET",
       credentials: "include"
-    })
+    }))
       .then(response => {
         if (response.status === 200) return response.json();
         throw new Error("failed to authenticate user");
       })
       .then(res => {
         dispatch({type: "LOGIN", payload: res})
+        userId = res.id
+        return fetch(`http://localhost:3001/users/${userId}/guestToCart/`, {
+          method: 'POST',
+          body: JSON.stringify({orderLines: JSON.parse(localStorage.getItem('guestCart'))}),
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          credentials: 'include' 
       })
+      .then((data)=>{
+        console.log(data)
+        if(cart.length != 0){window.localStorage.setItem('guestCart', JSON.stringify([]))
+        window.location.reload()
+        swal('Los productos que estaban en el carrito de invitado pasaron a tu carrito')}
+      })
+      })
+
       .catch(error => {
         console.log(error)
       });
@@ -144,9 +162,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getAllProducts: () => dispatch(getAllProducts()),
+    getCart: (id) => dispatch(getCart(id)),
     getCategoryProducts: (category) => dispatch(getCategoryProducts(category)),
     getAllCategories: () => dispatch(getAllCategories()),
-    sessionLogin: (user) => dispatch(sessionLogin(user)),
     sessionLogout: () => dispatch(sessionLogout()),
   };
 }
