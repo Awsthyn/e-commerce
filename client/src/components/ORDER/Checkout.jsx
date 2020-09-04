@@ -11,23 +11,27 @@ export class Checkout extends React.Component {
 			address:"",
 			locality:"",
 			state:"",
-			typeOfCard:"",
+			typeOfCard:"credit",
 			cardName:"",
 			cardNumber:"",
 			cardExpiration:"",
 			cardCvv:"",
 		}
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	handleChange(e){
-	this.setState({[e.target.name]: e.target.value})
-	console.log(this.state)
+	this.setState({[e.target.name]: e.target.value});	
+	this.setState({typeOfCard: e.target.value});
+	
 	}
 
 	handleSubmit(e) {
-		e.preventDefault();
+		e.preventDefault();		
 		const checkout = this.state;
-		this.props.confirmCart(checkout)
+		console.log(this.state)
+
+		this.props.confirmCart()
 		.then(res => {
 				console.info(res)
 				this.setState({
@@ -41,7 +45,7 @@ export class Checkout extends React.Component {
 					cardExpiration:"",
 					cardCvv:"",
 				})
-				window.location = "/Admin/CrudUser"; //a donde lo redirigimos cuando compre???
+				window.location = "/Profile"; 
 				alert("Pago Procesado - Gracias por su compra!!")
 		}).catch(err => console.error(err))
 	}
@@ -70,24 +74,26 @@ export class Checkout extends React.Component {
 								<input type="text" id="state" name="state" onChange={this.handleChange} className="form-control" value={this.state.state} required />
 							</div>
 						</div>
+
+					<h4>Total $ {console.log(this.props)}</h4>
 					
-					<h4 class="mb-3">Payment</h4>
+					<h4 class="mb-3">Forma de Pago</h4>
 					<div class="d-block my-3">
           <div className="container row">
 						<div class="custom-control custom-radio mr-4">
-							<input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required/>
-							<label class="custom-control-label" name="credit" for="credit">Credit card</label>
+							<input id="credit" name="paymentMethod" type="radio" checked={this.state.typeOfCard === "credit"} onChange={this.handleChange} value="credit" class="custom-control-input"   required/>
+							<label class="custom-control-label" name="credit" for="credit">Credito</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required/>
-							<label class="custom-control-label" name="debit" for="debit">Debit card</label>
+							<input id="debit" name="paymentMethod" type="radio" checked={this.state.typeOfCard === "debit"} onChange={this.handleChange} value="debit"class="custom-control-input" required/>
+							<label class="custom-control-label" name="debit" for="debit">Debito</label>
 						</div>  	
 					</div>        
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="cc-name">Nombre completo</label>
-            <input type="text" class="form-control" name="cardName" id="cc-name" placeholder="" required/>
+            <input type="text" class="form-control" name="cardName" onChange={this.handleChange} id="cc-name" value={this.state.cardName} placeholder="" required/>
             <small class="text-muted">Nombre completo como sale en la Tarjeta</small>
             <div class="invalid-feedback">
               El nombre es Requerido
@@ -95,7 +101,7 @@ export class Checkout extends React.Component {
           </div>
           <div class="col-md-6 mb-3">
             <label for="cc-number">Numero de Tarjeta</label>
-            <input type="text" class="form-control" name="cardNumber" id="cc-number" placeholder="" required/>
+            <input type="text" class="form-control" name="cardNumber" onChange={this.handleChange}id="cc-number" value={this.state.cardNumber} placeholder="" required/>
             <div class="invalid-feedback">
               El numero de la tarjeta es requerido
             </div>
@@ -104,14 +110,14 @@ export class Checkout extends React.Component {
         <div class="row">
           <div class="col-md-3 mb-3">
             <label for="cc-expiration">Vencimiento</label>
-            <input type="text" class="form-control" name="cardExpiration" id="cc-expiration" placeholder="" required/>
+            <input type="text" class="form-control" name="cardExpiration" onChange={this.handleChange} value={this.state.cardExpiration} id="cc-expiration" placeholder="" required/>
             <div class="invalid-feedback">
               Fecha de vencimiento requerida
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <label for="cc-cvv">CVV</label>
-            <input type="text" class="form-control" name="cardCvv"id="cc-cvv" placeholder="" required/>
+            <input type="text" class="form-control" name="cardCvv" onChange={this.handleChange} id="cc-cvv" value={this.state.cardCvv} placeholder="" required/>
             <div class="invalid-feedback">
               Codigo de Seguridad Requerido
             </div>
@@ -136,6 +142,7 @@ export class Checkout extends React.Component {
 function mapStateToProps(state) {
 	return {
 			orders: state.orders.orders,
+			sessionUser: state.session.sessionUser,
 	};
 }
 
