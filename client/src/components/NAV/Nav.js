@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useHistory, Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { getAllProducts, getCategoryProducts } from "../../Redux/actions/productActions";
@@ -43,9 +43,32 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
     }
     return <LoggedUser />
   }
-
+  const [user, setUser] = useState({})
+  const [error, setError] = useState(null);
+  const [authenticated, setAuthenticated] = useState(false)
 
   let history = useHistory();
+
+  useEffect(()=>{
+    fetch("http://localhost:3001", {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(response => {
+        if (response.status === 200) return response.json();
+        throw new Error("failed to authenticate user");
+      })
+      .then(responseJson => {
+        console.log(responseJson)
+        setAuthenticated(true)
+        setUser(responseJson.email)
+      })
+      .catch(error => {
+        setAuthenticated(false)
+        setError("Failed to authenticate user")
+      });
+  }, [])
+  
   return (
     <>
 <nav className="navbar navbar-expand-sm bg-dark navbar-dark">

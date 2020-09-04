@@ -48,8 +48,8 @@ passport.use(new Strategy({
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
 passport.use(new GoogleStrategy({
-  clientID: "586918322902-7njd86fdgbo49hiedpl2blekl5fkl0b0.apps.googleusercontent.com",
-  clientSecret:"AkHGr9lcji6-mknhSuqwcIPg",
+  clientID: "1069016896277-o3gjr0810k4ejdlf8k99tpnb0q3sf6s4.apps.googleusercontent.com",
+  clientSecret:"GS-WyU5dqD2E_agKOagAmXJV",
   callbackURL: "http://localhost:3001/auth/google/callback",
   //passReqToCallback: true
 },
