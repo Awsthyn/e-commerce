@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer")
 
 //---------- Email: confirmacion -------
 server.post("/creada", (req, res) => {
-    console.log(req.body)
+    console.log("Email ENVIADO")
     const email = req.body.email
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -22,7 +22,7 @@ server.post("/creada", (req, res) => {
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
-        if(error) {
+        if (error) {
             res.status(500).send(error.message)
         } else {
             console.log("email enviado");
@@ -35,7 +35,7 @@ server.post("/creada", (req, res) => {
 //---------- Email: despachado -------
 server.post("/procesando", (req, res) => {
     console.log('mail enviado')
-    const {email} = req.body
+    const { email } = req.body
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -52,7 +52,7 @@ server.post("/procesando", (req, res) => {
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
-        if(error) {
+        if (error) {
             res.status(500).send(error.message)
         } else {
             console.log("email enviado");
