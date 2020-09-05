@@ -52,23 +52,13 @@ export class Checkout extends React.Component {
       .then(res => {
         console.info(res)
         console.log('SE CONFIRMÓ LA COMPRA')
-        this.setState({
-          email: "",
-          address: "",
-          locality: "",
-          state: "",
-          typeOfCard: "",
-          cardName: "",
-          cardNumber: "",
-          cardExpiration: "",
-          cardCvv: "",
-        })
+        
         this.confirm()
-        window.location = "/Profile";
-
+				console.log(this.state.email)
 				alert("Pago Procesado - Gracias por su compra!!");
-				this.props.sendEmail(this.state.email, e.target.value) //aca le paso la funcion de despachar mail
-
+				this.props.sendEmail(this.state.email, "creada") //aca le paso la funcion de despachar mail
+        window.location = "/Profile";
+				
 
       }).catch(err => console.error(err))
   }
