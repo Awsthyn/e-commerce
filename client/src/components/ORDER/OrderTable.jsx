@@ -42,13 +42,13 @@ class OrderTable extends React.Component {
     render() {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
         return (
-            <div className="container mt-4">
+            <div className="container mt-4 table-responsive">
                 <h2 className="col-11 text-center mb-2">Lista de Ordenes</h2>
-                <div className="d-flex flex-row justify-content-center mb-4">
-                <button className="btn btn-primary mr-1 ml-1" onClick={()=> this.props.getAllOrders()}>Todas</button>    
-        {estadosOptions.map((e, i) => <button name={e} className="mr-1 ml-1 btn btn-primary" key={e+i} onClick={e => this.props.getOrdersByStatus(e.target.getAttribute('name'))}>{e}</button>)}
+              <div className="btn-group d-flex justify-content-center" role="group" aria-label="Grupo de Botones">
+                <button className="btn btn-sm btn-primary mx-1" onClick={()=> this.props.getAllOrders()}>Todas</button>
+        {estadosOptions.map((e, i) => <button name={e} className="btn btn-sm btn-primary mx-1" key={e+i} onClick={e => this.props.getOrdersByStatus(e.target.getAttribute('name'))}>{e}</button>)}
                 </div>
-                <table className="table table-hover table-responsive">
+                <table className="table table-hover ">
                     {this.props.orders.length > 0 ? <thead className="text-center">
                         <tr>
                             <th>Nro de Orden</th>
@@ -64,7 +64,7 @@ class OrderTable extends React.Component {
                     <tbody className="text-center">
                         {this.props.orders.map(order => (
                             <tr key={order.id}>
-                                <td>{order.id}</td>
+                                <td >{order.id}</td>
                                 <td>{order.orderStatus}</td>
                                 <td>{order.user.first_name}</td>
                                 <td>{order.user.last_name}</td>
