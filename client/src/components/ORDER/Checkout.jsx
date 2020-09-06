@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { confirmCart, getCart } from "../../Redux/actions/cartActions"
 import { sendEmail } from "../../Redux/actions/cartActions"
+import { getLoguedUser } from "../../Redux/actions/sessionActions"
+
 import swal from 'sweetalert';
 
 
@@ -40,7 +42,9 @@ export class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCart(this.props.sessionUser.id)
+    console.log('checkout')
+    Promise.resolve(this.props.getLoguedUser())
+    .then(() => this.props.getCart(this.props.sessionUser.id))
   }
 
   handleSubmit(e) {
@@ -177,7 +181,8 @@ function mapDispatchToProps(dispatch) {
   return {
     confirmCart: (total, userId, cart, address, locality) => dispatch(confirmCart(total, userId, cart, address, locality)),
 		getCart: (userId) => dispatch(getCart(userId)),
-		sendEmail: (email, tipo) => dispatch(sendEmail(email, tipo)),
+    sendEmail: (email, tipo) => dispatch(sendEmail(email, tipo)),
+    getLoguedUser: () => dispatch(getLoguedUser())
   };
 }
 
