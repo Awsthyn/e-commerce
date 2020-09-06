@@ -26,7 +26,7 @@ import Review from "../components/CRUDS/reviewCrud/Review";
 import { Favoritos } from "../components/NAV/Favoritos"
 import AdminRoute from "./AdminRoute"
 import PasswordForgot from "../components/CRUDS/singleUserCruds/PasswordForgot"
-import Question from "../components/CRUDS/singleUserCruds/Question"
+//import Question from "../components/CRUDS/singleUserCruds/Question"
 import Checkout from "../components/ORDER/Checkout.jsx"
 
 function App() {
@@ -82,10 +82,10 @@ function App() {
         exact path="/PassForgot"
         component={PasswordForgot}
       />
-      <Route
+      {/*<Route
         exact path="/ResetQuestion"
         component={Question}
-      />
+      />*/}
 
       {/* -------------- ADMINS ------------------ */}
       <AdminRoute

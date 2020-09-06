@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import { getAllProducts, getCategoryProducts } from "../../Redux/actions/productActions";
 import { getCart } from '../../Redux/actions/cartActions';
@@ -69,10 +69,9 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
           credentials: 'include' 
       })
       .then((data)=>{
-        console.log(data)
-        if(cart.length != 0){window.localStorage.setItem('guestCart', JSON.stringify([]))
+        if(cart.length !== 0){window.localStorage.setItem('guestCart', JSON.stringify([]))
         window.location.reload()
-        swal('Los productos que estaban en el carrito de invitado pasaron a tu carrito')}
+        return swal('Los productos que estaban en el carrito de invitado pasaron a tu carrito')}
       })
       })
 
@@ -84,12 +83,10 @@ export function Nav({ categories, getCategoryProducts, getAllProducts, sessionUs
   return (
     <>
 <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-  <Link to="/">
-  <div className={s.brand}>
+  <div role="button" className={s.brand} onClick={() => {return window.location = "/"}}>
     <img className="px-0" src={require("../../assets/MercadoNegro5.gif")} alt="logo" width="70px" />
     <h4 className="d-none d-lg-block mr-4">MERCADO NEGRO</h4>
   </div>
-  </Link>
   <SearchBar />
   <ul className="navbar-nav d-flex flex-row mr-2">
     <li className="nav-item dropdown">
