@@ -19,6 +19,7 @@ class CrudUser extends React.Component {
     handleChange(e) {
         const userId = Number.parseInt(e.target.getAttribute('data-user-id'))
         const user = this.props.users.find(a => a.id === userId)
+        console.log(e.target.value, "valor admin")
         user.admin = String(e.target.value) === "Administrador"
 
         if (window.confirm('Presione Aceptar para confirmar la acción'))
@@ -29,7 +30,6 @@ class CrudUser extends React.Component {
 
     handleClick(e) {
         const usuarioId = e.target.getAttribute("data-usuarioId")
-        console.log("En on click ", usuarioId)
         if (window.confirm('Presione Aceptar para eliminar usuario')) {
             this.props.deleteUser(usuarioId)
                 .then(() => alert('El usuario fue eliminado Correctamente'))
@@ -58,7 +58,7 @@ class CrudUser extends React.Component {
                             <tr key={user.id}>
                                 <td>{`${user.first_name} ${user.last_name}`}</td>
                                 <td>
-                                    <select name='admin' className="form-control-sm chosen-select" data-user-id={user.id} value={this.userType} onChange={this.handleChange}>
+                                    <select name='admin' className="form-control-sm chosen-select" data-user-id={user.id} value={user.admin ? adminOptions[0]: adminOptions[1]} onChange={this.handleChange}>
                                         {
                                             adminOptions.map((o) => (
                                                 <option key={o} value={o}>{o}</option>
