@@ -26,7 +26,7 @@ const confirmar = (tit, tex, tim, suc, func, total, userId, cart) => {
 				});
 			}
 			if (func && willBuy) {
-				func(total, userId, cart)
+				//func(total, userId, cart)
 				console.log("ACEPTADO")
 				window.location = ('/Checkout')
 			} else {
