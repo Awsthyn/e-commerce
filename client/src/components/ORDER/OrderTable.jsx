@@ -42,15 +42,16 @@ class OrderTable extends React.Component {
     render() {
         const estadosOptions = ["carrito", "creada", "procesando", "cancelada", "completa"]
         return (
-            <div className="container mt-4">
+            <div className="container mt-4 table-responsive">
                 <h2 className="col-11 text-center mb-2">Lista de Ordenes</h2>
-                <div className="d-flex flex-row justify-content-center mb-4">
-                <button className="btn btn-primary mr-1 ml-1" onClick={()=> this.props.getAllOrders()}>Todas</button>    
-        {estadosOptions.map((e, i) => <button name={e} className="mr-1 ml-1 btn btn-primary" key={e+i} onClick={e => this.props.getOrdersByStatus(e.target.getAttribute('name'))}>{e}</button>)}
+              <div className="btn-group d-flex justify-content-center" role="group" aria-label="Grupo de Botones">
+                <button className="btn btn-sm btn-primary mx-1" onClick={()=> this.props.getAllOrders()}>Todas</button>
+        {estadosOptions.map((e, i) => <button name={e} className="btn btn-sm btn-primary mx-1" key={e+i} onClick={e => this.props.getOrdersByStatus(e.target.getAttribute('name'))}>{e}</button>)}
                 </div>
-                <table className="table table-hover table-responsive">
+                <table className="table table-hover">
                     {this.props.orders.length > 0 ? <thead className="text-center font-weight-bold text-info border border-secondary bg-dark">
                         <tr> 
+
                             <th>Nro de Orden</th>
                             <th>Status</th>
                             <th>Nombre</th>
@@ -72,6 +73,7 @@ class OrderTable extends React.Component {
 
                                 {order.orderLines.length > 0 ? <td className="border border-info">${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td className="border border-info">$0</td>}
                                 <td className="border border-info">
+
                                     <select name='orderStatus' className = "form-control-sm chosen-select" order-email={order.user.email} data-order-id={order.id} value={order.orderStatus.toLowerCase()} onChange={this.handleChange}>
                                         {
                                             estadosOptions.map((o) => (
