@@ -86,7 +86,6 @@ function App() {
         exact path="/ResetPassword/:token"
         component={ResetPassword}
       />
-
       {/* -------------- ADMINS ------------------ */}
       <AdminRoute
         path="/Admin"

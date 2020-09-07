@@ -68,9 +68,9 @@ export function editUser(user){
             },
             credentials: 'include'
         }).then(res => {
-            console.info(res)
-            dispatch({type: EDIT_USER, payload: res})
-        }).catch(err => console.error(err))
+           dispatch(getAllUsers())
+
+       }).catch(err => console.error(err))
     }
 
 }

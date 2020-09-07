@@ -31,7 +31,7 @@ export class LoginModal extends React.Component {
 
 	render() {
 		return (
-			<form className="form-group ">
+			<div className="form-group ">
 				<div
 					className="modal fade mt-4"
 					id="modalLoginForm"
@@ -89,7 +89,7 @@ export class LoginModal extends React.Component {
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>
 		);
 	}
 }

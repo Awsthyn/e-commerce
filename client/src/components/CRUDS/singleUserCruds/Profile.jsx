@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 export class Profile extends React.Component {
     constructor(props) {
         super(props);
-        // const userId = this.props.sessionUser.id 
+        // const userId = this.props.sessionUser.id
         // this.props.toProfile()
         console.log(this.props.sessionUser)
         this.props.toProfile()
@@ -29,17 +29,13 @@ export class Profile extends React.Component {
             <div className="container mt-4">
                 <h2 className='card-title text-justify'>Hola! {this.props.sessionUser.first_name}, este es tu perfil.</h2>
                 <h4 className='lead'>Aca podés editar tus datos, verificar el estado de tus compras, ver tus opiniones.</h4>
-                <table>
-                    <thead className="text-center table btn-group">
-                        <tr>
-                            <th><Link to={`/Profile/${this.props.sessionUser.id}/editdata`} className="btn btn-warning">Editar Mis Datos</Link></th>
-                            <th><Link to={`/Profile/${this.props.sessionUser.id}/purchasestate`} className="btn btn-warning">Mis Productos Comprados</Link></th>
-                            <th><Link to={`/Profile/${this.props.sessionUser.id}/OrderTableByUser`} className="btn btn-warning">Mis Ordenes de Compra</Link></th>
-                            <th><Link to={`/Profile/${this.props.sessionUser.id}/myreviews`} className="btn btn-warning">Mis Opiniones</Link></th>
-                            {this.props.sessionUser.admin ? <th><Link to="/Admin/CrudUser" className="btn btn-warning">Admin Cruds</Link></th> : <th></th>}
-                        </tr>
-                    </thead>
-                </table>
+                <div class="btn-group" role="group" aria-label="Grupo de Botones">
+                            <Link to={`/Profile/${this.props.sessionUser.id}/editdata`} className="btn btn-sm btn-warning mx-2">Editar Mis Datos</Link>
+                            <Link to={`/Profile/${this.props.sessionUser.id}/purchasestate`} className="btn btn-sm btn-warning mx-2">Productos Comprados</Link>
+                            <Link to={`/Profile/${this.props.sessionUser.id}/OrderTableByUser`} className="btn btn-sm btn-warning mx-2">Ordenes de Compra</Link>
+                            <Link to={`/Profile/${this.props.sessionUser.id}/myreviews`} className="btn btn-sm btn-warning mx-2">Mis Opiniones</Link>
+                            {this.props.sessionUser.admin ? <Link to="/Admin/CrudUser" className="btn btn-sm btn-warning mx-2">Admin Cruds</Link> : <></>}
+                </div>
             </div>
         )
     };

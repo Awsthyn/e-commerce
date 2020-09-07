@@ -73,13 +73,13 @@ export class GuestCart extends Component {
 							
 							<button className="btn btn-success" data-toggle="modal" data-target="#modalLoginForm">
 							Confirmar compra</button>
-							<button className="btn btn-danger" onClick={() => {
+							<button className="btn btn-danger ml-2" onClick={() => {
 									confirmar("¿Vaciar carrito?", "¿Desea eliminar todos productos del carrito?", "4000", "Su compra ha sido vaciado", this.props.emptyGuestCart)
 								}}>
 				
 								Vaciar carrito
 							</button>
-						<h5 id="total" className="border border-success p-3 ml-auto float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
+						<h5 id="total" className="ml-4 border border-success p-3 float-right" onClick={() => console.log(document.getElementById("total").innerHTML.slice(8))}>
 							Total: $
 							{cart[0] ? cart.map((e) => e.quantity * e.product.price).reduce((a, b) => a + b) : 0}
 						</h5>
