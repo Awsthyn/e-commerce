@@ -25,6 +25,7 @@ export class Checkout extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleButtonChange = this.handleButtonChange.bind(this);
   }
 
   confirm = () => {
@@ -38,13 +39,14 @@ export class Checkout extends React.Component {
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+  handleButtonChange(e) {
     this.setState({ typeOfCard: e.target.value });
   }
-
   componentDidMount() {
     console.log('checkout')
     Promise.resolve(this.props.getLoguedUser())
-    .then(() => this.props.getCart(this.props.sessionUser.id))
+      .then(() => this.props.getCart(this.props.sessionUser.id))
   }
 
   handleSubmit(e) {
@@ -56,13 +58,13 @@ export class Checkout extends React.Component {
       .then(res => {
         console.info(res)
         console.log('SE CONFIRMÓ LA COMPRA')
-        
+
         this.confirm()
-				console.log(this.state.email)
-				alert("Pago Procesado - Gracias por su compra!!");
-				this.props.sendEmail(this.state.email, "creada") //aca le paso la funcion de despachar mail
+        console.log(this.state.email)
+        alert("Pago Procesado - Gracias por su compra!!");
+        this.props.sendEmail(this.state.email, "creada") //aca le paso la funcion de despachar mail
         window.location = "/Profile";
-				
+
 
       }).catch(err => console.error(err))
   }
@@ -100,11 +102,11 @@ export class Checkout extends React.Component {
             <div class="d-block my-3">
               <div className="container row">
                 <div class="custom-control custom-radio mr-4">
-                  <input id="credit" name="paymentMethod" type="radio" checked={this.state.typeOfCard === "credit"} onChange={this.handleChange} value="credit" class="custom-control-input" required />
+                  <input id="credit" name="paymentMethod" type="radio" checked={this.state.typeOfCard === "credit"} onChange={this.handleButtonChange} value="credit" class="custom-control-input" required />
                   <label class="custom-control-label" name="credit" for="credit">Credito</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input id="debit" name="paymentMethod" type="radio" checked={this.state.typeOfCard === "debit"} onChange={this.handleChange} value="debit" class="custom-control-input" required />
+                  <input id="debit" name="paymentMethod" type="radio" checked={this.state.typeOfCard === "debit"} onChange={this.handleButtonChange} value="debit" class="custom-control-input" required />
                   <label class="custom-control-label" name="debit" for="debit">Debito</label>
                 </div>
               </div>
@@ -170,7 +172,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     confirmCart: (total, userId, cart, address, locality) => dispatch(confirmCart(total, userId, cart, address, locality)),
-		getCart: (userId) => dispatch(getCart(userId)),
+    getCart: (userId) => dispatch(getCart(userId)),
     sendEmail: (email, tipo) => dispatch(sendEmail(email, tipo)),
     getLoguedUser: () => dispatch(getLoguedUser())
   };
