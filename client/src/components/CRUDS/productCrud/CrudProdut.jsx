@@ -24,8 +24,8 @@ const Crud = (props) => {
                 {products.map((e, i) => (
                     <tr key={e.id}>
                             <td className="border border-info">{e.name}</td>
-                            <td >{e.description}</td>
-                            <td> <Link
+                            <td className="border border-info">{e.description}</td>
+                            <td className="border border-info"> <Link
                                 to={{
                                   pathname: `/Admin/products/${e.id}/edit`,
                                    state: { product : e }
@@ -33,7 +33,7 @@ const Crud = (props) => {
                                 className= "btn btn-success"
                               >Editar</Link>
                               </td>
-                              <td>
+                              <td className="border border-info">
                               <DeleteProduct id={e.id} /></td>
                     </tr>
                 ))}

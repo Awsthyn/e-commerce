@@ -12,7 +12,7 @@ export const CrudCategory = ({ categories }) => {
             <Link to="/Admin/categories/form/new" className="btn btn-success">Nuevo</Link>
             <h2 className="col-11 text-center">Edición de categorías</h2>
             <table className="table table-hover">
-                <thead className="text-center">
+                <thead className="text-center font-weight-bold text-info border border-secondary bg-dark">
                     <tr>
                         <th>Categoría</th>
                         <th>Descripción</th>
@@ -24,9 +24,9 @@ export const CrudCategory = ({ categories }) => {
 
                 {categories.map((e, i) => (
                     <tr key={e.id}>
-                        <td>{e.name}</td>
-                        <td>{e.description}</td>
-                        <td>
+                        <td className="border border-info">{e.name}</td>
+                        <td className="border border-info">{e.description}</td>
+                        <td className="border border-info">
                             <Link
                                 to = {{
                                     pathname: `/Admin/categories/${e.id}/edit`,
@@ -35,7 +35,7 @@ export const CrudCategory = ({ categories }) => {
                                 className= "btn btn-success">Editar
                             </Link>
                         </td>
-                        <td>
+                        <td className="border border-info">
                             <DeleteCategory id={e.id} /></td>
                     </tr>
                 ))}
