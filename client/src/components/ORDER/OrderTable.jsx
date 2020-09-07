@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getAllOrders, getOrdersByStatus, editOrder } from "../../Redux/actions/orderActions";
 import { sendEmail } from "../../Redux/actions/cartActions"
+import moment from "moment";
+import 'moment/locale/es';
+moment.locale('es');
+
 
 
 class OrderTable extends React.Component {
@@ -44,7 +48,7 @@ class OrderTable extends React.Component {
         return (
             <div className="container mt-4 table-responsive">
                 <h2 className="col-11 text-center mb-2">Lista de Ordenes</h2>
-              <div className="btn-group d-flex justify-content-center" role="group" aria-label="Grupo de Botones">
+              <div className="btn-group d-flex justify-content-center mb-4" role="group" aria-label="Grupo de Botones">
                 <button className="btn btn-sm btn-primary mx-1" onClick={()=> this.props.getAllOrders()}>Todas</button>
         {estadosOptions.map((e, i) => <button name={e} className="btn btn-sm btn-primary mx-1" key={e+i} onClick={e => this.props.getOrdersByStatus(e.target.getAttribute('name'))}>{e}</button>)}
                 </div>
@@ -57,6 +61,8 @@ class OrderTable extends React.Component {
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Email</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
                             <th>Total</th>
                             <th>Editar Estado</th>
                             <th>Ver</th>
@@ -66,10 +72,12 @@ class OrderTable extends React.Component {
                         {this.props.orders.map(order => (
                             <tr  key={order.id}>
                                 <td className="text-center border border-info">{order.id}</td>
-                                <td className="border border-info">{order.orderStatus}</td>
-                                <td className="border border-info">{order.user.first_name}</td>
-                                <td className="border border-info">{order.user.last_name}</td>
-                                <td className="border border-info">{order.user.email}</td>
+                                <td className="text-center border border-info">{order.orderStatus}</td>
+                                <td className="text-center border border-info">{order.user.first_name}</td>
+                                <td className="text-center border border-info">{order.user.last_name}</td>
+                                <td className="text-center border border-info">{order.user.email}</td>
+                                <td className="text-center border border-info">{order.checkoutDate ? moment(order.checkoutDate).format('l') : "-" }</td>
+								<td className="text-center border border-info">{order.checkoutDate ? moment(order.checkoutDate).format('LT') : "-" }</td>
 
                                 {order.orderLines.length > 0 ? <td className="border border-info">${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td className="border border-info">$0</td>}
                                 <td className="border border-info">

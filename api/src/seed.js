@@ -262,10 +262,12 @@ let initialOrders = [
   {
     orderStatus: "completa",
     userId: 1,
+    checkoutDate: "2020-09-07T11:49:56.000Z"
   },
   {
     orderStatus: "completa",
     userId: 1,
+    checkoutDate: "2020-09-07T11:49:56.000Z"
   },
   {
     orderStatus: "carrito",

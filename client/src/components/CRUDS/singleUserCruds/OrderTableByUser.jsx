@@ -53,9 +53,9 @@ class OrderTableByUser extends React.Component {
 							<tr key={order.id}>
 									<td className="border border-info">{order.id}</td>
 									<td className="border border-info">{order.orderStatus.charAt(0).toUpperCase()+order.orderStatus.slice(1)}</td>
-									<td className="border border-info">{moment(order.updatedAt).format('l')}</td>
-									<td className="border border-info">{moment(order.updatedAt).format('LT')}</td>
-									{order.orderLines.length > 0 ? <td className="border border-info">${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}</td> : <td>$0</td>}											
+									<td className="text-center border border-info">{order.checkoutDate ? moment(order.checkoutDate).format('l') : "-" }</td>
+								<td className="text-center border border-info">{order.checkoutDate ? moment(order.checkoutDate).format('LT') : "-" }</td>
+									<td className="border border-info">{order.orderLines.length > 0 ? `${order.orderLines.map(e => e.quantity * e.product.price).reduce((a, b) => a + b)}` : `$ 0`}</td>											
 									<td className="border border-info">
 										<button type="button" className="btn btn-warning" data-toggle="modal" data-target={`#order${order.id}`} >Detalles</button>
 										<div className="modal fade" id={'order' + order.id} role="dialog">
@@ -73,10 +73,10 @@ class OrderTableByUser extends React.Component {
 															</thead>
 															{order.orderLines.map((g) => (
 																<tr>
-																	<td><Link to={`/products/${g.product.id}`}>{g.product.name}</Link></td>
-																	<td>{g.quantity}</td>
-																	<td>$ {g.product.price}</td>
-																	<td>$ {g.product.price * g.quantity}</td>
+																	<td className="text-center border border-info"><Link to={`/products/${g.product.id}`}>{g.product.name}</Link></td>
+																	<td className="text-center border border-info">{g.quantity}</td>
+																	<td className="text-center border border-info">$ {g.product.price}</td>
+																	<td className="text-center border border-info">$ {g.product.price * g.quantity}</td>
 																</tr>
 															))}
 														</table>
