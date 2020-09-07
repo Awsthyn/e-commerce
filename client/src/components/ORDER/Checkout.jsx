@@ -125,7 +125,7 @@ export class Checkout extends React.Component {
               </div>
               <div class="col-md-6 mb-3">
                 <label for="cc-number">Numero de Tarjeta</label>
-                <input type="text" class="form-control" name="cardNumber" onChange={this.handleChange} id="cc-number" value={this.state.cardNumber} placeholder="" required />
+                <input type="number" min="13" class="form-control" name="cardNumber" onChange={this.handleChange} id="cc-number" value={this.state.cardNumber} placeholder="" required />
                 <div class="invalid-feedback">
                   El numero de la tarjeta es requerido
             </div>
@@ -134,14 +134,14 @@ export class Checkout extends React.Component {
             <div class="row">
               <div class="col-md-3 mb-3">
                 <label for="cc-expiration">Vencimiento</label>
-                <input type="text" class="form-control" name="cardExpiration" onChange={this.handleChange} value={this.state.cardExpiration} id="cc-expiration" placeholder="" required />
+                <input type="date" class="form-control" name="cardExpiration"  min="2020-08-01" onChange={this.handleChange} value={this.state.cardExpiration} id="cc-expiration" placeholder="" required />
                 <div class="invalid-feedback">
                   Fecha de vencimiento requerida
             </div>
               </div>
               <div class="col-md-3 mb-3">
                 <label for="cc-cvv">CVV</label>
-                <input type="text" class="form-control" name="cardCvv" onChange={this.handleChange} id="cc-cvv" value={this.state.cardCvv} placeholder="" required />
+                <input type="number" class="form-control" name="cardCvv" min="3" onChange={this.handleChange} id="cc-cvv" value={this.state.cardCvv} placeholder="" required />
                 <div class="invalid-feedback">
                   Codigo de Seguridad Requerido
             </div>
