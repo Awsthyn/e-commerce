@@ -38,7 +38,7 @@ export class ResetPassword extends React.Component {
             icon: "success",
             timer: "4000",
         })
-        setTimeout(() => window.location = "/Profile", 4000)
+        setTimeout(() => window.location = "/Profile", 3000)
     }
 
     handleChange(e) {

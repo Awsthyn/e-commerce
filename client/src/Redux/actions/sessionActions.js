@@ -137,7 +137,6 @@ export function getForgottenUser(token) {
         })
         .then((r) => r.json())
         .then(res => {
-            alert(res)
             dispatch({type: GET_FORGOTTEN_USER, payload: res})
         })
         .catch(err => console.log(err))

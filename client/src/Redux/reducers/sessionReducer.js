@@ -2,7 +2,7 @@ import { LOGIN, LOGOUT, GET_FORGOTTEN_USER, PURCHASED_PRODUCTS } from "../action
 
 const initialState = {
     sessionUser: {},
-    forgottenUser: {email: "aaa@aaa.com"},
+    forgottenUser: {},
     productsPurchased: []
 };
 
