@@ -28,8 +28,12 @@ console.log('BODY', req.body)
             var mailOptions = {
                 from: "Dark Market",
                 to: usuario.email,
-                subject: 'Node.js Password Reset',
-                text: 'http://localhost:3000/ResetPassword/' + token
+                subject: 'Dark Market Password Reset',
+                text: 
+                'Estas recibiendo este email porque vos (o alguien más) desea cambiar la contraseña.\n\n' +
+                'Para continuar con el cambio de contraseña hacer click en el siguiente Link, o en su defecto copiar y pegar en el navegador:\n\n' +
+                'http://localhost:3000/ResetPassword/' + token + '\n\n' +
+                'Si usted no pidió esto, por favor ignorar este mail y la contraseña se mantendrá igual.\n'
             };
 
             transporter.sendMail(mailOptions, (error, info) => {
@@ -59,19 +63,23 @@ server.get('/reset/:token', function(req, res, next) {
 
 //-------- Actualiza la contraseña ----------------
 server.put('/reset/:token', function(req, res, next) {
-    const { token } = req.params;
-    console.log('PUT', token)
-    User.update({
-        password: req.body.password
-    },
-        { where: { resetPasswordToken: token } })
-        .then(() => {
-            res.sendStatus(201);
+
+    try {
+        const { token } = req.params;
+        const { password } = req.body;
+        User.findOne({where: {resetPasswordToken: token}}).then(user => {
+            if (user) {
+                user.password = password
+                return user.save()
+            }
         })
-        .catch(err => {
-            console.error(`Error a promocionar usuario ${id}`)
-            next()
+        .then( () => {
+            res.sendStatus(200);
         });
+    } catch (error) {
+        console.error(error.message);
+    }
+
 })
 
 module.exports = server;

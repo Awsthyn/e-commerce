@@ -2,6 +2,7 @@ import React from 'react';
 // import { useHistory } from "react-router-dom";
 import { sessionLogin, sessionLogout, sendForgotMail} from "../../../Redux/actions/sessionActions"
 import { connect } from "react-redux";
+import swal from 'sweetalert';
 
 
 export class PasswordForgot extends React.Component {
@@ -14,7 +15,7 @@ export class PasswordForgot extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // let history = useHistory();
+    
 
     handleChange(e) {
         this.setState({email: e.target.value})
@@ -24,6 +25,7 @@ export class PasswordForgot extends React.Component {
         e.preventDefault();
         console.log('estado', this.state)
         this.props.sendForgotMail(this.state)
+        swal("", `Se ha enviado un mail a "${this.state.email}" con las instrucciónes. Recuerde revisar en la carpeta de Spam`, "success");
     }
 
         render() {
