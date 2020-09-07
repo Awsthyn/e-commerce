@@ -51,7 +51,13 @@ module.exports = (sequelize) => {
         },
         googleId: {type: DataTypes.STRING,
             allowNull: true,
-        }
+        },
+        resetPasswordToken: {
+            type: DataTypes.STRING
+        },
+        resetPasswordExpires: {
+            type: DataTypes.DATE
+        },
     })
 
     // debe ser function para que funcione this.password
@@ -73,13 +79,13 @@ module.exports = (sequelize) => {
     }
 
     User.addHook('beforeCreate', (user, options, cb) => {
-        console.info("en el hook beforeCreate", user)
+        // console.info("en el hook beforeCreate", user)
         return hashPassword(user.password).then(hash => user.password = hash)}
     )
 
     User.addHook('beforeUpdate', (user, options, cb) =>
     {
-        console.info("en el hook beforeUpdate:", user)
+        // console.info("en el hook beforeUpdate:", user)
         return hashPassword(user.password).then(hash => user.password = hash)}
     )
 

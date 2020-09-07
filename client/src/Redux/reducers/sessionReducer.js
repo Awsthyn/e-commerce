@@ -2,7 +2,7 @@ import { LOGIN, LOGOUT, GET_FORGOTTEN_USER, PURCHASED_PRODUCTS } from "../action
 
 const initialState = {
     sessionUser: {},
-    forgottenUser: {},
+    forgottenUser: {email: "aaa@aaa.com"},
     productsPurchased: []
 };
 
@@ -28,19 +28,14 @@ export default function sessionReducer (state = initialState, action) {
         console.log("GET_FORGOTTEN_USER")
         return {
             ...state,
-            forgottenUser: action.payload[0]
+            forgottenUser: action.payload
         }
 
-    case "FAKE_LOGIN":
-        return {
-            ...state,
-            sessionUser: state.forgottenUser
-        }
     case PURCHASED_PRODUCTS:
         return {
         ...state,
         productsPurchased: action.payload
-      }      
+        }      
 
     default:
         return state

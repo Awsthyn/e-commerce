@@ -67,32 +67,6 @@ export function toProfile() {
 }
 
 
-// ------------- TRAE TODOS LOS USUARIOS, PARA DEJAR EL OLVIDADIZO
-
-
-export function getForgottenUser(email) {
-    // alert('asd')
-    return function(dispatch) {
-        return fetch(`http://localhost:3001/users`, {
-            credentials: 'include'
-        })
-        .then((r) => r.json())
-        .then((data) => {
-            dispatch({ type: GET_FORGOTTEN_USER, payload: data.filter(e => e.email === email)})
-        })
-        // .then(  window.location = "/ResetQuestion")
-        .catch((error) => {
-            console.error(error);
-        });
-    }
-}
-
-
-//---------- "LOGUEA forgotten user" --------------
-export function fakeLogUser() {
-    return {type: "FAKE_LOGIN"}
-}
-
 
 // -----------------TRAE LOS PRODUCTOS COMPRADOS DEL USUARIO LOGUEADO --------
 export function purchasedProducts(userId){
@@ -130,5 +104,59 @@ export function getLoguedUser() {
         dispatch({type: "LOGIN", payload: res})
         return res
     })
+    }
+}
+
+
+
+// ======================== RESET PASSWORD ACTIONS =================
+
+// ------------- Envia email con token ---------------
+export function sendForgotMail(email) {
+    console.log('EMAIL',email)
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/resetPassword/forgot`, {
+            method: 'POST',
+            body: JSON.stringify(email),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' 
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+}
+
+//------------ Trae el usuario dueño del token ----------------
+export function getForgottenUser(token) {
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/resetPassword/reset/${token}`, {
+            credentials: "include"
+        })
+        .then((r) => r.json())
+        .then(res => {
+            alert(res)
+            dispatch({type: GET_FORGOTTEN_USER, payload: res})
+        })
+        .catch(err => console.log(err))
+    }
+}
+
+//------------ Ejecuta el cambio de contraseña ---------------
+export function changePassword(token, password) {
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/resetPassword/reset/${token}`, {
+            method: 'PUT',
+            body: JSON.stringify(password),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' 
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 }
