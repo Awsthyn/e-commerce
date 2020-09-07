@@ -23,6 +23,7 @@ export class Checkout extends React.Component {
       cardExpiration: "",
       cardCvv: "",
     }
+    this.cart = null
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleButtonChange = this.handleButtonChange.bind(this);
@@ -47,6 +48,7 @@ export class Checkout extends React.Component {
     console.log('checkout')
     Promise.resolve(this.props.getLoguedUser())
       .then(() => this.props.getCart(this.props.sessionUser.id))
+      .then(() => this.cart = this.props.cart)
   }
 
   handleSubmit(e) {
@@ -61,8 +63,9 @@ export class Checkout extends React.Component {
 
         this.confirm()
         console.log(this.state.email)
+        console.log(this.cart)
         alert("Pago Procesado - Gracias por su compra!!");
-        this.props.sendEmail(this.state.email, "creada") //aca le paso la funcion de despachar mail
+        this.props.sendEmail(this.state.email, "creada", this.cart) //aca le paso la funcion de despachar mail
         window.location = "/Profile";
 
 
@@ -173,7 +176,7 @@ function mapDispatchToProps(dispatch) {
   return {
     confirmCart: (total, userId, cart, address, locality) => dispatch(confirmCart(total, userId, cart, address, locality)),
     getCart: (userId) => dispatch(getCart(userId)),
-    sendEmail: (email, tipo) => dispatch(sendEmail(email, tipo)),
+    sendEmail: (email, tipo, cart) => dispatch(sendEmail(email, tipo, cart)),
     getLoguedUser: () => dispatch(getLoguedUser())
   };
 }

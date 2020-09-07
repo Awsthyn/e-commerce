@@ -8,6 +8,29 @@ var crypto = require('crypto');
 server.post("/creada", (req, res) => {
     console.log("Email ENVIADO")
     const email = req.body.email
+    const cart = req.body.cart
+    console.log('abajo tiene q aparecer cart')
+    let message = (
+        '<table style="border: 1px solid #333;">' +
+        '<thead>' +
+        '<th style="border: 1px solid #333;"> Producto </th>' +
+        '<th style="border: 1px solid #333;"> Precio </th>'  +
+        '<th style="border: 1px solid #333;"> Cantidad </th>' +
+        '<th style="border: 1px solid #333;"> Subtotal </th>' +
+        '</thead>'
+      ); 
+    
+        for(elem of cart){
+        message += (
+            '<tr>' +
+            '<th style="border: 1px solid #333;">' + elem.product.name + '</th>' +
+            '<th style="border: 1px solid #333;">' + elem.product.price + '</th>'  +
+            '<th style="border: 1px solid #333;">' + elem.quantity + '</th>' +
+            '<th style="border: 1px solid #333;">' + elem.quantity * elem.product.price + '</th>' +
+            '</tr>'
+        );
+        }
+        message +=  '</table>';
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -20,7 +43,8 @@ server.post("/creada", (req, res) => {
         from: "Dark Market",
         to: email,
         subject: "Hola! su compra ha sido confirmada.",
-        text: "Te avisaremos cuando tu compra este siendo despachada. Podés seguir el estado de la orden en tu perfil de darkmarket.com"
+        html: "Te avisaremos cuando tu compra este siendo despachada. Podés seguir el estado de la orden en tu perfil de darkmarket.com" + message
+
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
