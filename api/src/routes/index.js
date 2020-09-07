@@ -10,6 +10,7 @@ const userRouter = require('./user.js')
 const reviewRouter = require('./review.js')
 const authRouter = require('./authenticate')
 const emailRouter = require('./email')
+const resetPassword = require('./resetPassword')
 
 const router = Router();
 
@@ -20,6 +21,8 @@ router.use(bodyParser.json());
 router.get("/", (req, res, next) => {
     res.json(req.user)
   });
+
+router.use('/resetPassword', resetPassword);
 router.use('/email', emailRouter);
 router.use('/auth', authRouter);
 router.use('/products', productRouter);
